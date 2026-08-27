@@ -1,352 +1,819 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <!--
-    =============================================================================
-    HEAD SECTION – METADATA, TITLE, & RESOURCE LINKS
-    -----------------------------------------------------------------------------
-    This section sets the character encoding, meta descriptions/keywords,
-    and viewport settings. It also loads external resources like Google Fonts,
-    Font Awesome, and the CSS stylesheets.
-    =============================================================================
-  -->
-  <meta charset="UTF-8" />
-  <meta name="description" content="Portfolio" />
-  <meta name="keywords" content="Portfolio" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>JUDE Portfolio</title>
-  
-  <!-- Google Font: Poppins -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
-  <!-- Main CSS and Contact CSS -->
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="contact.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="Jude Mawad is a computer science student, digital designer, and app developer focused on useful mobile experiences.">
+  <title>Jude Mawad — Digital Designer &amp; App Developer</title>
+  <link rel="preload" href="images/img_8246.JPG" as="image">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/hero.css">
+  <link rel="stylesheet" href="styles/about.css">
+  <link rel="stylesheet" href="styles/stack.css">
+  <link rel="stylesheet" href="styles/projects-section.css">
+  <link rel="stylesheet" href="styles/journey.css">
+  <link rel="stylesheet" href="styles/contact-section.css">
 </head>
 <body>
-  <!--
-    =============================================================================
-    FIXED HOME HEADER
-    -----------------------------------------------------------------------------
-    Contains:
-      • Left: Local time display with animated digits.
-      • Center: Burger menu for toggling the overlay menu.
-      • Right: A "CONTACT ME" button linking to the Contact page.
-    =============================================================================
-  -->
-  <header class="home-header">
-    <div class="home-local animate delay-111">
-      <span class="gray-text"> LOCAL／</span>
-      <span class="time-hours">
-        <span class="digit" data-index="0">0</span>
-        <span class="digit" data-index="1">0</span>
-      </span>:
-      <span class="time-minutes">
-        <span class="digit" data-index="0">0</span>
-        <span class="digit" data-index="1">0</span>
-      </span>:
-      <span class="time-seconds">
-        <span class="digit" data-index="0">0</span>
-        <span class="digit" data-index="1">0</span>
+  <a class="skip-link" href="#about">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="site-grid" aria-hidden="true"></div>
+  <div class="site-grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Hero and global navigation -->
+<header class="site-header" data-site-header>
+  <div class="site-header__inner">
+    <a class="site-header__brand" href="#home" aria-label="Jude Mawad — back to home">
+      <span class="site-header__monogram" aria-hidden="true">JM</span>
+      <span class="site-header__brand-copy">
+        <strong>Jude Mawad</strong>
+        <span>Portfolio / 2026</span>
       </span>
+    </a>
+
+    <div class="site-header__availability" aria-label="Based in Brunswick, Germany">
+      <span class="site-header__status-dot" aria-hidden="true"></span>
+      <span>Based in Brunswick / DE</span>
     </div>
-    <div class="burger-container home-burger animate">
-      <div class="burger-menu" id="burgerMenuHome">
+
+    <nav class="site-header__nav" aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#stack">Stack</a>
+      <a href="#projects">Projects</a>
+      <a href="#journey">Journey</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="site-header__contact" href="#contact">
+      Let&rsquo;s talk <span aria-hidden="true">↗</span>
+    </a>
+
+    <button
+      class="site-header__menu-toggle"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      data-site-menu-toggle
+    >
+      <span class="site-header__menu-label" data-site-menu-label>Menu</span>
+      <span class="site-header__menu-icon" aria-hidden="true">
         <span></span>
         <span></span>
-        <span></span>
+      </span>
+    </button>
+  </div>
+</header>
+
+<div class="site-menu" id="site-menu" aria-hidden="true" data-site-menu>
+  <div class="site-menu__wash" aria-hidden="true"></div>
+  <div class="site-menu__inner">
+    <div class="site-menu__eyebrow">
+      <span>Navigation</span>
+      <span>JM&mdash;06</span>
+    </div>
+
+    <nav class="site-menu__nav" aria-label="Mobile navigation">
+      <a href="#home" data-site-menu-link><span>01</span><strong>Home</strong></a>
+      <a href="#about" data-site-menu-link><span>02</span><strong>About</strong></a>
+      <a href="#stack" data-site-menu-link><span>03</span><strong>Stack</strong></a>
+      <a href="#projects" data-site-menu-link><span>04</span><strong>Projects</strong></a>
+      <a href="#journey" data-site-menu-link><span>05</span><strong>Journey</strong></a>
+      <a href="#contact" data-site-menu-link><span>06</span><strong>Contact</strong></a>
+    </nav>
+
+    <div class="site-menu__footer">
+      <div>
+        <span class="site-menu__meta-label">Based in</span>
+        <span>Brunswick, Germany</span>
+      </div>
+      <a href="Resume.pdf" target="_blank" rel="noopener">
+        View résumé <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<section class="hero-section" id="home" aria-labelledby="hero-title" data-hero>
+  <h1 class="visually-hidden" id="hero-title">Jude Mawad — digital designer and app developer</h1>
+  <div class="hero-section__grid" aria-hidden="true"></div>
+  <div class="hero-section__inner">
+    <div class="hero-kicker hero-motion" data-hero-reveal>
+      <p>
+        Computer science student<br>
+        Digital designer + app developer
+      </p>
+      <div class="hero-kicker__location">
+        <span>52.2689° N / 10.5268° E</span>
+        <span>BRU <time datetime="" data-hero-time>--:--</time></span>
       </div>
     </div>
-    <a href="contact.html" class="home-contact animate delay-11">CONTACT ME</a>
-  </header>
 
-  <!--
-    =============================================================================
-    FULL-SCREEN OVERLAY MENU
-    -----------------------------------------------------------------------------
-    This overlay menu appears when the burger menu is toggled. It includes
-    navigation links and social links for quick access.
-    =============================================================================
-  -->
-  <div class="overlay-menu" id="overlayMenu">
-    <!-- Centered Navigation Links -->
-    <ul class="overlay-nav">
-      <li class="animate delay-11"><a href="index.html">Home</a></li>
-      <li class="animate delay-22"><a href="#about">About Me</a></li>
-      <li class="animate delay-33"><a href="projects.html">Projects</a></li>
-      <li class="animate delay-44"><a href="contact.html">Contact</a></li>
-    </ul>
-    <!-- Social Links -->
-    <div class="social-links animate delay-66">
-      <a href="https://www.instagram.com/jude_mawad?igsh=c3oxYjN0MHFjZTJn&utm_source=qr" target="_blank">INSTAGRAM ↗</a>
-      <a href="https://github.com/JoudMawad" target="_blank">GITHUB ↗</a>
+    <div class="hero-statement" aria-label="Jude builds with intent">
+      <div class="hero-statement__line hero-statement__line--first hero-motion" data-hero-reveal>
+        <span>Jude</span>
+        <span class="hero-statement__aside" aria-hidden="true">01 / 03</span>
+      </div>
+
+      <div class="hero-statement__line hero-statement__line--second hero-motion" data-hero-reveal>
+        <span class="hero-statement__aside hero-statement__aside--left" aria-hidden="true">
+          Thoughtful systems<br>
+          Honest interfaces
+        </span>
+        <span>Builds</span>
+      </div>
+
+      <div class="hero-statement__line hero-statement__line--third hero-motion" data-hero-reveal>
+        <span>With</span>
+        <figure class="hero-portrait" data-hero-portrait>
+          <img
+            src="images/img_8246.JPG"
+            alt="Jude Mawad on a rooftop in Brunswick"
+            width="3024"
+            height="4032"
+            fetchpriority="high"
+          >
+          <figcaption>
+            <span>Jude Mawad</span>
+            <span>Portrait / 01</span>
+          </figcaption>
+        </figure>
+        <span>Intent<span class="hero-statement__period">.</span></span>
+      </div>
+    </div>
+
+    <div class="hero-footer hero-motion" data-hero-reveal>
+      <p class="hero-footer__intro">
+        I turn ideas into focused digital products&mdash;from the first interface
+        sketch to working, useful code.
+      </p>
+
+      <div class="hero-footer__actions" aria-label="Hero calls to action">
+        <a class="hero-link hero-link--primary" href="#projects">
+          <span>Explore projects</span>
+          <span aria-hidden="true">↘</span>
+        </a>
+        <a class="hero-link" href="#contact">
+          <span>Start a conversation</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a class="hero-link hero-link--resume" href="Resume.pdf" target="_blank" rel="noopener">
+          <span>Résumé</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <div class="hero-scroll-cue" aria-hidden="true">
+        <span>Scroll to discover</span>
+        <i></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <main id="main-content">
+    <!-- About -->
+<section class="about-section" id="about" aria-labelledby="about-title">
+  <div class="about-shell">
+    <header class="about-rail">
+      <p class="about-index" data-reveal="left">[001]</p>
+      <h2 class="about-title" id="about-title" data-reveal="left">ABOUT</h2>
+
+      <div class="about-signal" aria-hidden="true" data-reveal="line">
+        <span class="about-signal-node"></span>
+        <span class="about-signal-line"></span>
+        <span class="about-signal-node"></span>
+      </div>
+
+      <div class="about-badge" data-reveal="left">
+        <span class="about-badge-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" role="presentation">
+            <circle cx="24" cy="17" r="6"></circle>
+            <path d="M13 38v-4.5c0-5 4.4-9 11-9s11 4 11 9V38"></path>
+          </svg>
+        </span>
+        <span class="about-badge-copy">
+          <strong>JUDE MAWAD</strong>
+          <span>MOBILE APP DEVELOPER</span>
+        </span>
+      </div>
+    </header>
+
+    <div class="about-editorial">
+      <p class="about-eyebrow" data-reveal="up">
+        <span>BRUNSWICK, DE</span>
+        <span aria-hidden="true">/</span>
+        <span>DESIGN + DEVELOPMENT</span>
+      </p>
+
+      <h3 class="about-statement" data-reveal="up">
+        I build <em>mobile experiences</em> with clean,
+        <strong>user-friendly interfaces</strong> and scalable systems.
+      </h3>
+
+      <div class="about-details">
+        <figure class="about-portrait" data-reveal="image">
+          <div class="about-portrait-frame">
+            <img
+              src="images/IMG_4982.JPG"
+              alt="Jude Mawad outdoors in Brunswick"
+              loading="lazy"
+              decoding="async"
+            >
+            <span class="about-portrait-cross about-portrait-cross--one" aria-hidden="true"></span>
+            <span class="about-portrait-cross about-portrait-cross--two" aria-hidden="true"></span>
+          </div>
+          <figcaption>
+            <span>PORTRAIT / 02</span>
+            <span>52.2689° N / 10.5268° E</span>
+          </figcaption>
+        </figure>
+
+        <div class="about-copy" data-reveal="up">
+          <p>
+            Focused on mobile app development with Swift, SwiftUI, and Core Data,
+            I create functional apps with clean, user-friendly interfaces. I am
+            also skilled in Git, HTML, and CSS, with a strong eye for design and
+            usability—always working toward efficient, scalable solutions that
+            deliver real value to users.
+          </p>
+
+          <div class="about-meta" aria-label="Core focus areas">
+            <span>SWIFT / SWIFTUI</span>
+            <span>CORE DATA</span>
+            <span>UI / UX</span>
+          </div>
+
+          <a class="about-resume" href="Resume.pdf" download>
+            <span>Download résumé</span>
+            <span class="about-resume-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!--
-    =============================================================================
-    MAIN CONTENT AREA
-    -----------------------------------------------------------------------------
-    This container holds the primary content of the page (below the header and
-    overlay), including the hero section, divider sections, and multiple content
-    sections like "APPROUCH", "ABOUT", "SKILLS", "PROJECTS", and "CONTACTS".
-    =============================================================================
-  -->
-  <div class="main-content">
-    <!--
-      MAIN HERO SECTION
-      -----------------------------------------------------------------------------
-      Displays a large, scalable "JUDE" heading. Additional hero text can be added
-      as needed.
-    -->
-    <main id="hero" class="center-content hero">
-      <h1 class="scalable-text animate delay-1" 
-          data-min-width="320" 
-          data-max-width="1133" 
-          data-min-size="9" 
-          data-max-size="26">
-        JUDE
-      </h1>
-      <!-- Additional hero text can go here -->
-    </main>
+  <div class="about-section-foot" aria-hidden="true">
+    <span>INTENTIONAL INTERFACES</span>
+    <span>01 / 05</span>
+  </div>
+</section>
 
-    <!-- Section Divider with Animation -->
-    <hr class="section-divider animate delay-333">
-    
-    <!-- Bottom Bar with Key Information -->
-    <div class="bottom-bar animate delay-3">
-      <div class="bottom-item">
-        <div class="icon icon-location"><i class="fas fa-map-marker-alt"></i></div>
-        <div class="text">BASED IN BRUNSWICK, GERMANY</div>
+  <div class="marquee-band" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span>Intentional interfaces</span>
+        <span>Mobile first</span>
+        <span>Built with clarity</span>
+        <span>Swift thinking</span>
       </div>
-      <div class="bottom-item">
-        <div class="icon icon-globe"><i class="fas fa-globe"></i></div>
-        <div class="text">AVAILABLE ALL AROUND WORLDWIDE</div>
-      </div>
-      <div class="bottom-item">
-        <div class="icon icon-code"><i class="fas fa-laptop-code"></i></div>
-        <div class="text">DIGITAL DESIGNER + APP DEVELOPER</div>
+      <div class="marquee-group">
+        <span>Intentional interfaces</span>
+        <span>Mobile first</span>
+        <span>Built with clarity</span>
+        <span>Swift thinking</span>
       </div>
     </div>
+  </div>
 
-    <!-- Divider Section with Text -->
-    <div class="section-divider animate delay-4">
-      <div class="divider-text">
-        <span class="divider-word left">S1</span>
-        <span class="divider-word middle">//APPROUCH</span>
-        <span class="divider-word right">2025</span>
-      </div>
-    </div>
+    <!-- Stack -->
+<section id="stack" class="stack-section" aria-labelledby="stack-title">
+  <div class="stack-shell">
+    <header class="stack-header">
+      <p class="stack-index" data-reveal>[002]</p>
+      <h2 id="stack-title" class="stack-title" data-reveal style="--reveal-delay: 70ms;">
+        Stack
+      </h2>
+    </header>
 
-    <!--
-      APPROUCH SECTION
-      -----------------------------------------------------------------------------
-      Introduces who you are with a headline, subtext, and a button to download
-      your resume.
-    -->
-    <section id="approuch" class="section">
-      <div class="approuch-card">
-        <div class="approuch-center">
-          <h1 class="approuch-center animate delay-1" 
-              data-min-width="320" 
-              data-max-width="1440" 
-              data-min-size="1.5" 
-              data-max-size="0">
-            I'M Jude Mawad, <br/>A Computer science student
-          </h1>
-          <p class="approuch-text animate delay-77">
-            I love turning ideas into beautifully functional apps<br/> and learning new technologies<br/> along the way.
-          </p>
-          <!-- Download Resume Button -->
-          <li class="animate delay-88">
-            <a href="Resume.pdf" class="home-resume" download>Download Resume</a>
+    <div class="stack-groups">
+      <article class="stack-group" data-reveal="left">
+        <div class="stack-group-heading">
+          <span class="stack-group-number" aria-hidden="true">01</span>
+          <h3 class="stack-group-title">Mobile Development</h3>
+        </div>
+
+        <ul class="stack-tools stack-tools--three" role="list" aria-label="Mobile development technologies">
+          <li class="stack-tool">
+            <span class="stack-tool-icon" aria-hidden="true">
+              <img src="images/swift-og.png" alt="" loading="lazy" decoding="async">
+            </span>
+            <span>Swift</span>
           </li>
-        </div>
-      </div>
-    </section>
+          <li class="stack-tool">
+            <span class="stack-tool-icon stack-tool-monogram" aria-hidden="true">UI</span>
+            <span>SwiftUI</span>
+          </li>
+          <li class="stack-tool">
+            <span class="stack-tool-icon stack-tool-monogram stack-tool-database" aria-hidden="true"></span>
+            <span>Core Data</span>
+          </li>
+        </ul>
+      </article>
 
-    <!-- Divider for "WHO AM I" -->
-    <div class="section-divider animate delay-66">
-      <div class="divider-text">
-        <span class="divider-word left">S2</span>
-        <span class="divider-word middle">//WHO AM I</span>
-        <span class="divider-word right">2025</span>
+      <article class="stack-group" data-reveal="right" style="--reveal-delay: 40ms;">
+        <div class="stack-group-heading">
+          <span class="stack-group-number" aria-hidden="true">02</span>
+          <h3 class="stack-group-title">Web Development</h3>
+        </div>
+
+        <ul class="stack-tools stack-tools--three" role="list" aria-label="Web development technologies">
+          <li class="stack-tool">
+            <span class="stack-tool-icon" aria-hidden="true">
+              <img src="images/html-1.svg" alt="" loading="lazy" decoding="async">
+            </span>
+            <span>HTML5</span>
+          </li>
+          <li class="stack-tool">
+            <span class="stack-tool-icon" aria-hidden="true">
+              <img src="images/Official_CSS_Logo.svg.png" alt="" loading="lazy" decoding="async">
+            </span>
+            <span>CSS3</span>
+          </li>
+          <li class="stack-tool">
+            <span class="stack-tool-icon stack-tool-responsive" aria-hidden="true">
+              <span></span>
+            </span>
+            <span>Responsive Design</span>
+          </li>
+        </ul>
+      </article>
+
+      <article class="stack-group" data-reveal="left" style="--reveal-delay: 80ms;">
+        <div class="stack-group-heading">
+          <span class="stack-group-number" aria-hidden="true">03</span>
+          <h3 class="stack-group-title">Workflow &amp; Tooling</h3>
+        </div>
+
+        <ul class="stack-tools stack-tools--four" role="list" aria-label="Development workflow tools">
+          <li class="stack-tool">
+            <span class="stack-tool-icon" aria-hidden="true">
+              <img src="images/Git_icon.svg.png" alt="" loading="lazy" decoding="async">
+            </span>
+            <span>Git</span>
+          </li>
+          <li class="stack-tool">
+            <span class="stack-tool-icon" aria-hidden="true">
+              <img src="images/Octicons-mark-github.svg.png" alt="" loading="lazy" decoding="async">
+            </span>
+            <span>GitHub</span>
+          </li>
+          <li class="stack-tool">
+            <span class="stack-tool-icon stack-tool-monogram" aria-hidden="true">XC</span>
+            <span>Xcode</span>
+          </li>
+          <li class="stack-tool">
+            <span class="stack-tool-icon stack-tool-monogram" aria-hidden="true">VS</span>
+            <span>VS Code</span>
+          </li>
+        </ul>
+      </article>
+
+      <article class="stack-group" data-reveal="right" style="--reveal-delay: 120ms;">
+        <div class="stack-group-heading">
+          <span class="stack-group-number" aria-hidden="true">04</span>
+          <h3 class="stack-group-title">Design Practice</h3>
+        </div>
+
+        <ul class="stack-tools stack-tools--two" role="list" aria-label="Design and problem-solving practices">
+          <li class="stack-tool">
+            <span class="stack-tool-icon stack-tool-monogram" aria-hidden="true">UX</span>
+            <span>UI/UX Principles</span>
+          </li>
+          <li class="stack-tool">
+            <span class="stack-tool-icon stack-tool-solve" aria-hidden="true"></span>
+            <span>Problem Solving</span>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+  <div class="marquee-band" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span>Intentional interfaces</span>
+        <span>Mobile first</span>
+        <span>Built with clarity</span>
+        <span>Swift thinking</span>
+      </div>
+      <div class="marquee-group">
+        <span>Intentional interfaces</span>
+        <span>Mobile first</span>
+        <span>Built with clarity</span>
+        <span>Swift thinking</span>
       </div>
     </div>
+  </div>
 
-    <!--
-      ABOUT SECTION
-      -----------------------------------------------------------------------------
-      Provides a brief introduction about your background and skills along with
-      an image.
-    -->
-    <section id="about" class="section animate delay-5">
-      <div class="aboutMe-card">
-        <div class="aboutMe-left">
-          <h2>About<br/> Me</h2>
-          <p class="aboutMe-text">
-            Focused on mobile app development with expertise in Swift, SwiftUI, and Core Data. Experienced in building functional apps with clean, user-friendly interfaces. Skilled in Git, HTML, and CSS, with a strong eye for design and usability. Passionate about creating efficient, scalable solutions that deliver real value to users.
+    <!-- Projects -->
+<section class="projects-section" id="projects" aria-labelledby="projects-title">
+  <div class="projects-sticky">
+    <div class="projects-viewport">
+      <div class="projects-track">
+        <header class="projects-intro">
+          <p class="projects-index" data-reveal="left">[003]</p>
+          <h2 class="projects-title" id="projects-title" data-reveal="left">PROJECTS</h2>
+          <p class="projects-statement" data-reveal="up">
+            Two tools for daily life:
+            <em>one tracks energy,</em>
+            the other protects time.
           </p>
-        </div>
-        <img src="images/IMG_4982.JPG" alt="About Me Photo" class="aboutMe-image">
-      </div>
-    </section>
+          <div class="projects-explore" data-reveal="up" aria-hidden="true">
+            <span class="projects-explore-line"></span>
+            <span>Scroll to explore</span>
+            <span class="projects-explore-arrow">&#8594;</span>
+          </div>
+        </header>
 
-    <!-- Divider for "skills" -->
-    <div class="section-divider">
-      <div class="divider-text">
-        <span class="divider-word left">S3</span>
-        <span class="divider-word middle">//skills</span>
-        <span class="divider-word right">2024-2025</span>
+        <a
+          class="projects-card projects-panel projects-card--ignite"
+          href="Ignite/"
+          aria-label="View Ignite, a fully functional calorie tracking iOS app"
+          data-cursor="view"
+        >
+          <div class="projects-frame">
+            <div class="projects-media projects-media--ignite">
+              <img
+                class="projects-ignite-backdrop projects-media-source"
+                src="images/Simulator Screenshot - iPhone 17 Pro Max - 2025-11-25 at 00.18.28.png"
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+              >
+              <img
+                class="projects-ignite-mark"
+                src="images/svgviewer-png-output.png"
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+              >
+              <img
+                class="projects-ignite-shot"
+                src="images/Simulator Screenshot - iPhone 17 Pro Max - 2025-11-25 at 00.18.28.png"
+                alt="Ignite calorie tracking dashboard on iPhone"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+
+            <div class="projects-card-content">
+              <div class="projects-card-meta">
+                <span>iOS application</span>
+                <span>Swift / SwiftUI / Core Data</span>
+              </div>
+              <p class="projects-card-summary">Fully functional calorie tracking, designed and built for iOS.</p>
+              <h3 class="projects-card-title">IGNITE</h3>
+              <span class="projects-card-arrow" aria-hidden="true">&#8599;</span>
+            </div>
+          </div>
+        </a>
+
+        <article
+          class="projects-card projects-panel projects-card--clockwise"
+          tabindex="0"
+          aria-labelledby="projects-clockwise-title"
+          data-cursor="view"
+        >
+          <div class="projects-frame projects-video-frame">
+            <div class="projects-video-fallback" aria-hidden="true">
+              <span class="projects-clock-face">
+                <span class="projects-clock-hand projects-clock-hand--hour"></span>
+                <span class="projects-clock-hand projects-clock-hand--minute"></span>
+              </span>
+              <span class="projects-fallback-word">CLOCK / WISE</span>
+            </div>
+            <video
+              class="projects-clockwise-video projects-media-source"
+              muted
+              autoplay
+              loop
+              playsinline
+              preload="metadata"
+              poster="images/clockwise-poster.jpg"
+              role="img"
+              aria-label="Motion preview of the Clockwise time management project"
+            >
+              <source src="images/clockwise.mp4" type="video/mp4">
+              Your browser cannot play the Clockwise project preview.
+            </video>
+
+            <div class="projects-card-content">
+              <div class="projects-card-meta">
+                <span>Time management</span>
+                <span>Project oriented</span>
+              </div>
+              <p class="projects-card-summary">A project-oriented approach to managing time.</p>
+              <h3 class="projects-card-title" id="projects-clockwise-title">CLOCKWISE</h3>
+              <span class="projects-motion-note" aria-hidden="true">
+                <i></i><span>Motion study</span>
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="projects-terminal projects-panel" aria-label="More work in progress">
+          <div class="projects-terminal-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <b>jude / lab</b>
+          </div>
+          <div class="projects-terminal-body">
+            <p><span class="projects-terminal-prompt">&#8250;</span> status --next</p>
+            <p class="projects-terminal-response">New work is taking shape.</p>
+            <p><span class="projects-terminal-prompt">&#8250;</span> release when_ready<span class="projects-terminal-caret" aria-hidden="true"></span></p>
+          </div>
+          <div class="projects-terminal-foot">
+            <span>Queue / active</span>
+            <span>More in motion</span>
+          </div>
+          <h3>MORE<br><em>IN MOTION</em></h3>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <div class="marquee-band" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span>Intentional interfaces</span>
+        <span>Mobile first</span>
+        <span>Built with clarity</span>
+        <span>Swift thinking</span>
+      </div>
+      <div class="marquee-group">
+        <span>Intentional interfaces</span>
+        <span>Mobile first</span>
+        <span>Built with clarity</span>
+        <span>Swift thinking</span>
+      </div>
+    </div>
+  </div>
+
+    <!-- Journey -->
+<section
+  class="journey-section"
+  id="journey"
+  aria-labelledby="journey-title"
+  aria-describedby="journey-intro"
+  data-journey
+>
+  <div class="journey-shell">
+    <header class="journey-header">
+      <p class="journey-index">[004]</p>
+      <h2 class="journey-title" id="journey-title">Journey</h2>
+      <p class="journey-intro" id="journey-intro">
+        A path from computer science foundations to focused mobile products,
+        shaped by putting every new skill into practice.
+      </p>
+    </header>
+
+    <div class="journey-timeline-wrap">
+      <div class="journey-track" aria-hidden="true">
+        <span class="journey-track-progress"></span>
+      </div>
+
+      <ol class="journey-timeline" aria-label="Jude Mawad's development journey">
+        <li class="journey-step" data-journey-step>
+          <span class="journey-node" aria-hidden="true">
+            <span class="journey-node-core"></span>
+          </span>
+
+          <article class="journey-card">
+            <span class="journey-card-index" aria-hidden="true">01</span>
+            <span class="journey-ghost-number" aria-hidden="true">01</span>
+            <div class="journey-card-content">
+              <p class="journey-card-label">Stage 01</p>
+              <h3 class="journey-card-title">Foundations</h3>
+              <p class="journey-card-copy">
+                Computer science studies built the foundation: learning to break
+                down problems clearly while developing practical skills in HTML,
+                CSS, and Git.
+              </p>
+              <ul class="journey-skills" aria-label="Foundation skills">
+                <li>Computer Science</li>
+                <li>Problem Solving</li>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>Git</li>
+              </ul>
+            </div>
+          </article>
+        </li>
+
+        <li class="journey-step" data-journey-step>
+          <span class="journey-node" aria-hidden="true">
+            <span class="journey-node-core"></span>
+          </span>
+
+          <article class="journey-card">
+            <span class="journey-card-index" aria-hidden="true">02</span>
+            <span class="journey-ghost-number" aria-hidden="true">02</span>
+            <div class="journey-card-content">
+              <p class="journey-card-label">Stage 02</p>
+              <h3 class="journey-card-title">Mobile Focus</h3>
+              <p class="journey-card-copy">
+                The focus moved to mobile development with Swift, SwiftUI, and
+                Core Data&mdash;practising how to turn functionality into clean,
+                user-friendly interfaces.
+              </p>
+              <ul class="journey-skills" aria-label="Mobile development skills">
+                <li>Swift</li>
+                <li>SwiftUI</li>
+                <li>Core Data</li>
+                <li>Interface Design</li>
+              </ul>
+            </div>
+          </article>
+        </li>
+
+        <li class="journey-step" data-journey-step>
+          <span class="journey-node" aria-hidden="true">
+            <span class="journey-node-core"></span>
+          </span>
+
+          <article class="journey-card">
+            <span class="journey-card-index" aria-hidden="true">03</span>
+            <span class="journey-ghost-number" aria-hidden="true">03</span>
+            <div class="journey-card-content">
+              <p class="journey-card-label">Stage 03</p>
+              <h3 class="journey-card-title">Building Now</h3>
+              <p class="journey-card-copy">
+                Applying design and development through IGNITE and CLOCKWISE,
+                with a continued focus on efficient, scalable solutions that
+                deliver real value.
+              </p>
+              <ul class="journey-skills" aria-label="Current project focus">
+                <li>Ignite</li>
+                <li>Clockwise</li>
+                <li>Design + Development</li>
+                <li>Scalable Solutions</li>
+              </ul>
+            </div>
+          </article>
+        </li>
+      </ol>
+    </div>
+
+    <footer class="journey-footer" aria-hidden="true">
+      <span>Learning through building</span>
+      <span>04 / 05</span>
+    </footer>
+  </div>
+</section>
+
+  <div class="marquee-band" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span>Intentional interfaces</span>
+        <span>Mobile first</span>
+        <span>Built with clarity</span>
+        <span>Swift thinking</span>
+      </div>
+      <div class="marquee-group">
+        <span>Intentional interfaces</span>
+        <span>Mobile first</span>
+        <span>Built with clarity</span>
+        <span>Swift thinking</span>
+      </div>
+    </div>
+  </div>
+
+    <!-- Contact and footer -->
+<section
+  class="contact-section"
+  id="contact"
+  aria-labelledby="contact-title"
+  aria-describedby="contact-intro"
+>
+  <div class="contact-shell">
+    <header class="contact-header">
+      <p class="contact-index" data-reveal>[005]</p>
+      <h2 class="contact-title" id="contact-title" data-reveal style="--reveal-delay: 70ms;">
+        Contact
+      </h2>
+      <p
+        class="contact-intro"
+        id="contact-intro"
+        data-reveal
+        style="--reveal-delay: 140ms;"
+      >
+        Whether we start fresh to bring an idea to life or take an existing product
+        further, let&rsquo;s make something thoughtful together.
+      </p>
+    </header>
+
+    <div class="contact-directory" aria-label="Contact details">
+      <a
+        class="contact-row"
+        href="mailto:JudeMawad@gmail.com"
+        data-reveal
+        style="--reveal-delay: 40ms;"
+      >
+        <span class="contact-row-label">Send an email</span>
+        <span class="contact-row-main">
+          <span class="contact-row-value contact-row-value--email">JudeMawad@gmail.com</span>
+          <span class="contact-row-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+              <path d="M7 17 17 7"></path>
+              <path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+        </span>
+      </a>
+
+      <a
+        class="contact-row"
+        href="tel:+491772257937"
+        data-reveal
+        style="--reveal-delay: 90ms;"
+      >
+        <span class="contact-row-label">Direct line</span>
+        <span class="contact-row-main">
+          <span class="contact-row-value">+49 177 2257937</span>
+          <span class="contact-row-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+              <path d="M7 17 17 7"></path>
+              <path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+        </span>
+      </a>
+
+      <div class="contact-row contact-row--location" data-reveal style="--reveal-delay: 140ms;">
+        <span class="contact-row-label">Based in</span>
+        <address class="contact-row-value">Brunswick, 38100 Germany</address>
       </div>
     </div>
 
-    <!--
-      SKILLS SECTION
-      -----------------------------------------------------------------------------
-      Showcases a list of your skills in a scrolling wrapper.
-    -->
-    <section id="skills" class="section animate delay-5">
-      <div class="skills-card">
-        <!-- Scrolling Wrapper for Skills -->
-        <div class="skills-strip-wrapper">
-          <ul class="skills-list">
-            <li>Swift & SwiftUI</li>
-            <li>Core Data</li>
-            <li>HTML & CSS</li>
-            <li>Git & GitHub</li>
-            <li>UI/UX Principles</li>
-            <li>Problem Solving</li>
-            <li>Responsive Design</li>
-            <!-- Additional skills can be added here -->
-          </ul>
-        </div>
-      </div>
-    </section>
+    <footer class="contact-footer">
+      <div class="contact-socials" aria-label="Social links and r&eacute;sum&eacute;">
+        <a
+          class="contact-pill"
+          href="https://github.com/JoudMawad"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-reveal
+        >
+          <span>GitHub</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 17 17 7"></path>
+            <path d="M8 7h9v9"></path>
+          </svg>
+        </a>
 
-    <!--
-      TECH SECTION (Commented Out)
-      -----------------------------------------------------------------------------
-      This section is commented out but can be enabled to display additional tech
-      related logos.
-    -->
-    <!-- 
-    <section id="tech" class="section animate delay-5">
-      <div class="tech-card">
-        <div class="tech-strip-wrapper">
-          <ul class="tech-list">
-            <li><img src="images/1200x630bb.png" alt="Xcode"></li>
-            <li><img src="images/Octicons-mark-github.svg.png" alt="GitHub"></li>
-            <li><img src="images/swift-og.png" alt="SWIFT"></li>
-            <li><img src="images/Visual_Studio_Code_1.35_icon.svg.png" alt="VS Code"></li>
-            <li><img src="images/Git_icon.svg.png" alt="GitHub"></li>
-            <li><img src="images/Official_CSS_Logo.svg.png" alt="Figma"></li>
-            <li><img src="images/html-1.svg" alt="VS Code"></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    -->
+        <a
+          class="contact-pill"
+          href="https://www.instagram.com/jude_mawad"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-reveal
+          style="--reveal-delay: 70ms;"
+        >
+          <span>Instagram</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 17 17 7"></path>
+            <path d="M8 7h9v9"></path>
+          </svg>
+        </a>
 
-    <!-- Divider for "PROJECTS" -->
-    <div class="section-divider">
-      <div class="divider-text">
-        <span class="divider-word left">S4</span>
-        <span class="divider-word middle">//PROJECTS</span>
-        <span class="divider-word right">2024-2025</span>
+        <a
+          class="contact-pill"
+          href="Resume.pdf"
+          download
+          data-reveal
+          style="--reveal-delay: 140ms;"
+        >
+          <span>R&eacute;sum&eacute;</span>
+          <svg class="contact-pill-download" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 4v13"></path>
+            <path d="m7.5 12.5 4.5 4.5 4.5-4.5"></path>
+            <path d="M5 20h14"></path>
+          </svg>
+        </a>
       </div>
-    </div>
 
-    <!--
-      PROJECTS SECTION
-      -----------------------------------------------------------------------------
-      Displays your portfolio items with images, titles, and short descriptions.
-    -->
-    <section id="projects" class="latest-portfolio section animate delay-3">
-      <!-- Header: Title & Description for Projects -->
-      <div class="portfolio-header">
-        <h2>MY<br/>PROJECTS</h2>
-        <p>
-          My creative spirit comes alive in the digital realm.
-          With nimble fingers flying across the device.
-        </p>
+      <div class="contact-legal">
+        <p><span>&copy; 2026 Jude Mawad</span><i aria-hidden="true"></i><span>All rights reserved.</span></p>
+        <a href="#home" aria-label="Back to the top of the page">
+          Back to top
+          <span aria-hidden="true">&uarr;</span>
+        </a>
       </div>
-      <!-- Portfolio Items Grid -->
-      <div class="portfolio-grid">
-        <div class="portfolio-item">
-          <img src="images/svgviewer-png-output.png" alt="Seventy Seven Taxi" />
-          <h3>IGNITE</h3>
-          <span>FULLY FUNCTIONAL CALORIE APP</span>
-        </div>
-        <div class="portfolio-item">
-          <img src="images/1.mov" alt="Scrambler Motorcycle" />
-          <h3>CLOCKWISE</h3>
-          <span>Project Oriented Time Management</span>
-        </div>
-      </div>
-    </section>
+    </footer>
+  </div>
+</section>
+  </main>
 
-    <!-- Divider for "CONTACTS" -->
-    <div class="section-divider">
-      <div class="divider-text">
-        <span class="divider-word left">S5</span>
-        <span class="divider-word middle">//CONTACTS</span>
-        <span class="divider-word right">2025</span>
-      </div>
-    </div>
-
-    <!--
-      FOOTER – CONTACT INFO SECTION
-      -----------------------------------------------------------------------------
-      Provides additional ways to contact you, including social media, location,
-      phone number, and email address.
-    -->
-    <section class="contact-info">
-      <!-- Column 1: Social Media -->
-      <div class="info-col">
-        <h3>Follow Me</h3>
-        <div class="contact-social-links">
-          <ul>
-            <li>
-              <a href="https://www.instagram.com/jude_mawad?igsh=c3oxYjN0MHFjZTJn&utm_source=qr" target="_blank">
-                INSTAGRAM
-              </a>
-            </li>
-            <!-- Add additional social links here as needed -->
-          </ul>
-        </div>
-      </div>
-      
-      <!-- Column 2: Current Location -->
-      <div class="info-col">
-        <h3>Current Location</h3>
-        <p>
-          Brunswick, 38100<br/>
-          Germany
-        </p>
-      </div>
-      
-      <!-- Column 3: Phone -->
-      <div class="info-col">
-        <h3>Phone</h3>
-        <p>GER +49 1772257937</p>
-      </div>
-      
-      <!-- Column 4: Email -->
-      <div class="info-col">
-        <h3>Email Me</h3>
-        <p>JudeMawad@Gmail.com</p>
-      </div>
-    </section>
-
-  </div> <!-- End of main-content -->
-
-  <!-- External JavaScript -->
-  <script src="script.js"></script>
+  <script src="section-scripts/site.js"></script>
+  <script src="section-scripts/hero.js"></script>
+  <script src="section-scripts/projects.js"></script>
+  <script src="section-scripts/journey.js"></script>
 </body>
 </html>

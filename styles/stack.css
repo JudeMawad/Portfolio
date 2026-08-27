@@ -1,0 +1,299 @@
+.stack-section {
+  position: relative;
+  overflow: clip;
+  border-block: 1px solid var(--line);
+  background: var(--bg);
+  isolation: isolate;
+}
+
+.stack-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 84% 9%, color-mix(in srgb, var(--fg) 4%, transparent), transparent 28rem),
+    linear-gradient(90deg, transparent 0 49.96%, color-mix(in srgb, var(--line) 65%, transparent) 50%, transparent 50.04%);
+}
+
+.stack-shell {
+  width: min(100%, var(--max));
+  margin-inline: auto;
+  padding: clamp(8rem, 14vw, 14rem) var(--pad) clamp(7rem, 12vw, 12rem);
+}
+
+.stack-header {
+  margin-bottom: clamp(6rem, 11vw, 10rem);
+}
+
+.stack-index {
+  margin: 0 0 1.4rem;
+  color: var(--muted-bright, var(--muted));
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.23em;
+  line-height: 1;
+}
+
+.stack-title {
+  margin: 0;
+  font-size: clamp(4.5rem, 11vw, 10.5rem);
+  font-weight: 800;
+  letter-spacing: -0.075em;
+  line-height: 0.78;
+  text-transform: uppercase;
+}
+
+.stack-groups {
+  width: 100%;
+}
+
+.stack-group {
+  border-top: 1px solid var(--line);
+}
+
+.stack-group:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.stack-group[data-reveal="left"] {
+  transform: translate3d(-2.25rem, 1.25rem, 0);
+}
+
+.stack-group[data-reveal="right"] {
+  transform: translate3d(2.25rem, 1.25rem, 0);
+}
+
+.stack-group[data-reveal].is-visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.stack-group-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-top: 1.55rem;
+}
+
+.stack-group-number,
+.stack-group-title {
+  font-size: clamp(0.63rem, 0.72vw, 0.72rem);
+  line-height: 1;
+}
+
+.stack-group-number {
+  flex: 0 0 auto;
+  color: color-mix(in srgb, var(--muted) 62%, transparent);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+}
+
+.stack-group-title {
+  margin: 0;
+  color: var(--muted-bright, var(--muted));
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.stack-tools {
+  display: grid;
+  grid-template-columns: repeat(var(--stack-track-count, 3), minmax(0, 1fr));
+  align-items: center;
+  gap: 1.3rem clamp(1.5rem, 3vw, 3.5rem);
+  margin: 0;
+  padding: clamp(2.3rem, 4vw, 3.6rem) 0 clamp(4.6rem, 7.5vw, 7rem);
+  list-style: none;
+}
+
+.stack-tools--two {
+  --stack-track-count: 2;
+}
+
+.stack-tools--three {
+  --stack-track-count: 3;
+}
+
+.stack-tools--four {
+  --stack-track-count: 4;
+}
+
+.stack-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.78rem;
+  min-height: 1.6rem;
+  color: color-mix(in srgb, var(--muted-bright, var(--muted)) 78%, transparent);
+  font-size: clamp(0.82rem, 1vw, 0.96rem);
+  font-weight: 450;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: color 220ms ease, transform 320ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+@media (min-width: 761px) {
+  .stack-tools > .stack-tool:first-child {
+    justify-self: start;
+  }
+
+  .stack-tools > .stack-tool:last-child {
+    justify-self: end;
+  }
+
+  .stack-tools > .stack-tool:not(:first-child):not(:last-child) {
+    justify-self: center;
+  }
+}
+
+.stack-tool-icon {
+  position: relative;
+  display: inline-grid;
+  flex: 0 0 1.35rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  place-items: center;
+  color: currentColor;
+  opacity: 0.62;
+  transition: opacity 220ms ease, transform 320ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.stack-tool-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(1) invert(1) brightness(0.82) contrast(0.9);
+}
+
+.stack-tool-monogram {
+  border: 1px solid currentColor;
+  font-size: 0.48rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+.stack-tool-database::before,
+.stack-tool-database::after {
+  content: "";
+  position: absolute;
+  left: 0.18rem;
+  width: 0.98rem;
+  border: 1px solid currentColor;
+}
+
+.stack-tool-database::before {
+  top: 0.17rem;
+  height: 0.38rem;
+  border-radius: 50%;
+}
+
+.stack-tool-database::after {
+  top: 0.34rem;
+  height: 0.76rem;
+  border-top: 0;
+  border-radius: 0 0 50% 50% / 0 0 24% 24%;
+}
+
+.stack-tool-responsive {
+  border: 1px solid currentColor;
+  border-radius: 1px;
+}
+
+.stack-tool-responsive::before {
+  content: "";
+  position: absolute;
+  inset: 0.2rem 0.22rem 0.37rem;
+  border: 1px solid currentColor;
+}
+
+.stack-tool-responsive span {
+  position: absolute;
+  bottom: 0.14rem;
+  width: 0.42rem;
+  border-top: 1px solid currentColor;
+}
+
+.stack-tool-solve::before,
+.stack-tool-solve::after {
+  content: "";
+  position: absolute;
+  inset: 0.14rem;
+  border: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.stack-tool-solve::after {
+  inset: 0.42rem;
+  border-color: var(--accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .stack-group:hover .stack-group-number {
+    color: var(--accent);
+  }
+
+  .stack-tool:hover {
+    color: var(--fg);
+    transform: translateY(-0.18rem);
+  }
+
+  .stack-tool:hover .stack-tool-icon {
+    opacity: 1;
+    transform: rotate(-3deg) scale(1.08);
+  }
+}
+
+@media (max-width: 760px) {
+  .stack-section::before {
+    background: radial-gradient(circle at 100% 6%, color-mix(in srgb, var(--fg) 4%, transparent), transparent 19rem);
+  }
+
+  .stack-shell {
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
+  }
+
+  .stack-header {
+    margin-bottom: 5.5rem;
+  }
+
+  .stack-title {
+    font-size: clamp(4rem, 22vw, 7rem);
+  }
+
+  .stack-group-heading {
+    padding-top: 1.25rem;
+  }
+
+  .stack-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem 1rem;
+    padding-block: 2.25rem 4.75rem;
+  }
+
+  .stack-tool {
+    justify-self: start;
+    min-width: 0;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 420px) {
+  .stack-tools {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-group[data-reveal="left"],
+  .stack-group[data-reveal="right"] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .stack-tool,
+  .stack-tool-icon {
+    transition: none;
+  }
+}
