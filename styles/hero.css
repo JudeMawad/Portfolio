@@ -161,7 +161,6 @@
 
 .site-header__contact {
   justify-self: end;
-  display: inline-flex;
   align-items: center;
   gap: .9rem;
   border: 1px solid var(--hero-line);

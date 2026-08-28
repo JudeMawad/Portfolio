@@ -176,9 +176,8 @@
   max-width: 31rem;
   margin: 0;
   color: var(--card-muted);
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: clamp(1.12rem, 1.55vw, 1.5rem);
-  font-style: italic;
   line-height: 1.48;
 }
 
