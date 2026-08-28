@@ -41,7 +41,7 @@ const document = `<!doctype html>
   <meta name="theme-color" content="#080808">
   <meta name="description" content="Jude Mawad is a computer science student, digital designer, and app developer focused on useful mobile experiences.">
   <title>Jude Mawad — Digital Designer &amp; App Developer</title>
-  <link rel="preload" href="images/img_8246.JPG" as="image">
+  <link rel="preload" href="images/portrait.png" as="image">
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/hero.css">
   <link rel="stylesheet" href="styles/about.css">
