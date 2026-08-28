@@ -356,17 +356,29 @@
 }
 
 .hero-section__grid {
+  --hero-guide-half: .5px;
   width: 100%;
   left: 0;
   right: 0;
   border-inline: 1px solid var(--hero-line);
   background:
     linear-gradient(90deg,
-      transparent calc(25% - .5px), var(--hero-line) 25%, transparent calc(25% + .5px),
-      transparent calc(50% - .5px), var(--hero-line) 50%, transparent calc(50% + .5px),
-      transparent calc(75% - .5px), var(--hero-line) 75%, transparent calc(75% + .5px));
+      transparent calc(25% - var(--hero-guide-half)),
+      var(--hero-line) calc(25% - var(--hero-guide-half)) calc(25% + var(--hero-guide-half)),
+      transparent calc(25% + var(--hero-guide-half)) calc(50% - var(--hero-guide-half)),
+      var(--hero-line) calc(50% - var(--hero-guide-half)) calc(50% + var(--hero-guide-half)),
+      transparent calc(50% + var(--hero-guide-half)) calc(75% - var(--hero-guide-half)),
+      var(--hero-line) calc(75% - var(--hero-guide-half)) calc(75% + var(--hero-guide-half)),
+      transparent calc(75% + var(--hero-guide-half)));
   transform: none;
   opacity: .62;
+}
+
+@media (min-width: 1600px) {
+  .hero-section__grid {
+    --hero-guide-half: 1px;
+    opacity: .78;
+  }
 }
 
 .hero-section__inner {
@@ -635,6 +647,7 @@
   min-height: 3.1rem;
   display: flex;
   justify-content: space-between;
+  background: var(--hero-bg);
   align-items: center;
   border: 1px solid var(--hero-line);
   border-radius: 99rem;
@@ -748,7 +761,9 @@
 
   .hero-section__grid {
     background: linear-gradient(90deg,
-      transparent calc(50% - .5px), var(--hero-line) 50%, transparent calc(50% + .5px));
+      transparent calc(50% - var(--hero-guide-half)),
+      var(--hero-line) calc(50% - var(--hero-guide-half)) calc(50% + var(--hero-guide-half)),
+      transparent calc(50% + var(--hero-guide-half)));
   }
 
   .hero-kicker { grid-template-columns: 1fr auto; }

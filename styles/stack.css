@@ -270,7 +270,7 @@
   margin-bottom: clamp(11rem, 23svh, 18rem);
 }
 
-.stack-section.is-stack-enhanced .stack-card-pin:last-child { margin-bottom: clamp(14rem, 45svh, 34rem); }
+
 
 @media (hover: hover) and (pointer: fine) {
   .stack-pagination button:hover,

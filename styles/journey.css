@@ -223,9 +223,7 @@
 
 .journey-card-title {
   margin: 0;
-  font-family: var(--journey-serif);
   font-size: clamp(2.6rem, 4vw, 4.5rem);
-  font-style: italic;
   font-weight: 600;
   letter-spacing: -0.055em;
   line-height: 0.95;

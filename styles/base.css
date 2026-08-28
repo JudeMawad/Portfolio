@@ -142,15 +142,32 @@ main {
 .projects-section::after,
 .journey-section::after,
 .contact-section::after {
+  --section-guide-color: color-mix(in srgb, var(--line, #20201e) 72%, transparent);
+  --section-guide-half: .5px;
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   background: linear-gradient(90deg,
-    transparent calc(25% - .5px), color-mix(in srgb, var(--line, #20201e) 72%, transparent) 25%, transparent calc(25% + .5px),
-    transparent calc(50% - .5px), color-mix(in srgb, var(--line, #20201e) 72%, transparent) 50%, transparent calc(50% + .5px),
-    transparent calc(75% - .5px), color-mix(in srgb, var(--line, #20201e) 72%, transparent) 75%, transparent calc(75% + .5px));
+    transparent calc(25% - var(--section-guide-half)),
+    var(--section-guide-color) calc(25% - var(--section-guide-half)) calc(25% + var(--section-guide-half)),
+    transparent calc(25% + var(--section-guide-half)) calc(50% - var(--section-guide-half)),
+    var(--section-guide-color) calc(50% - var(--section-guide-half)) calc(50% + var(--section-guide-half)),
+    transparent calc(50% + var(--section-guide-half)) calc(75% - var(--section-guide-half)),
+    var(--section-guide-color) calc(75% - var(--section-guide-half)) calc(75% + var(--section-guide-half)),
+    transparent calc(75% + var(--section-guide-half)));
+}
+
+@media (min-width: 1600px) {
+  .about-section::after,
+  .stack-section::after,
+  .projects-section::after,
+  .journey-section::after,
+  .contact-section::after {
+    --section-guide-color: color-mix(in srgb, var(--line, #20201e) 88%, transparent);
+    --section-guide-half: 1px;
+  }
 }
 
 .section-shell {
@@ -277,9 +294,9 @@ main {
   .journey-section::after,
   .contact-section::after {
     background: linear-gradient(90deg,
-      transparent calc(50% - .5px),
-      color-mix(in srgb, var(--line, #20201e) 72%, transparent) 50%,
-      transparent calc(50% + .5px));
+      transparent calc(50% - var(--section-guide-half)),
+      var(--section-guide-color) calc(50% - var(--section-guide-half)) calc(50% + var(--section-guide-half)),
+      transparent calc(50% + var(--section-guide-half)));
   }
 
 }
