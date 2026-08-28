@@ -54,7 +54,6 @@ const document = `<!doctype html>
   <a class="skip-link" href="#about">Skip to content</a>
   <div class="scroll-progress" aria-hidden="true"></div>
   <div class="site-grid" aria-hidden="true"></div>
-  <div class="site-grain" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"></div>
 
