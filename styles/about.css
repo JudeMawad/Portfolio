@@ -1,5 +1,5 @@
 .about-section {
-  --about-serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+  --about-serif: var(--serif, "Instrument Serif", "Iowan Old Style", serif);
   position: relative;
   isolation: isolate;
   min-height: 100svh;
@@ -17,9 +17,7 @@
   inset: 0;
   pointer-events: none;
   opacity: 0.22;
-  background:
-    linear-gradient(90deg, transparent 0 28.5%, var(--line, rgba(255, 255, 255, 0.12)) 28.5% calc(28.5% + 1px), transparent calc(28.5% + 1px)),
-    radial-gradient(circle at 78% 44%, color-mix(in srgb, var(--accent, #a7ff4f) 7%, transparent), transparent 31%);
+  background: radial-gradient(circle at 78% 44%, color-mix(in srgb, var(--accent, #a7ff4f) 7%, transparent), transparent 31%);
 }
 
 .about-shell {
@@ -124,13 +122,13 @@
   display: grid;
   gap: 0.35rem;
   text-align: center;
-  font-size: 0.53rem;
+  font-size: 0.68rem;
   color: var(--muted, #8d8d8a);
 }
 
 .about-badge-copy strong {
   color: var(--fg, #f3f3f0);
-  font-size: 0.67rem;
+  font-size: 0.78rem;
   font-weight: 600;
 }
 
@@ -143,7 +141,7 @@
   display: flex;
   gap: 0.9rem;
   color: var(--muted, #8d8d8a);
-  font-size: clamp(0.58rem, 0.67vw, 0.72rem);
+  font-size: clamp(0.7rem, 0.76vw, 0.82rem);
 }
 
 .about-statement {
@@ -202,7 +200,7 @@
   color: var(--muted, #8d8d8a);
   border: 1px solid var(--line, rgba(255, 255, 255, 0.14));
   border-radius: 999px;
-  font-size: 0.55rem;
+  font-size: 0.7rem;
 }
 
 .about-resume {
@@ -251,7 +249,7 @@
   justify-content: space-between;
   color: var(--muted, #777);
   border-top: 1px solid var(--line, rgba(255, 255, 255, 0.12));
-  font-size: 0.55rem;
+  font-size: 0.7rem;
 }
 
 /* Scroll-driven reveal: visible by default in older browsers, animated where supported. */

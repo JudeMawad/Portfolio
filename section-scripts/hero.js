@@ -85,24 +85,45 @@
     window.addEventListener("scroll", requestScrollUpdate, { passive: true });
     updateHeader();
 
+    const clock = hero.querySelector("[data-hero-time]");
+    const clockMain = hero.querySelector("[data-hero-time-main]");
+    const secondsTile = hero.querySelector("[data-hero-time-seconds]");
+    const secondsValue = hero.querySelector("[data-hero-seconds-value]");
+    const timeFormatter = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Europe/Berlin",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false
+    });
+    let previousSecond = "";
+
     const updateBrunswickTime = () => {
-      const clock = hero.querySelector("[data-hero-time]");
-      if (!clock) return;
+      if (!clock || !clockMain || !secondsTile || !secondsValue) return;
 
       const now = new Date();
-      const value = new Intl.DateTimeFormat("en-GB", {
-        timeZone: "Europe/Berlin",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false
-      }).format(now);
+      const parts = Object.fromEntries(
+        timeFormatter.formatToParts(now).map(({ type, value }) => [type, value])
+      );
+      const currentSecond = parts.second;
+      const readableTime = `${parts.hour}:${parts.minute}:${currentSecond}`;
 
-      clock.textContent = value;
+      clockMain.textContent = `${parts.hour}:${parts.minute}`;
+      secondsValue.textContent = currentSecond;
       clock.dateTime = now.toISOString();
+      clock.setAttribute("aria-label", `Current time in Brunswick: ${readableTime}`);
+
+      if (previousSecond && currentSecond !== previousSecond && !reduceMotion.matches) {
+        secondsTile.classList.remove("is-flipping");
+        void secondsTile.offsetWidth;
+        secondsTile.classList.add("is-flipping");
+      }
+
+      previousSecond = currentSecond;
     };
 
     updateBrunswickTime();
-    window.setInterval(updateBrunswickTime, 30000);
+    window.setInterval(updateBrunswickTime, 1000);
 
     window.requestAnimationFrame(() => {
       window.requestAnimationFrame(() => hero.classList.add("hero-ready"));

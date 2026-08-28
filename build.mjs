@@ -15,24 +15,6 @@ const [hero, about, stack, projects, journey, contact] = await Promise.all([
   read('sections/contact.html')
 ]);
 
-const marquee = `
-  <div class="marquee-band" aria-hidden="true">
-    <div class="marquee-track">
-      <div class="marquee-group">
-        <span>Intentional interfaces</span>
-        <span>Mobile first</span>
-        <span>Built with clarity</span>
-        <span>Swift thinking</span>
-      </div>
-      <div class="marquee-group">
-        <span>Intentional interfaces</span>
-        <span>Mobile first</span>
-        <span>Built with clarity</span>
-        <span>Swift thinking</span>
-      </div>
-    </div>
-  </div>`;
-
 const document = `<!doctype html>
 <html lang="en">
 <head>
@@ -41,6 +23,9 @@ const document = `<!doctype html>
   <meta name="theme-color" content="#080808">
   <meta name="description" content="Jude Mawad is a computer science student, digital designer, and app developer focused on useful mobile experiences.">
   <title>Jude Mawad — Digital Designer &amp; App Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
   <link rel="preload" href="images/portrait.png" as="image">
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/hero.css">
@@ -63,19 +48,15 @@ ${hero.trim()}
   <main id="main-content">
     <!-- About -->
 ${about.trim()}
-${marquee}
 
     <!-- Stack -->
 ${stack.trim()}
-${marquee}
 
     <!-- Projects -->
 ${projects.trim()}
-${marquee}
 
     <!-- Journey -->
 ${journey.trim()}
-${marquee}
 
     <!-- Contact and footer -->
 ${contact.trim()}
@@ -83,6 +64,7 @@ ${contact.trim()}
 
   <script src="section-scripts/site.js"></script>
   <script src="section-scripts/hero.js"></script>
+  <script src="section-scripts/stack.js"></script>
   <script src="section-scripts/projects.js"></script>
   <script src="section-scripts/journey.js"></script>
 </body>

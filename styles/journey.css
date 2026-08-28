@@ -1,7 +1,7 @@
 .journey-section {
   --journey-step-height: clamp(30rem, 48vw, 40rem);
   --journey-serif: var(--serif, "Iowan Old Style", "Baskerville", "Times New Roman", serif);
-  --journey-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --journey-mono: var(--mono, "DM Mono", monospace);
   position: relative;
   isolation: isolate;
   overflow: clip;
@@ -16,9 +16,7 @@
   z-index: -1;
   pointer-events: none;
   content: "";
-  background:
-    radial-gradient(circle at 50% 14%, color-mix(in srgb, var(--accent, #ff5a1f) 6%, transparent), transparent 23rem),
-    linear-gradient(90deg, transparent calc(50% - 0.5px), color-mix(in srgb, var(--line, #20201e) 48%, transparent) 50%, transparent calc(50% + 0.5px));
+  background: radial-gradient(circle at 50% 14%, color-mix(in srgb, var(--accent, #ff5a1f) 6%, transparent), transparent 23rem);
 }
 
 .journey-shell {
@@ -181,7 +179,7 @@
   z-index: 3;
   top: 1.25rem;
   color: var(--muted, #8f8f8b);
-  font-size: 0.58rem;
+  font-size: 0.7rem;
   letter-spacing: 0.18em;
 }
 
@@ -218,7 +216,7 @@
 .journey-card-label {
   margin: 0 0 1rem;
   color: var(--accent, #ff5a1f);
-  font-size: 0.57rem;
+  font-size: 0.7rem;
   font-weight: 650;
   letter-spacing: 0.2em;
 }
@@ -265,7 +263,7 @@
   color: color-mix(in srgb, var(--muted, #8f8f8b) 88%, var(--fg, #f2f2f0));
   border: 1px solid var(--line, #20201e);
   border-radius: 999px;
-  font-size: clamp(0.5rem, 0.62vw, 0.59rem);
+  font-size: clamp(0.68rem, 0.72vw, 0.76rem);
   letter-spacing: 0.09em;
   line-height: 1;
   white-space: nowrap;
@@ -340,7 +338,7 @@
   justify-content: space-between;
   color: var(--muted, #8f8f8b);
   border-top: 1px solid var(--line, #20201e);
-  font-size: 0.55rem;
+  font-size: 0.7rem;
   letter-spacing: 0.16em;
 }
 

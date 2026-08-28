@@ -9,10 +9,6 @@
         </span>
       </a>
 
-      <div class="site-header__availability" aria-label="Based in Brunswick, Germany">
-        <span class="site-header__status-dot" aria-hidden="true"></span>
-        <span>Based in Brunswick / DE</span>
-      </div>
     </div>
 
     <nav class="site-header__nav" aria-label="Primary navigation">
@@ -83,40 +79,51 @@
         Digital designer + app developer
       </p>
       <span class="hero-kicker__coordinates">52.2689° N / 10.5268° E</span>
-      <span class="hero-kicker__time">BRU <time datetime="" data-hero-time>--:--</time></span>
+      <span class="hero-kicker__time">
+        <span aria-hidden="true">BRU</span>
+        <time datetime="" aria-label="Current time in Brunswick" data-hero-time>
+          <span class="hero-clock-main" aria-hidden="true" data-hero-time-main>--:--</span>
+          <span class="hero-clock-separator" aria-hidden="true">:</span>
+          <span class="hero-clock-seconds" aria-hidden="true" data-hero-time-seconds>
+            <span data-hero-seconds-value>--</span>
+          </span>
+        </time>
+      </span>
     </div>
 
-    <div class="hero-statement" aria-label="Jude builds with intent">
-      <div class="hero-statement__line hero-statement__line--top hero-motion" data-hero-reveal>
-        <span>Jude</span>
-        <span class="hero-statement__outline">Builds</span>
+    <div class="hero-composition">
+      <div class="hero-statement" aria-label="Jude builds with intent">
+        <div class="hero-statement__line hero-statement__line--top hero-motion" data-hero-reveal>
+          <span>Jude</span>
+          <span class="hero-statement__outline">Builds</span>
+        </div>
+
+        <div class="hero-statement__meta hero-motion" data-hero-reveal aria-hidden="true">
+          <span>
+            Thoughtful systems<br>
+            Honest interfaces
+          </span>
+        </div>
+
+        <div class="hero-statement__line hero-statement__line--bottom hero-motion" data-hero-reveal>
+          <span>With</span>
+          <span>Intent<span class="hero-statement__period">.</span></span>
+        </div>
       </div>
 
-      <div class="hero-statement__meta hero-motion" data-hero-reveal aria-hidden="true">
-        <span>
-          Thoughtful systems<br>
-          Honest interfaces
-        </span>
-        <span>01 / 03</span>
-      </div>
-
-      <div class="hero-statement__line hero-statement__line--bottom hero-motion" data-hero-reveal>
-        <span>With</span>
-        <figure class="hero-portrait" data-hero-portrait>
-          <img
-            src="images/portrait.png"
-            alt="Portrait of Jude Mawad against a red background"
-            width="1537"
-            height="1023"
-            fetchpriority="high"
-          >
-          <figcaption>
-            <span>Jude Mawad</span>
-            <span>Portrait / 01</span>
-          </figcaption>
-        </figure>
-        <span>Intent<span class="hero-statement__period">.</span></span>
-      </div>
+      <figure class="hero-portrait" data-hero-portrait>
+        <img
+          src="images/portrait.png"
+          alt="Portrait of Jude Mawad against a red background"
+          width="1537"
+          height="1023"
+          fetchpriority="high"
+        >
+        <figcaption>
+          <span>Jude Mawad</span>
+          <span>Portrait / 01</span>
+        </figcaption>
+      </figure>
     </div>
 
     <div class="hero-footer hero-motion" data-hero-reveal>

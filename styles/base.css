@@ -7,12 +7,15 @@
   --muted-bright: #b8b8b2;
   --line: #20201e;
   --line-bright: #353531;
-  --accent: #ff5a1f;
+  --accent: #e02010;
   --pad: clamp(1rem, 4vw, 4rem);
   --max: 1440px;
   --header-h: 4.5rem;
-  --serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
-  --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --serif: "Instrument Serif", "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+  --sans: "Instrument Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "DM Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-sans: var(--sans);
+  --font-mono: var(--mono);
 }
 
 *,
@@ -134,6 +137,22 @@ main {
   z-index: 1;
 }
 
+.about-section::after,
+.stack-section::after,
+.projects-section::after,
+.journey-section::after,
+.contact-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    transparent calc(25% - .5px), color-mix(in srgb, var(--line, #20201e) 72%, transparent) 25%, transparent calc(25% + .5px),
+    transparent calc(50% - .5px), color-mix(in srgb, var(--line, #20201e) 72%, transparent) 50%, transparent calc(50% + .5px),
+    transparent calc(75% - .5px), color-mix(in srgb, var(--line, #20201e) 72%, transparent) 75%, transparent calc(75% + .5px));
+}
+
 .section-shell {
   width: min(100%, var(--max));
   margin: 0 auto;
@@ -143,7 +162,7 @@ main {
 .section-kicker {
   margin: 0 0 1.2rem;
   color: var(--muted-bright);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 650;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -162,49 +181,6 @@ main {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-}
-
-.marquee-band {
-  position: relative;
-  z-index: 2;
-  overflow: hidden;
-  border-block: 1px solid var(--line);
-  background: var(--bg);
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  padding-block: 0.85rem;
-  animation: marquee 32s linear infinite;
-}
-
-.marquee-group {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  gap: 2rem;
-  padding-right: 2rem;
-}
-
-.marquee-group span {
-  display: inline-flex;
-  align-items: center;
-  gap: 2rem;
-  color: var(--muted);
-  font-size: 0.66rem;
-  font-weight: 650;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.marquee-group span::after {
-  content: "";
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: var(--fg);
 }
 
 [data-reveal] {
@@ -269,10 +245,6 @@ main {
   background: rgba(255, 255, 255, 0.06);
 }
 
-@keyframes marquee {
-  to { transform: translateX(-50%); }
-}
-
 @media (hover: hover) and (pointer: fine) {
   body,
   a,
@@ -299,9 +271,17 @@ main {
     font-size: clamp(2.7rem, 13vw, 4.6rem);
   }
 
-  .marquee-track {
-    animation-duration: 24s;
+  .about-section::after,
+  .stack-section::after,
+  .projects-section::after,
+  .journey-section::after,
+  .contact-section::after {
+    background: linear-gradient(90deg,
+      transparent calc(50% - .5px),
+      color-mix(in srgb, var(--line, #20201e) 72%, transparent) 50%,
+      transparent calc(50% + .5px));
   }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

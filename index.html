@@ -6,6 +6,9 @@
   <meta name="theme-color" content="#080808">
   <meta name="description" content="Jude Mawad is a computer science student, digital designer, and app developer focused on useful mobile experiences.">
   <title>Jude Mawad — Digital Designer &amp; App Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
   <link rel="preload" href="images/portrait.png" as="image">
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/hero.css">
@@ -34,10 +37,6 @@
         </span>
       </a>
 
-      <div class="site-header__availability" aria-label="Based in Brunswick, Germany">
-        <span class="site-header__status-dot" aria-hidden="true"></span>
-        <span>Based in Brunswick / DE</span>
-      </div>
     </div>
 
     <nav class="site-header__nav" aria-label="Primary navigation">
@@ -86,15 +85,6 @@
       <a href="#contact" data-site-menu-link><span>06</span><strong>Contact</strong></a>
     </nav>
 
-    <div class="site-menu__footer">
-      <div>
-        <span class="site-menu__meta-label">Based in</span>
-        <span>Brunswick, Germany</span>
-      </div>
-      <a href="Resume.pdf" target="_blank" rel="noopener">
-        View résumé <span aria-hidden="true">↗</span>
-      </a>
-    </div>
   </div>
 </div>
 
@@ -104,64 +94,73 @@
   <div class="hero-section__inner">
     <div class="hero-kicker hero-motion" data-hero-reveal>
       <p>
-        Computer science student<br>
-        Digital designer + app developer
-      </p>
+        Computer science student</p>
       <span class="hero-kicker__coordinates">52.2689° N / 10.5268° E</span>
-      <span class="hero-kicker__time">BRU <time datetime="" data-hero-time>--:--</time></span>
+      <span class="hero-kicker__time">
+        <span aria-hidden="true">BRUNSWICK</span>
+        <time datetime="" aria-label="Current time in Brunswick" data-hero-time>
+          <span class="hero-clock-main" aria-hidden="true" data-hero-time-main>--:--</span>
+          <span class="hero-clock-separator" aria-hidden="true">:</span>
+          <span class="hero-clock-seconds" aria-hidden="true" data-hero-time-seconds>
+            <span data-hero-seconds-value>--</span>
+          </span>
+        </time>
+      </span>
     </div>
 
-    <div class="hero-statement" aria-label="Jude builds with intent">
-      <div class="hero-statement__line hero-statement__line--top hero-motion" data-hero-reveal>
-        <span>Jude</span>
-        <span class="hero-statement__outline">Builds</span>
+    <div class="hero-composition">
+      <div class="hero-statement" aria-label="Jude builds with intent">
+        <div class="hero-statement__line hero-statement__line--top hero-motion" data-hero-reveal>
+          <span>Jude</span>
+          <span class="hero-statement__outline">Builds</span>
+        </div>
+
+        <div class="hero-statement__meta hero-motion" data-hero-reveal aria-hidden="true">
+          <span>
+            Thoughtful systems<br>
+            Honest interfaces
+          </span>
+        </div>
+
+        <div class="hero-statement__line hero-statement__line--bottom hero-motion" data-hero-reveal>
+          <span>With</span>
+          <span>Intent<span class="hero-statement__period">.</span></span>
+        </div>
       </div>
 
-      <div class="hero-statement__meta hero-motion" data-hero-reveal aria-hidden="true">
-        <span>
-          Thoughtful systems<br>
-          Honest interfaces
-        </span>
-        <span>01 / 03</span>
-      </div>
-
-      <div class="hero-statement__line hero-statement__line--bottom hero-motion" data-hero-reveal>
-        <span>With</span>
-        <figure class="hero-portrait" data-hero-portrait>
-          <img
-            src="images/portrait.png"
-            alt="Portrait of Jude Mawad against a red background"
-            width="1537"
-            height="1023"
-            fetchpriority="high"
-          >
-          <figcaption>
-            <span>Jude Mawad</span>
-            <span>Portrait / 01</span>
-          </figcaption>
-        </figure>
-        <span>Intent<span class="hero-statement__period">.</span></span>
-      </div>
+      <figure class="hero-portrait" data-hero-portrait>
+        <img
+          src="images/portrait.png"
+          alt="Portrait of Jude Mawad against a red background"
+          width="1537"
+          height="1023"
+          fetchpriority="high"
+        >
+        <figcaption>
+          <span>Jude Mawad</span>
+          <span>Portrait / 01</span>
+        </figcaption>
+      </figure>
     </div>
 
     <div class="hero-footer hero-motion" data-hero-reveal>
       <p class="hero-footer__intro">
-        I turn ideas into focused digital products&mdash;from the first interface
+        I turn ideas into focused digital products, from the first interface
         sketch to working, useful code.
       </p>
 
       <div class="hero-footer__actions" aria-label="Hero calls to action">
         <a class="hero-link hero-link--primary" href="#projects">
           <span>Explore projects</span>
-          <span aria-hidden="true">↘</span>
+          <span aria-hidden="true"></span>
         </a>
         <a class="hero-link" href="#contact">
           <span>Start a conversation</span>
-          <span aria-hidden="true">↗</span>
+          <span aria-hidden="true"></span>
         </a>
         <a class="hero-link hero-link--resume" href="Resume.pdf" target="_blank" rel="noopener">
           <span>Résumé</span>
-          <span aria-hidden="true">↗</span>
+          <span aria-hidden="true"></span>
         </a>
       </div>
 
@@ -204,8 +203,6 @@
     <div class="about-editorial">
       <p class="about-eyebrow" data-reveal="up">
         <span>BRUNSWICK, DE</span>
-        <span aria-hidden="true">/</span>
-        <span>DESIGN + DEVELOPMENT</span>
       </p>
 
       <h3 class="about-statement" data-reveal="up">
@@ -244,153 +241,89 @@
   </div>
 </section>
 
-  <div class="marquee-band" aria-hidden="true">
-    <div class="marquee-track">
-      <div class="marquee-group">
-        <span>Intentional interfaces</span>
-        <span>Mobile first</span>
-        <span>Built with clarity</span>
-        <span>Swift thinking</span>
-      </div>
-      <div class="marquee-group">
-        <span>Intentional interfaces</span>
-        <span>Mobile first</span>
-        <span>Built with clarity</span>
-        <span>Swift thinking</span>
-      </div>
-    </div>
-  </div>
-
     <!-- Stack -->
-<section id="stack" class="stack-section" aria-labelledby="stack-title">
+<section id="stack" class="stack-section" aria-labelledby="stack-title" data-stack>
   <div class="stack-shell">
     <header class="stack-header">
-      <p class="stack-index" data-reveal>[002]</p>
-      <h2 id="stack-title" class="stack-title" data-reveal style="--reveal-delay: 70ms;">
-        Stack
-      </h2>
+      <div>
+        <p class="stack-index" data-reveal>[002]</p>
+        <h2 id="stack-title" class="stack-title" data-reveal style="--reveal-delay: 70ms;">Stack</h2>
+      </div>
+      <p class="stack-intro" data-reveal style="--reveal-delay: 130ms;">
+        The tools I use to move an idea from a rough interaction to a focused, working product.
+      </p>
     </header>
 
-    <div class="stack-groups">
-      <article class="stack-group" data-reveal="left">
-        <div class="stack-group-heading">
-          <span class="stack-group-number" aria-hidden="true">01</span>
-          <h3 class="stack-group-title">Mobile Development</h3>
-        </div>
+    <p id="stack-instructions" class="visually-hidden">
+      Scroll through four stacked cards. When this area is focused, use the arrow keys, Home, or End to move between cards.
+    </p>
 
-        <ul class="stack-tools stack-tools--three" role="list" aria-label="Mobile development technologies">
-          <li class="stack-tool">
-            <span class="stack-tool-icon" aria-hidden="true">
-              <img src="images/swift-og.png" alt="" loading="lazy" decoding="async">
-            </span>
-            <span>Swift</span>
-          </li>
-          <li class="stack-tool">
-            <span class="stack-tool-icon stack-tool-monogram" aria-hidden="true">UI</span>
-            <span>SwiftUI</span>
-          </li>
-          <li class="stack-tool">
-            <span class="stack-tool-icon stack-tool-monogram stack-tool-database" aria-hidden="true"></span>
-            <span>Core Data</span>
-          </li>
-        </ul>
-      </article>
+    <div class="stack-deck" tabindex="0" role="group" aria-labelledby="stack-title" aria-describedby="stack-instructions" data-stack-deck>
+      <nav class="stack-pagination" aria-label="Stack card navigation">
+        <button type="button" aria-label="Go to Mobile Development, card 1 of 4" aria-controls="stack-card-mobile" aria-current="true" data-stack-dot="0"><span>01</span></button>
+        <button type="button" aria-label="Go to Web Development, card 2 of 4" aria-controls="stack-card-web" data-stack-dot="1"><span>02</span></button>
+        <button type="button" aria-label="Go to Workflow and Tooling, card 3 of 4" aria-controls="stack-card-workflow" data-stack-dot="2"><span>03</span></button>
+        <button type="button" aria-label="Go to Design Practice, card 4 of 4" aria-controls="stack-card-design" data-stack-dot="3"><span>04</span></button>
+      </nav>
 
-      <article class="stack-group" data-reveal="right" style="--reveal-delay: 40ms;">
-        <div class="stack-group-heading">
-          <span class="stack-group-number" aria-hidden="true">02</span>
-          <h3 class="stack-group-title">Web Development</h3>
-        </div>
+      <ol class="stack-cards" data-stack-cards>
+        <li class="stack-card-pin" data-stack-item style="--stack-index: 0;">
+          <article id="stack-card-mobile" class="stack-card" data-stack-card data-stack-tone="ink">
+            <span class="stack-card-ghost" aria-hidden="true">01</span>
+            <header class="stack-card-header"><p>01 / Product platform</p><span>Native systems</span></header>
+            <div class="stack-card-body">
+              <div><p class="stack-card-kicker">Primary practice</p><h3>Mobile<br>Development</h3></div>
+              <p class="stack-card-copy">Native iOS experiences with careful state, useful motion, and interfaces that feel at home on the device.</p>
+            </div>
+            <ul class="stack-card-tools" aria-label="Mobile development technologies"><li>Swift</li><li>SwiftUI</li><li>Core Data</li></ul>
+            <p class="stack-card-cue" aria-hidden="true">Scroll to layer the next card <span>↓</span></p>
+          </article>
+        </li>
 
-        <ul class="stack-tools stack-tools--three" role="list" aria-label="Web development technologies">
-          <li class="stack-tool">
-            <span class="stack-tool-icon" aria-hidden="true">
-              <img src="images/html-1.svg" alt="" loading="lazy" decoding="async">
-            </span>
-            <span>HTML5</span>
-          </li>
-          <li class="stack-tool">
-            <span class="stack-tool-icon" aria-hidden="true">
-              <img src="images/Official_CSS_Logo.svg.png" alt="" loading="lazy" decoding="async">
-            </span>
-            <span>CSS3</span>
-          </li>
-          <li class="stack-tool">
-            <span class="stack-tool-icon stack-tool-responsive" aria-hidden="true">
-              <span></span>
-            </span>
-            <span>Responsive Design</span>
-          </li>
-        </ul>
-      </article>
+        <li class="stack-card-pin" data-stack-item style="--stack-index: 1;">
+          <article id="stack-card-web" class="stack-card" data-stack-card data-stack-tone="paper">
+            <span class="stack-card-ghost" aria-hidden="true">02</span>
+            <header class="stack-card-header"><p>02 / Digital canvas</p><span>Responsive systems</span></header>
+            <div class="stack-card-body">
+              <div><p class="stack-card-kicker">Browser craft</p><h3>Web<br>Development</h3></div>
+              <p class="stack-card-copy">Responsive sites built around strong hierarchy, semantic structure, and details that hold up at every viewport.</p>
+            </div>
+            <ul class="stack-card-tools" aria-label="Web development technologies"><li>HTML5</li><li>CSS3</li><li>Responsive Design</li></ul>
+            <p class="stack-card-cue" aria-hidden="true">Keep scrolling <span>↓</span></p>
+          </article>
+        </li>
 
-      <article class="stack-group" data-reveal="left" style="--reveal-delay: 80ms;">
-        <div class="stack-group-heading">
-          <span class="stack-group-number" aria-hidden="true">03</span>
-          <h3 class="stack-group-title">Workflow &amp; Tooling</h3>
-        </div>
+        <li class="stack-card-pin" data-stack-item style="--stack-index: 2;">
+          <article id="stack-card-workflow" class="stack-card" data-stack-card data-stack-tone="graphite">
+            <span class="stack-card-ghost" aria-hidden="true">03</span>
+            <header class="stack-card-header"><p>03 / Build discipline</p><span>Reliable workflow</span></header>
+            <div class="stack-card-body">
+              <div><p class="stack-card-kicker">Daily toolkit</p><h3>Workflow<br>&amp; Tooling</h3></div>
+              <p class="stack-card-copy">A practical toolchain for shaping, reviewing, and shipping work without losing the intent behind the first sketch.</p>
+            </div>
+            <ul class="stack-card-tools" aria-label="Development workflow tools"><li>Git</li><li>GitHub</li><li>Xcode</li><li>VS Code</li></ul>
+            <p class="stack-card-cue" aria-hidden="true">One more layer <span>↓</span></p>
+          </article>
+        </li>
 
-        <ul class="stack-tools stack-tools--four" role="list" aria-label="Development workflow tools">
-          <li class="stack-tool">
-            <span class="stack-tool-icon" aria-hidden="true">
-              <img src="images/Git_icon.svg.png" alt="" loading="lazy" decoding="async">
-            </span>
-            <span>Git</span>
-          </li>
-          <li class="stack-tool">
-            <span class="stack-tool-icon" aria-hidden="true">
-              <img src="images/Octicons-mark-github.svg.png" alt="" loading="lazy" decoding="async">
-            </span>
-            <span>GitHub</span>
-          </li>
-          <li class="stack-tool">
-            <span class="stack-tool-icon stack-tool-monogram" aria-hidden="true">XC</span>
-            <span>Xcode</span>
-          </li>
-          <li class="stack-tool">
-            <span class="stack-tool-icon stack-tool-monogram" aria-hidden="true">VS</span>
-            <span>VS Code</span>
-          </li>
-        </ul>
-      </article>
+        <li class="stack-card-pin" data-stack-item style="--stack-index: 3;">
+          <article id="stack-card-design" class="stack-card" data-stack-card data-stack-tone="signal">
+            <span class="stack-card-ghost" aria-hidden="true">04</span>
+            <header class="stack-card-header"><p>04 / Product thinking</p><span>Clarity first</span></header>
+            <div class="stack-card-body">
+              <div><p class="stack-card-kicker">Design practice</p><h3>Useful by<br>Intent</h3></div>
+              <p class="stack-card-copy">UI and UX decisions grounded in the problem, the person using the product, and the smallest honest solution.</p>
+            </div>
+            <ul class="stack-card-tools" aria-label="Design practices"><li>UI / UX</li><li>Problem Solving</li><li>Prototyping</li></ul>
+            <p class="stack-card-cue" aria-hidden="true">End of stack <span>↘</span></p>
+          </article>
+        </li>
+      </ol>
 
-      <article class="stack-group" data-reveal="right" style="--reveal-delay: 120ms;">
-        <div class="stack-group-heading">
-          <span class="stack-group-number" aria-hidden="true">04</span>
-          <h3 class="stack-group-title">Design Practice</h3>
-        </div>
-
-        <ul class="stack-tools stack-tools--two" role="list" aria-label="Design and problem-solving practices">
-          <li class="stack-tool">
-            <span class="stack-tool-icon stack-tool-monogram" aria-hidden="true">UX</span>
-            <span>UI/UX Principles</span>
-          </li>
-          <li class="stack-tool">
-            <span class="stack-tool-icon stack-tool-solve" aria-hidden="true"></span>
-            <span>Problem Solving</span>
-          </li>
-        </ul>
-      </article>
+      <p class="visually-hidden" role="status" aria-live="polite" aria-atomic="true" data-stack-status></p>
     </div>
   </div>
 </section>
-
-  <div class="marquee-band" aria-hidden="true">
-    <div class="marquee-track">
-      <div class="marquee-group">
-        <span>Intentional interfaces</span>
-        <span>Mobile first</span>
-        <span>Built with clarity</span>
-        <span>Swift thinking</span>
-      </div>
-      <div class="marquee-group">
-        <span>Intentional interfaces</span>
-        <span>Mobile first</span>
-        <span>Built with clarity</span>
-        <span>Swift thinking</span>
-      </div>
-    </div>
-  </div>
 
     <!-- Projects -->
 <section class="projects-section" id="projects" aria-labelledby="projects-title">
@@ -521,23 +454,6 @@
   </div>
 </section>
 
-  <div class="marquee-band" aria-hidden="true">
-    <div class="marquee-track">
-      <div class="marquee-group">
-        <span>Intentional interfaces</span>
-        <span>Mobile first</span>
-        <span>Built with clarity</span>
-        <span>Swift thinking</span>
-      </div>
-      <div class="marquee-group">
-        <span>Intentional interfaces</span>
-        <span>Mobile first</span>
-        <span>Built with clarity</span>
-        <span>Swift thinking</span>
-      </div>
-    </div>
-  </div>
-
     <!-- Journey -->
 <section
   class="journey-section"
@@ -649,23 +565,6 @@
     </footer>
   </div>
 </section>
-
-  <div class="marquee-band" aria-hidden="true">
-    <div class="marquee-track">
-      <div class="marquee-group">
-        <span>Intentional interfaces</span>
-        <span>Mobile first</span>
-        <span>Built with clarity</span>
-        <span>Swift thinking</span>
-      </div>
-      <div class="marquee-group">
-        <span>Intentional interfaces</span>
-        <span>Mobile first</span>
-        <span>Built with clarity</span>
-        <span>Swift thinking</span>
-      </div>
-    </div>
-  </div>
 
     <!-- Contact and footer -->
 <section
@@ -795,6 +694,7 @@
 
   <script src="section-scripts/site.js"></script>
   <script src="section-scripts/hero.js"></script>
+  <script src="section-scripts/stack.js"></script>
   <script src="section-scripts/projects.js"></script>
   <script src="section-scripts/journey.js"></script>
 </body>

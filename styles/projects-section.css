@@ -9,18 +9,6 @@
   border-top: 1px solid var(--line, rgba(255, 255, 255, 0.14));
 }
 
-.projects-section::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.34;
-  background:
-    radial-gradient(circle at 74% 42%, color-mix(in srgb, var(--accent, #ff5a1f) 7%, transparent), transparent 28%),
-    linear-gradient(90deg, transparent calc(25% - 1px), var(--line, rgba(255, 255, 255, 0.12)) 25%, transparent calc(25% + 1px));
-}
-
 .projects-viewport {
   width: min(100%, var(--max, 1440px));
   margin-inline: auto;
@@ -87,7 +75,7 @@
   align-items: center;
   gap: 1rem;
   color: var(--muted, #8f8f8b);
-  font-size: 0.62rem;
+  font-size: 0.76rem;
 }
 
 .projects-explore-line {
@@ -359,7 +347,7 @@
   justify-content: space-between;
   gap: 1.5rem;
   color: var(--muted-bright, #b8b8b2);
-  font-size: clamp(0.53rem, 0.72vw, 0.72rem);
+  font-size: clamp(0.7rem, 0.76vw, 0.82rem);
   line-height: 1.4;
 }
 
@@ -449,7 +437,7 @@
   align-items: center;
   gap: 0.6rem;
   color: var(--muted-bright, #b8b8b2);
-  font-size: 0.55rem;
+  font-size: 0.7rem;
   opacity: 0;
   transition: opacity 400ms ease 160ms;
 }
@@ -501,7 +489,7 @@
   gap: 0.42rem;
   color: var(--muted, #8f8f8b);
   border-bottom: 1px solid var(--line, rgba(255, 255, 255, 0.14));
-  font-size: 0.55rem;
+  font-size: 0.7rem;
 }
 
 .projects-terminal-bar span {
@@ -526,7 +514,7 @@
   z-index: 1;
   padding: clamp(1.4rem, 3vw, 3rem);
   color: var(--muted-bright, #b8b8b2);
-  font-size: clamp(0.64rem, 0.82vw, 0.78rem);
+  font-size: clamp(0.72rem, 0.84vw, 0.84rem);
   line-height: 1.9;
   text-transform: none;
   letter-spacing: 0.06em;
@@ -585,7 +573,7 @@
   gap: 1rem;
   color: var(--muted, #8f8f8b);
   border-top: 1px solid var(--line, rgba(255, 255, 255, 0.14));
-  font-size: 0.52rem;
+  font-size: 0.7rem;
 }
 
 @media (min-width: 900px) {
