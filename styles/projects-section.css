@@ -225,8 +225,8 @@
 
 .projects-cube-shot {
   right: 3%;
-  top: 10%;
-  height: 80%;
+  top: 15%;
+  height: 70%;
   opacity: 0.63;
   filter: grayscale(1) contrast(0.9) brightness(0.72);
   transform: translate3d(1.5%, 1%, 0) rotate(1deg);
@@ -701,7 +701,7 @@
 
   .projects-cube-shot {
     right: 8%;
-    top: 20%;
+    top: 23%;
     width: 84%;
     height: auto;
   }
