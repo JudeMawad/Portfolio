@@ -15,6 +15,8 @@
     let distance = 0;
     let frame = 0;
     let enhanced = false;
+    let mobileCardObserver = null;
+    const mobileCardCandidates = new Set();
 
     if (!track) return;
 
@@ -71,13 +73,71 @@
       }
     };
 
+    const updateMobileCardState = () => {
+      frame = 0;
+      if (!mobileCardObserver || desktopQuery.matches || reducedMotionQuery.matches) return;
+
+      const viewportCenter = window.innerHeight / 2;
+      let activeCard = null;
+      let closestDistance = Infinity;
+
+      mobileCardCandidates.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const centerDistance = Math.abs(rect.top + rect.height / 2 - viewportCenter);
+        if (centerDistance < closestDistance) {
+          closestDistance = centerDistance;
+          activeCard = card;
+        }
+      });
+
+      cards.forEach((card) => card.classList.toggle('is-active', card === activeCard));
+    };
+
     const requestUpdate = () => {
-      if (frame || !enhanced) return;
-      frame = window.requestAnimationFrame(update);
+      if (frame) return;
+      if (enhanced) {
+        frame = window.requestAnimationFrame(update);
+      } else if (mobileCardObserver) {
+        frame = window.requestAnimationFrame(updateMobileCardState);
+      }
+    };
+
+    const stopMobileCardObserver = () => {
+      mobileCardObserver?.disconnect();
+      mobileCardObserver = null;
+      mobileCardCandidates.clear();
+      section.classList.remove('is-projects-mobile-observed');
+      cards.forEach((card) => card.classList.remove('is-active'));
+    };
+
+    const startMobileCardObserver = () => {
+      stopMobileCardObserver();
+      if (desktopQuery.matches || reducedMotionQuery.matches || !('IntersectionObserver' in window)) return;
+
+      section.classList.add('is-projects-mobile-observed');
+      mobileCardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            mobileCardCandidates.add(entry.target);
+          } else {
+            mobileCardCandidates.delete(entry.target);
+          }
+        });
+        requestUpdate();
+      }, {
+        rootMargin: '-28% 0px -28% 0px',
+        threshold: 0.01
+      });
+
+      cards.forEach((card) => mobileCardObserver.observe(card));
     };
 
     const disable = () => {
       enhanced = false;
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+        frame = 0;
+      }
       section.classList.remove('is-projects-enhanced');
       section.style.removeProperty('--projects-scroll-distance');
       section.style.removeProperty('--projects-rail-progress');
@@ -94,10 +154,12 @@
       const shouldEnhance = desktopQuery.matches && !reducedMotionQuery.matches;
       if (!shouldEnhance) {
         disable();
+        startMobileCardObserver();
         videos.forEach((video) => video.pause());
         return;
       }
 
+      stopMobileCardObserver();
       enhanced = true;
       section.classList.add('is-projects-enhanced');
       videos.forEach((video) => video.play().catch(() => {}));
@@ -105,7 +167,10 @@
     };
 
     window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', measure, { passive: true });
+    window.addEventListener('resize', () => {
+      measure();
+      requestUpdate();
+    }, { passive: true });
 
     if ('ResizeObserver' in window) {
       const observer = new ResizeObserver(measure);
