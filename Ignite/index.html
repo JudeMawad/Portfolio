@@ -1,282 +1,395 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="description" content="Ignite - private fitness and nutrition tracking. Barcode scan, detailed charts, Apple Watch and Whoop support.">
-  <title>Ignite - Private Fitness & Nutrition</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="IGNITE — a native iOS tracker for nutrition, training, activity, and long-term progress, built with SwiftUI, Core Data, HealthKit, OpenFoodFacts, and Supabase.">
+  <meta property="og:title" content="IGNITE — iOS Product Case Study">
+  <meta property="og:description" content="A native iOS tracker for nutrition, training, activity, and progress with local-first storage and limited network access.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://judemawad.com/images/IGNITE/campaign.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IGNITE — iOS Product Case Study">
+  <meta name="twitter:description" content="A native iOS tracker for nutrition, training, activity, and progress.">
+  <meta name="twitter:image" content="https://judemawad.com/images/IGNITE/campaign.png">
+  <title>IGNITE — iOS Product Case Study | Jude Mawad</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="preload" href="../images/IGNITE/campaign.png" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="style.css?v=20260830-6">
 </head>
 <body>
-  <div class="bg-glow glow-1"></div>
-  <div class="bg-glow glow-2"></div>
-  <div class="bg-grid"></div>
+  <a class="skip-link" href="#main-content">Skip to case study</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="site-grid" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
 
-  <div class="overlay-menu" id="overlayMenu">
-    <div class="overlay-nav-container">
-      <ul class="overlay-nav">
-        <li class="animate delay-11"><a href="#download">Download</a></li>
-        <li class="animate delay-22"><a href="#features">Features</a></li>
-        <li class="animate delay-44"><a href="#pricing">Pricing</a></li>
-        <li class="animate delay-55"><a href="#contact">Contact</a></li>
-        <li class="animate delay-66"><a href="PrivacyPolicy/">Privacy</a></li>
-        <li class="animate delay-77"><a href="TermsOfUse/">Terms</a></li>
-      </ul>
-    </div>
-  </div>
+  <header class="project-header" data-project-header>
+    <div class="project-header__inner">
+      <a class="project-header__identity" href="../#home" aria-label="Jude Mawad portfolio home">
+        <span>~/Portfolio$</span>
+        <strong>Jude Mawad</strong>
+      </a>
 
-  <header class="topbar shell">
-    <div class="brand">
-      <img src="../images/svgviewer-png-output.png" alt="Ignite flame logo">
-      <span>Ignite</span>
+      <nav class="project-header__nav" aria-label="IGNITE case study">
+        <a href="#product">Product</a>
+        <a href="#experience">Experience</a>
+        <a href="#engineering">Engineering</a>
+      </nav>
+
+      <a class="project-header__back" href="../#projects">
+        <span aria-hidden="true">&#8592;</span>
+        <span>Selected Projects</span>
+      </a>
     </div>
-    <nav class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="PrivacyPolicy/">Privacy</a>
-      <a href="TermsOfUse/">Terms</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="burger-container">
-      <div class="burger-menu" id="burgerMenu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-    <a class="btn ghost" href="#download">Download</a>
   </header>
 
-  <main>
-    <section class="hero shell" id="download">
-      <div class="hero-copy">
-        <p class="eyebrow">Ignite / Private performance OS</p>
-        <h1>Track everything. Share nothing.</h1>
-        <p class="lede">
-          A dark, athletic, mobile-first tracker. Barcode scan, detailed charts, Apple Watch and Whoop - built with zero cloud storage.
-        </p>
-        <div class="cta-row">
-          <a class="btn primary" href="https://apps.apple.com/de/app/ignite-fitness-nutrition/id6755685081?l=en-GB" target="_blank" rel="noopener noreferrer" aria-label="Download Ignite: Fitness & Nutrition on the App Store">Download on the App Store</a>
-          <a class="btn ghost" href="#contact">Contact us</a>
-        </div>
-        <div class="chips">
-          <span>Analytics</span>
-          <span>Barcode scan</span>
-          <span>Apple Watch + Whoop</span>
-          <span>Customizable</span>
-        </div>
-        <div class="promise">
-          <div class="promise-item">
-            <span class="dot"></span>
-            <p>No ads. No trackers. No accounts.</p>
+  <main id="main-content">
+    <section class="ignite-hero" id="overview" aria-labelledby="ignite-title">
+      <div class="ignite-hero__ambient" aria-hidden="true"></div>
+      <div class="ignite-shell ignite-hero__inner">
+        <div class="ignite-hero__copy">
+          <p class="ignite-eyebrow hero-enter" style="--enter-delay: 80ms;">01 / IOS PRODUCT</p>
+          <div class="ignite-hero__title-mask">
+            <h1 id="ignite-title" class="ignite-hero__title hero-enter" style="--enter-delay: 140ms;">IGNITE</h1>
           </div>
-          <div class="promise-item">
-            <span class="dot"></span>
-            <p>Designed for one-handed capture.</p>
-          </div>
+          <p class="ignite-hero__tagline hero-enter" style="--enter-delay: 260ms;">Nutrition, training, and progress <br>in one native iOS app.</p>
+          <p class="ignite-hero__stack hero-enter" style="--enter-delay: 420ms;">SWIFT <span aria-hidden="true">&middot;</span> SWIFTUI <span aria-hidden="true">&middot;</span> CORE DATA</p>
+        </div>
+
+        <figure class="ignite-hero__visual hero-enter" style="--enter-delay: 220ms;" data-hero-visual>
+          <a href="https://apps.apple.com/de/app/ignite-fitness-nutrition/id6755685081?l=en-GB" target="_blank" rel="noopener noreferrer" aria-label="View IGNITE: Fitness &amp; Nutrition on the App Store">
+            <img src="../images/IGNITE/campaign.png" alt="IGNITE campaign artwork with dashboard and analytics screens shown on two iPhones" width="1080" height="1350" fetchpriority="high" decoding="async">
+          </a>
+          <figcaption>
+            <span>Product visual / 01</span>
+            <span>Available on the App Store <span aria-hidden="true">&#8599;</span></span>
+          </figcaption>
+        </figure>
+
+        <div class="ignite-hero__foot hero-enter" style="--enter-delay: 660ms;" aria-hidden="true">
+          <span>Scroll to inspect</span><i></i>
         </div>
       </div>
-      <div class="hero-visual">
-        <div class="halo"></div>
-        <div class="device-frame">
-          <div class="device-inner">
-            <div class="device-placeholder">
-              <img class="device-shot" src="../images/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20Max%20-%202025-11-25%20at%2000.18.28.png" alt="Ignite app screenshot in simulator">
+    </section>
+
+    <section class="opening-statement" id="product" aria-labelledby="opening-title">
+      <div class="ignite-shell opening-statement__inner">
+        <p class="ignite-index" data-reveal>[001]</p>
+        <div class="opening-statement__copy">
+          <h2 id="opening-title" data-reveal>A native iOS tracker for nutrition, workouts, activity, and <em>long-term progress.</em></h2>
+          <p data-reveal style="--reveal-delay: 100ms;">IGNITE combines daily nutrition, water, workouts, supplements, activity, and body metrics in one app. Most user data is stored on-device, while network access is limited to food lookup and foods deliberately submitted to the community database.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="efficiency" id="principle" aria-labelledby="efficiency-title">
+      <div class="efficiency__ambient" aria-hidden="true"></div>
+      <div class="ignite-shell efficiency__layout">
+        <div class="efficiency__copy">
+          <p class="ignite-index" data-reveal>[002]</p>
+          <p class="ignite-eyebrow" data-reveal>Daily workflow</p>
+          <h2 id="efficiency-title" data-reveal>Designed around the daily log.</h2>
+          <p data-reveal>The dashboard is the main working view. It shows calories, macros, water, activity, meals, workouts, and supplements together so common updates can be made without moving through several separate sections.</p>
+        </div>
+
+        <figure class="efficiency__media" data-parallax-media data-reveal>
+          <img src="../images/IGNITE/1.png" alt="Angled IGNITE dashboard phone with the words Simple meets efficient" width="1260" height="2736" loading="lazy" decoding="async">
+          <figcaption><span>Dashboard / Product visual 02</span><span>Daily overview</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="experience" id="experience" aria-labelledby="experience-title">
+      <header class="ignite-shell experience__header">
+        <p class="ignite-index" data-reveal>[003]</p>
+        <div>
+          <p class="ignite-eyebrow" data-reveal>Core product flow</p>
+          <h2 id="experience-title" data-reveal>From entry to history.</h2>
+          <p data-reveal>Daily data is entered from the dashboard and food library, then reused in longer-term nutrition, weight, and progress views.</p>
+        </div>
+      </header>
+
+      <div class="ignite-shell experience__layout">
+        <div class="experience__steps">
+          <article class="experience-step is-active" data-experience-step="0" aria-labelledby="track-title">
+            <div class="experience-step__content">
+              <p class="experience-step__number">01 / Track</p>
+              <h3 id="track-title">One dashboard for the current day.</h3>
+              <p>The main screen combines calories, macros, water, HealthKit activity, meals, workouts, and supplements. It acts as both the daily summary and the starting point for most updates.</p>
+            </div>
+            <figure class="experience-step__mobile-media">
+              <img src="../images/IGNITE/2.png" alt="IGNITE dashboard showing macros, steps, burned calories, water, and meals" width="1260" height="2736" loading="lazy" decoding="async">
+            </figure>
+          </article>
+
+          <article class="experience-step" data-experience-step="1" aria-labelledby="add-title">
+            <div class="experience-step__content">
+              <p class="experience-step__number">02 / Add</p>
+              <h3 id="add-title">Search, inspect, set the amount, add.</h3>
+              <p>Food entries can be found through the app’s food library, reviewed with their nutritional values, assigned an amount, and added directly to the current day.</p>
+            </div>
+            <figure class="experience-step__mobile-media">
+              <img src="../images/IGNITE/4.png" alt="IGNITE food library with nutrition details and an inline amount entry" width="1260" height="2736" loading="lazy" decoding="async">
+            </figure>
+          </article>
+
+          <article class="experience-step" data-experience-step="2" aria-labelledby="analyze-title">
+            <div class="experience-step__content">
+              <p class="experience-step__number">03 / Analyze</p>
+              <h3 id="analyze-title">Daily records feed longer-term views.</h3>
+              <p>Stored daily records are reused in 7-day, 30-day, and 365-day views for calories, protein, macros, weight, and other progress data.</p>
+            </div>
+            <figure class="experience-step__mobile-media">
+              <img src="../images/IGNITE/3.png" alt="IGNITE analytics view with weekly calories, protein, weight, and macro charts" width="1260" height="2736" loading="lazy" decoding="async">
+            </figure>
+          </article>
+
+          <article class="experience-step" data-experience-step="3" aria-labelledby="train-title">
+            <div class="experience-step__content">
+              <p class="experience-step__number">04 / Train</p>
+              <h3 id="train-title">Training and activity live beside nutrition.</h3>
+              <p>IGNITE also tracks workouts, supplements, activity, and progress. HealthKit provides permissioned activity and body metrics so the daily view is not limited to manually entered nutrition data.</p>
+            </div>
+            <figure class="experience-step__mobile-media">
+              <img src="../images/IGNITE/5.png" alt="IGNITE dashboard showing a workout, supplements, and progress calendar" width="1260" height="2736" loading="lazy" decoding="async">
+            </figure>
+          </article>
+        </div>
+
+        <aside class="experience-stage-wrap" aria-label="IGNITE product screens">
+          <div class="experience-stage" data-experience-stage>
+            <div class="experience-stage__ambient" aria-hidden="true"></div>
+            <figure class="experience-stage__panel is-active" data-experience-panel="0">
+              <img src="../images/IGNITE/2.png" alt="IGNITE dashboard showing macros, steps, burned calories, water, and meals" width="1260" height="2736" loading="lazy" decoding="async">
+            </figure>
+            <figure class="experience-stage__panel" data-experience-panel="1" aria-hidden="true">
+              <img src="../images/IGNITE/4.png" alt="IGNITE food library with nutrition details and an inline amount entry" width="1260" height="2736" loading="lazy" decoding="async">
+            </figure>
+            <figure class="experience-stage__panel" data-experience-panel="2" aria-hidden="true">
+              <img src="../images/IGNITE/3.png" alt="IGNITE analytics view with weekly calories, protein, weight, and macro charts" width="1260" height="2736" loading="lazy" decoding="async">
+            </figure>
+            <figure class="experience-stage__panel" data-experience-panel="3" aria-hidden="true">
+              <img src="../images/IGNITE/5.png" alt="IGNITE dashboard showing a workout, supplements, and progress calendar" width="1260" height="2736" loading="lazy" decoding="async">
+            </figure>
+            <div class="experience-stage__footer" aria-hidden="true">
+              <span data-stage-label>Track</span>
+              <span><b data-stage-current>01</b> / 04</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="privacy" id="privacy" aria-labelledby="privacy-title">
+      <div class="ignite-shell privacy__layout">
+        <figure class="privacy__media" data-reveal>
+          <img src="../images/IGNITE/6.png" alt="IGNITE privacy screen explaining local-first storage and limited network access" width="1260" height="2736" loading="lazy" decoding="async">
+        </figure>
+
+        <div class="privacy__copy">
+          <p class="ignite-index" data-reveal>[004]</p>
+          <p class="privacy__eyebrow" data-reveal>Data boundary</p>
+          <h2 id="privacy-title" data-reveal>Most data stays on the iPhone.</h2>
+          <p data-reveal>Nutrition logs, workouts, progress data, profile information, and settings remain on-device. HealthKit data is accessed through Apple’s permission system. The app goes online only for food lookup and community food submission.</p>
+
+          <ul class="privacy__principles" aria-label="IGNITE privacy principles" data-reveal>
+            <li><span>No ads</span></li>
+            <li><span>Local-first</span></li>
+            <li><span>No analytics SDKs</span></li>
+            <li><span>Network-light</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="technical-intro" id="engineering" aria-labelledby="technical-title">
+      <div class="ignite-shell technical-intro__inner">
+        <p class="ignite-index" data-reveal>[005]</p>
+        <div>
+          <p class="ignite-eyebrow" data-reveal>Implementation</p>
+          <h2 id="technical-title" data-reveal>SwiftUI, local persistence, and limited network access.</h2>
+          <p data-reveal>The app is written in Swift with a SwiftUI interface. Core Data persists tracking and progress data, UserDefaults stores preferences, and HealthKit supplies permissioned health metrics. OpenFoodFacts and Supabase are the only documented network-facing services.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="architecture" aria-labelledby="architecture-title">
+      <div class="ignite-shell architecture__inner">
+        <header class="architecture__header">
+          <div>
+            <p class="ignite-eyebrow" data-reveal>System boundary</p>
+            <h2 id="architecture-title" data-reveal>What stays local, <br>and what goes online.</h2>
+          </div>
+          <p data-reveal>The app is local-first by default. SwiftUI sits on top of local persistence and HealthKit, while only two user-triggered features cross the device boundary.</p>
+        </header>
+
+        <div class="boundary-map" data-reveal aria-label="IGNITE documented system boundary">
+          <div class="boundary-map__layer boundary-map__layer--interface">
+            <span class="boundary-map__label">Interface</span>
+            <strong>SWIFTUI</strong>
+            <small>Native views and interaction</small>
+          </div>
+
+          <div class="boundary-map__connector boundary-map__connector--vertical" aria-hidden="true"></div>
+
+          <div class="boundary-map__group boundary-map__group--local">
+            <header><span>ON DEVICE</span><small>Default boundary</small></header>
+            <div class="boundary-map__nodes">
+              <div><strong>CORE DATA</strong><small>Tracking and progress data</small></div>
+              <div><strong>USERDEFAULTS</strong><small>Settings and preferences</small></div>
+              <div><strong>HEALTHKIT</strong><small>Permissioned health reads</small></div>
+            </div>
+          </div>
+
+          <div class="boundary-map__branch" aria-hidden="true"><i></i><i></i><i></i></div>
+
+          <div class="boundary-map__group boundary-map__group--network">
+            <header><span>USER-INITIATED NETWORK</span><small>Limited by feature</small></header>
+            <div class="boundary-map__nodes boundary-map__nodes--network">
+              <div><strong>OPENFOODFACTS</strong><small>Barcode or name lookup</small></div>
+              <div><strong>SUPABASE</strong><small>Submitted community foods</small></div>
             </div>
           </div>
         </div>
-        <div class="pillars">
-          <div class="pillar">
-            <span class="label">Privacy</span>
-            <p>On-device only. Revoke permissions anytime.</p>
+
+        <p class="architecture__caption">Application data boundary / documented integrations</p>
+      </div>
+    </section>
+
+    <section class="data-layer" aria-labelledby="data-title">
+      <div class="ignite-shell data-layer__inner">
+        <header class="data-layer__header">
+          <p class="ignite-index" data-reveal>[006]</p>
+          <div>
+            <p class="ignite-eyebrow" data-reveal>Storage and integrations</p>
+            <h2 id="data-title" data-reveal>Where each kind of <br>data lives.</h2>
           </div>
-          <div class="pillar">
-            <span class="label">Performance</span>
-            <p>Fast capture, tactile controls, clean charts.</p>
+          <p data-reveal>Different data has different ownership and storage rules. Tracking data is persisted locally, preferences stay in UserDefaults, HealthKit remains permission-gated, and only food search or explicit community submission uses the network.</p>
+        </header>
+
+        <div class="data-ledger" data-reveal>
+          <article>
+            <span class="data-ledger__index">01</span>
+            <div><h3>Daily tracking</h3><p>Calories, macros, water, supplements, exercises, foods, and custom meals.</p></div>
+            <strong>CORE DATA / LOCAL</strong>
+          </article>
+          <article>
+            <span class="data-ledger__index">02</span>
+            <div><h3>Preferences</h3><p>Profile information and app settings remain on the device.</p></div>
+            <strong>USERDEFAULTS / LOCAL</strong>
+          </article>
+          <article>
+            <span class="data-ledger__index">03</span>
+            <div><h3>Health context</h3><p>Steps, active energy, weight, height, biological sex, and age are read with permission.</p></div>
+            <strong>HEALTHKIT / PERMISSIONED</strong>
+          </article>
+          <article class="data-ledger__network">
+            <span class="data-ledger__index">04</span>
+            <div><h3>Food lookup</h3><p>Only a barcode or food name is sent for an on-demand lookup.</p></div>
+            <strong>OPENFOODFACTS / REQUESTED</strong>
+          </article>
+          <article class="data-ledger__network">
+            <span class="data-ledger__index">05</span>
+            <div><h3>Community foods</h3><p>Foods deliberately submitted to the shared library sync to Supabase.</p></div>
+            <strong>SUPABASE / SUBMITTED</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="components" aria-labelledby="components-title">
+      <div class="ignite-shell components__inner">
+        <header class="components__header">
+          <p class="ignite-index" data-reveal>[007]</p>
+          <div>
+            <p class="ignite-eyebrow" data-reveal>Reusable UI patterns</p>
+            <h2 id="components-title" data-reveal>Repeated patterns, <br>not isolated screens.</h2>
           </div>
+          <p data-reveal>The interface reuses the same interaction patterns across the app: metric cards, progress indicators, expandable meal rows, inline add actions, trend charts, and persistent navigation.</p>
+        </header>
+
+        <div class="component-board" data-reveal>
+          <figure class="component-sample component-sample--metric">
+            <div class="component-sample__crop"><img src="../images/IGNITE/2.png" alt="Cropped IGNITE dashboard metric tiles" width="1260" height="2736" loading="lazy" decoding="async"></div>
+            <figcaption><span>01</span><strong>Metric hierarchy</strong><small>Value / context / progress</small></figcaption>
+          </figure>
+          <figure class="component-sample component-sample--chart">
+            <div class="component-sample__crop"><img src="../images/IGNITE/3.png" alt="Cropped IGNITE chart panels" width="1260" height="2736" loading="lazy" decoding="async"></div>
+            <figcaption><span>02</span><strong>Trend views</strong><small>7D / 30D / 365D</small></figcaption>
+          </figure>
+          <figure class="component-sample component-sample--food">
+            <div class="component-sample__crop"><img src="../images/IGNITE/4.png" alt="Cropped IGNITE food entry rows" width="1260" height="2736" loading="lazy" decoding="async"></div>
+            <figcaption><span>03</span><strong>Inline entry</strong><small>Search / amount / add</small></figcaption>
+          </figure>
+          <figure class="component-sample component-sample--calendar">
+            <div class="component-sample__crop"><img src="../images/IGNITE/5.png" alt="Cropped IGNITE progress calendar" width="1260" height="2736" loading="lazy" decoding="async"></div>
+            <figcaption><span>04</span><strong>Daily context</strong><small>Workout / supplement / date</small></figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    <section class="shell section signal">
-      <div class="signal-grid">
-        <div class="signal-card">
-          <p class="eyebrow">01 / Privacy</p>
-          <h3>Local-only storage</h3>
-          <p class="muted">Everything stays on device. Delete the app, delete the data.</p>
-        </div>
-        <div class="signal-card">
-          <p class="eyebrow">02 / Integrations</p>
-          <h3>Apple Watch + Whoop + ...</h3>
-          <p class="muted">Reads Health metrics, steps and energy no writing unless you enable it.</p>
-        </div>
-        <div class="signal-card">
-          <p class="eyebrow">03 / Control</p>
-          <h3>Custom goals</h3>
-          <p class="muted">Dial macros, workouts, hydration, and overrides per day.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell section feature-lines" id="features">
-      <div class="section-head">
-        <p class="eyebrow">Purpose built</p>
-        <h2>Everything useful, nothing extra.</h2>
-        <p class="muted">A straight line from scan to stats with clean visuals and fast actions.</p>
-      </div>
-      <div class="line-item">
-        <div>
-          <h3>Barcode scan</h3>
-          <p class="muted">Only barcode or name is sent. No identifiers, no tracking.</p>
-        </div>
-        <div class="pill ghost">Fast intake</div>
-      </div>
-      <div class="line-item">
-        <div>
-          <h3>Detailed charts</h3>
-          <p class="muted">Macros, hydration, weight and more, load in crisp dark mode visuals.</p>
-        </div>
-        <div class="pill ghost">Visual clarity</div>
-      </div>
-      <div class="line-item">
-        <div>
-          <h3>Health integrations</h3>
-          <p class="muted">Apple Health + Whoop reads only; everything remains local.</p>
-        </div>
-        <div class="pill ghost">Ready for wearables</div>
-      </div>
-      <div class="line-item">
-        <div>
-          <h3>Customizable UX</h3>
-          <p class="muted">One-handed controls, haptics, and quick actions tuned for speed.</p>
-        </div>
-        <div class="pill ghost">Built for athletes</div>
-      </div>
-    </section>
-
-    <section class="section shell pricing" id="pricing">
-      <div class="section-head">
-        <p class="eyebrow">Simple plans</p>
-        <h2>Start free. Unlock when ready.</h2>
-        <p class="muted">Pricing is set for launch. App is new with no downloads yet.</p>
-      </div>
-      <div class="pricing-grid">
-        <article class="card pricing-card">
-          <div class="card-tag">Free</div>
-          <h3>Starter</h3>
-          <p class="price">EUR 0</p>
-          <ul>
-            <li>Calorie tracking</li>
-            <li>Exercise logging</li>
-            <li>Local data storage</li>
-          </ul>
-          <button class="btn ghost" type="button">Included</button>
-        </article>
-        <article class="card pricing-card">
-          <div class="card-tag">Popular</div>
-          <h3>3 months</h3>
-          <p class="price">EUR 12.99</p>
-          <ul>
-            <li>All premium features</li>
-            <li>Barcode scan & charts</li>
-            <li>Health integrations</li>
-          </ul>
-          <button class="btn primary" type="button">Plan on launch</button>
-        </article>
-        <article class="card pricing-card">
-          <div class="card-tag">Value</div>
-          <h3>6 months</h3>
-          <p class="price">EUR 19.99</p>
-          <ul>
-            <li>All premium features</li>
-            <li>Customization unlocked</li>
-            <li>Priority support</li>
-          </ul>
-          <button class="btn ghost" type="button">Plan on launch</button>
-        </article>
-        <article class="card pricing-card">
-          <div class="card-tag">Best</div>
-          <h3>12 months</h3>
-          <p class="price">EUR 29.99</p>
-          <ul>
-            <li>All premium features</li>
-            <li>All future updates</li>
-            <li>Best value per month</li>
-          </ul>
-          <button class="btn ghost" type="button">Plan on launch</button>
-        </article>
-      </div>
-    </section>
-
-    <section class="section shell contact" id="contact">
-      <div class="contact-card">
-        <div class="contact-copy">
-          <p class="eyebrow">Support</p>
-          <h2>Talk to us.</h2>
-          <p class="muted">ignite@judemawad.com - fast replies for launch prep, feature requests, or beta interest.</p>
-          <div class="chips tight">
-            <span>Launch prep</span>
-            <span>Feature requests</span>
-            <span>Beta interest</span>
+    <section class="challenges" aria-labelledby="challenges-title">
+      <div class="ignite-shell challenges__inner">
+        <header class="challenges__header">
+          <p class="ignite-index" data-reveal>[008]</p>
+          <div>
+            <p class="ignite-eyebrow" data-reveal>Engineering decisions</p>
+            <h2 id="challenges-title" data-reveal>Three constraints that shaped the implementation.</h2>
           </div>
+        </header>
+
+        <div class="challenge-list">
+          <article data-reveal>
+            <p>01 / Challenge</p>
+            <h3>Keep personal tracking local while still supporting food search.</h3>
+            <div><p>Daily tracking, profile data, settings, and health context should not depend on a remote account, but food search still benefits from an external database.</p><p><strong>Decision</strong> Store user data locally by default, then treat OpenFoodFacts lookup and submitted community foods as explicit network exceptions.</p></div>
+          </article>
+          <article data-reveal>
+            <p>02 / Challenge</p>
+            <h3>Use HealthKit without duplicating ownership of health data.</h3>
+            <div><p>Steps, active energy, weight, height, age, and biological sex add useful context, but access needs to remain permission-controlled.</p><p><strong>Decision</strong> Request only the HealthKit data the app needs and keep access behind Apple’s permission model, with writing disabled unless explicitly enabled.</p></div>
+          </article>
+          <article data-reveal>
+            <p>03 / Challenge</p>
+            <h3>Turn daily records into usable historical data.</h3>
+            <div><p>Daily entries need to stay quick, but the same data also has to support weekly, monthly, and yearly analysis.</p><p><strong>Decision</strong> Keep entry focused on the current day, then surface the stored history separately in 7-day, 30-day, and 365-day views.</p></div>
+          </article>
         </div>
-        <form class="contact-form" id="contactForm">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required>
-
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required>
-
-          <label for="goal">Goal</label>
-          <input id="goal" name="goal" type="text" placeholder="What do you want to achieve?" required>
-
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="4" placeholder="Tell us about your use case or questions" required></textarea>
-
-          <button class="btn primary" type="submit">Compose email</button>
-        </form>
       </div>
     </section>
 
-    <section class="section shell final-cta">
-      <div class="final-card">
+    <section class="reflection" aria-labelledby="reflection-title">
+      <div class="ignite-shell reflection__inner">
+        <p class="ignite-index" data-reveal>[009]</p>
         <div>
-          <p class="eyebrow">Ready to launch</p>
-          <h2>Private by design. Built for athletes.</h2>
-          <p class="muted">Straightforward tracking with full control and no cloud.</p>
-        </div>
-        <div class="cta-row">
-          <a class="btn primary" href="https://apps.apple.com/de/app/ignite-fitness-nutrition/id6755685081?l=en-GB" target="_blank" rel="noopener noreferrer">Get Ignite on the App Store</a>
-          <a class="btn ghost" href="PrivacyPolicy/">Read Privacy</a>
-          <a class="btn ghost" href="TermsOfUse/">Read Terms</a>
+          <p class="ignite-eyebrow" data-reveal>Project scope</p>
+          <h2 id="reflection-title" data-reveal>What the project required beyond UI.</h2>
+          <p data-reveal>IGNITE required more than building individual screens. The project connected interface design, persistent local data, HealthKit permissions, external food data, a shared backend, analytics views, privacy decisions, and App Store distribution into one working iOS product.</p>
         </div>
       </div>
     </section>
+
+    <footer class="project-footer">
+      <div class="ignite-shell project-footer__inner">
+        <a class="project-footer__next" href="../#projects-server-title" data-cursor="view">
+          <span>Next project</span>
+          <strong>Home Server</strong>
+          <i aria-hidden="true">&#8594;</i>
+        </a>
+
+        <div class="project-footer__meta">
+          <a href="../#projects"><span aria-hidden="true">&#8592;</span> Back to projects</a>
+          <span>&copy; 2026 Jude Mawad</span>
+        </div>
+      </div>
+    </footer>
   </main>
 
-  <div class="mobile-cta">
-    <a class="btn primary" href="https://apps.apple.com/de/app/ignite-fitness-nutrition/id6755685081?l=en-GB" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
-    <a class="btn ghost" href="#contact">Contact</a>
-  </div>
-
-  <footer class="shell footer">
-    <div class="footer-left">
-      <span class="brand-mark"></span>
-      <span>Ignite - Fitness & Nutrition</span>
-    </div>
-    <div class="footer-right">
-      <a href="PrivacyPolicy/">Privacy</a>
-      <a href="TermsOfUse/">Terms</a>
-      <a href="#contact">Support</a>
-      <span class="muted">Contact: ignite@judemawad.com</span>
-    </div>
-  </footer>
-
-  <script src="app.js"></script>
+  <script src="app.js?v=20260830-3"></script>
 </body>
 </html>
