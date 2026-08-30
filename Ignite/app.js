@@ -4,34 +4,72 @@
   document.documentElement.classList.add("js");
 
   const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const desktopQuery = window.matchMedia("(min-width: 901px)");
   const header = document.querySelector("[data-project-header]");
   const progress = document.querySelector(".scroll-progress");
-  const heroImage = document.querySelector("[data-hero-visual] img");
+  const heroArtwork = document.querySelector("[data-hero-artwork]");
   const revealNodes = [...document.querySelectorAll("[data-reveal]")];
-  const experienceSteps = [...document.querySelectorAll("[data-experience-step]")];
-  const experiencePanels = [...document.querySelectorAll("[data-experience-panel]")];
-  const stageLabel = document.querySelector("[data-stage-label]");
-  const stageCurrent = document.querySelector("[data-stage-current]");
-  const experienceLabels = ["Dashboard", "Food entry", "History", "Health & training"];
-  let activeExperience = -1;
+  const systemSteps = [...document.querySelectorAll("[data-system-step]")];
+  const systemPanels = [...document.querySelectorAll("[data-system-panel]")];
+  const systemFlip = document.querySelector("[data-system-flip]");
+  const systemLabel = document.querySelector("[data-system-label]");
+  const systemCurrent = document.querySelector("[data-system-current]");
+  const systemLabels = ["Nutrition", "Activity", "Hydration", "Supplements", "Body weight", "Progress"];
 
-  const setExperience = (index) => {
-    if (index === activeExperience && experienceSteps[index]?.classList.contains("is-active")) return;
-    activeExperience = index;
+  let activeSystemIndex = -1;
+  let activeSystemScreen = "";
+  let flipSwapTimer = 0;
+  let flipEndTimer = 0;
+  let flipRun = 0;
 
-    experienceSteps.forEach((step, stepIndex) => {
-      step.classList.toggle("is-active", stepIndex === index);
-    });
-
-    experiencePanels.forEach((panel, panelIndex) => {
-      const isActive = panelIndex === index;
+  const showSystemScreen = (screen) => {
+    systemPanels.forEach((panel) => {
+      const isActive = panel.dataset.systemPanel === screen;
       panel.classList.toggle("is-active", isActive);
       if (isActive) panel.removeAttribute("aria-hidden");
       else panel.setAttribute("aria-hidden", "true");
     });
+    activeSystemScreen = screen;
+  };
 
-    if (stageLabel) stageLabel.textContent = experienceLabels[index] || "Track";
-    if (stageCurrent) stageCurrent.textContent = String(index + 1).padStart(2, "0");
+  const cancelFlip = () => {
+    window.clearTimeout(flipSwapTimer);
+    window.clearTimeout(flipEndTimer);
+    systemFlip?.classList.remove("is-flipping");
+  };
+
+  const setSystem = (index, immediate = false) => {
+    const step = systemSteps[index];
+    if (!step || index === activeSystemIndex) return;
+
+    activeSystemIndex = index;
+    systemSteps.forEach((item, itemIndex) => item.classList.toggle("is-active", itemIndex === index));
+    if (systemLabel) systemLabel.textContent = systemLabels[index] || "IGNITE";
+    if (systemCurrent) systemCurrent.textContent = String(index + 1).padStart(2, "0");
+
+    const nextScreen = step.dataset.systemScreen;
+    if (!nextScreen || nextScreen === activeSystemScreen) return;
+
+    const shouldFlip = !immediate && !motionQuery.matches && desktopQuery.matches && Boolean(activeSystemScreen && systemFlip);
+    if (!shouldFlip) {
+      cancelFlip();
+      showSystemScreen(nextScreen);
+      return;
+    }
+
+    cancelFlip();
+    const run = ++flipRun;
+    systemFlip.classList.add("is-flipping");
+
+    flipSwapTimer = window.setTimeout(() => {
+      if (run !== flipRun) return;
+      showSystemScreen(nextScreen);
+    }, 365);
+
+    flipEndTimer = window.setTimeout(() => {
+      if (run !== flipRun) return;
+      systemFlip.classList.remove("is-flipping");
+    }, 780);
   };
 
   const revealContent = () => {
@@ -46,9 +84,24 @@
         entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       });
-    }, { rootMargin: "0px 0px -5% 0px", threshold: .08 });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: .08 });
 
     revealNodes.forEach((node) => observer.observe(node));
+  };
+
+  const observeSystem = () => {
+    if (!("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      const closest = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => Math.abs(a.boundingClientRect.top + a.boundingClientRect.height * .5 - window.innerHeight * .5)
+          - Math.abs(b.boundingClientRect.top + b.boundingClientRect.height * .5 - window.innerHeight * .5))[0];
+
+      if (closest) setSystem(Number(closest.target.dataset.systemStep));
+    }, { rootMargin: "-41% 0px -41% 0px", threshold: 0 });
+
+    systemSteps.forEach((step) => observer.observe(step));
   };
 
   let scrollFrame = 0;
@@ -59,37 +112,20 @@
     header?.classList.toggle("is-scrolled", window.scrollY > 24);
     if (progress) progress.style.transform = `scaleX(${progressAmount})`;
 
-    if (heroImage && !motionQuery.matches) {
-      const heroScroll = Math.min(window.scrollY, window.innerHeight);
-      heroImage.style.transform = `translate3d(0, ${(heroScroll * -.08).toFixed(2)}px, 0)`;
+    if (heroArtwork) {
+      const heroShift = motionQuery.matches ? 0 : Math.min(window.scrollY, window.innerHeight) * -.065;
+      heroArtwork.style.setProperty("--hero-shift", heroShift.toFixed(2));
     }
 
     scrollFrame = 0;
   };
 
-  const observeExperience = () => {
-    if (!("IntersectionObserver" in window)) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      const visibleEntry = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => Math.abs(a.boundingClientRect.top + a.boundingClientRect.height * .5 - window.innerHeight * .5)
-          - Math.abs(b.boundingClientRect.top + b.boundingClientRect.height * .5 - window.innerHeight * .5))[0];
-
-      if (!visibleEntry) return;
-      setExperience(Number(visibleEntry.target.dataset.experienceStep));
-    }, { rootMargin: "-42% 0px -42% 0px", threshold: 0 });
-
-    experienceSteps.forEach((step) => observer.observe(step));
+  const queueScrollUpdate = () => {
+    if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateScrollEffects);
   };
 
-  window.addEventListener("scroll", () => {
-    if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateScrollEffects);
-  }, { passive: true });
-
-  window.addEventListener("resize", () => {
-    if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateScrollEffects);
-  }, { passive: true });
+  window.addEventListener("scroll", queueScrollUpdate, { passive: true });
+  window.addEventListener("resize", queueScrollUpdate, { passive: true });
 
   document.addEventListener("click", (event) => {
     const link = event.target.closest('a[href^="#"]');
@@ -140,9 +176,9 @@
     document.addEventListener("visibilitychange", queueCursorFrame);
   }
 
+  setSystem(0, true);
   revealContent();
-  setExperience(0);
-  observeExperience();
+  observeSystem();
   updateScrollEffects();
   window.requestAnimationFrame(() => {
     window.requestAnimationFrame(() => document.body.classList.add("is-ready"));
