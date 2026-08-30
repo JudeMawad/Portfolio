@@ -261,7 +261,6 @@
             <p>Swift concurrency is used across these boundaries so remote discovery and system integrations do not block the interface.</p>
             <p>The architecture also allows network failures to remain localized. Losing access to a remote food source, for example, does not make the rest of the tracking system unavailable.</p>
           </div>
-          <div class="boundary-strip" data-reveal aria-label="Independent asynchronous system boundaries"><span>Local persistence</span><span>Network APIs</span><span>Apple Health</span><span>Purchases</span><span>Background updates</span></div>
         </div>
       </div>
     </section>
@@ -303,7 +302,6 @@
         <div>
           <h2 id="testing-title" class="case-heading" data-reveal>Tested below the interface</h2>
           <div class="case-copy case-copy--wide" data-reveal><p>The parts of IGNITE that carry the most application logic are also the parts that are tested independently of the UI.</p><p>XCTest coverage includes Core Data repositories, hybrid food discovery, barcode fallback behavior, caching, pagination, remote failure handling, deduplication, translation mapping, and view-model behavior.</p><p>In-memory Core Data stores and test doubles allow persistence and service behavior to be exercised without depending on production data or live external services.</p><p>The goal was not to test whether a button exists. It was to test whether the systems behind it behave correctly when data, state, or network conditions change.</p></div>
-          <div class="test-matrix" data-reveal aria-label="Independently tested application logic"><span>Core Data repositories</span><span>Hybrid discovery</span><span>Barcode fallback</span><span>Caching</span><span>Pagination</span><span>Remote failures</span><span>Deduplication</span><span>Translation mapping</span><span>View models</span></div>
         </div>
       </div>
     </section>

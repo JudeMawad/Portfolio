@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="THE CUBE — a voice-controlled physical computing system by Jude Mawad.">
+  <meta property="og:title" content="THE CUBE — Physical Computing Project | Jude Mawad">
+  <meta property="og:description" content="A compact voice-controlled hardware and software system built around a Raspberry Pi 5.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://judemawad.com/images/THE_CUBE.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="THE CUBE — Physical Computing Project | Jude Mawad">
+  <meta name="twitter:description" content="A compact voice-controlled hardware and software system built around a Raspberry Pi 5.">
+  <meta name="twitter:image" content="https://judemawad.com/images/THE_CUBE.png">
+  <title>THE CUBE — Physical Computing Project | Jude Mawad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="style.css?v=20260831-cube-hero-2">
+  <script>document.documentElement.classList.add("js");</script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body class="cube-page">
+  <a class="skip-link" href="#cube-hero">Skip to project overview</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="site-grid" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <header class="project-header" data-project-header>
+    <div class="project-header__inner">
+      <a class="project-header__identity" href="../#home" aria-label="Jude Mawad portfolio home">
+        <span>~/Portfolio$</span><strong>Jude Mawad</strong>
+      </a>
+      <p class="project-header__context">Project 02 / Physical Computing</p>
+      <a class="project-header__back" href="../#projects">
+        <span aria-hidden="true">&#8592;</span><span>Selected Projects</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="cube-hero" id="cube-hero" aria-labelledby="cube-hero-title">
+      <div class="cube-shell cube-hero__inner">
+        <div class="cube-hero__copy">
+          <p class="cube-hero__eyebrow cube-enter" style="--enter-delay: 60ms;">
+            <span>[002]</span><strong>Project / The Cube</strong>
+          </p>
+
+          <div class="cube-hero__title-mask">
+            <h1 class="cube-hero__title cube-enter" id="cube-hero-title" style="--enter-delay: 130ms;">THE CUBE</h1>
+          </div>
+
+          <p class="cube-hero__descriptor cube-enter" style="--enter-delay: 210ms;">
+            Voice-controlled physical computing system
+          </p>
+
+          <p class="cube-hero__intro cube-enter" style="--enter-delay: 280ms;">
+            A compact hardware and software system combining voice interaction, a 64&times;64 LED matrix, integrated audio and a custom-designed enclosure around a Raspberry Pi 5.
+          </p>
+
+          <div class="cube-hero__meta cube-enter" style="--enter-delay: 360ms;" aria-label="Project metadata">
+            <span>2026</span>
+            <span>Hardware</span>
+            <span>Embedded Linux</span>
+            <span>CAD</span>
+            <span>3D Printing</span>
+          </div>
+        </div>
+
+        <figure class="cube-hero__visual cube-enter" style="--enter-delay: 200ms;" data-cube-visual data-cursor="view">
+          <div class="cube-hero__stage" data-cube-stage>
+            <img
+              class="cube-hero__fallback"
+              src="../images/THE_CUBE.png"
+              alt="Exterior of The Cube showing its LED matrix and speaker grille"
+              width="1080"
+              height="1080"
+              fetchpriority="low"
+              decoding="async"
+              data-model-fallback
+            >
+            <canvas class="cube-hero__canvas" aria-hidden="true" data-cube-canvas></canvas>
+          </div>
+          <figcaption id="cube-model-caption">
+            <span data-model-status aria-live="polite">Model / Loading</span>
+            <span>Interactive object / Drag to rotate</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="app.js?v=20260831-cube-hero-2"></script>
+</body>
+</html>
