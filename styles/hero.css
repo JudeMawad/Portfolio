@@ -678,15 +678,15 @@
 .hero-link {
   min-height: 3.1rem;
   display: flex;
-  justify-content: space-between;
   background: var(--hero-bg);
   align-items: center;
+  justify-content: center;
   border: 1px solid var(--hero-line);
   border-radius: 99rem;
   padding: .8rem 1rem;
   color: var(--hero-fg);
   font-family: var(--hero-sans);
-  font-size: .78rem;
+  font-size: .9rem;
   font-weight: 600;
   letter-spacing: -.005em;
   text-decoration: none;
@@ -867,7 +867,7 @@
   }
 
   .hero-footer__actions { grid-template-columns: 1fr 1fr; }
-  .hero-link { min-height: 2.55rem; padding: .65rem .8rem; font-size: .52rem; }
+  .hero-link { min-height: 2.55rem; padding: .65rem .8rem; font-size: .7rem; }
   .hero-scroll-cue { display: none; }
 
   .site-menu__nav strong { font-size: clamp(2.25rem, 7.2vh, 4.5rem); }
@@ -896,7 +896,7 @@
   .hero-statement__line { font-size: clamp(3.2rem, 19.25vw, 5rem); }
   .hero-statement__line--bottom { font-size: clamp(3.1rem, 18.25vw, 4.8rem); }
   .hero-footer__actions { gap: .4rem; }
-  .hero-link { font-size: .48rem; }
+  .hero-link { font-size: .6rem; }
   .site-menu__nav strong { font-size: clamp(2rem, 6.5vh, 3.5rem); }
 }
 

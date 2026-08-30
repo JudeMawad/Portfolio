@@ -164,6 +164,12 @@
 
 .about-statement strong {
   font-weight: 680;
+  color: var(--fg);
+}
+
+.about-statement strong_accent {
+  font-weight: 680;
+  color: var(--accent);
 }
 
 .about-details {
