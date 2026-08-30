@@ -1,18 +1,19 @@
 (() => {
   "use strict";
 
+  document.documentElement.classList.add("js");
+
   const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   const header = document.querySelector("[data-project-header]");
   const progress = document.querySelector(".scroll-progress");
   const heroImage = document.querySelector("[data-hero-visual] img");
   const revealNodes = [...document.querySelectorAll("[data-reveal]")];
-  const scrollScenes = [...document.querySelectorAll("[data-scroll-scene]")];
   const experienceSteps = [...document.querySelectorAll("[data-experience-step]")];
   const experiencePanels = [...document.querySelectorAll("[data-experience-panel]")];
   const stageLabel = document.querySelector("[data-stage-label]");
   const stageCurrent = document.querySelector("[data-stage-current]");
-  const experienceLabels = ["Track", "Add", "Analyze", "Train"];
-  let activeExperience = 0;
+  const experienceLabels = ["Dashboard", "Food entry", "History", "Health & training"];
+  let activeExperience = -1;
 
   const setExperience = (index) => {
     if (index === activeExperience && experienceSteps[index]?.classList.contains("is-active")) return;
@@ -45,7 +46,7 @@
         entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       });
-    }, { rootMargin: "0px 0px -9% 0px", threshold: .12 });
+    }, { rootMargin: "0px 0px -5% 0px", threshold: .08 });
 
     revealNodes.forEach((node) => observer.observe(node));
   };
@@ -60,30 +61,26 @@
 
     if (heroImage && !motionQuery.matches) {
       const heroScroll = Math.min(window.scrollY, window.innerHeight);
-      heroImage.style.transform = `translate3d(0, ${(heroScroll * -.4).toFixed(2)}px, 0)`;
-    }
-
-    if (!motionQuery.matches && window.innerWidth > 900) {
-      scrollScenes.forEach((scene) => {
-        const rect = scene.getBoundingClientRect();
-        const sceneProgress = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / (rect.height + window.innerHeight)));
-        scene.style.setProperty("--scene-progress", sceneProgress.toFixed(4));
-      });
-
-      let closestStep = activeExperience;
-      let closestDistance = Number.POSITIVE_INFINITY;
-      experienceSteps.forEach((step, index) => {
-        const rect = step.getBoundingClientRect();
-        const distance = Math.abs(rect.top + rect.height * .5 - window.innerHeight * .5);
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestStep = index;
-        }
-      });
-      setExperience(closestStep);
+      heroImage.style.transform = `translate3d(0, ${(heroScroll * -.08).toFixed(2)}px, 0)`;
     }
 
     scrollFrame = 0;
+  };
+
+  const observeExperience = () => {
+    if (!("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      const visibleEntry = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => Math.abs(a.boundingClientRect.top + a.boundingClientRect.height * .5 - window.innerHeight * .5)
+          - Math.abs(b.boundingClientRect.top + b.boundingClientRect.height * .5 - window.innerHeight * .5))[0];
+
+      if (!visibleEntry) return;
+      setExperience(Number(visibleEntry.target.dataset.experienceStep));
+    }, { rootMargin: "-42% 0px -42% 0px", threshold: 0 });
+
+    experienceSteps.forEach((step) => observer.observe(step));
   };
 
   window.addEventListener("scroll", () => {
@@ -111,28 +108,41 @@
     let mouseY = -100;
     let ringX = -100;
     let ringY = -100;
+    let cursorFrame = 0;
+
+    const renderCursor = () => {
+      ringX += (mouseX - ringX) * .16;
+      ringY += (mouseY - ringY) * .16;
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+
+      if (Math.hypot(mouseX - ringX, mouseY - ringY) > .1 && !document.hidden) {
+        cursorFrame = window.requestAnimationFrame(renderCursor);
+      } else {
+        cursorFrame = 0;
+      }
+    };
+
+    const queueCursorFrame = () => {
+      if (!cursorFrame && !document.hidden) cursorFrame = window.requestAnimationFrame(renderCursor);
+    };
 
     window.addEventListener("pointermove", (event) => {
       mouseX = event.clientX;
       mouseY = event.clientY;
       dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      queueCursorFrame();
     }, { passive: true });
 
     document.addEventListener("pointerover", (event) => {
       ring.classList.toggle("is-active", Boolean(event.target.closest("a, button, [data-cursor]")));
     });
 
-    const renderCursor = () => {
-      ringX += (mouseX - ringX) * .16;
-      ringY += (mouseY - ringY) * .16;
-      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-      window.requestAnimationFrame(renderCursor);
-    };
-    renderCursor();
+    document.addEventListener("visibilitychange", queueCursorFrame);
   }
 
   revealContent();
   setExperience(0);
+  observeExperience();
   updateScrollEffects();
   window.requestAnimationFrame(() => {
     window.requestAnimationFrame(() => document.body.classList.add("is-ready"));

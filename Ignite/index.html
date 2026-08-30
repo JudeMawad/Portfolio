@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
   <link rel="preload" href="../images/IGNITE/campaign.png" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20260830-6">
+  <link rel="stylesheet" href="style.css?v=20260830-12">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to case study</a>
@@ -57,7 +57,6 @@
             <h1 id="ignite-title" class="ignite-hero__title hero-enter" style="--enter-delay: 140ms;">IGNITE</h1>
           </div>
           <p class="ignite-hero__tagline hero-enter" style="--enter-delay: 260ms;">Nutrition, training, and progress <br>in one native iOS app.</p>
-          <p class="ignite-hero__stack hero-enter" style="--enter-delay: 420ms;">SWIFT <span aria-hidden="true">&middot;</span> SWIFTUI <span aria-hidden="true">&middot;</span> CORE DATA</p>
         </div>
 
         <figure class="ignite-hero__visual hero-enter" style="--enter-delay: 220ms;" data-hero-visual>
@@ -80,8 +79,16 @@
       <div class="ignite-shell opening-statement__inner">
         <p class="ignite-index" data-reveal>[001]</p>
         <div class="opening-statement__copy">
-          <h2 id="opening-title" data-reveal>A native iOS tracker for nutrition, workouts, activity, and <em>long-term progress.</em></h2>
-          <p data-reveal style="--reveal-delay: 100ms;">IGNITE combines daily nutrition, water, workouts, supplements, activity, and body metrics in one app. Most user data is stored on-device, while network access is limited to food lookup and foods deliberately submitted to the community database.</p>
+          <p class="ignite-eyebrow" data-reveal>Project overview</p>
+          <h2 id="opening-title" data-reveal>I designed and developed IGNITE as a native iOS application.</h2>
+          <p data-reveal>IGNITE brings nutrition logging, hydration, workouts, supplements, activity, body metrics, and historical progress into one application. I built it to keep those related records in one place while making on-device storage the default for personal tracking data.</p>
+
+          <dl class="project-brief" data-reveal aria-label="IGNITE project details">
+            <div><dt>Role</dt><dd>Product design and iOS development</dd></div>
+            <div><dt>Platform</dt><dd>Native iOS</dd></div>
+            <div><dt>Core stack</dt><dd>Swift / SwiftUI / Core Data</dd></div>
+            <div><dt>Integrations</dt><dd>HealthKit / OpenFoodFacts / Supabase</dd></div>
+          </dl>
         </div>
       </div>
     </section>
@@ -91,13 +98,13 @@
       <div class="ignite-shell efficiency__layout">
         <div class="efficiency__copy">
           <p class="ignite-index" data-reveal>[002]</p>
-          <p class="ignite-eyebrow" data-reveal>Daily workflow</p>
-          <h2 id="efficiency-title" data-reveal>Designed around the daily log.</h2>
-          <p data-reveal>The dashboard is the main working view. It shows calories, macros, water, activity, meals, workouts, and supplements together so common updates can be made without moving through several separate sections.</p>
+          <p class="ignite-eyebrow" data-reveal>Application structure</p>
+          <h2 id="efficiency-title" data-reveal>A day-based dashboard is the primary working screen.</h2>
+          <p data-reveal>The dashboard displays calorie and macronutrient totals, water, meals, workouts, supplements, steps, and active energy for the current day. It is also the starting point for adding and updating daily records.</p>
         </div>
 
-        <figure class="efficiency__media" data-parallax-media data-reveal>
-          <img src="../images/IGNITE/1.png" alt="Angled IGNITE dashboard phone with the words Simple meets efficient" width="1260" height="2736" loading="lazy" decoding="async">
+        <figure class="efficiency__media" data-reveal>
+          <img src="../images/IGNITE/1.png?v=20260830-phones" alt="Angled IGNITE dashboard phone showing macros, activity, water, and meals" width="1257" height="1558" loading="lazy" decoding="async">
           <figcaption><span>Dashboard / Product visual 02</span><span>Daily overview</span></figcaption>
         </figure>
       </div>
@@ -107,9 +114,8 @@
       <header class="ignite-shell experience__header">
         <p class="ignite-index" data-reveal>[003]</p>
         <div>
-          <p class="ignite-eyebrow" data-reveal>Core product flow</p>
-          <h2 id="experience-title" data-reveal>From entry to history.</h2>
-          <p data-reveal>Daily data is entered from the dashboard and food library, then reused in longer-term nutrition, weight, and progress views.</p>
+          <p class="ignite-eyebrow" data-reveal>Features implemented</p>
+          <h2 id="experience-title" data-reveal>Four connected parts of the application.</h2>
         </div>
       </header>
 
@@ -117,45 +123,45 @@
         <div class="experience__steps">
           <article class="experience-step is-active" data-experience-step="0" aria-labelledby="track-title">
             <div class="experience-step__content">
-              <p class="experience-step__number">01 / Track</p>
-              <h3 id="track-title">One dashboard for the current day.</h3>
-              <p>The main screen combines calories, macros, water, HealthKit activity, meals, workouts, and supplements. It acts as both the daily summary and the starting point for most updates.</p>
+              <p class="experience-step__number">01 / Daily dashboard</p>
+              <h3 id="track-title">Current-day tracking in one view.</h3>
+              <p>The main view displays calories, protein, carbohydrates, fat, water, meals, workouts, supplements, steps, and active energy. Users can review the day and start most logging actions from this screen.</p>
             </div>
             <figure class="experience-step__mobile-media">
-              <img src="../images/IGNITE/2.png" alt="IGNITE dashboard showing macros, steps, burned calories, water, and meals" width="1260" height="2736" loading="lazy" decoding="async">
+              <img src="../images/IGNITE/2.png?v=20260830-phones" alt="IGNITE dashboard showing macros, steps, burned calories, water, and meals" width="907" height="1834" loading="lazy" decoding="async">
             </figure>
           </article>
 
           <article class="experience-step" data-experience-step="1" aria-labelledby="add-title">
             <div class="experience-step__content">
-              <p class="experience-step__number">02 / Add</p>
-              <h3 id="add-title">Search, inspect, set the amount, add.</h3>
-              <p>Food entries can be found through the app’s food library, reviewed with their nutritional values, assigned an amount, and added directly to the current day.</p>
+              <p class="experience-step__number">02 / Food entry</p>
+              <h3 id="add-title">Food search, portions, and custom entries.</h3>
+              <p>Users can search public food data by barcode or name through OpenFoodFacts, review nutrition and portion information, set an amount, or create a custom food. Foods deliberately submitted to the shared library are stored in Supabase.</p>
             </div>
             <figure class="experience-step__mobile-media">
-              <img src="../images/IGNITE/4.png" alt="IGNITE food library with nutrition details and an inline amount entry" width="1260" height="2736" loading="lazy" decoding="async">
+              <img src="../images/IGNITE/4.png?v=20260830-phones" alt="IGNITE food library with nutrition details and an inline amount entry" width="907" height="1834" loading="lazy" decoding="async">
             </figure>
           </article>
 
           <article class="experience-step" data-experience-step="2" aria-labelledby="analyze-title">
             <div class="experience-step__content">
-              <p class="experience-step__number">03 / Analyze</p>
-              <h3 id="analyze-title">Daily records feed longer-term views.</h3>
-              <p>Stored daily records are reused in 7-day, 30-day, and 365-day views for calories, protein, macros, weight, and other progress data.</p>
+              <p class="experience-step__number">03 / History</p>
+              <h3 id="analyze-title">Historical nutrition and body metrics.</h3>
+              <p>Locally stored records are presented in 7-day, 30-day, and 365-day views for calories, protein, macronutrients, weight, and other progress data.</p>
             </div>
             <figure class="experience-step__mobile-media">
-              <img src="../images/IGNITE/3.png" alt="IGNITE analytics view with weekly calories, protein, weight, and macro charts" width="1260" height="2736" loading="lazy" decoding="async">
+              <img src="../images/IGNITE/3.png?v=20260830-phones" alt="IGNITE analytics view with weekly calories, protein, weight, and macro charts" width="907" height="1834" loading="lazy" decoding="async">
             </figure>
           </article>
 
           <article class="experience-step" data-experience-step="3" aria-labelledby="train-title">
             <div class="experience-step__content">
-              <p class="experience-step__number">04 / Train</p>
-              <h3 id="train-title">Training and activity live beside nutrition.</h3>
-              <p>IGNITE also tracks workouts, supplements, activity, and progress. HealthKit provides permissioned activity and body metrics so the daily view is not limited to manually entered nutrition data.</p>
+              <p class="experience-step__number">04 / Health &amp; training</p>
+              <h3 id="train-title">Workouts, supplements, and HealthKit context.</h3>
+              <p>Workouts and supplements are stored with daily tracking data. With permission, IGNITE reads steps, active energy, weight, height, biological sex, and age from HealthKit. HealthKit writing remains disabled unless the user explicitly enables it.</p>
             </div>
             <figure class="experience-step__mobile-media">
-              <img src="../images/IGNITE/5.png" alt="IGNITE dashboard showing a workout, supplements, and progress calendar" width="1260" height="2736" loading="lazy" decoding="async">
+              <img src="../images/IGNITE/5.png?v=20260830-phones" alt="IGNITE dashboard showing a workout, supplements, and progress calendar" width="907" height="1834" loading="lazy" decoding="async">
             </figure>
           </article>
         </div>
@@ -164,16 +170,16 @@
           <div class="experience-stage" data-experience-stage>
             <div class="experience-stage__ambient" aria-hidden="true"></div>
             <figure class="experience-stage__panel is-active" data-experience-panel="0">
-              <img src="../images/IGNITE/2.png" alt="IGNITE dashboard showing macros, steps, burned calories, water, and meals" width="1260" height="2736" loading="lazy" decoding="async">
+              <img src="../images/IGNITE/2.png?v=20260830-phones" alt="IGNITE dashboard showing macros, steps, burned calories, water, and meals" width="907" height="1834" loading="lazy" decoding="async">
             </figure>
             <figure class="experience-stage__panel" data-experience-panel="1" aria-hidden="true">
-              <img src="../images/IGNITE/4.png" alt="IGNITE food library with nutrition details and an inline amount entry" width="1260" height="2736" loading="lazy" decoding="async">
+              <img src="../images/IGNITE/4.png?v=20260830-phones" alt="IGNITE food library with nutrition details and an inline amount entry" width="907" height="1834" loading="lazy" decoding="async">
             </figure>
             <figure class="experience-stage__panel" data-experience-panel="2" aria-hidden="true">
-              <img src="../images/IGNITE/3.png" alt="IGNITE analytics view with weekly calories, protein, weight, and macro charts" width="1260" height="2736" loading="lazy" decoding="async">
+              <img src="../images/IGNITE/3.png?v=20260830-phones" alt="IGNITE analytics view with weekly calories, protein, weight, and macro charts" width="907" height="1834" loading="lazy" decoding="async">
             </figure>
             <figure class="experience-stage__panel" data-experience-panel="3" aria-hidden="true">
-              <img src="../images/IGNITE/5.png" alt="IGNITE dashboard showing a workout, supplements, and progress calendar" width="1260" height="2736" loading="lazy" decoding="async">
+              <img src="../images/IGNITE/5.png?v=20260830-phones" alt="IGNITE dashboard showing a workout, supplements, and progress calendar" width="907" height="1834" loading="lazy" decoding="async">
             </figure>
             <div class="experience-stage__footer" aria-hidden="true">
               <span data-stage-label>Track</span>
@@ -186,21 +192,17 @@
 
     <section class="privacy" id="privacy" aria-labelledby="privacy-title">
       <div class="ignite-shell privacy__layout">
-        <figure class="privacy__media" data-reveal>
-          <img src="../images/IGNITE/6.png" alt="IGNITE privacy screen explaining local-first storage and limited network access" width="1260" height="2736" loading="lazy" decoding="async">
-        </figure>
-
+        <p class="ignite-index" data-reveal>[004]</p>
         <div class="privacy__copy">
-          <p class="ignite-index" data-reveal>[004]</p>
-          <p class="privacy__eyebrow" data-reveal>Data boundary</p>
-          <h2 id="privacy-title" data-reveal>Most data stays on the iPhone.</h2>
-          <p data-reveal>Nutrition logs, workouts, progress data, profile information, and settings remain on-device. HealthKit data is accessed through Apple’s permission system. The app goes online only for food lookup and community food submission.</p>
+          <p class="privacy__eyebrow" data-reveal>Storage policy</p>
+          <h2 id="privacy-title" data-reveal>On-device storage is the default.</h2>
+          <p data-reveal>Core Data stores nutrition, hydration, workout, supplement, and progress records locally. UserDefaults stores profile information and settings. Network requests occur only for requested OpenFoodFacts lookups and foods deliberately submitted to the Supabase community library. The app has no ads or analytics SDKs.</p>
 
-          <ul class="privacy__principles" aria-label="IGNITE privacy principles" data-reveal>
-            <li><span>No ads</span></li>
-            <li><span>Local-first</span></li>
-            <li><span>No analytics SDKs</span></li>
-            <li><span>Network-light</span></li>
+          <ul class="privacy__principles" aria-label="IGNITE data boundaries" data-reveal>
+            <li><span>Core Data / Local</span></li>
+            <li><span>HealthKit / Permissioned</span></li>
+            <li><span>OpenFoodFacts / On demand</span></li>
+            <li><span>Supabase / Submitted foods</span></li>
           </ul>
         </div>
       </div>
@@ -210,9 +212,9 @@
       <div class="ignite-shell technical-intro__inner">
         <p class="ignite-index" data-reveal>[005]</p>
         <div>
-          <p class="ignite-eyebrow" data-reveal>Implementation</p>
-          <h2 id="technical-title" data-reveal>SwiftUI, local persistence, and limited network access.</h2>
-          <p data-reveal>The app is written in Swift with a SwiftUI interface. Core Data persists tracking and progress data, UserDefaults stores preferences, and HealthKit supplies permissioned health metrics. OpenFoodFacts and Supabase are the only documented network-facing services.</p>
+          <p class="ignite-eyebrow" data-reveal>Implementation stack</p>
+          <h2 id="technical-title" data-reveal>A native Swift and SwiftUI application.</h2>
+          <p data-reveal>I designed and implemented IGNITE in Swift and SwiftUI. Core Data persists tracking and progress records, UserDefaults stores preferences, and HealthKit supplies permissioned health metrics. OpenFoodFacts handles requested food lookup, while Supabase stores food entries submitted to the shared library.</p>
         </div>
       </div>
     </section>
@@ -221,10 +223,10 @@
       <div class="ignite-shell architecture__inner">
         <header class="architecture__header">
           <div>
-            <p class="ignite-eyebrow" data-reveal>System boundary</p>
-            <h2 id="architecture-title" data-reveal>What stays local, <br>and what goes online.</h2>
+            <p class="ignite-eyebrow" data-reveal>Data flow</p>
+            <h2 id="architecture-title" data-reveal>Local application state with two network paths.</h2>
           </div>
-          <p data-reveal>The app is local-first by default. SwiftUI sits on top of local persistence and HealthKit, while only two user-triggered features cross the device boundary.</p>
+          <p data-reveal>The SwiftUI interface works with on-device application data. Core Data holds tracking records, UserDefaults holds profile information and settings, and HealthKit remains behind Apple’s permission system. A barcode or name query reaches OpenFoodFacts only when requested; a Supabase write occurs only when a food is submitted to the shared library.</p>
         </header>
 
         <div class="boundary-map" data-reveal aria-label="IGNITE documented system boundary">
@@ -265,21 +267,20 @@
         <header class="data-layer__header">
           <p class="ignite-index" data-reveal>[006]</p>
           <div>
-            <p class="ignite-eyebrow" data-reveal>Storage and integrations</p>
-            <h2 id="data-title" data-reveal>Where each kind of <br>data lives.</h2>
+            <p class="ignite-eyebrow" data-reveal>Persistence</p>
+            <h2 id="data-title" data-reveal>Data stores and network destinations.</h2>
           </div>
-          <p data-reveal>Different data has different ownership and storage rules. Tracking data is persisted locally, preferences stay in UserDefaults, HealthKit remains permission-gated, and only food search or explicit community submission uses the network.</p>
         </header>
 
         <div class="data-ledger" data-reveal>
           <article>
             <span class="data-ledger__index">01</span>
-            <div><h3>Daily tracking</h3><p>Calories, macros, water, supplements, exercises, foods, and custom meals.</p></div>
+            <div><h3>Tracking records</h3><p>Calories, macros, water, supplements, exercises, foods, and custom meals.</p></div>
             <strong>CORE DATA / LOCAL</strong>
           </article>
           <article>
             <span class="data-ledger__index">02</span>
-            <div><h3>Preferences</h3><p>Profile information and app settings remain on the device.</p></div>
+            <div><h3>Profile and settings</h3><p>Profile information and app preferences remain on the device.</p></div>
             <strong>USERDEFAULTS / LOCAL</strong>
           </article>
           <article>
@@ -289,46 +290,14 @@
           </article>
           <article class="data-ledger__network">
             <span class="data-ledger__index">04</span>
-            <div><h3>Food lookup</h3><p>Only a barcode or food name is sent for an on-demand lookup.</p></div>
-            <strong>OPENFOODFACTS / REQUESTED</strong>
+            <div><h3>Requested lookup</h3><p>Only a barcode or food name is sent for an on-demand lookup.</p></div>
+            <strong>OPENFOODFACTS / ON DEMAND</strong>
           </article>
           <article class="data-ledger__network">
             <span class="data-ledger__index">05</span>
-            <div><h3>Community foods</h3><p>Foods deliberately submitted to the shared library sync to Supabase.</p></div>
+            <div><h3>Community submission</h3><p>Food name, brand, nutrition facts, and optional barcode or portion data are submitted to the shared library.</p></div>
             <strong>SUPABASE / SUBMITTED</strong>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="components" aria-labelledby="components-title">
-      <div class="ignite-shell components__inner">
-        <header class="components__header">
-          <p class="ignite-index" data-reveal>[007]</p>
-          <div>
-            <p class="ignite-eyebrow" data-reveal>Reusable UI patterns</p>
-            <h2 id="components-title" data-reveal>Repeated patterns, <br>not isolated screens.</h2>
-          </div>
-          <p data-reveal>The interface reuses the same interaction patterns across the app: metric cards, progress indicators, expandable meal rows, inline add actions, trend charts, and persistent navigation.</p>
-        </header>
-
-        <div class="component-board" data-reveal>
-          <figure class="component-sample component-sample--metric">
-            <div class="component-sample__crop"><img src="../images/IGNITE/2.png" alt="Cropped IGNITE dashboard metric tiles" width="1260" height="2736" loading="lazy" decoding="async"></div>
-            <figcaption><span>01</span><strong>Metric hierarchy</strong><small>Value / context / progress</small></figcaption>
-          </figure>
-          <figure class="component-sample component-sample--chart">
-            <div class="component-sample__crop"><img src="../images/IGNITE/3.png" alt="Cropped IGNITE chart panels" width="1260" height="2736" loading="lazy" decoding="async"></div>
-            <figcaption><span>02</span><strong>Trend views</strong><small>7D / 30D / 365D</small></figcaption>
-          </figure>
-          <figure class="component-sample component-sample--food">
-            <div class="component-sample__crop"><img src="../images/IGNITE/4.png" alt="Cropped IGNITE food entry rows" width="1260" height="2736" loading="lazy" decoding="async"></div>
-            <figcaption><span>03</span><strong>Inline entry</strong><small>Search / amount / add</small></figcaption>
-          </figure>
-          <figure class="component-sample component-sample--calendar">
-            <div class="component-sample__crop"><img src="../images/IGNITE/5.png" alt="Cropped IGNITE progress calendar" width="1260" height="2736" loading="lazy" decoding="async"></div>
-            <figcaption><span>04</span><strong>Daily context</strong><small>Workout / supplement / date</small></figcaption>
-          </figure>
         </div>
       </div>
     </section>
@@ -336,28 +305,28 @@
     <section class="challenges" aria-labelledby="challenges-title">
       <div class="ignite-shell challenges__inner">
         <header class="challenges__header">
-          <p class="ignite-index" data-reveal>[008]</p>
+          <p class="ignite-index" data-reveal>[007]</p>
           <div>
             <p class="ignite-eyebrow" data-reveal>Engineering decisions</p>
-            <h2 id="challenges-title" data-reveal>Three constraints that shaped the implementation.</h2>
+            <h2 id="challenges-title" data-reveal>Three engineering decisions in the implementation.</h2>
           </div>
         </header>
 
         <div class="challenge-list">
           <article data-reveal>
-            <p>01 / Challenge</p>
-            <h3>Keep personal tracking local while still supporting food search.</h3>
-            <div><p>Daily tracking, profile data, settings, and health context should not depend on a remote account, but food search still benefits from an external database.</p><p><strong>Decision</strong> Store user data locally by default, then treat OpenFoodFacts lookup and submitted community foods as explicit network exceptions.</p></div>
+            <p>01 / Storage boundary</p>
+            <h3>Keep personal tracking off the backend.</h3>
+            <div><p>Nutrition, hydration, workout, supplement, progress, profile, and settings data remain on the device.</p><p><strong>Implementation</strong> Core Data stores tracking records and UserDefaults stores preferences; neither OpenFoodFacts nor Supabase is part of that persistence path.</p></div>
           </article>
           <article data-reveal>
-            <p>02 / Challenge</p>
-            <h3>Use HealthKit without duplicating ownership of health data.</h3>
-            <div><p>Steps, active energy, weight, height, age, and biological sex add useful context, but access needs to remain permission-controlled.</p><p><strong>Decision</strong> Request only the HealthKit data the app needs and keep access behind Apple’s permission model, with writing disabled unless explicitly enabled.</p></div>
+            <p>02 / Health data</p>
+            <h3>Keep HealthKit access permission-controlled.</h3>
+            <div><p>IGNITE requests the health metrics used by the product: steps, active energy, weight, height, biological sex, and age.</p><p><strong>Implementation</strong> Reads remain behind Apple’s permission system, and writing stays disabled unless the user explicitly enables it.</p></div>
           </article>
           <article data-reveal>
-            <p>03 / Challenge</p>
-            <h3>Turn daily records into usable historical data.</h3>
-            <div><p>Daily entries need to stay quick, but the same data also has to support weekly, monthly, and yearly analysis.</p><p><strong>Decision</strong> Keep entry focused on the current day, then surface the stored history separately in 7-day, 30-day, and 365-day views.</p></div>
+            <p>03 / External services</p>
+            <h3>Limit food requests to the data each service needs.</h3>
+            <div><p>OpenFoodFacts receives only a requested barcode or food name. Supabase receives only foods deliberately submitted to the community library.</p><p><strong>Implementation</strong> Health data, profile information, account identifiers, and device identifiers are excluded from both network paths.</p></div>
           </article>
         </div>
       </div>
@@ -365,11 +334,11 @@
 
     <section class="reflection" aria-labelledby="reflection-title">
       <div class="ignite-shell reflection__inner">
-        <p class="ignite-index" data-reveal>[009]</p>
+        <p class="ignite-index" data-reveal>[008]</p>
         <div>
-          <p class="ignite-eyebrow" data-reveal>Project scope</p>
-          <h2 id="reflection-title" data-reveal>What the project required beyond UI.</h2>
-          <p data-reveal>IGNITE required more than building individual screens. The project connected interface design, persistent local data, HealthKit permissions, external food data, a shared backend, analytics views, privacy decisions, and App Store distribution into one working iOS product.</p>
+          <p class="ignite-eyebrow" data-reveal>Project result</p>
+          <h2 id="reflection-title" data-reveal>A native iOS product designed and built end to end.</h2>
+          <p data-reveal>I designed the product and implemented the iOS application in Swift and SwiftUI. The main lesson was that persistence, permission boundaries, external data, and App Store distribution have to be designed alongside the interface—not treated as separate finishing tasks.</p>
         </div>
       </div>
     </section>
@@ -390,6 +359,6 @@
     </footer>
   </main>
 
-  <script src="app.js?v=20260830-3"></script>
+  <script src="app.js?v=20260830-6"></script>
 </body>
 </html>
