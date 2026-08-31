@@ -12,7 +12,7 @@ export const cubeCallouts = [
     preferredSide: "right",
     labelOffsetY: 12,
     priority: 3,
-    showOnMobile: false
+    showOnMobile: true
   },
   {
     id: "Air Intake",
@@ -22,7 +22,7 @@ export const cubeCallouts = [
     preferredSide: "right",
     labelOffsetY: 12,
     priority: 3,
-    showOnMobile: false
+    showOnMobile: true
   },
   {
     id: "rgb-matrix",
@@ -52,7 +52,7 @@ export const cubeCallouts = [
     preferredSide: "left",
     labelOffsetY: -20,
     priority: 5,
-    showOnMobile: false
+    showOnMobile: true
   },
   {
     id: "Microphone",
@@ -62,7 +62,7 @@ export const cubeCallouts = [
     preferredSide: "right",
     labelOffsetY: -42,
     priority: 4,
-    showOnMobile: false
+    showOnMobile: true
   }
 ];
 

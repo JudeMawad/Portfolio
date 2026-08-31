@@ -178,10 +178,6 @@
   .cube-callouts {
     --callout-label-width: 6.25rem;
   }
-
-  .cube-callout-label__subtitle {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
