@@ -107,6 +107,7 @@
   let OutputPass;
   let RectAreaLightUniformsLib;
   let createCubeCalloutSystem;
+  let createCubeLedAnimation;
 
   try {
     const modules = await Promise.all([
@@ -118,7 +119,8 @@
       import("three/addons/postprocessing/UnrealBloomPass.js"),
       import("three/addons/postprocessing/OutputPass.js"),
       import("three/addons/lights/RectAreaLightUniformsLib.js"),
-      import("./cube-callouts.js?v=20260831-mobile-all-1")
+      import("./cube-callouts.js?v=20260831-mobile-all-1"),
+      import("./cube-led-animation.js?v=20260901-fastled-2")
     ]);
     THREE = modules[0];
     ({ GLTFLoader } = modules[1]);
@@ -129,6 +131,7 @@
     ({ OutputPass } = modules[6]);
     ({ RectAreaLightUniformsLib } = modules[7]);
     ({ createCubeCalloutSystem } = modules[8]);
+    ({ createCubeLedAnimation } = modules[9]);
   } catch (error) {
     showStaticFallback();
     return;
@@ -224,6 +227,9 @@
   let idleYawAngle = 0;
   let model = null;
   let calloutSystem = null;
+  let ledAnimation = null;
+  let pendingLedState = "idle";
+  let pendingVoiceLevel = null;
   let plasticBumpTexture = null;
   let resizeObserver = null;
   let visibilityObserver = null;
@@ -258,7 +264,7 @@
 
   const renderScene = (deltaTime = 0) => {
     if (isDisposed) return;
-    composer.render(deltaTime);
+    renderer.render(scene, camera);
     calloutSystem?.update();
   };
 
@@ -315,9 +321,65 @@
     idleQuaternion.setFromEuler(idleEuler);
     composedQuaternion.copy(idleQuaternion).multiply(userRotationTarget);
     presentation.quaternion.slerp(composedQuaternion, rotationEase);
+    ledAnimation?.update(now);
     renderScene(deltaTime);
     startAnimation();
   };
+
+  const validLedStates = new Set([
+    "idle",
+    "wake",
+    "listening",
+    "thinking",
+    "speaking",
+    "speech",
+    "followup"
+  ]);
+
+  const refreshStaticLedFrame = () => {
+    if (!ledAnimation || !motionQuery.matches) return;
+    renderScene();
+  };
+
+  const setCubeAnimationState = (nextState) => {
+    const normalized = String(nextState).toLowerCase();
+    if (!validLedStates.has(normalized)) return false;
+
+    pendingLedState = normalized === "speech" ? "speaking" : normalized;
+    pendingVoiceLevel = null;
+    const applied = ledAnimation ? ledAnimation.setState(pendingLedState) : true;
+    refreshStaticLedFrame();
+    startAnimation();
+    return applied;
+  };
+
+  const setCubeVoiceLevel = (nextLevel) => {
+    const parsedLevel = Number(nextLevel);
+    if (!Number.isFinite(parsedLevel)) return false;
+
+    pendingLedState = "speaking";
+    pendingVoiceLevel = THREE.MathUtils.clamp(parsedLevel, 0, 1);
+    const applied = ledAnimation ? ledAnimation.setVoiceLevel(pendingVoiceLevel) : true;
+    refreshStaticLedFrame();
+    startAnimation();
+    return applied;
+  };
+
+  const cubeLedApi = Object.freeze({
+    setState: setCubeAnimationState,
+    setVoiceLevel: setCubeVoiceLevel,
+    setDebugMode: (enabled) => {
+      if (!ledAnimation) return false;
+      ledAnimation.setDebugMode(enabled);
+      renderScene();
+      return true;
+    },
+    getDiagnostics: () => ledAnimation?.getDiagnostics() ?? null
+  });
+
+  window.setCubeAnimationState = setCubeAnimationState;
+  window.setCubeVoiceLevel = setCubeVoiceLevel;
+  window.cubeLedAnimation = cubeLedApi;
 
   const cubePartMap = Object.freeze({
     enclosure: { nodeName: "Cube", materialName: "Material" },
@@ -408,11 +470,8 @@
     parts.ledPanel.material.metalness = 0;
     parts.ledPanel.material.roughness = .56;
 
-    const emissive = parts.ledPixels.material.emissive;
-    if (emissive.r + emissive.g + emissive.b < .001) emissive.setRGB(1, .0012, 0);
     parts.ledPixels.material.metalness = 0;
     parts.ledPixels.material.roughness = .48;
-    parts.ledPixels.material.emissiveIntensity = 4;
 
     parts.speakerGrille.material.metalness = 0;
     parts.speakerGrille.material.roughness = .62;
@@ -458,6 +517,15 @@
       try {
         model = gltf.scene;
         const parts = configureCubeMaterials(model);
+        ledAnimation = createCubeLedAnimation({
+          THREE,
+          mesh: parts.ledPixels.mesh,
+          material: parts.ledPixels.material,
+          reducedMotion: motionQuery.matches,
+          debug: new URLSearchParams(window.location.search).get("cubeLedDebug") === "1"
+        });
+        ledAnimation.setState(pendingLedState);
+        if (pendingVoiceLevel !== null) ledAnimation.setVoiceLevel(pendingVoiceLevel);
         model.updateMatrixWorld(true);
 
         const bounds = new THREE.Box3().setFromObject(model);
@@ -491,6 +559,8 @@
           startAnimation();
         }
       } catch (error) {
+        ledAnimation?.dispose();
+        ledAnimation = null;
         calloutSystem?.dispose();
         calloutSystem = null;
         presentation.remove(model);
@@ -608,6 +678,7 @@
     pointerTarget.set(0, 0);
     pointerCurrent.set(0, 0);
     calloutSystem?.forceOcclusion();
+    ledAnimation?.setReducedMotion(motionQuery.matches);
 
     if (motionQuery.matches) {
       stopAnimation();
@@ -632,6 +703,12 @@
     visibilityObserver?.disconnect();
     calloutSystem?.dispose();
     calloutSystem = null;
+    ledAnimation?.dispose();
+    ledAnimation = null;
+
+    if (window.setCubeAnimationState === setCubeAnimationState) delete window.setCubeAnimationState;
+    if (window.setCubeVoiceLevel === setCubeVoiceLevel) delete window.setCubeVoiceLevel;
+    if (window.cubeLedAnimation === cubeLedApi) delete window.cubeLedAnimation;
 
     scene.environment = null;
     environmentTarget.dispose();
