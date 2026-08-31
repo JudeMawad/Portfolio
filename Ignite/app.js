@@ -1,6 +1,21 @@
 (() => {
   "use strict";
 
+  const navigationEntry = performance.getEntriesByType?.("navigation")?.[0];
+  const shouldStartAtTop = !window.location.hash && navigationEntry?.type !== "back_forward";
+  if (shouldStartAtTop) {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    const resetScroll = () => window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    resetScroll();
+    window.addEventListener("load", () => {
+      resetScroll();
+      window.requestAnimationFrame(() => {
+        resetScroll();
+        if ("scrollRestoration" in history) history.scrollRestoration = "auto";
+      });
+    }, { once: true });
+  }
+
   document.documentElement.classList.add("js");
 
   const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");

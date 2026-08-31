@@ -1,6 +1,21 @@
 (async () => {
   "use strict";
 
+  const navigationEntry = performance.getEntriesByType?.("navigation")?.[0];
+  const shouldStartAtTop = !window.location.hash && navigationEntry?.type !== "back_forward";
+  if (shouldStartAtTop) {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    const resetScroll = () => window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    resetScroll();
+    window.addEventListener("load", () => {
+      resetScroll();
+      window.requestAnimationFrame(() => {
+        resetScroll();
+        if ("scrollRestoration" in history) history.scrollRestoration = "auto";
+      });
+    }, { once: true });
+  }
+
   const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
   const header = document.querySelector("[data-project-header]");
@@ -80,7 +95,7 @@
 
   const showStaticFallback = () => {
     visual.classList.add("is-model-error");
-    if (modelStatus) modelStatus.textContent = "Model / Static";
+    if (modelStatus) modelStatus.textContent = "Product Render / Static";
   };
 
   let THREE;
@@ -91,6 +106,7 @@
   let UnrealBloomPass;
   let OutputPass;
   let RectAreaLightUniformsLib;
+  let createCubeCalloutSystem;
 
   try {
     const modules = await Promise.all([
@@ -101,7 +117,8 @@
       import("three/addons/postprocessing/RenderPass.js"),
       import("three/addons/postprocessing/UnrealBloomPass.js"),
       import("three/addons/postprocessing/OutputPass.js"),
-      import("three/addons/lights/RectAreaLightUniformsLib.js")
+      import("three/addons/lights/RectAreaLightUniformsLib.js"),
+      import("./cube-callouts.js")
     ]);
     THREE = modules[0];
     ({ GLTFLoader } = modules[1]);
@@ -111,6 +128,7 @@
     ({ UnrealBloomPass } = modules[5]);
     ({ OutputPass } = modules[6]);
     ({ RectAreaLightUniformsLib } = modules[7]);
+    ({ createCubeCalloutSystem } = modules[8]);
   } catch (error) {
     showStaticFallback();
     return;
@@ -183,7 +201,9 @@
     rotationY: 0,
     rotationZ: 0,
     scale: 3.55,
-    framingPadding: 1.08,
+    // Higher values add clear space around the Cube for LED bloom and full rotation.
+    framingPadding: 1.14,
+    idleRotationSpeed: .035,
     dragSensitivity: .006
   });
 
@@ -201,7 +221,9 @@
   const dragPitchQuaternion = new THREE.Quaternion();
   const dragUpAxis = new THREE.Vector3();
   const dragRightAxis = new THREE.Vector3();
+  let idleYawAngle = 0;
   let model = null;
+  let calloutSystem = null;
   let plasticBumpTexture = null;
   let resizeObserver = null;
   let visibilityObserver = null;
@@ -237,6 +259,7 @@
   const renderScene = (deltaTime = 0) => {
     if (isDisposed) return;
     composer.render(deltaTime);
+    calloutSystem?.update();
   };
 
   const resize = () => {
@@ -252,6 +275,7 @@
     camera.aspect = width / height;
     frameCamera();
     camera.updateProjectionMatrix();
+    calloutSystem?.resize(width, height);
     renderScene();
   };
 
@@ -277,11 +301,15 @@
     const rotationEase = 1 - Math.exp(-2.15 * deltaTime);
 
     pointerCurrent.lerp(pointerTarget, pointerEase);
+    const autoRotationPaused = pointerIsDragging || pointerIsActive;
+    if (!autoRotationPaused) {
+      idleYawAngle = (idleYawAngle + deltaTime * cubeView.idleRotationSpeed) % (Math.PI * 2);
+    }
+
     const idleAmount = pointerIsDragging ? 0 : pointerIsActive ? .28 : 1;
-    const idleYaw = Math.sin(now * .000105) * .052 * idleAmount;
     const idlePitch = Math.sin(now * .000073 + .7) * .014 * idleAmount;
     const targetPitch = idlePitch + pointerCurrent.y * .04;
-    const targetYaw = idleYaw + pointerCurrent.x * .065;
+    const targetYaw = idleYawAngle + pointerCurrent.x * .065;
 
     idleEuler.set(targetPitch, targetYaw, 0);
     idleQuaternion.setFromEuler(idleEuler);
@@ -429,7 +457,7 @@
 
       try {
         model = gltf.scene;
-        configureCubeMaterials(model);
+        const parts = configureCubeMaterials(model);
         model.updateMatrixWorld(true);
 
         const bounds = new THREE.Box3().setFromObject(model);
@@ -444,9 +472,17 @@
         new THREE.Box3().setFromObject(model).getBoundingSphere(modelBounds);
 
         frameCamera();
+        calloutSystem = createCubeCalloutSystem({
+          THREE,
+          stage,
+          camera,
+          model,
+          modelRadius: modelBounds.radius,
+          occluders: [parts.enclosure.mesh, parts.ledPanel.mesh, parts.speakerGrille.mesh]
+        });
         resize();
         visual.classList.add("is-model-ready");
-        if (modelStatus) modelStatus.textContent = "Model / Live";
+        if (modelStatus) modelStatus.textContent = "Product Render / Live";
 
         if (motionQuery.matches) {
           presentation.quaternion.copy(userRotationTarget);
@@ -455,6 +491,8 @@
           startAnimation();
         }
       } catch (error) {
+        calloutSystem?.dispose();
+        calloutSystem = null;
         presentation.remove(model);
         disposeModelResources(model);
         model = null;
@@ -464,7 +502,7 @@
     (event) => {
       if (isDisposed || !modelStatus || !event.lengthComputable || !event.total) return;
       const percent = Math.min(99, Math.round((event.loaded / event.total) * 100));
-      modelStatus.textContent = `Model / Loading ${percent}%`;
+      modelStatus.textContent = `Product Render / Loading ${percent}%`;
     },
     () => {
       if (!isDisposed) showStaticFallback();
@@ -525,6 +563,7 @@
       dragPitchQuaternion.setFromAxisAngle(dragRightAxis, deltaY * cubeView.dragSensitivity);
       userRotationTarget.premultiply(dragYawQuaternion).premultiply(dragPitchQuaternion).normalize();
       pointerTarget.set(0, 0);
+      calloutSystem?.forceOcclusion();
 
       if (motionQuery.matches) {
         presentation.quaternion.copy(userRotationTarget);
@@ -551,6 +590,8 @@
     pointerIsActive = finePointerQuery.matches && stage.matches(":hover");
     pointerTarget.set(0, 0);
     stage.classList.remove("is-dragging");
+    calloutSystem?.forceOcclusion();
+    if (motionQuery.matches) renderScene();
   };
 
   stage.addEventListener("pointerup", finishDrag, { signal: listenerController.signal });
@@ -566,6 +607,7 @@
   motionQuery.addEventListener("change", () => {
     pointerTarget.set(0, 0);
     pointerCurrent.set(0, 0);
+    calloutSystem?.forceOcclusion();
 
     if (motionQuery.matches) {
       stopAnimation();
@@ -588,6 +630,8 @@
     listenerController.abort();
     resizeObserver?.disconnect();
     visibilityObserver?.disconnect();
+    calloutSystem?.dispose();
+    calloutSystem = null;
 
     scene.environment = null;
     environmentTarget.dispose();

@@ -148,6 +148,8 @@ a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transpar
   text-transform: uppercase;
 }
 .ignite-eyebrow { color: var(--ignite-green); }
+.ignite-eyebrow span { color: var(--ignite-muted); }
+.ignite-eyebrow strong { font-weight:lighter; }
 .ignite-index { color: var(--ignite-muted); }
 
 .ignite-hero {
@@ -231,7 +233,7 @@ a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transpar
   gap: 1rem;
   color: var(--ignite-muted);
   font-family: var(--mono);
-  font-size: .85rem;
+  font-size: .66rem;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -653,9 +655,9 @@ a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transpar
   .project-header__inner { grid-template-columns: 1fr auto; }
   .project-header__nav { display: none; }
   .ignite-hero, .ignite-hero__inner { min-height: auto; }
-  .ignite-hero__inner { padding-top: 7.5rem; padding-bottom: 5rem; grid-template-columns: 1fr; gap: 3rem; }
-  .ignite-hero__copy { max-width: 46rem; }
-  .ignite-hero__visual { width: min(100%, 42rem); margin-left: auto; }
+  .ignite-hero__inner { padding-top: 7.5rem; padding-bottom: 5rem; grid-template-columns: 1fr; gap: 2.5rem; }
+  .ignite-hero__copy { order: 2; max-width: 46rem; }
+  .ignite-hero__visual { order: 1; width: min(100%, 42rem); margin-left: auto; }
   .ignite-hero__foot { display: none; }
   .case-section, .analytics { padding-block: clamp(5rem, 11vw, 7rem); }
   .section-grid, .section-heading-row, .ending__inner { grid-template-columns: 1fr; gap: 2.25rem; }

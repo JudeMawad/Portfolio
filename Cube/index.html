@@ -18,7 +18,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/base.css">
-  <link rel="stylesheet" href="style.css?v=20260831-cube-hero-2">
+  <link rel="stylesheet" href="style.css?v=20260831-mobile-full-bleed-1">
+  <link rel="stylesheet" href="cube-callouts.css?v=20260831-callouts-1">
   <script>document.documentElement.classList.add("js");</script>
   <script type="importmap">
     {
@@ -50,10 +51,11 @@
 
   <main id="main-content">
     <section class="cube-hero" id="cube-hero" aria-labelledby="cube-hero-title">
+      <div class="cube-hero__ambient" aria-hidden="true"></div>
       <div class="cube-shell cube-hero__inner">
         <div class="cube-hero__copy">
           <p class="cube-hero__eyebrow cube-enter" style="--enter-delay: 60ms;">
-            <span>[002]</span><strong>Project / The Cube</strong>
+            <span>[001]</span><strong>Project / The Cube</strong>
           </p>
 
           <div class="cube-hero__title-mask">
@@ -67,14 +69,6 @@
           <p class="cube-hero__intro cube-enter" style="--enter-delay: 280ms;">
             A compact hardware and software system combining voice interaction, a 64&times;64 LED matrix, integrated audio and a custom-designed enclosure around a Raspberry Pi 5.
           </p>
-
-          <div class="cube-hero__meta cube-enter" style="--enter-delay: 360ms;" aria-label="Project metadata">
-            <span>2026</span>
-            <span>Hardware</span>
-            <span>Embedded Linux</span>
-            <span>CAD</span>
-            <span>3D Printing</span>
-          </div>
         </div>
 
         <figure class="cube-hero__visual cube-enter" style="--enter-delay: 200ms;" data-cube-visual data-cursor="view">
@@ -92,14 +86,28 @@
             <canvas class="cube-hero__canvas" aria-hidden="true" data-cube-canvas></canvas>
           </div>
           <figcaption id="cube-model-caption">
-            <span data-model-status aria-live="polite">Model / Loading</span>
+            <span data-model-status aria-live="polite">Product Render / Loading</span>
             <span>Interactive object / Drag to rotate</span>
           </figcaption>
         </figure>
       </div>
     </section>
+
+    <footer class="project-footer">
+      <div class="cube-shell project-footer__inner">
+        <a class="project-footer__next" href="../Ignite/" data-cursor="view">
+          <span>Next project</span>
+          <strong>IGNITE</strong>
+          <i aria-hidden="true">&#8594;</i>
+        </a>
+        <div class="project-footer__meta">
+          <a href="../#projects"><span aria-hidden="true">&#8592;</span> Back to projects</a>
+          <span>&copy; 2026 Jude Mawad</span>
+        </div>
+      </div>
+    </footer>
   </main>
 
-  <script type="module" src="app.js?v=20260831-cube-hero-2"></script>
+  <script type="module" src="app.js?v=20260831-large-viewer-1"></script>
 </body>
 </html>

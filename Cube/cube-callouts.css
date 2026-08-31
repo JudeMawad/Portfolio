@@ -1,0 +1,197 @@
+.cube-callouts {
+  --callout-label-width: 9.5rem;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: clip;
+  opacity: 0;
+  transform: scale(.975);
+  transform-origin: center;
+  pointer-events: none;
+  contain: layout paint;
+  transition: opacity 950ms ease, transform 1200ms var(--cube-ease);
+}
+
+.cube-hero__visual.is-model-ready .cube-callouts.is-ready {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cube-callouts__svg,
+.cube-callouts__labels {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.cube-callouts__labels {
+  z-index: 1;
+}
+
+.cube-callout-connector {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.cube-callout-connector__line {
+  fill: none;
+  stroke: var(--fg);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: .78;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 1.5px rgba(242, 242, 240, .14));
+  transition: stroke-dashoffset 220ms ease;
+}
+
+.cube-callout-connector__marker {
+  fill: var(--accent);
+  stroke: var(--bg);
+  stroke-width: 1;
+  opacity: 0;
+  transform: scale(.35);
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0 3px rgba(224, 32, 16, .28));
+  transition: opacity 180ms ease, transform 220ms var(--cube-ease);
+}
+
+.cube-callout-position {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--callout-label-width);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 180ms ease;
+}
+
+.cube-callout-label {
+  font-family: var(--mono);
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.cube-callout-position[data-side="left"] .cube-callout-label {
+  text-align: right;
+}
+
+.cube-callout-position[data-side="right"] .cube-callout-label {
+  text-align: left;
+}
+
+.cube-callout-label__title,
+.cube-callout-label__subtitle {
+  display: block;
+  opacity: 0;
+  transform: translate3d(0, 4px, 0);
+}
+
+.cube-callout-label__title {
+  color: var(--fg);
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-shadow: 0 0 8px rgba(242, 242, 240, .12);
+  transition: opacity 220ms ease, transform 360ms var(--cube-ease);
+}
+
+.cube-callout-label__subtitle {
+  margin-top: .18rem;
+  color: var(--muted-bright);
+  font-size: .48rem;
+  font-weight: 400;
+  letter-spacing: .1em;
+  transition: opacity 220ms ease, transform 360ms var(--cube-ease);
+}
+
+.cube-callouts.is-ready .cube-callout-connector.is-visible,
+.cube-callouts.is-ready .cube-callout-position.is-visible {
+  opacity: 1;
+}
+
+.cube-callouts.is-ready .cube-callout-connector.is-visible .cube-callout-connector__line {
+  stroke-dashoffset: 0;
+  transition-duration: 520ms;
+  transition-timing-function: var(--cube-ease);
+}
+
+.cube-callouts.is-ready .cube-callout-connector.is-visible .cube-callout-connector__marker {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cube-callouts.is-ready .cube-callout-position.is-visible .cube-callout-label__title {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: 170ms;
+}
+
+.cube-callouts.is-ready .cube-callout-position.is-visible .cube-callout-label__subtitle {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: 245ms;
+}
+
+@media (max-width: 1120px) {
+  .cube-callouts {
+    --callout-label-width: 8.25rem;
+  }
+
+  .cube-callout-label__title {
+    font-size: .56rem;
+  }
+
+  .cube-callout-label__subtitle {
+    font-size: .45rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .cube-callouts {
+    --callout-label-width: 7.25rem;
+  }
+
+  .cube-callout-connector__line {
+    stroke-width: 1;
+    filter: none;
+  }
+
+  .cube-callout-label__title {
+    font-size: .52rem;
+  }
+
+  .cube-callout-label__subtitle {
+    font-size: .42rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .cube-callouts {
+    --callout-label-width: 6.25rem;
+  }
+
+  .cube-callout-label__subtitle {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cube-callouts,
+  .cube-callout-connector,
+  .cube-callout-connector__line,
+  .cube-callout-connector__marker,
+  .cube-callout-position,
+  .cube-callout-label__title,
+  .cube-callout-label__subtitle {
+    transition: none;
+  }
+}

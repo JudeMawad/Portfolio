@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="styles/contact-section.css">
 </head>
 <body>
-  <a class="skip-link" href="#about">Skip to content</a>
+  <a class="skip-link" href="#projects">Skip to content</a>
   <div class="scroll-progress" aria-hidden="true"></div>
   <div class="site-grid" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div>
@@ -41,9 +41,9 @@
     </div>
 
     <nav class="site-header__nav" aria-label="Primary navigation">
+      <a href="#projects">Projects</a>
       <a href="#about">About</a>
       <a href="#stack">Stack</a>
-      <a href="#projects">Projects</a>
       <a href="#journey">Journey</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -79,9 +79,9 @@
 
     <nav class="site-menu__nav" aria-label="Mobile navigation">
       <a href="#home" data-site-menu-link><span>01</span><strong>Home</strong></a>
-      <a href="#about" data-site-menu-link><span>02</span><strong>About</strong></a>
-      <a href="#stack" data-site-menu-link><span>03</span><strong>Stack</strong></a>
-      <a href="#projects" data-site-menu-link><span>04</span><strong>Projects</strong></a>
+      <a href="#projects" data-site-menu-link><span>02</span><strong>Projects</strong></a>
+      <a href="#about" data-site-menu-link><span>03</span><strong>About</strong></a>
+      <a href="#stack" data-site-menu-link><span>04</span><strong>Stack</strong></a>
       <a href="#journey" data-site-menu-link><span>05</span><strong>Journey</strong></a>
       <a href="#contact" data-site-menu-link><span>06</span><strong>Contact</strong></a>
     </nav>
@@ -173,141 +173,6 @@
 </section>
 
   <main id="main-content">
-    <!-- About -->
-<section class="about-section" id="about" aria-labelledby="about-title">
-  <div class="about-shell">
-    <header class="about-rail">
-      <p class="about-index" data-reveal="left">[001]</p>
-      <h2 class="about-title" id="about-title" data-reveal="left">ABOUT</h2>
-
-      
-    </header>
-
-    <div class="about-editorial">
-      <p class="about-eyebrow" data-reveal="up">
-        <span>BRUNSWICK, GER</span>
-      </p>
-
-      <h3 class="about-statement" data-reveal="up">
-       I’m interested in the systems <strong>behind</strong> the things we use <br> and in understanding, designing, and building them across <strong_accent>software</strong_accent> and hardware.
-      </h3>
-
-      <div class="about-details">
-        <div class="about-copy" data-reveal="up">
-          <p>
-            As a Computer Science student, I build complete systems, from software and interfaces to infrastructure, embedded computing, and physical products.
-            What interests me most is how the pieces of a system fit together: how software is structured, how components interact, and how different technologies can be combined into something reliable, useful, and well designed.
-          </p>
-
-          <a class="about-resume" href="Resume.pdf" download>
-            <span>Download resume</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="about-section-foot" aria-hidden="true">
-    <span>SYSTEMS WITH INTENT</span>
-  </div>
-</section>
-
-    <!-- Stack -->
-<section id="stack" class="stack-section" aria-labelledby="stack-title" data-stack>
-  <div class="stack-shell">
-    <header class="stack-header">
-      <div>
-        <p class="stack-index" data-reveal>[002]</p>
-        <h2 id="stack-title" class="stack-title" data-reveal style="--reveal-delay: 70ms;">Stack</h2>
-      </div>
-      <p class="stack-intro" data-reveal style="--reveal-delay: 130ms;">
-        The technologies and tools I use across software, systems, interfaces, and physical prototyping.
-      </p>
-    </header>
-
-    <p id="stack-instructions" class="visually-hidden">
-      Scroll through four stacked cards. When this area is focused, use the arrow keys, Home, or End to move between cards.
-    </p>
-
-    <div class="stack-deck" tabindex="0" role="group" aria-labelledby="stack-title" aria-describedby="stack-instructions" data-stack-deck>
-      <nav class="stack-pagination" aria-label="Stack card navigation">
-        <button type="button" aria-label="Go to Software Development, card 1 of 4" aria-controls="stack-card-mobile" aria-current="true" data-stack-dot="0"><span>01</span></button>
-        <button type="button" aria-label="Go to Web Interfaces, card 2 of 4" aria-controls="stack-card-web" data-stack-dot="1"><span>02</span></button>
-        <button type="button" aria-label="Go to Hardware & Computing, card 3 of 4" aria-controls="stack-card-workflow" data-stack-dot="2"><span>03</span></button>
-        <button type="button" aria-label="Go to Design & Prototyping, card 4 of 4" aria-controls="stack-card-design" data-stack-dot="3"><span>04</span></button>
-      </nav>
-
-      <ol class="stack-cards" data-stack-cards>
-        <li class="stack-card-pin" data-stack-item style="--stack-index: 0;">
-          <article id="stack-card-mobile" class="stack-card" data-stack-card data-stack-tone="ink">
-            <span class="stack-card-ghost" aria-hidden="true">01</span>
-            <header class="stack-card-header">
-             <p>01 / Software</p>
-             <span>Building systems</span>
-            </header>
-
-            <div class="stack-card-body">
-             <div>
-              <p class="stack-card-kicker">Development</p>
-             <h3>Software<br>Development</h3>
-             </div>
-
-             <p class="stack-card-copy">
-               Building software by breaking complex problems into manageable parts, designing how they work together, and turning them into reliable implementations.
-             </p>
-           </div>
-
-            <ul class="stack-card-tools">
-             <li>Python</li>
-             <li>Swift</li>
-             <li>Java</li>
-             <li>SQL</li>
-            </ul>
-          </article>
-        </li>
-
-        <li class="stack-card-pin" data-stack-item style="--stack-index: 1;">
-          <article id="stack-card-web" class="stack-card" data-stack-card data-stack-tone="paper">
-            <span class="stack-card-ghost" aria-hidden="true">02</span>
-            <header class="stack-card-header"><p>02 / Interfaces</p><span>Digital experiences</span></header>
-            <div class="stack-card-body">
-              <div><p class="stack-card-kicker">Browser craft</p><h3>Web<br>Interfaces</h3></div>
-              <p class="stack-card-copy">Designing and building responsive interfaces with attention to hierarchy, interaction, motion, and usability across different screens.</p>
-            </div>
-            <ul class="stack-card-tools" aria-label="Web development technologies"><li>JavaScript</li><li>CSS</li><li>HTML</li><li>Responsive Design</li></ul>
-          </article>
-        </li>
-
-        <li class="stack-card-pin" data-stack-item style="--stack-index: 2;">
-          <article id="stack-card-workflow" class="stack-card" data-stack-card data-stack-tone="graphite">
-            <span class="stack-card-ghost" aria-hidden="true">03</span>
-            <header class="stack-card-header"><p>03 / Physical computing</p><span>Software meets hardware</span></header>
-            <div class="stack-card-body">
-              <div><p class="stack-card-kicker">Embedded systems</p><h3>Hardware<br>&amp; Computing</h3></div>
-              <p class="stack-card-copy">Building embedded computing by combining electronics, Linux, sensors, displays, audio, and software into complete physical systems.</p>
-            </div>
-            <ul class="stack-card-tools" aria-label="Development workflow tools"><li>Linux</li><li>Networking</li><li>Electronics</li><li>Raspberry Pi</li></ul>
-          </article>
-        </li>
-
-        <li class="stack-card-pin" data-stack-item style="--stack-index: 3;">
-          <article id="stack-card-design" class="stack-card" data-stack-card data-stack-tone="signal">
-            <span class="stack-card-ghost" aria-hidden="true">04</span>
-            <header class="stack-card-header"><p>04 / Prototyping</p><span>Idea to object</span></header>
-            <div class="stack-card-body">
-              <div><p class="stack-card-kicker">Making ideas tangible</p><h3>Design<br>&amp; Prototyping</h3></div>
-              <p class="stack-card-copy">Moving quickly between digital models and physical prototypes, iterating around dimensions, usability, manufacturability, and appearance.</p>
-            </div>
-            <ul class="stack-card-tools" aria-label="Design practices"><li>Fusion 360</li><li>Blender</li><li>3D Printing</li><li>Rapid Prototyping</li></ul>
-          </article>
-        </li>
-      </ol>
-
-      <p class="visually-hidden" role="status" aria-live="polite" aria-atomic="true" data-stack-status></p>
-    </div>
-  </div>
-</section>
-
     <!-- Projects -->
 <section class="projects-section" id="projects" aria-labelledby="projects-title">
   <div class="projects-sticky">
@@ -316,7 +181,7 @@
 
         <!-- Intro -->
         <header class="projects-intro">
-          <p class="projects-index" data-reveal="left">[003]</p>
+          <p class="projects-index" data-reveal="left">[001]</p>
 
           <h2
             class="projects-title"
@@ -664,6 +529,142 @@
         </aside>
 
       </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- About -->
+<section class="about-section" id="about" aria-labelledby="about-title">
+  <div class="about-shell">
+    <header class="about-rail">
+      <p class="about-index" data-reveal="left">[002]</p>
+      <h2 class="about-title" id="about-title" data-reveal="left">ABOUT</h2>
+
+
+    </header>
+
+    <div class="about-editorial">
+      <p class="about-eyebrow" data-reveal="up">
+        <span>BRUNSWICK, GER</span>
+      </p>
+
+      <h3 class="about-statement" data-reveal="up">
+       I’m interested in the systems <strong>behind</strong> the things we use <br> and in understanding, designing, and building them across <strong_accent>software</strong_accent> and hardware.
+      </h3>
+
+      <div class="about-details">
+        <div class="about-copy" data-reveal="up">
+          <p>
+            As a Computer Science student, I build complete systems, from software and interfaces to infrastructure, embedded computing, and physical products.
+            What interests me most is how the pieces of a system fit together: how software is structured, how components interact, and how different technologies can be combined into something reliable, useful, and well designed.
+          </p>
+
+          <a class="about-resume" href="Resume.pdf" download>
+            <span>Download resume</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-section-foot" aria-hidden="true">
+    <span>SYSTEMS WITH INTENT</span>
+  </div>
+</section>
+
+    <!-- Stack -->
+<section id="stack" class="stack-section" aria-labelledby="stack-title" data-stack>
+  <div class="stack-shell">
+    <header class="stack-header">
+      <div>
+        <p class="stack-index" data-reveal>[003]</p>
+        <h2 id="stack-title" class="stack-title" data-reveal style="--reveal-delay: 70ms;">Stack</h2>
+      </div>
+      <p class="stack-intro" data-reveal style="--reveal-delay: 130ms;">
+        The technologies and tools I use across software, systems, interfaces, and physical prototyping.
+      </p>
+    </header>
+
+    <p id="stack-instructions" class="visually-hidden">
+      Scroll through four stacked cards. When this area is focused, use the arrow keys, Home, or End to move between cards.
+    </p>
+
+    <div class="stack-deck" tabindex="0" role="group" aria-labelledby="stack-title" aria-describedby="stack-instructions" data-stack-deck>
+      <nav class="stack-pagination" aria-label="Stack card navigation">
+        <button type="button" aria-label="Go to Software Development, card 1 of 4" aria-controls="stack-card-mobile" aria-current="true" data-stack-dot="0"><span>01</span></button>
+        <button type="button" aria-label="Go to Web Interfaces, card 2 of 4" aria-controls="stack-card-web" data-stack-dot="1"><span>02</span></button>
+        <button type="button" aria-label="Go to Hardware & Computing, card 3 of 4" aria-controls="stack-card-workflow" data-stack-dot="2"><span>03</span></button>
+        <button type="button" aria-label="Go to Design & Prototyping, card 4 of 4" aria-controls="stack-card-design" data-stack-dot="3"><span>04</span></button>
+      </nav>
+
+      <ol class="stack-cards" data-stack-cards>
+        <li class="stack-card-pin" data-stack-item style="--stack-index: 0;">
+          <article id="stack-card-mobile" class="stack-card" data-stack-card data-stack-tone="ink">
+            <span class="stack-card-ghost" aria-hidden="true">01</span>
+            <header class="stack-card-header">
+             <p>01 / Software</p>
+             <span>Building systems</span>
+            </header>
+
+            <div class="stack-card-body">
+             <div>
+              <p class="stack-card-kicker">Development</p>
+             <h3>Software<br>Development</h3>
+             </div>
+
+             <p class="stack-card-copy">
+               Building software by breaking complex problems into manageable parts, designing how they work together, and turning them into reliable implementations.
+             </p>
+           </div>
+
+            <ul class="stack-card-tools">
+             <li>Python</li>
+             <li>Swift</li>
+             <li>Java</li>
+             <li>SQL</li>
+            </ul>
+          </article>
+        </li>
+
+        <li class="stack-card-pin" data-stack-item style="--stack-index: 1;">
+          <article id="stack-card-web" class="stack-card" data-stack-card data-stack-tone="paper">
+            <span class="stack-card-ghost" aria-hidden="true">02</span>
+            <header class="stack-card-header"><p>02 / Interfaces</p><span>Digital experiences</span></header>
+            <div class="stack-card-body">
+              <div><p class="stack-card-kicker">Browser craft</p><h3>Web<br>Interfaces</h3></div>
+              <p class="stack-card-copy">Designing and building responsive interfaces with attention to hierarchy, interaction, motion, and usability across different screens.</p>
+            </div>
+            <ul class="stack-card-tools" aria-label="Web development technologies"><li>JavaScript</li><li>CSS</li><li>HTML</li><li>Responsive Design</li></ul>
+          </article>
+        </li>
+
+        <li class="stack-card-pin" data-stack-item style="--stack-index: 2;">
+          <article id="stack-card-workflow" class="stack-card" data-stack-card data-stack-tone="graphite">
+            <span class="stack-card-ghost" aria-hidden="true">03</span>
+            <header class="stack-card-header"><p>03 / Physical computing</p><span>Software meets hardware</span></header>
+            <div class="stack-card-body">
+              <div><p class="stack-card-kicker">Embedded systems</p><h3>Hardware<br>&amp; Computing</h3></div>
+              <p class="stack-card-copy">Building embedded computing by combining electronics, Linux, sensors, displays, audio, and software into complete physical systems.</p>
+            </div>
+            <ul class="stack-card-tools" aria-label="Development workflow tools"><li>Linux</li><li>Networking</li><li>Electronics</li><li>Raspberry Pi</li></ul>
+          </article>
+        </li>
+
+        <li class="stack-card-pin" data-stack-item style="--stack-index: 3;">
+          <article id="stack-card-design" class="stack-card" data-stack-card data-stack-tone="signal">
+            <span class="stack-card-ghost" aria-hidden="true">04</span>
+            <header class="stack-card-header"><p>04 / Prototyping</p><span>Idea to object</span></header>
+            <div class="stack-card-body">
+              <div><p class="stack-card-kicker">Making ideas tangible</p><h3>Design<br>&amp; Prototyping</h3></div>
+              <p class="stack-card-copy">Moving quickly between digital models and physical prototypes, iterating around dimensions, usability, manufacturability, and appearance.</p>
+            </div>
+            <ul class="stack-card-tools" aria-label="Design practices"><li>Fusion 360</li><li>Blender</li><li>3D Printing</li><li>Rapid Prototyping</li></ul>
+          </article>
+        </li>
+      </ol>
+
+      <p class="visually-hidden" role="status" aria-live="polite" aria-atomic="true" data-stack-status></p>
     </div>
   </div>
 </section>
