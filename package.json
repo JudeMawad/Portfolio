@@ -1,0 +1,27 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio is a responsive web portfolio that displays projects, skills, and background information.",
+  "main": "script.js",
+  "scripts": {
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoudMawad/Portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/JoudMawad/Portfolio/issues"
+  },
+  "homepage": "https://github.com/JoudMawad/Portfolio#readme",
+  "devDependencies": {
+    "vite": "^8.2.2"
+  },
+  "dependencies": {
+    "three": "^0.185.1"
+  }
+}

@@ -18,8 +18,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/base.css">
-  <link rel="stylesheet" href="style.css?v=20260831-ignite-visual-match-1">
+  <link rel="stylesheet" href="style.css?v=20260831-ignite-navbar-1">
   <link rel="stylesheet" href="cube-callouts.css?v=20260831-mobile-all-1">
+  <link rel="stylesheet" href="system-map.css?v=20260901-system-map-20">
   <script>document.documentElement.classList.add("js");</script>
   <script type="importmap">
     {
@@ -42,7 +43,9 @@
       <a class="project-header__identity" href="../#home" aria-label="Jude Mawad portfolio home">
         <span>~/Portfolio$</span><strong>Jude Mawad</strong>
       </a>
-      <p class="project-header__context">Project 02 / Physical Computing</p>
+      <nav class="project-header__nav" aria-label="The Cube project navigation">
+        <a href="#cube-hero">Overview</a><a href="#introduction">Introduction</a><a href="#system-map">System Map</a>
+      </nav>
       <a class="project-header__back" href="../#projects">
         <span aria-hidden="true">&#8592;</span><span>Selected Projects</span>
       </a>
@@ -93,6 +96,133 @@
       </div>
     </section>
 
+    <section class="cube-section cube-introduction" id="introduction" aria-labelledby="cube-introduction-title">
+      <div class="cube-shell cube-section__grid">
+        <div class="cube-section__rail" data-cube-reveal>
+          <p class="cube-section__index">[002]</p>
+          <p class="cube-section__eyebrow">Introduction</p>
+        </div>
+
+        <div class="cube-introduction__content">
+          <h2 class="cube-section__heading" id="cube-introduction-title" data-cube-reveal>Cube</h2>
+
+          <p class="cube-introduction__lead" data-cube-reveal>
+            Cube is a 128 mm desktop device I am building around a Raspberry Pi 5, a 64&times;64 RGB matrix, local voice processing and a custom enclosure.
+          </p>
+
+          <div class="cube-introduction__columns">
+            <div data-cube-reveal>
+              <p>The idea is to use it as a physical voice interface for my computer and home server. It can listen for a wake word, transcribe speech locally, and pass requests to the local AI running on my PC.</p>
+              <p>From there, the AI can interact with my computer through the terminal, for example executing commands, searching for files or prints, and controlling local tools.</p>
+              <p>Requests that do not need my PC can be handled through my home server instead. The Cube can trigger existing automations to download movies or music, manage services, or send files back to me.</p>
+            </div>
+
+            <div data-cube-reveal>
+              <p>Before designing the enclosure, I started by testing the individual parts: the HUB75E matrix and animations, wake-word detection, Whisper for speech recognition, and local language models.</p>
+              <p>The current stage is focused on the internal body: fitting the electronics inside the 128 mm cube, designing mounts, routing cables, managing cooling and testing printed prototypes before moving on to the final enclosure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cube-section cube-system" id="system-map" aria-labelledby="cube-system-map-title">
+      <div class="cube-shell">
+        <header class="cube-section__grid cube-system__heading">
+          <div class="cube-section__rail" data-cube-reveal>
+            <p class="cube-section__index">[003]</p>
+            <p class="cube-section__eyebrow">Architecture</p>
+          </div>
+          <h2 class="cube-section__heading" id="cube-system-map-title" data-cube-reveal>System Map</h2>
+        </header>
+
+        <figure class="cube-system-map" data-system-map aria-labelledby="cube-system-map-title" aria-describedby="cube-system-map-caption">
+          <article class="cube-system-node cube-system-node--cube" data-map-node="cube">
+            <div class="cube-system-node__render">
+              <img src="../images/THE_CUBE.png" alt="Exterior render of the Cube with its LED matrix and speaker grille" width="1080" height="1080" loading="lazy" decoding="async">
+              <span>128 MM / DESKTOP</span>
+            </div>
+
+            <div class="cube-system-node__content">
+              <div class="cube-system-node__meta"><span>01</span></div>
+              <h3>Cube</h3>
+              <p>The Raspberry Pi inside the Cube handles the always-on parts of the system: wake-word detection, microphone input, speech recognition and the LED matrix.</p>
+              <ul class="cube-system-node__capabilities" aria-label="Cube capabilities">
+                <li>Wake word</li><li>Mic input</li><li>Whisper</li><li>LED matrix</li>
+              </ul>
+            </div>
+          </article>
+
+          <div class="cube-system-map__branch" aria-hidden="true">
+            <svg viewBox="0 0 1000 140" preserveAspectRatio="none" focusable="false">
+              <path class="cube-system-map__line cube-system-map__line--trunk" pathLength="1" d="M500 0 V120"></path>
+              <path class="cube-system-map__line cube-system-map__line--branch-left" pathLength="1" d="M500 120 H250 V140"></path>
+              <path class="cube-system-map__line cube-system-map__line--branch-right" pathLength="1" d="M500 120 H750 V140"></path>
+            </svg>
+            <i class="cube-system-map__mobile-line cube-system-map__mobile-line--pc"></i>
+          </div>
+
+          <div class="cube-system-map__systems">
+            <article class="cube-system-node cube-system-node--system cube-system-node--pc" data-map-node="pc">
+              <div class="cube-system-node__meta"><span><i aria-hidden="true"></i>Execution target</span><span>02</span></div>
+              <div class="cube-system-node__terminal" aria-hidden="true">
+                <span>LOCAL / SESSION</span>
+                <code>&gt; route request</code>
+                <code>&gt; search ~/prints</code>
+                <code>&gt; execute command</code>
+              </div>
+              <h3>PC / Local AI</h3>
+              <p>When I ask for something related to my computer, the request is sent to the local AI running on my PC. The model can then decide what needs to happen and interact with the system through the terminal.</p>
+              <ul class="cube-system-node__capabilities" aria-label="PC and local AI capabilities">
+                <li>Terminal</li><li>File search</li><li>Print search</li><li>Local AI</li>
+              </ul>
+            </article>
+
+            <i class="cube-system-map__mobile-line cube-system-map__mobile-line--server" aria-hidden="true"></i>
+
+            <article class="cube-system-node cube-system-node--system cube-system-node--server" data-map-node="server">
+              <div class="cube-system-node__meta"><span><i aria-hidden="true"></i>Execution target</span><span>03</span></div>
+              <div class="cube-system-node__server-stack" aria-hidden="true">
+                <span><i></i><b>Automations</b><small>Active</small></span>
+                <span><i></i><b>Media</b><small>Ready</small></span>
+                <span><i></i><b>Files</b><small>Online</small></span>
+                <span><i></i><b>Services</b><small>Available</small></span>
+              </div>
+              <h3>Home Server / Automations</h3>
+              <p>Other requests can be passed to my home server, where I already run different services and automations. This lets the Cube trigger tasks such as downloading media, finding files or starting existing workflows without needing to run everything directly on the Raspberry Pi.</p>
+              <ul class="cube-system-node__capabilities" aria-label="Home server capabilities">
+                <li>Automations</li><li>Media</li><li>Files</li><li>Services</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="cube-system-map__feedback-connection" aria-hidden="true">
+            <svg viewBox="0 0 1000 140" preserveAspectRatio="none" focusable="false">
+              <path class="cube-system-map__line cube-system-map__line--feedback-left" pathLength="1" d="M250 0 V28 H500 V140"></path>
+              <path class="cube-system-map__line cube-system-map__line--feedback-right" pathLength="1" d="M750 0 V28 H500"></path>
+            </svg>
+            <i class="cube-system-map__mobile-line cube-system-map__mobile-line--feedback"></i>
+          </div>
+
+          <article class="cube-system-feedback" data-map-node="feedback">
+            <div class="cube-system-feedback__matrix" aria-hidden="true">
+              <img src="../images/LED_MATRIX.png" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+            </div>
+            <div class="cube-system-feedback__content">
+              <div class="cube-system-node__meta"><span><i aria-hidden="true"></i>Visual feedback</span><span>04</span></div>
+              <h3>LED Matrix / Feedback</h3>
+              <p>The LED matrix acts as the main visual feedback for the system, showing different states while the Cube is listening, processing or executing a request.</p>
+              <ul class="cube-system-feedback__states" aria-label="LED matrix states">
+                <li><i aria-hidden="true"></i>Listening</li><li><i aria-hidden="true"></i>Processing</li><li><i aria-hidden="true"></i>Executing</li>
+              </ul>
+            </div>
+          </article>
+
+          <figcaption class="visually-hidden" id="cube-system-map-caption">The Cube routes requests to a local PC or home server and reports its state through the LED matrix.</figcaption>
+        </figure>
+      </div>
+    </section>
+
     <footer class="project-footer">
       <div class="cube-shell project-footer__inner">
         <a class="project-footer__next" href="../Ignite/" data-cursor="view">
@@ -108,6 +238,7 @@
     </footer>
   </main>
 
+  <script type="module" src="system-map.js?v=20260831-system-map-9"></script>
   <script type="module" src="app.js?v=20260831-mobile-all-1"></script>
 </body>
 </html>

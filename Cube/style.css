@@ -93,24 +93,16 @@ html {
   letter-spacing: -.015em;
 }
 
-.project-header__context {
-  margin: 0;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: .62rem;
-  font-weight: 500;
-  letter-spacing: .13em;
-  line-height: 1.4;
-  text-transform: uppercase;
+.project-header__nav {
+  justify-self: center;
+  display: flex;
+  gap: clamp(1rem, 2vw, 2rem);
 }
 
+.project-header__nav a,
 .project-header__back {
   position: relative;
   padding-block: .5rem;
-  display: inline-flex;
-  align-items: center;
-  gap: .65rem;
-  justify-self: end;
   color: var(--muted);
   font-size: clamp(.72rem, .72vw, .84rem);
   font-weight: 550;
@@ -118,6 +110,7 @@ html {
   transition: color 180ms ease;
 }
 
+.project-header__nav a::after,
 .project-header__back::after {
   position: absolute;
   inset: auto 0 .25rem;
@@ -129,15 +122,26 @@ html {
   transition: transform 300ms var(--cube-ease);
 }
 
+.project-header__nav a:hover,
+.project-header__nav a:focus-visible,
 .project-header__back:hover,
 .project-header__back:focus-visible {
   color: var(--fg);
 }
 
+.project-header__nav a:hover::after,
+.project-header__nav a:focus-visible::after,
 .project-header__back:hover::after,
 .project-header__back:focus-visible::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+.project-header__back {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
 }
 
 .cube-hero {
@@ -437,7 +441,7 @@ html {
     grid-template-columns: 1fr auto;
   }
 
-  .project-header__context {
+  .project-header__nav {
     display: none;
   }
 
