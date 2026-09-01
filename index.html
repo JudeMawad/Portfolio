@@ -215,26 +215,39 @@
 >
   <div class="projects-frame">
 
-        <div class="projects-media projects-media--ignite">
+       <div class="projects-media projects-media--ignite">
 
-              <img
-                class="projects-ignite-backdrop projects-media-source"
-                src="images/THE_CUBE_Bg.png"
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                decoding="async"
-              >
+  <img
+    class="projects-ignite-backdrop projects-media-source"
+    src="images/THE_CUBE_Bg.png"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  >
 
-              <img
-                class="projects-ignite-shot projects-cube-shot"
-                src="images/THE_CUBE.png"
-                alt="The Cube local AI home assistant"
-                loading="lazy"
-                decoding="async"
-              >
+  <div class="projects-cube-render">
 
-            </div>
+  <div class="projects-cube-visual">
+
+    <img
+      class="projects-ignite-shot projects-cube-shot"
+      src="images/THE_CUBE_OFF.png"
+      alt="The Cube local AI home assistant"
+    >
+
+    <canvas
+      class="projects-cube-led-canvas"
+      width="640"
+      height="640"
+      aria-hidden="true">
+    </canvas>
+
+  </div>
+
+</div>
+
+</div>
     <div class="projects-card-content">
 
       <div class="projects-card-meta">
@@ -1122,7 +1135,7 @@
   <script src="section-scripts/site.js"></script>
   <script src="section-scripts/hero.js"></script>
   <script src="section-scripts/stack.js"></script>
-  <script src="section-scripts/projects.js"></script>
+  <script type="module" src="section-scripts/projects.js"></script>
   <script src="section-scripts/journey.js"></script>
 </body>
 </html>

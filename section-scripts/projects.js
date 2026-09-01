@@ -199,6 +199,482 @@
       }
     };
 
+// ============================================================
+// THE CUBE — LED OVERLAY + PERSPECTIVE + ANIMATION
+// ============================================================
+
+const cubeRender = document.querySelector(".projects-cube-render");
+const cubeCanvas = document.querySelector(".projects-cube-led-canvas");
+
+if (cubeRender && cubeCanvas) {
+
+  // ----------------------------------------------------------
+  // CALIBRATED LED PANEL CORNERS
+  // Coordinates are normalized relative to .projects-cube-render
+  // Order: top-left, top-right, bottom-right, bottom-left
+  // ----------------------------------------------------------
+
+  const CUBE_LED_CORNERS = {
+    desktop: [
+      { x: 0.676648, y: 0.306452 }, // top-left
+      { x: 0.854270, y: 0.280059 }, // top-right
+      { x: 0.848077, y: 0.718475 }, // bottom-right
+      { x: 0.679945, y: 0.782919 }  // bottom-left
+    ],
+
+    mobile: [
+      { x: 0.445000, y: 0.376000 }, // top-left
+      { x: 0.870000, y: 0.352676 }, // top-right
+      { x: 0.862000, y: 0.763661 }, // bottom-right
+      { x: 0.450000, y: 0.823000 }  // bottom-left
+    ]
+  };
+
+
+  // ==========================================================
+  // PERSPECTIVE MAPPING
+  // ==========================================================
+
+  const applyCubePerspective = () => {
+    const rect = cubeRender.getBoundingClientRect();
+
+    const points = desktopQuery.matches
+      ? CUBE_LED_CORNERS.desktop
+      : CUBE_LED_CORNERS.mobile;
+
+    const p0 = {
+      x: points[0].x * rect.width,
+      y: points[0].y * rect.height
+    };
+
+    const p1 = {
+      x: points[1].x * rect.width,
+      y: points[1].y * rect.height
+    };
+
+    const p2 = {
+      x: points[2].x * rect.width,
+      y: points[2].y * rect.height
+    };
+
+    const p3 = {
+      x: points[3].x * rect.width,
+      y: points[3].y * rect.height
+    };
+
+    const dx1 = p1.x - p2.x;
+    const dx2 = p3.x - p2.x;
+    const dx3 = p0.x - p1.x + p2.x - p3.x;
+
+    const dy1 = p1.y - p2.y;
+    const dy2 = p3.y - p2.y;
+    const dy3 = p0.y - p1.y + p2.y - p3.y;
+
+    const denominator = dx1 * dy2 - dx2 * dy1;
+
+    let g = 0;
+    let h = 0;
+
+    if (Math.abs(denominator) > 0.000001) {
+      g = (dx3 * dy2 - dx2 * dy3) / denominator;
+      h = (dx1 * dy3 - dx3 * dy1) / denominator;
+    }
+
+    const a = p1.x - p0.x + g * p1.x;
+    const b = p3.x - p0.x + h * p3.x;
+    const c = p0.x;
+
+    const d = p1.y - p0.y + g * p1.y;
+    const e = p3.y - p0.y + h * p3.y;
+    const f = p0.y;
+
+    /*
+     * The CSS canvas itself is 64 × 64 px.
+     * Its internal drawing resolution can be higher without
+     * changing these values.
+     */
+    const sourceWidth = cubeCanvas.width;
+    const sourceHeight = cubeCanvas.height;
+
+    cubeCanvas.style.transform = `matrix3d(
+      ${a / sourceWidth},
+      ${d / sourceWidth},
+      0,
+      ${g / sourceWidth},
+
+      ${b / sourceHeight},
+      ${e / sourceHeight},
+      0,
+      ${h / sourceHeight},
+
+      0,
+      0,
+      1,
+      0,
+
+      ${c},
+      ${f},
+      0,
+      1
+    )`;
+  };
+
+
+  // ==========================================================
+  // LED CANVAS
+  // ==========================================================
+
+  const MATRIX_SIZE = 64;
+
+  /*
+   * Each logical LED gets an 8×8 drawing cell.
+   * The actual colored LED occupies only part of that cell,
+   * leaving transparent gaps between LEDs.
+   */
+  const CELL_SIZE = 10;
+  const LED_SIZE = 5;
+
+  // ~30 FPS, matching the physical animation.
+  const FRAME_TIME_MS = 33;
+
+  // Same Perlin scale as the Cube implementation.
+  const NOISE_SCALE = 31;
+
+  cubeCanvas.width = MATRIX_SIZE * CELL_SIZE;
+  cubeCanvas.height = MATRIX_SIZE * CELL_SIZE;
+
+  const ctx = cubeCanvas.getContext("2d", {
+    alpha: true
+  });
+
+  if (ctx) {
+    ctx.imageSmoothingEnabled = false;
+
+
+    // --------------------------------------------------------
+    // Exact Cube palette
+    // --------------------------------------------------------
+
+    const PALETTE = new Uint8Array([
+      0, 110, 32,
+      0, 110, 32,
+
+      230, 8, 4,
+      230, 8, 4,
+
+      255, 92, 0,
+      255, 92, 0,
+
+      0, 110, 32
+    ]);
+
+
+    // --------------------------------------------------------
+    // Helpers
+    // --------------------------------------------------------
+
+    const randomUint16 = () => {
+      if (globalThis.crypto?.getRandomValues) {
+        return globalThis.crypto.getRandomValues(
+          new Uint16Array(1)
+        )[0];
+      }
+
+      return Math.floor(Math.random() * 65536);
+    };
+
+
+    // --------------------------------------------------------
+    // LOAD THE SAME NOISE FUNCTION USED BY THE 3D CUBE
+    // --------------------------------------------------------
+
+   const animationModuleUrl =
+  new URL("/Cube/cube-led-animation.js", window.location.origin).href;
+
+
+    import(animationModuleUrl)
+      .then(({ noise8 }) => {
+
+        if (typeof noise8 !== "function") {
+          throw new Error(
+            "cube-led-animation.js does not export noise8()"
+          );
+        }
+
+
+        // ====================================================
+        // ANIMATION STATE
+        // ====================================================
+
+        const noise = new Uint8Array(
+          MATRIX_SIZE * MATRIX_SIZE
+        );
+
+        const xCoordinates = new Uint16Array(MATRIX_SIZE);
+        const yCoordinates = new Uint16Array(MATRIX_SIZE);
+
+        const noiseX = randomUint16();
+        const noiseY = randomUint16();
+
+        let noiseZ = randomUint16();
+
+        let huePhase = 0;
+
+        // Same idle animation values as the 3D Cube.
+        let speed = 3.5;
+        let hueRate = 0.12;
+
+        let lastFrameTime = 0;
+
+
+        // ----------------------------------------------------
+        // PRECOMPUTE X/Y PERLIN COORDINATES
+        // ----------------------------------------------------
+
+        for (let index = 0; index < MATRIX_SIZE; index += 1) {
+          xCoordinates[index] =
+            (noiseX + NOISE_SCALE * index) & 0xffff;
+
+          yCoordinates[index] =
+            (noiseY + NOISE_SCALE * index) & 0xffff;
+        }
+
+
+        // ====================================================
+        // DRAW ONE LED FRAME
+        // ====================================================
+
+        const drawLedFrame = () => {
+
+          const sampledZ =
+            Math.trunc(noiseZ) & 0xffff;
+
+
+          // --------------------------------------------------
+          // Generate 64×64 Perlin field
+          // --------------------------------------------------
+
+          for (let x = 0; x < MATRIX_SIZE; x += 1) {
+            for (let y = 0; y < MATRIX_SIZE; y += 1) {
+
+              noise[y * MATRIX_SIZE + x] = noise8(
+                xCoordinates[x],
+                yCoordinates[y],
+                sampledZ
+              );
+            }
+          }
+
+          noiseZ += speed;
+
+
+          // --------------------------------------------------
+          // Clear previous LED frame
+          // Gaps remain transparent so the PNG stays visible.
+          // --------------------------------------------------
+
+          ctx.clearRect(
+            0,
+            0,
+            cubeCanvas.width,
+            cubeCanvas.height
+          );
+
+
+          const roundedHue =
+            Math.round(huePhase) & 0xff;
+
+          const gap =
+            (CELL_SIZE - LED_SIZE) / 2;
+
+
+          // --------------------------------------------------
+          // Draw all 4096 LEDs
+          // --------------------------------------------------
+
+          for (let y = 0; y < MATRIX_SIZE; y += 1) {
+            for (let x = 0; x < MATRIX_SIZE; x += 1) {
+
+              const pixelBrightness =
+                noise[y * MATRIX_SIZE + x];
+
+              /*
+               * Matches the original Cube implementation:
+               * brightness lookup is normal,
+               * palette lookup is transposed.
+               */
+              const transposedNoise =
+                noise[x * MATRIX_SIZE + y];
+
+              const palettePosition =
+                (roundedHue + transposedNoise) & 0xff;
+
+              const scaledPosition =
+                palettePosition * 6;
+
+              const segment =
+                Math.min(scaledPosition >> 8, 5);
+
+              const amount =
+                scaledPosition & 0xff;
+
+              const inverse =
+                255 - amount;
+
+              const from =
+                segment * 3;
+
+              const to =
+                from + 3;
+
+
+              let red = 0;
+              let green = 0;
+              let blue = 0;
+
+
+              // ----------------------------------------------
+              // RED
+              // ----------------------------------------------
+
+              let blended = Math.floor(
+                (
+                  PALETTE[from] * inverse +
+                  PALETTE[to] * amount +
+                  127
+                ) / 255
+              );
+
+              red = Math.floor(
+                (blended * pixelBrightness + 127) / 255
+              );
+
+
+              // ----------------------------------------------
+              // GREEN
+              // ----------------------------------------------
+
+              blended = Math.floor(
+                (
+                  PALETTE[from + 1] * inverse +
+                  PALETTE[to + 1] * amount +
+                  127
+                ) / 255
+              );
+
+              green = Math.floor(
+                (blended * pixelBrightness + 127) / 255
+              );
+
+
+              // ----------------------------------------------
+              // BLUE
+              // ----------------------------------------------
+
+              blended = Math.floor(
+                (
+                  PALETTE[from + 2] * inverse +
+                  PALETTE[to + 2] * amount +
+                  127
+                ) / 255
+              );
+
+              blue = Math.floor(
+                (blended * pixelBrightness + 127) / 255
+              );
+
+
+              // ----------------------------------------------
+              // Draw physical LED
+              // ----------------------------------------------
+
+              ctx.fillStyle =
+                `rgb(${red}, ${green}, ${blue})`;
+
+              ctx.fillRect(
+                x * CELL_SIZE + gap,
+                y * CELL_SIZE + gap,
+                LED_SIZE,
+                LED_SIZE
+              );
+            }
+          }
+
+
+          // --------------------------------------------------
+          // Advance palette animation
+          // --------------------------------------------------
+
+          huePhase += hueRate;
+
+          if (huePhase >= 256) {
+            huePhase %= 256;
+          }
+        };
+
+
+        // ====================================================
+        // ANIMATION LOOP
+        // ====================================================
+
+        const renderFrame = (now) => {
+
+          window.requestAnimationFrame(renderFrame);
+
+          if (
+            now - lastFrameTime <
+            FRAME_TIME_MS
+          ) {
+            return;
+          }
+
+          lastFrameTime =
+            now - (
+              (now - lastFrameTime) %
+              FRAME_TIME_MS
+            );
+
+          drawLedFrame();
+        };
+
+
+        // Draw immediately so the panel isn't blank initially.
+        drawLedFrame();
+
+        window.requestAnimationFrame(renderFrame);
+      })
+      .catch((error) => {
+        console.error(
+          "Cube LED animation failed to load:",
+          error
+        );
+      });
+  }
+
+
+  // ==========================================================
+  // INITIAL PERSPECTIVE + RESPONSIVE UPDATES
+  // ==========================================================
+
+  applyCubePerspective();
+
+  window.addEventListener(
+    "resize",
+    applyCubePerspective,
+    { passive: true }
+  );
+
+  /*
+   * desktopQuery already exists near the top of projects.js.
+   */
+  if (typeof desktopQuery.addEventListener === "function") {
+    desktopQuery.addEventListener(
+      "change",
+      applyCubePerspective
+    );
+  }
+}
+
     listenForChange(desktopQuery);
     listenForChange(reducedMotionQuery);
     configure();
