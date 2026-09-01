@@ -16,9 +16,9 @@ const CUBE_PHOTO_ANIMATION_STATE = "listening";
 const CUBE_PHOTO_STATE_REFRESH_MS = 10000;
 const CUBE_SYSTEM_MAP_LED_STYLE = Object.freeze({
   brightnessScale: 10,
-  glowBlur: 50,
-  glowOpacity: .90,
-  glowSpread: .02,
+  glowBlur: 10,
+  glowOpacity: .30,
+  glowSpread: .03,
   glowBleed: 50
 });
 

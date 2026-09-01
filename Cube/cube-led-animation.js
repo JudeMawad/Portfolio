@@ -38,7 +38,7 @@ const PALETTE = new Uint8Array([
 
 export const CUBE_ANIMATION_STATES = Object.freeze({
   idle: Object.freeze({ brightness: 25, speed: 3.5, hueRate: .12 }),
-  wake: Object.freeze({ brightness: 60, speed: 18, hueRate: .55 }),
+  wake: Object.freeze({ brightness: 50, speed: 18, hueRate: .55 }),
   listening: Object.freeze({ brightness: 50, speed: 12, hueRate: .35 }),
   thinking: Object.freeze({ brightness: 50, speed: 8, hueRate: .28 }),
   speaking: Object.freeze({ brightness: 50, speed: 10, hueRate: .30 }),
