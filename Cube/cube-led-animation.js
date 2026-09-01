@@ -1,6 +1,9 @@
-const MATRIX_SIZE = 64;
+export const CUBE_LED_MATRIX_SIZE = 64;
+export const CUBE_LED_FRAME_TIME_MS = 33;
+
+const MATRIX_SIZE = CUBE_LED_MATRIX_SIZE;
 const PIXEL_COUNT = MATRIX_SIZE * MATRIX_SIZE;
-const FRAME_TIME_MS = 33;
+const FRAME_TIME_MS = CUBE_LED_FRAME_TIME_MS;
 const NOISE_SCALE = 31;
 
 const PERMUTATION = new Uint8Array([
@@ -234,20 +237,11 @@ const configureLedMaterial = ({ THREE, material, texture, brightnessUniform, emi
   };
 };
 
-export const createCubeLedAnimation = ({
-  THREE,
-  mesh,
-  material,
+export const createCubeLedFrameGenerator = ({
   reducedMotion = false,
   debug = false,
-  emissionGain = 15
-
-}) => {
-  if (!THREE || !mesh?.isMesh || !material?.isMeshStandardMaterial) {
-    throw new Error("Cube LED animation requires Three.js and the LED MeshStandardMaterial");
-  }
-
-  const mapping = createLedCoordinateAttribute(THREE, mesh.geometry);
+  onFrame = null
+} = {}) => {
   const noise = new Uint8Array(PIXEL_COUNT);
   const pixelData = new Uint8Array(PIXEL_COUNT * 4);
   const xCoordinates = new Uint16Array(MATRIX_SIZE);
@@ -255,6 +249,7 @@ export const createCubeLedAnimation = ({
   const noiseX = randomUint16();
   const noiseY = randomUint16();
   let noiseZ = randomUint16();
+  const frameListener = typeof onFrame === "function" ? onFrame : null;
 
   for (let index = 0; index < MATRIX_SIZE; index += 1) {
     xCoordinates[index] = (noiseX + NOISE_SCALE * index) & 0xffff;
@@ -264,30 +259,6 @@ export const createCubeLedAnimation = ({
   for (let index = 0; index < PIXEL_COUNT; index += 1) {
     pixelData[index * 4 + 3] = 255;
   }
-
-  const texture = new THREE.DataTexture(
-    pixelData,
-    MATRIX_SIZE,
-    MATRIX_SIZE,
-    THREE.RGBAFormat,
-    THREE.UnsignedByteType
-  );
-  texture.name = "CubeFastLedNoise64x64";
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.minFilter = THREE.NearestFilter;
-  texture.magFilter = THREE.NearestFilter;
-  texture.generateMipmaps = false;
-  texture.flipY = false;
-  texture.unpackAlignment = 1;
-
-  const brightnessUniform = { value: .1 };
-  const restoreMaterial = configureLedMaterial({
-    THREE,
-    material,
-    texture,
-    brightnessUniform,
-    emissionGain
-  });
 
   let mode = "idle";
   let targetBrightness = CUBE_ANIMATION_STATES.idle.brightness;
@@ -307,6 +278,12 @@ export const createCubeLedAnimation = ({
   let disposed = false;
   let frameCount = 0;
   let averageUpdateMs = 0;
+  let appliedBrightness = 10;
+
+  const publishFrame = (brightnessOverride = null) => {
+    appliedBrightness = brightnessOverride ?? clamp(lround(brightness), 1, 100);
+    frameListener?.(pixelData, appliedBrightness);
+  };
 
   const applyState = (nextMode, now = performance.now()) => {
     const normalized = String(nextMode).toLowerCase() === "speech"
@@ -354,7 +331,6 @@ export const createCubeLedAnimation = ({
     hueRate += (requestedHueRate - hueRate) * .12;
     const brightnessResponse = targetBrightness > brightness ? .22 : .045;
     brightness += (targetBrightness - brightness) * brightnessResponse;
-    brightnessUniform.value = clamp(lround(brightness), 1, 100) / 100;
   };
 
   const writeDebugFrame = () => {
@@ -373,8 +349,6 @@ export const createCubeLedAnimation = ({
     setPixel(MATRIX_SIZE - 1, 0, 0, 255, 0);
     setPixel(0, MATRIX_SIZE - 1, 0, 0, 255);
     setPixel(MATRIX_SIZE - 1, MATRIX_SIZE - 1, 255, 255, 255);
-    brightnessUniform.value = 1;
-    texture.needsUpdate = true;
   };
 
   const writeNoiseFrame = () => {
@@ -413,7 +387,6 @@ export const createCubeLedAnimation = ({
 
     huePhase += hueRate;
     if (huePhase >= 256) huePhase %= 256;
-    texture.needsUpdate = true;
   };
 
   const simulateFrame = (now) => {
@@ -421,6 +394,7 @@ export const createCubeLedAnimation = ({
     updateControlValues(now);
     if (debugEnabled) writeDebugFrame();
     else writeNoiseFrame();
+    publishFrame(debugEnabled ? 100 : null);
     const elapsed = performance.now() - started;
     averageUpdateMs = frameCount ? averageUpdateMs * .9 + elapsed * .1 : elapsed;
     frameCount += 1;
@@ -441,51 +415,59 @@ export const createCubeLedAnimation = ({
   };
 
   const setReducedMotion = (nextReduced) => {
+    if (disposed) return false;
     reduced = Boolean(nextReduced);
     lastSimulationTime = 0;
     if (reduced && !debugEnabled) {
       updateControlValues(performance.now());
       writeNoiseFrame();
+      publishFrame();
     }
+    return true;
   };
 
   const setDebugMode = (enabled) => {
+    if (disposed) return false;
     debugEnabled = Boolean(enabled);
     lastSimulationTime = 0;
-    if (debugEnabled) writeDebugFrame();
-    else {
-      brightnessUniform.value = clamp(lround(brightness), 1, 100) / 100;
-      writeNoiseFrame();
+    if (debugEnabled) {
+      writeDebugFrame();
+      publishFrame(100);
     }
+    else {
+      writeNoiseFrame();
+      publishFrame();
+    }
+    return true;
   };
 
   const setState = (nextMode, now = performance.now()) => {
+    if (disposed) return false;
     const applied = applyState(nextMode, now);
     if (applied && reduced && !debugEnabled) {
       updateControlValues(now);
       writeNoiseFrame();
+      publishFrame();
     }
     return applied;
   };
 
   const setVoiceLevel = (nextLevel, now = performance.now()) => {
+    if (disposed) return false;
     const applied = applyVoiceLevel(nextLevel, now);
     if (applied && reduced && !debugEnabled) {
       updateControlValues(now);
       writeNoiseFrame();
+      publishFrame();
     }
     return applied;
   };
 
   const getDiagnostics = () => ({
     logicalPixelCount: PIXEL_COUNT,
-    mappedPixelCount: mapping.mappedPixelCount,
-    vertexCount: mapping.vertexCount,
-    minimumVerticesPerPixel: mapping.minimumVerticesPerPixel,
-    maximumVerticesPerPixel: mapping.maximumVerticesPerPixel,
-    mapping: "GLB local +X left-to-right; local -Z bottom-to-top; source Y flipped to top-left origin",
     state: mode,
     brightness,
+    appliedBrightness,
     speed,
     hueRate,
     voiceLevel,
@@ -499,9 +481,6 @@ export const createCubeLedAnimation = ({
   const dispose = () => {
     if (disposed) return;
     disposed = true;
-    mesh.geometry.deleteAttribute("cubeLedCoord");
-    restoreMaterial();
-    texture.dispose();
   };
 
   const initialSimulationTime = performance.now();
@@ -509,12 +488,92 @@ export const createCubeLedAnimation = ({
   lastSimulationTime = initialSimulationTime;
 
   return {
+    pixelData,
     setState,
     setVoiceLevel,
     setReducedMotion,
     setDebugMode,
     getDiagnostics,
     update,
+    dispose
+  };
+};
+
+export const createCubeLedAnimation = ({
+  THREE,
+  mesh,
+  material,
+  reducedMotion = false,
+  debug = false,
+  emissionGain = 15
+}) => {
+  if (!THREE || !mesh?.isMesh || !material?.isMeshStandardMaterial) {
+    throw new Error("Cube LED animation requires Three.js and the LED MeshStandardMaterial");
+  }
+
+  const mapping = createLedCoordinateAttribute(THREE, mesh.geometry);
+  const brightnessUniform = { value: .1 };
+  let texture = null;
+
+  const frameGenerator = createCubeLedFrameGenerator({
+    reducedMotion,
+    debug,
+    onFrame: (_pixelData, nextBrightness) => {
+      brightnessUniform.value = nextBrightness / 100;
+      if (texture) texture.needsUpdate = true;
+    }
+  });
+
+  texture = new THREE.DataTexture(
+    frameGenerator.pixelData,
+    MATRIX_SIZE,
+    MATRIX_SIZE,
+    THREE.RGBAFormat,
+    THREE.UnsignedByteType
+  );
+  texture.name = "CubeFastLedNoise64x64";
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.minFilter = THREE.NearestFilter;
+  texture.magFilter = THREE.NearestFilter;
+  texture.generateMipmaps = false;
+  texture.flipY = false;
+  texture.unpackAlignment = 1;
+  texture.needsUpdate = true;
+
+  const restoreMaterial = configureLedMaterial({
+    THREE,
+    material,
+    texture,
+    brightnessUniform,
+    emissionGain
+  });
+  let disposed = false;
+
+  const getDiagnostics = () => ({
+    ...frameGenerator.getDiagnostics(),
+    mappedPixelCount: mapping.mappedPixelCount,
+    vertexCount: mapping.vertexCount,
+    minimumVerticesPerPixel: mapping.minimumVerticesPerPixel,
+    maximumVerticesPerPixel: mapping.maximumVerticesPerPixel,
+    mapping: "GLB local +X left-to-right; local -Z bottom-to-top; source Y flipped to top-left origin"
+  });
+
+  const dispose = () => {
+    if (disposed) return;
+    disposed = true;
+    frameGenerator.dispose();
+    mesh.geometry.deleteAttribute("cubeLedCoord");
+    restoreMaterial();
+    texture.dispose();
+  };
+
+  return {
+    setState: frameGenerator.setState,
+    setVoiceLevel: frameGenerator.setVoiceLevel,
+    setReducedMotion: frameGenerator.setReducedMotion,
+    setDebugMode: frameGenerator.setDebugMode,
+    getDiagnostics,
+    update: frameGenerator.update,
     dispose
   };
 };

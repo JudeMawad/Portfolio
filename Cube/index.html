@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="../styles/base.css">
   <link rel="stylesheet" href="style.css?v=20260831-ignite-navbar-1">
   <link rel="stylesheet" href="cube-callouts.css?v=20260831-mobile-all-1">
-  <link rel="stylesheet" href="system-map.css?v=20260901-system-map-20">
+  <link rel="stylesheet" href="system-map.css?v=20260901-system-map-21">
   <script>document.documentElement.classList.add("js");</script>
   <script type="importmap">
     {
@@ -139,7 +139,12 @@
         <figure class="cube-system-map" data-system-map aria-labelledby="cube-system-map-title" aria-describedby="cube-system-map-caption">
           <article class="cube-system-node cube-system-node--cube" data-map-node="cube">
             <div class="cube-system-node__render">
-              <img src="../images/THE_CUBE.png" alt="Exterior render of the Cube with its LED matrix and speaker grille" width="1080" height="1080" loading="lazy" decoding="async">
+              <div class="cube-system-node__cube-visual" data-system-map-cube-visual>
+                <div class="cube-system-node__cube-mirror">
+                  <img class="cube-system-node__cube-image" src="../images/THE_CUBE_OFF.png" alt="Exterior render of the Cube with its LED matrix and speaker grille" width="1080" height="1080" loading="lazy" decoding="async">
+                  <canvas class="cube-system-node__cube-led-canvas" width="640" height="640" aria-hidden="true" data-system-map-cube-canvas></canvas>
+                </div>
+              </div>
               <span>128 MM / DESKTOP</span>
             </div>
 
@@ -223,7 +228,7 @@
     </footer>
   </main>
 
-  <script type="module" src="system-map.js?v=20260831-system-map-9"></script>
-  <script type="module" src="app.js?v=20260901-fastled-2"></script>
+  <script type="module" src="system-map.js?v=20260901-system-map-10"></script>
+  <script type="module" src="app.js?v=20260901-fastled-3"></script>
 </body>
 </html>

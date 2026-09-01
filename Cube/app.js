@@ -120,7 +120,7 @@
       import("three/addons/postprocessing/OutputPass.js"),
       import("three/addons/lights/RectAreaLightUniformsLib.js"),
       import("./cube-callouts.js?v=20260831-mobile-all-1"),
-      import("./cube-led-animation.js?v=20260901-fastled-2")
+      import("./cube-led-animation.js?v=20260901-fastled-3")
     ]);
     THREE = modules[0];
     ({ GLTFLoader } = modules[1]);

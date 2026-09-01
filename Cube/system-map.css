@@ -167,10 +167,41 @@
   justify-items: center;
 }
 
-.cube-system-node__render img {
+.cube-system-node__cube-visual {
+  position: relative;
   width: min(100%, 28rem);
-  height: auto;
+  aspect-ratio: 1;
+}
+
+.cube-system-node__cube-mirror {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(-1);
+  transform-origin: center;
+}
+
+.cube-system-node__cube-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+}
+
+.cube-system-node__cube-led-canvas {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 640px;
+  height: 640px;
+  display: block;
+  transform-origin: 0 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  image-rendering: pixelated;
+  will-change: transform;
+  pointer-events: none;
 }
 
 .cube-system-node__render > span {
@@ -626,7 +657,7 @@
     gap: 1.75rem;
   }
 
-  .cube-system-node__render img {
+  .cube-system-node__cube-visual {
     width: min(100%, 21rem);
   }
 
@@ -681,7 +712,7 @@
 
   .cube-system-feedback__matrix {
     width: min(100%, 12rem);
-    justify-self: start;
+    justify-self: center;
   }
 
   .cube-system-map.is-animated .cube-system-map__mobile-line {

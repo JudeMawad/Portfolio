@@ -1,3 +1,325 @@
+import {
+  CUBE_LED_MATRIX_SIZE,
+  createCubeLedFrameGenerator
+} from "../Cube/cube-led-animation.js?v=20260901-shared-card-1";
+
+const CUBE_LED_CALIBRATION = false;
+const CUBE_LED_CELL_SIZE = 10;
+const CUBE_LED_SIZE = 5;
+const CUBE_LED_SURFACE_SIZE = CUBE_LED_MATRIX_SIZE * CUBE_LED_CELL_SIZE;
+const CUBE_LED_HANDLE_LABELS = ["TL", "TR", "BR", "BL"];
+
+const CUBE_LED_CORNERS = Object.freeze({
+  desktop: Object.freeze([
+    Object.freeze({ x: 0.676648, y: 0.306452 }),
+    Object.freeze({ x: 0.950270, y: 0.280059 }),
+    Object.freeze({ x: 0.94877, y: 0.718475 }),
+    Object.freeze({ x: 0.679945, y: 0.782919 })
+  ]),
+  mobile: Object.freeze([
+    Object.freeze({ x: 0.455633, y: 0.380443 }),
+    Object.freeze({ x: 0.895443, y: 0.352676 }),
+    Object.freeze({ x: 0.886762, y: 0.777661 }),
+    Object.freeze({ x: 0.457562, y: 0.840136 })
+  ])
+});
+
+const clampCubeCoordinate = (value) => Math.min(1, Math.max(0, value));
+
+const createPerspectiveTransform = (points, sourceWidth, sourceHeight) => {
+  if (
+    !Number.isFinite(sourceWidth) || sourceWidth <= 0 ||
+    !Number.isFinite(sourceHeight) || sourceHeight <= 0 ||
+    points.some(({ x, y }) => !Number.isFinite(x) || !Number.isFinite(y))
+  ) return null;
+
+  const [p0, p1, p2, p3] = points;
+  const dx1 = p1.x - p2.x;
+  const dx2 = p3.x - p2.x;
+  const dx3 = p0.x - p1.x + p2.x - p3.x;
+  const dy1 = p1.y - p2.y;
+  const dy2 = p3.y - p2.y;
+  const dy3 = p0.y - p1.y + p2.y - p3.y;
+  const denominator = dx1 * dy2 - dx2 * dy1;
+
+  let projectiveX = 0;
+  let projectiveY = 0;
+  if (Math.abs(denominator) > .000001) {
+    projectiveX = (dx3 * dy2 - dx2 * dy3) / denominator;
+    projectiveY = (dx1 * dy3 - dx3 * dy1) / denominator;
+  } else if (Math.abs(dx3) > .000001 || Math.abs(dy3) > .000001) {
+    return null;
+  }
+
+  const scaleX = p1.x - p0.x + projectiveX * p1.x;
+  const skewX = p3.x - p0.x + projectiveY * p3.x;
+  const translateX = p0.x;
+  const skewY = p1.y - p0.y + projectiveX * p1.y;
+  const scaleY = p3.y - p0.y + projectiveY * p3.y;
+  const translateY = p0.y;
+
+  return `matrix3d(${[
+    scaleX / sourceWidth, skewY / sourceWidth, 0, projectiveX / sourceWidth,
+    skewX / sourceHeight, scaleY / sourceHeight, 0, projectiveY / sourceHeight,
+    0, 0, 1, 0,
+    translateX, translateY, 0, 1
+  ].join(",")})`;
+};
+
+const setupCubeProjectCard = ({ section, desktopQuery, reducedMotionQuery }) => {
+  const card = section.querySelector(".projects-card--cube");
+  const stage = card?.querySelector(".projects-cube-stage");
+  const render = stage?.querySelector(".projects-cube-render");
+  const canvas = render?.querySelector(".projects-cube-led-canvas");
+  const context = canvas?.getContext("2d", { alpha: true });
+  if (!card || !stage || !render || !canvas || !context) return null;
+
+  canvas.width = CUBE_LED_SURFACE_SIZE;
+  canvas.height = CUBE_LED_SURFACE_SIZE;
+  context.imageSmoothingEnabled = false;
+
+  const corners = {
+    desktop: CUBE_LED_CORNERS.desktop.map((point) => ({ ...point })),
+    mobile: CUBE_LED_CORNERS.mobile.map((point) => ({ ...point }))
+  };
+  const handles = [];
+  const ledGap = Math.floor((CUBE_LED_CELL_SIZE - CUBE_LED_SIZE) / 2);
+  let profile = desktopQuery.matches ? "desktop" : "mobile";
+  let measuredStageWidth = 0;
+  let measuredStageHeight = 0;
+  let measuredRenderLeft = 0;
+  let measuredRenderTop = 0;
+  let measuredRenderWidth = 0;
+  let measuredRenderHeight = 0;
+  let measuredProfile = "";
+  let animationFrame = 0;
+  let isVisible = true;
+  let disposed = false;
+  let visibilityObserver = null;
+
+  const drawFrame = (pixelData, brightness) => {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    // Match the shared idle brightness while compensating for the 3D material's
+    // emission gain so the card remains readable over its static PNG.
+    context.globalAlpha = Math.min(1, Math.max(.12, brightness / 10));
+
+    for (let index = 0; index < pixelData.length / 4; index += 1) {
+      const offset = index * 4;
+      const red = pixelData[offset];
+      const green = pixelData[offset + 1];
+      const blue = pixelData[offset + 2];
+      if (red + green + blue === 0) continue;
+
+      context.fillStyle = `rgb(${red},${green},${blue})`;
+      context.fillRect(
+        (index % CUBE_LED_MATRIX_SIZE) * CUBE_LED_CELL_SIZE + ledGap,
+        Math.floor(index / CUBE_LED_MATRIX_SIZE) * CUBE_LED_CELL_SIZE + ledGap,
+        CUBE_LED_SIZE,
+        CUBE_LED_SIZE
+      );
+    }
+
+    context.globalAlpha = 1;
+  };
+
+  const frameGenerator = createCubeLedFrameGenerator({
+    reducedMotion: reducedMotionQuery.matches,
+    onFrame: drawFrame
+  });
+
+  const shouldAnimate = () => (
+    !disposed &&
+    !reducedMotionQuery.matches &&
+    isVisible &&
+    !document.hidden
+  );
+
+  const stopAnimation = () => {
+    if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    animationFrame = 0;
+  };
+
+  const animate = (now) => {
+    animationFrame = 0;
+    if (!shouldAnimate()) return;
+    frameGenerator.update(now);
+    animationFrame = window.requestAnimationFrame(animate);
+  };
+
+  const startAnimation = () => {
+    if (animationFrame || !shouldAnimate()) return;
+    animationFrame = window.requestAnimationFrame(animate);
+  };
+
+  const printCalibration = () => {
+    const values = corners[profile].map(({ x, y }) => ({
+      x: Number(x.toFixed(6)),
+      y: Number(y.toFixed(6))
+    }));
+    console.info(`Cube LED ${profile} corners (TL, TR, BR, BL):`, values);
+  };
+
+  const updateHandlePositions = (stageWidth, stageHeight, renderLeft, renderWidth) => {
+    handles.forEach((handle, index) => {
+      const point = corners[profile][index];
+      const logicalX = point.x * stageWidth;
+      const mirroredX = renderLeft + renderWidth - (logicalX - renderLeft);
+      handle.style.left = `${mirroredX}px`;
+      handle.style.top = `${point.y * stageHeight}px`;
+    });
+  };
+
+  const resize = (force = false) => {
+    if (disposed) return;
+    const stageWidth = stage.clientWidth;
+    const stageHeight = stage.clientHeight;
+    const renderLeft = render.offsetLeft;
+    const renderTop = render.offsetTop;
+    const renderWidth = render.clientWidth;
+    const renderHeight = render.clientHeight;
+    const nextProfile = desktopQuery.matches ? "desktop" : "mobile";
+    if (!stageWidth || !stageHeight || !renderWidth || !renderHeight) return;
+    if (
+      !force &&
+      stageWidth === measuredStageWidth &&
+      stageHeight === measuredStageHeight &&
+      renderLeft === measuredRenderLeft &&
+      renderTop === measuredRenderTop &&
+      renderWidth === measuredRenderWidth &&
+      renderHeight === measuredRenderHeight &&
+      nextProfile === measuredProfile
+    ) return;
+
+    profile = nextProfile;
+    measuredProfile = nextProfile;
+    measuredStageWidth = stageWidth;
+    measuredStageHeight = stageHeight;
+    measuredRenderLeft = renderLeft;
+    measuredRenderTop = renderTop;
+    measuredRenderWidth = renderWidth;
+    measuredRenderHeight = renderHeight;
+    const destination = corners[profile].map((point) => ({
+      x: point.x * stageWidth - renderLeft,
+      y: point.y * stageHeight - renderTop
+    }));
+    const sourceWidth = canvas.width;
+    const sourceHeight = canvas.height;
+    const transform = createPerspectiveTransform(destination, sourceWidth, sourceHeight);
+    if (transform) canvas.style.transform = transform;
+    updateHandlePositions(stageWidth, stageHeight, renderLeft, renderWidth);
+  };
+
+  const updatePointFromPointer = (index, event) => {
+    const rect = stage.getBoundingClientRect();
+    const stageWidth = stage.clientWidth;
+    const stageHeight = stage.clientHeight;
+    const renderWidth = render.clientWidth;
+    if (!rect.width || !rect.height || !stageWidth || !stageHeight || !renderWidth) return;
+    const displayedX = (event.clientX - rect.left) * (stageWidth / rect.width);
+    const logicalX = render.offsetLeft + renderWidth - (displayedX - render.offsetLeft);
+    corners[profile][index].x = clampCubeCoordinate(logicalX / stageWidth);
+    corners[profile][index].y = clampCubeCoordinate((event.clientY - rect.top) / rect.height);
+    resize(true);
+    printCalibration();
+  };
+
+  if (CUBE_LED_CALIBRATION) {
+    card.classList.add("is-cube-calibrating");
+    CUBE_LED_HANDLE_LABELS.forEach((label, index) => {
+      const handle = document.createElement("span");
+      handle.className = "projects-cube-calibration-handle";
+      handle.textContent = label;
+      handle.tabIndex = 0;
+      handle.setAttribute("role", "button");
+      handle.setAttribute("aria-label", `Adjust Cube LED ${label} corner`);
+      let activePointerId = null;
+
+      handle.addEventListener("pointerdown", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        activePointerId = event.pointerId;
+        handle.setPointerCapture(event.pointerId);
+        updatePointFromPointer(index, event);
+      });
+      handle.addEventListener("pointermove", (event) => {
+        if (event.pointerId !== activePointerId) return;
+        event.preventDefault();
+        event.stopPropagation();
+        updatePointFromPointer(index, event);
+      });
+      const finishDrag = (event) => {
+        if (event.pointerId !== activePointerId) return;
+        event.preventDefault();
+        event.stopPropagation();
+        if (handle.hasPointerCapture(event.pointerId)) handle.releasePointerCapture(event.pointerId);
+        activePointerId = null;
+        printCalibration();
+      };
+      handle.addEventListener("pointerup", finishDrag);
+      handle.addEventListener("pointercancel", finishDrag);
+      handle.addEventListener("keydown", (event) => {
+        if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        const step = event.shiftKey ? .005 : .0005;
+        const point = corners[profile][index];
+        // The visual is mirrored, so screen-left increases the saved logical X value.
+        if (event.key === "ArrowLeft") point.x = clampCubeCoordinate(point.x + step);
+        if (event.key === "ArrowRight") point.x = clampCubeCoordinate(point.x - step);
+        if (event.key === "ArrowUp") point.y = clampCubeCoordinate(point.y - step);
+        if (event.key === "ArrowDown") point.y = clampCubeCoordinate(point.y + step);
+        resize(true);
+        printCalibration();
+      });
+
+      stage.append(handle);
+      handles.push(handle);
+    });
+    card.addEventListener("click", (event) => event.preventDefault());
+  }
+
+  const handleVisibilityChange = () => {
+    if (document.hidden) stopAnimation();
+    else startAnimation();
+  };
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+
+  if ("IntersectionObserver" in window) {
+    visibilityObserver = new IntersectionObserver((entries) => {
+      isVisible = entries.some((entry) => entry.isIntersecting);
+      if (isVisible) startAnimation();
+      else stopAnimation();
+    }, { threshold: .01 });
+    visibilityObserver.observe(card);
+  }
+
+  const setReducedMotion = (reduced) => {
+    frameGenerator.setReducedMotion(reduced);
+    if (reduced) stopAnimation();
+    else startAnimation();
+  };
+
+  const dispose = () => {
+    if (disposed) return;
+    disposed = true;
+    stopAnimation();
+    visibilityObserver?.disconnect();
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+    window.removeEventListener("pagehide", handlePageHide);
+    frameGenerator.dispose();
+  };
+
+  const handlePageHide = (event) => {
+    if (!event.persisted) dispose();
+  };
+
+  resize(true);
+  startAnimation();
+  window.addEventListener("pagehide", handlePageHide);
+
+  return { element: render, resize, setReducedMotion, dispose };
+};
+
 (() => {
   const sections = [...document.querySelectorAll('.projects-section')];
   if (!sections.length) return;
@@ -19,6 +341,7 @@
     const mobileCardCandidates = new Set();
 
     if (!track) return;
+    const cubeOverlay = setupCubeProjectCard({ section, desktopQuery, reducedMotionQuery });
 
     const setVideoState = (video) => {
       const frameNode = video.closest('.projects-video-frame');
@@ -151,11 +474,13 @@
     };
 
     const configure = () => {
+      cubeOverlay?.setReducedMotion(reducedMotionQuery.matches);
       const shouldEnhance = desktopQuery.matches && !reducedMotionQuery.matches;
       if (!shouldEnhance) {
         disable();
         startMobileCardObserver();
         videos.forEach((video) => video.pause());
+        cubeOverlay?.resize(true);
         return;
       }
 
@@ -164,17 +489,23 @@
       section.classList.add('is-projects-enhanced');
       videos.forEach((video) => video.play().catch(() => {}));
       measure();
+      cubeOverlay?.resize(true);
     };
 
     window.addEventListener('scroll', requestUpdate, { passive: true });
     window.addEventListener('resize', () => {
       measure();
       requestUpdate();
+      cubeOverlay?.resize();
     }, { passive: true });
 
     if ('ResizeObserver' in window) {
-      const observer = new ResizeObserver(measure);
+      const observer = new ResizeObserver(() => {
+        measure();
+        cubeOverlay?.resize();
+      });
       observer.observe(track);
+      if (cubeOverlay?.element) observer.observe(cubeOverlay.element);
     }
 
     if ('IntersectionObserver' in window && !reducedMotionQuery.matches) {
@@ -199,488 +530,15 @@
       }
     };
 
-// ============================================================
-// THE CUBE — LED OVERLAY + PERSPECTIVE + ANIMATION
-// ============================================================
-
-const cubeRender = document.querySelector(".projects-cube-render");
-const cubeCanvas = document.querySelector(".projects-cube-led-canvas");
-
-if (cubeRender && cubeCanvas) {
-
-  // ----------------------------------------------------------
-  // CALIBRATED LED PANEL CORNERS
-  // Coordinates are normalized relative to .projects-cube-render
-  // Order: top-left, top-right, bottom-right, bottom-left
-  // ----------------------------------------------------------
-
-  const CUBE_LED_CORNERS = {
-    desktop: [
-      { x: 0.676648, y: 0.306452 }, // top-left
-      { x: 0.854270, y: 0.280059 }, // top-right
-      { x: 0.848077, y: 0.718475 }, // bottom-right
-      { x: 0.679945, y: 0.782919 }  // bottom-left
-    ],
-
-    mobile: [
-      { x: 0.445000, y: 0.376000 }, // top-left
-      { x: 0.870000, y: 0.352676 }, // top-right
-      { x: 0.862000, y: 0.763661 }, // bottom-right
-      { x: 0.450000, y: 0.823000 }  // bottom-left
-    ]
-  };
-
-
-  // ==========================================================
-  // PERSPECTIVE MAPPING
-  // ==========================================================
-
-  const applyCubePerspective = () => {
-    const rect = cubeRender.getBoundingClientRect();
-
-    const points = desktopQuery.matches
-      ? CUBE_LED_CORNERS.desktop
-      : CUBE_LED_CORNERS.mobile;
-
-    const p0 = {
-      x: points[0].x * rect.width,
-      y: points[0].y * rect.height
-    };
-
-    const p1 = {
-      x: points[1].x * rect.width,
-      y: points[1].y * rect.height
-    };
-
-    const p2 = {
-      x: points[2].x * rect.width,
-      y: points[2].y * rect.height
-    };
-
-    const p3 = {
-      x: points[3].x * rect.width,
-      y: points[3].y * rect.height
-    };
-
-    const dx1 = p1.x - p2.x;
-    const dx2 = p3.x - p2.x;
-    const dx3 = p0.x - p1.x + p2.x - p3.x;
-
-    const dy1 = p1.y - p2.y;
-    const dy2 = p3.y - p2.y;
-    const dy3 = p0.y - p1.y + p2.y - p3.y;
-
-    const denominator = dx1 * dy2 - dx2 * dy1;
-
-    let g = 0;
-    let h = 0;
-
-    if (Math.abs(denominator) > 0.000001) {
-      g = (dx3 * dy2 - dx2 * dy3) / denominator;
-      h = (dx1 * dy3 - dx3 * dy1) / denominator;
-    }
-
-    const a = p1.x - p0.x + g * p1.x;
-    const b = p3.x - p0.x + h * p3.x;
-    const c = p0.x;
-
-    const d = p1.y - p0.y + g * p1.y;
-    const e = p3.y - p0.y + h * p3.y;
-    const f = p0.y;
-
-    /*
-     * The CSS canvas itself is 64 × 64 px.
-     * Its internal drawing resolution can be higher without
-     * changing these values.
-     */
-    const sourceWidth = cubeCanvas.width;
-    const sourceHeight = cubeCanvas.height;
-
-    cubeCanvas.style.transform = `matrix3d(
-      ${a / sourceWidth},
-      ${d / sourceWidth},
-      0,
-      ${g / sourceWidth},
-
-      ${b / sourceHeight},
-      ${e / sourceHeight},
-      0,
-      ${h / sourceHeight},
-
-      0,
-      0,
-      1,
-      0,
-
-      ${c},
-      ${f},
-      0,
-      1
-    )`;
-  };
-
-
-  // ==========================================================
-  // LED CANVAS
-  // ==========================================================
-
-  const MATRIX_SIZE = 64;
-
-  /*
-   * Each logical LED gets an 8×8 drawing cell.
-   * The actual colored LED occupies only part of that cell,
-   * leaving transparent gaps between LEDs.
-   */
-  const CELL_SIZE = 10;
-  const LED_SIZE = 5;
-
-  // ~30 FPS, matching the physical animation.
-  const FRAME_TIME_MS = 33;
-
-  // Same Perlin scale as the Cube implementation.
-  const NOISE_SCALE = 31;
-
-  cubeCanvas.width = MATRIX_SIZE * CELL_SIZE;
-  cubeCanvas.height = MATRIX_SIZE * CELL_SIZE;
-
-  const ctx = cubeCanvas.getContext("2d", {
-    alpha: true
-  });
-
-  if (ctx) {
-    ctx.imageSmoothingEnabled = false;
-
-
-    // --------------------------------------------------------
-    // Exact Cube palette
-    // --------------------------------------------------------
-
-    const PALETTE = new Uint8Array([
-      0, 110, 32,
-      0, 110, 32,
-
-      230, 8, 4,
-      230, 8, 4,
-
-      255, 92, 0,
-      255, 92, 0,
-
-      0, 110, 32
-    ]);
-
-
-    // --------------------------------------------------------
-    // Helpers
-    // --------------------------------------------------------
-
-    const randomUint16 = () => {
-      if (globalThis.crypto?.getRandomValues) {
-        return globalThis.crypto.getRandomValues(
-          new Uint16Array(1)
-        )[0];
-      }
-
-      return Math.floor(Math.random() * 65536);
-    };
-
-
-    // --------------------------------------------------------
-    // LOAD THE SAME NOISE FUNCTION USED BY THE 3D CUBE
-    // --------------------------------------------------------
-
-   const animationModuleUrl =
-  new URL("/Cube/cube-led-animation.js", window.location.origin).href;
-
-
-    import(animationModuleUrl)
-      .then(({ noise8 }) => {
-
-        if (typeof noise8 !== "function") {
-          throw new Error(
-            "cube-led-animation.js does not export noise8()"
-          );
-        }
-
-
-        // ====================================================
-        // ANIMATION STATE
-        // ====================================================
-
-        const noise = new Uint8Array(
-          MATRIX_SIZE * MATRIX_SIZE
-        );
-
-        const xCoordinates = new Uint16Array(MATRIX_SIZE);
-        const yCoordinates = new Uint16Array(MATRIX_SIZE);
-
-        const noiseX = randomUint16();
-        const noiseY = randomUint16();
-
-        let noiseZ = randomUint16();
-
-        let huePhase = 0;
-
-        // Same idle animation values as the 3D Cube.
-        let speed = 3.5;
-        let hueRate = 0.12;
-
-        let lastFrameTime = 0;
-
-
-        // ----------------------------------------------------
-        // PRECOMPUTE X/Y PERLIN COORDINATES
-        // ----------------------------------------------------
-
-        for (let index = 0; index < MATRIX_SIZE; index += 1) {
-          xCoordinates[index] =
-            (noiseX + NOISE_SCALE * index) & 0xffff;
-
-          yCoordinates[index] =
-            (noiseY + NOISE_SCALE * index) & 0xffff;
-        }
-
-
-        // ====================================================
-        // DRAW ONE LED FRAME
-        // ====================================================
-
-        const drawLedFrame = () => {
-
-          const sampledZ =
-            Math.trunc(noiseZ) & 0xffff;
-
-
-          // --------------------------------------------------
-          // Generate 64×64 Perlin field
-          // --------------------------------------------------
-
-          for (let x = 0; x < MATRIX_SIZE; x += 1) {
-            for (let y = 0; y < MATRIX_SIZE; y += 1) {
-
-              noise[y * MATRIX_SIZE + x] = noise8(
-                xCoordinates[x],
-                yCoordinates[y],
-                sampledZ
-              );
-            }
-          }
-
-          noiseZ += speed;
-
-
-          // --------------------------------------------------
-          // Clear previous LED frame
-          // Gaps remain transparent so the PNG stays visible.
-          // --------------------------------------------------
-
-          ctx.clearRect(
-            0,
-            0,
-            cubeCanvas.width,
-            cubeCanvas.height
-          );
-
-
-          const roundedHue =
-            Math.round(huePhase) & 0xff;
-
-          const gap =
-            (CELL_SIZE - LED_SIZE) / 2;
-
-
-          // --------------------------------------------------
-          // Draw all 4096 LEDs
-          // --------------------------------------------------
-
-          for (let y = 0; y < MATRIX_SIZE; y += 1) {
-            for (let x = 0; x < MATRIX_SIZE; x += 1) {
-
-              const pixelBrightness =
-                noise[y * MATRIX_SIZE + x];
-
-              /*
-               * Matches the original Cube implementation:
-               * brightness lookup is normal,
-               * palette lookup is transposed.
-               */
-              const transposedNoise =
-                noise[x * MATRIX_SIZE + y];
-
-              const palettePosition =
-                (roundedHue + transposedNoise) & 0xff;
-
-              const scaledPosition =
-                palettePosition * 6;
-
-              const segment =
-                Math.min(scaledPosition >> 8, 5);
-
-              const amount =
-                scaledPosition & 0xff;
-
-              const inverse =
-                255 - amount;
-
-              const from =
-                segment * 3;
-
-              const to =
-                from + 3;
-
-
-              let red = 0;
-              let green = 0;
-              let blue = 0;
-
-
-              // ----------------------------------------------
-              // RED
-              // ----------------------------------------------
-
-              let blended = Math.floor(
-                (
-                  PALETTE[from] * inverse +
-                  PALETTE[to] * amount +
-                  127
-                ) / 255
-              );
-
-              red = Math.floor(
-                (blended * pixelBrightness + 127) / 255
-              );
-
-
-              // ----------------------------------------------
-              // GREEN
-              // ----------------------------------------------
-
-              blended = Math.floor(
-                (
-                  PALETTE[from + 1] * inverse +
-                  PALETTE[to + 1] * amount +
-                  127
-                ) / 255
-              );
-
-              green = Math.floor(
-                (blended * pixelBrightness + 127) / 255
-              );
-
-
-              // ----------------------------------------------
-              // BLUE
-              // ----------------------------------------------
-
-              blended = Math.floor(
-                (
-                  PALETTE[from + 2] * inverse +
-                  PALETTE[to + 2] * amount +
-                  127
-                ) / 255
-              );
-
-              blue = Math.floor(
-                (blended * pixelBrightness + 127) / 255
-              );
-
-
-              // ----------------------------------------------
-              // Draw physical LED
-              // ----------------------------------------------
-
-              ctx.fillStyle =
-                `rgb(${red}, ${green}, ${blue})`;
-
-              ctx.fillRect(
-                x * CELL_SIZE + gap,
-                y * CELL_SIZE + gap,
-                LED_SIZE,
-                LED_SIZE
-              );
-            }
-          }
-
-
-          // --------------------------------------------------
-          // Advance palette animation
-          // --------------------------------------------------
-
-          huePhase += hueRate;
-
-          if (huePhase >= 256) {
-            huePhase %= 256;
-          }
-        };
-
-
-        // ====================================================
-        // ANIMATION LOOP
-        // ====================================================
-
-        const renderFrame = (now) => {
-
-          window.requestAnimationFrame(renderFrame);
-
-          if (
-            now - lastFrameTime <
-            FRAME_TIME_MS
-          ) {
-            return;
-          }
-
-          lastFrameTime =
-            now - (
-              (now - lastFrameTime) %
-              FRAME_TIME_MS
-            );
-
-          drawLedFrame();
-        };
-
-
-        // Draw immediately so the panel isn't blank initially.
-        drawLedFrame();
-
-        window.requestAnimationFrame(renderFrame);
-      })
-      .catch((error) => {
-        console.error(
-          "Cube LED animation failed to load:",
-          error
-        );
-      });
-  }
-
-
-  // ==========================================================
-  // INITIAL PERSPECTIVE + RESPONSIVE UPDATES
-  // ==========================================================
-
-  applyCubePerspective();
-
-  window.addEventListener(
-    "resize",
-    applyCubePerspective,
-    { passive: true }
-  );
-
-  /*
-   * desktopQuery already exists near the top of projects.js.
-   */
-  if (typeof desktopQuery.addEventListener === "function") {
-    desktopQuery.addEventListener(
-      "change",
-      applyCubePerspective
-    );
-  }
-}
-
     listenForChange(desktopQuery);
     listenForChange(reducedMotionQuery);
     configure();
 
     if (document.fonts?.ready) {
-      document.fonts.ready.then(measure);
+      document.fonts.ready.then(() => {
+        measure();
+        cubeOverlay?.resize();
+      });
     }
   });
 })();
