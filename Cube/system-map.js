@@ -14,13 +14,6 @@ const CUBE_LED_SIZE = 5;
 const CUBE_LED_SURFACE_SIZE = CUBE_LED_MATRIX_SIZE * CUBE_LED_CELL_SIZE;
 const CUBE_PHOTO_ANIMATION_STATE = "listening";
 const CUBE_PHOTO_STATE_REFRESH_MS = 10000;
-const CUBE_SYSTEM_MAP_LED_STYLE = Object.freeze({
-  brightnessScale: 10,
-  glowBlur: 10,
-  glowOpacity: .30,
-  glowSpread: .03,
-  glowBleed: 50
-});
 
 const MATRIX_STATE_CYCLE = Object.freeze([
   Object.freeze({ state: "idle", duration: 3000 }),
@@ -138,21 +131,13 @@ const createCubeLedCanvasRenderer = (canvas, { brightnessScale = 10 } = {}) => {
   return { drawFrame };
 };
 
-const createProjectedCubeLedCanvasRenderer = (
-  canvas,
-  { brightnessScale = 10, glowBlur = 0, glowOpacity = 0, glowSpread = 0, glowBleed = 0 } = {}
-) => {
+const createProjectedCubeLedCanvasRenderer = (canvas, { brightnessScale = 10 } = {}) => {
   const context = canvas?.getContext("2d", { alpha: true });
-  const ledLayer = document.createElement("canvas");
-  const ledContext = ledLayer.getContext("2d", { alpha: true });
-  if (!canvas || !context || !ledContext) return null;
+  if (!canvas || !context) return null;
 
   const ledGap = Math.floor((CUBE_LED_CELL_SIZE - CUBE_LED_SIZE) / 2);
   let displayWidth = 0;
   let displayHeight = 0;
-  let canvasBleed = 0;
-  let canvasDisplayWidth = 0;
-  let canvasDisplayHeight = 0;
   let ledQuads = [];
   let lastPixelData = null;
   let lastBrightness = 0;
@@ -162,7 +147,7 @@ const createProjectedCubeLedCanvasRenderer = (
     lastBrightness = brightness;
     if (!displayWidth || !displayHeight || ledQuads.length !== CUBE_LED_MATRIX_SIZE ** 2) return;
 
-    ledContext.clearRect(-canvasBleed, -canvasBleed, canvasDisplayWidth, canvasDisplayHeight);
+    context.clearRect(0, 0, displayWidth, displayHeight);
     const intensity = Math.min(1, Math.max(.12, brightness / brightnessScale));
 
     for (let index = 0; index < pixelData.length / 4; index += 1) {
@@ -174,40 +159,15 @@ const createProjectedCubeLedCanvasRenderer = (
 
       const quad = ledQuads[index];
       if (!quad) continue;
-      ledContext.fillStyle = `rgb(${Math.round(red * intensity)},${Math.round(green * intensity)},${Math.round(blue * intensity)})`;
-      ledContext.beginPath();
-      ledContext.moveTo(quad[0].x, quad[0].y);
-      ledContext.lineTo(quad[1].x, quad[1].y);
-      ledContext.lineTo(quad[2].x, quad[2].y);
-      ledContext.lineTo(quad[3].x, quad[3].y);
-      ledContext.closePath();
-      ledContext.fill();
+      context.fillStyle = `rgb(${Math.round(red * intensity)},${Math.round(green * intensity)},${Math.round(blue * intensity)})`;
+      context.beginPath();
+      context.moveTo(quad[0].x, quad[0].y);
+      context.lineTo(quad[1].x, quad[1].y);
+      context.lineTo(quad[2].x, quad[2].y);
+      context.lineTo(quad[3].x, quad[3].y);
+      context.closePath();
+      context.fill();
     }
-
-    context.clearRect(-canvasBleed, -canvasBleed, canvasDisplayWidth, canvasDisplayHeight);
-    if (glowBlur > 0 && glowOpacity > 0) {
-      context.save();
-      context.globalAlpha = glowOpacity;
-      context.globalCompositeOperation = "lighter";
-      context.filter = `blur(${glowBlur}px)`;
-      const glowSpreadX = displayWidth * glowSpread;
-      const glowSpreadY = displayHeight * glowSpread;
-      context.drawImage(
-        ledLayer,
-        -canvasBleed - glowSpreadX,
-        -canvasBleed - glowSpreadY,
-        canvasDisplayWidth + glowSpreadX * 2,
-        canvasDisplayHeight + glowSpreadY * 2
-      );
-      context.restore();
-    }
-    context.drawImage(
-      ledLayer,
-      -canvasBleed,
-      -canvasBleed,
-      canvasDisplayWidth,
-      canvasDisplayHeight
-    );
   };
 
   const resize = (width, height, destination, pixelRatio = 1) => {
@@ -216,24 +176,16 @@ const createProjectedCubeLedCanvasRenderer = (
 
     displayWidth = width;
     displayHeight = height;
-    canvasBleed = Math.max(0, Number(glowBleed) || 0);
-    canvasDisplayWidth = width + canvasBleed * 2;
-    canvasDisplayHeight = height + canvasBleed * 2;
-    canvas.width = Math.max(1, Math.round(canvasDisplayWidth * pixelRatio));
-    canvas.height = Math.max(1, Math.round(canvasDisplayHeight * pixelRatio));
-    ledLayer.width = canvas.width;
-    ledLayer.height = canvas.height;
+    canvas.width = Math.max(1, Math.round(width * pixelRatio));
+    canvas.height = Math.max(1, Math.round(height * pixelRatio));
     canvas.style.removeProperty("transform");
-    canvas.style.left = `${-canvasBleed}px`;
-    canvas.style.top = `${-canvasBleed}px`;
-    canvas.style.width = `${canvasDisplayWidth}px`;
-    canvas.style.height = `${canvasDisplayHeight}px`;
-    const outputScaleX = canvas.width / canvasDisplayWidth;
-    const outputScaleY = canvas.height / canvasDisplayHeight;
+    canvas.style.removeProperty("left");
+    canvas.style.removeProperty("top");
+    canvas.style.removeProperty("width");
+    canvas.style.removeProperty("height");
+    const outputScaleX = canvas.width / width;
+    const outputScaleY = canvas.height / height;
     context.setTransform(outputScaleX, 0, 0, outputScaleY, 0, 0);
-    ledContext.setTransform(outputScaleX, 0, 0, outputScaleY, 0, 0);
-    context.translate(canvasBleed, canvasBleed);
-    ledContext.translate(canvasBleed, canvasBleed);
 
     ledQuads = new Array(CUBE_LED_MATRIX_SIZE ** 2);
     for (let y = 0; y < CUBE_LED_MATRIX_SIZE; y += 1) {
@@ -260,7 +212,7 @@ const createProjectedCubeLedCanvasRenderer = (
 
 const setupSystemMapCubeVisual = (visual) => {
   const canvas = visual.querySelector("[data-system-map-cube-canvas]");
-  const renderer = createProjectedCubeLedCanvasRenderer(canvas, CUBE_SYSTEM_MAP_LED_STYLE);
+  const renderer = createProjectedCubeLedCanvasRenderer(canvas);
   if (!canvas || !renderer) return null;
 
   const corners = Object.fromEntries(
