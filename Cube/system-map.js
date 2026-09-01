@@ -14,6 +14,13 @@ const CUBE_LED_SIZE = 5;
 const CUBE_LED_SURFACE_SIZE = CUBE_LED_MATRIX_SIZE * CUBE_LED_CELL_SIZE;
 const CUBE_PHOTO_ANIMATION_STATE = "listening";
 const CUBE_PHOTO_STATE_REFRESH_MS = 10000;
+const CUBE_SYSTEM_MAP_LED_STYLE = Object.freeze({
+  brightnessScale: 10,
+  glowBlur: 50,
+  glowOpacity: .90,
+  glowSpread: .02,
+  glowBleed: 50
+});
 
 const MATRIX_STATE_CYCLE = Object.freeze([
   Object.freeze({ state: "idle", duration: 3000 }),
@@ -21,19 +28,19 @@ const MATRIX_STATE_CYCLE = Object.freeze([
   Object.freeze({ state: "speaking", duration: 3000 })
 ]);
 
-// These are the current homepage card calibrations, normalized to its stage.
+// System Map Cube LED corners, normalized to the original card stage.
 const CUBE_LED_CARD_CORNERS = Object.freeze({
   desktop: Object.freeze([
-    Object.freeze({ x: 0.676648, y: 0.306452 }),
-    Object.freeze({ x: 0.950270, y: 0.280059 }),
-    Object.freeze({ x: 0.94877, y: 0.718475 }),
-    Object.freeze({ x: 0.679945, y: 0.782919 })
+    Object.freeze({ x: 0.680703, y: 0.308493 }),
+    Object.freeze({ x: 0.951297, y: 0.282535 }),
+    Object.freeze({ x: 0.946047, y: 0.715952 }),
+    Object.freeze({ x: 0.681359, y: 0.779827 })
   ]),
   mobile: Object.freeze([
-    Object.freeze({ x: 0.455633, y: 0.380443 }),
-    Object.freeze({ x: 0.895443, y: 0.352676 }),
-    Object.freeze({ x: 0.886762, y: 0.777661 }),
-    Object.freeze({ x: 0.457562, y: 0.840136 })
+    Object.freeze({ x: 0.457475, y: 0.382154 }),
+    Object.freeze({ x: 0.889725, y: 0.357234 }),
+    Object.freeze({ x: 0.881675, y: 0.773034 }),
+    Object.freeze({ x: 0.457825, y: 0.835194 })
   ])
 });
 
@@ -57,10 +64,8 @@ const CUBE_LED_CARD_GEOMETRY = Object.freeze({
   })
 });
 
-const createPerspectiveTransform = (points, sourceWidth, sourceHeight) => {
+const createPerspectiveProjector = (points) => {
   if (
-    !Number.isFinite(sourceWidth) || sourceWidth <= 0 ||
-    !Number.isFinite(sourceHeight) || sourceHeight <= 0 ||
     points.some(({ x, y }) => !Number.isFinite(x) || !Number.isFinite(y))
   ) return null;
 
@@ -89,12 +94,14 @@ const createPerspectiveTransform = (points, sourceWidth, sourceHeight) => {
   const scaleY = p3.y - p0.y + projectiveY * p3.y;
   const translateY = p0.y;
 
-  return `matrix3d(${[
-    scaleX / sourceWidth, skewY / sourceWidth, 0, projectiveX / sourceWidth,
-    skewX / sourceHeight, scaleY / sourceHeight, 0, projectiveY / sourceHeight,
-    0, 0, 1, 0,
-    translateX, translateY, 0, 1
-  ].join(",")})`;
+  return (sourceX, sourceY) => {
+    const divisor = projectiveX * sourceX + projectiveY * sourceY + 1;
+    if (Math.abs(divisor) <= .000001) return null;
+    return {
+      x: (scaleX * sourceX + skewX * sourceY + translateX) / divisor,
+      y: (skewY * sourceX + scaleY * sourceY + translateY) / divisor
+    };
+  };
 };
 
 const createCubeLedCanvasRenderer = (canvas, { brightnessScale = 10 } = {}) => {
@@ -131,14 +138,145 @@ const createCubeLedCanvasRenderer = (canvas, { brightnessScale = 10 } = {}) => {
   return { drawFrame };
 };
 
+const createProjectedCubeLedCanvasRenderer = (
+  canvas,
+  { brightnessScale = 10, glowBlur = 0, glowOpacity = 0, glowSpread = 0, glowBleed = 0 } = {}
+) => {
+  const context = canvas?.getContext("2d", { alpha: true });
+  const ledLayer = document.createElement("canvas");
+  const ledContext = ledLayer.getContext("2d", { alpha: true });
+  if (!canvas || !context || !ledContext) return null;
+
+  const ledGap = Math.floor((CUBE_LED_CELL_SIZE - CUBE_LED_SIZE) / 2);
+  let displayWidth = 0;
+  let displayHeight = 0;
+  let canvasBleed = 0;
+  let canvasDisplayWidth = 0;
+  let canvasDisplayHeight = 0;
+  let ledQuads = [];
+  let lastPixelData = null;
+  let lastBrightness = 0;
+
+  const drawFrame = (pixelData, brightness) => {
+    lastPixelData = pixelData;
+    lastBrightness = brightness;
+    if (!displayWidth || !displayHeight || ledQuads.length !== CUBE_LED_MATRIX_SIZE ** 2) return;
+
+    ledContext.clearRect(-canvasBleed, -canvasBleed, canvasDisplayWidth, canvasDisplayHeight);
+    const intensity = Math.min(1, Math.max(.12, brightness / brightnessScale));
+
+    for (let index = 0; index < pixelData.length / 4; index += 1) {
+      const offset = index * 4;
+      const red = pixelData[offset];
+      const green = pixelData[offset + 1];
+      const blue = pixelData[offset + 2];
+      if (red + green + blue === 0) continue;
+
+      const quad = ledQuads[index];
+      if (!quad) continue;
+      ledContext.fillStyle = `rgb(${Math.round(red * intensity)},${Math.round(green * intensity)},${Math.round(blue * intensity)})`;
+      ledContext.beginPath();
+      ledContext.moveTo(quad[0].x, quad[0].y);
+      ledContext.lineTo(quad[1].x, quad[1].y);
+      ledContext.lineTo(quad[2].x, quad[2].y);
+      ledContext.lineTo(quad[3].x, quad[3].y);
+      ledContext.closePath();
+      ledContext.fill();
+    }
+
+    context.clearRect(-canvasBleed, -canvasBleed, canvasDisplayWidth, canvasDisplayHeight);
+    if (glowBlur > 0 && glowOpacity > 0) {
+      context.save();
+      context.globalAlpha = glowOpacity;
+      context.globalCompositeOperation = "lighter";
+      context.filter = `blur(${glowBlur}px)`;
+      const glowSpreadX = displayWidth * glowSpread;
+      const glowSpreadY = displayHeight * glowSpread;
+      context.drawImage(
+        ledLayer,
+        -canvasBleed - glowSpreadX,
+        -canvasBleed - glowSpreadY,
+        canvasDisplayWidth + glowSpreadX * 2,
+        canvasDisplayHeight + glowSpreadY * 2
+      );
+      context.restore();
+    }
+    context.drawImage(
+      ledLayer,
+      -canvasBleed,
+      -canvasBleed,
+      canvasDisplayWidth,
+      canvasDisplayHeight
+    );
+  };
+
+  const resize = (width, height, destination, pixelRatio = 1) => {
+    const projector = createPerspectiveProjector(destination);
+    if (!projector || !width || !height || !Number.isFinite(pixelRatio) || pixelRatio <= 0) return;
+
+    displayWidth = width;
+    displayHeight = height;
+    canvasBleed = Math.max(0, Number(glowBleed) || 0);
+    canvasDisplayWidth = width + canvasBleed * 2;
+    canvasDisplayHeight = height + canvasBleed * 2;
+    canvas.width = Math.max(1, Math.round(canvasDisplayWidth * pixelRatio));
+    canvas.height = Math.max(1, Math.round(canvasDisplayHeight * pixelRatio));
+    ledLayer.width = canvas.width;
+    ledLayer.height = canvas.height;
+    canvas.style.removeProperty("transform");
+    canvas.style.left = `${-canvasBleed}px`;
+    canvas.style.top = `${-canvasBleed}px`;
+    canvas.style.width = `${canvasDisplayWidth}px`;
+    canvas.style.height = `${canvasDisplayHeight}px`;
+    const outputScaleX = canvas.width / canvasDisplayWidth;
+    const outputScaleY = canvas.height / canvasDisplayHeight;
+    context.setTransform(outputScaleX, 0, 0, outputScaleY, 0, 0);
+    ledContext.setTransform(outputScaleX, 0, 0, outputScaleY, 0, 0);
+    context.translate(canvasBleed, canvasBleed);
+    ledContext.translate(canvasBleed, canvasBleed);
+
+    ledQuads = new Array(CUBE_LED_MATRIX_SIZE ** 2);
+    for (let y = 0; y < CUBE_LED_MATRIX_SIZE; y += 1) {
+      const sourceTop = (y * CUBE_LED_CELL_SIZE + ledGap) / CUBE_LED_SURFACE_SIZE;
+      const sourceBottom = (y * CUBE_LED_CELL_SIZE + ledGap + CUBE_LED_SIZE) / CUBE_LED_SURFACE_SIZE;
+      for (let x = 0; x < CUBE_LED_MATRIX_SIZE; x += 1) {
+        const sourceLeft = (x * CUBE_LED_CELL_SIZE + ledGap) / CUBE_LED_SURFACE_SIZE;
+        const sourceRight = (x * CUBE_LED_CELL_SIZE + ledGap + CUBE_LED_SIZE) / CUBE_LED_SURFACE_SIZE;
+        const quad = [
+          projector(sourceLeft, sourceTop),
+          projector(sourceRight, sourceTop),
+          projector(sourceRight, sourceBottom),
+          projector(sourceLeft, sourceBottom)
+        ];
+        if (quad.every(Boolean)) ledQuads[y * CUBE_LED_MATRIX_SIZE + x] = quad;
+      }
+    }
+
+    if (lastPixelData) drawFrame(lastPixelData, lastBrightness);
+  };
+
+  return { drawFrame, resize };
+};
+
 const setupSystemMapCubeVisual = (visual) => {
   const canvas = visual.querySelector("[data-system-map-cube-canvas]");
-  const renderer = createCubeLedCanvasRenderer(canvas);
+  const renderer = createProjectedCubeLedCanvasRenderer(canvas, CUBE_SYSTEM_MAP_LED_STYLE);
   if (!canvas || !renderer) return null;
+
+  const corners = Object.fromEntries(
+    ["desktop", "mobile"].map((profile) => {
+      const geometry = CUBE_LED_CARD_GEOMETRY[profile];
+      return [profile, CUBE_LED_CARD_CORNERS[profile].map((point) => ({
+        x: (point.x * geometry.stageWidth - geometry.renderLeft) / geometry.renderWidth,
+        y: (point.y * geometry.stageHeight - geometry.renderTop) / geometry.renderHeight
+      }))];
+    })
+  );
 
   let measuredWidth = 0;
   let measuredHeight = 0;
   let measuredProfile = "";
+  let measuredPixelRatio = 0;
   let animationFrame = 0;
   let lastPhotoStateRefresh = 0;
   let isVisible = true;
@@ -164,24 +302,25 @@ const setupSystemMapCubeVisual = (visual) => {
     const width = visual.clientWidth;
     const height = visual.clientHeight;
     const profile = cubeLedDesktop.matches ? "desktop" : "mobile";
+    const pixelRatio = window.devicePixelRatio || 1;
     if (!width || !height) return;
     if (
       !force &&
       width === measuredWidth &&
       height === measuredHeight &&
-      profile === measuredProfile
+      profile === measuredProfile &&
+      pixelRatio === measuredPixelRatio
     ) return;
 
     measuredWidth = width;
     measuredHeight = height;
     measuredProfile = profile;
-    const geometry = CUBE_LED_CARD_GEOMETRY[profile];
-    const destination = CUBE_LED_CARD_CORNERS[profile].map((point) => ({
-      x: ((point.x * geometry.stageWidth - geometry.renderLeft) / geometry.renderWidth) * width,
-      y: ((point.y * geometry.stageHeight - geometry.renderTop) / geometry.renderHeight) * height
+    measuredPixelRatio = pixelRatio;
+    const destination = corners[profile].map((point) => ({
+      x: point.x * width,
+      y: point.y * height
     }));
-    const transform = createPerspectiveTransform(destination, canvas.width, canvas.height);
-    if (transform) canvas.style.transform = transform;
+    renderer.resize(width, height, destination, pixelRatio);
   };
 
   const shouldAnimate = () => (

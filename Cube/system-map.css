@@ -169,7 +169,7 @@
 
 .cube-system-node__cube-visual {
   position: relative;
-  width: min(113%, 31rem);
+  width: min(100%, 31rem);
   aspect-ratio: 1;
   right: 3%;
 }
@@ -194,14 +194,9 @@
   z-index: 1;
   left: 0;
   top: 0;
-  width: 640px;
-  height: 640px;
+  width: 100%;
+  height: 100%;
   display: block;
-  transform-origin: 0 0;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  image-rendering: pixelated;
-  will-change: transform;
   pointer-events: none;
 }
 
