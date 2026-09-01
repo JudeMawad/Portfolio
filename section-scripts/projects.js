@@ -8,6 +8,8 @@ const CUBE_LED_CELL_SIZE = 10;
 const CUBE_LED_SIZE = 5;
 const CUBE_LED_SURFACE_SIZE = CUBE_LED_MATRIX_SIZE * CUBE_LED_CELL_SIZE;
 const CUBE_LED_HANDLE_LABELS = ["TL", "TR", "BR", "BL"];
+const CUBE_PHOTO_ANIMATION_STATE = "listening";
+const CUBE_PHOTO_STATE_REFRESH_MS = 10000;
 
 const CUBE_LED_CORNERS = Object.freeze({
   desktop: Object.freeze([
@@ -93,6 +95,7 @@ const setupCubeProjectCard = ({ section, desktopQuery, reducedMotionQuery }) => 
   let measuredRenderHeight = 0;
   let measuredProfile = "";
   let animationFrame = 0;
+  let lastPhotoStateRefresh = 0;
   let isVisible = true;
   let disposed = false;
   let visibilityObserver = null;
@@ -127,6 +130,14 @@ const setupCubeProjectCard = ({ section, desktopQuery, reducedMotionQuery }) => 
     onFrame: drawFrame
   });
 
+  const keepPhotoAnimationState = (now = performance.now(), force = false) => {
+    if (!force && now - lastPhotoStateRefresh < CUBE_PHOTO_STATE_REFRESH_MS) return;
+    frameGenerator.setState(CUBE_PHOTO_ANIMATION_STATE, now);
+    lastPhotoStateRefresh = now;
+  };
+
+  keepPhotoAnimationState(performance.now(), true);
+
   const shouldAnimate = () => (
     !disposed &&
     !reducedMotionQuery.matches &&
@@ -142,6 +153,7 @@ const setupCubeProjectCard = ({ section, desktopQuery, reducedMotionQuery }) => 
   const animate = (now) => {
     animationFrame = 0;
     if (!shouldAnimate()) return;
+    keepPhotoAnimationState(now);
     frameGenerator.update(now);
     animationFrame = window.requestAnimationFrame(animate);
   };
@@ -295,6 +307,7 @@ const setupCubeProjectCard = ({ section, desktopQuery, reducedMotionQuery }) => 
 
   const setReducedMotion = (reduced) => {
     frameGenerator.setReducedMotion(reduced);
+    keepPhotoAnimationState(performance.now(), true);
     if (reduced) stopAnimation();
     else startAnimation();
   };

@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="../styles/base.css">
   <link rel="stylesheet" href="style.css?v=20260831-ignite-navbar-1">
   <link rel="stylesheet" href="cube-callouts.css?v=20260831-mobile-all-1">
-  <link rel="stylesheet" href="system-map.css?v=20260901-system-map-21">
+  <link rel="stylesheet" href="system-map.css?v=20260901-system-map-28">
   <script>document.documentElement.classList.add("js");</script>
   <script type="importmap">
     {
@@ -194,16 +194,18 @@
             <i class="cube-system-map__mobile-line cube-system-map__mobile-line--feedback"></i>
           </div>
 
-          <article class="cube-system-feedback" data-map-node="feedback">
+          <article class="cube-system-feedback" data-map-node="feedback" data-matrix-demo>
             <div class="cube-system-feedback__matrix" aria-hidden="true">
-              <img src="../images/LED_MATRIX.png" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+              <canvas class="cube-system-feedback__led-canvas" width="640" height="640" data-matrix-canvas></canvas>
             </div>
             <div class="cube-system-feedback__content">
               <div class="cube-system-node__meta"><span><i aria-hidden="true"></i>Visual feedback</span><span>04</span></div>
               <h3>LED Matrix</h3>
-              <p>The LED matrix acts as the main visual feedback for the system, showing different states while the Cube is listening, processing or executing a request.</p>
+              <p>The LED matrix acts as the main visual feedback for the system, showing when the Cube is idle, listening or speaking.</p>
               <ul class="cube-system-feedback__states" aria-label="LED matrix states">
-                <li><i aria-hidden="true"></i>Listening</li><li><i aria-hidden="true"></i>Processing</li><li><i aria-hidden="true"></i>Executing</li>
+                <li class="is-active" data-matrix-state-label="idle" aria-current="true"><i aria-hidden="true"></i>IDLE</li>
+                <li data-matrix-state-label="listening"><i aria-hidden="true"></i>LISTENING</li>
+                <li data-matrix-state-label="speaking"><i aria-hidden="true"></i>SPEAKING</li>
               </ul>
             </div>
           </article>
@@ -228,7 +230,7 @@
     </footer>
   </main>
 
-  <script type="module" src="system-map.js?v=20260901-system-map-10"></script>
+  <script type="module" src="system-map.js?v=20260901-system-map-14"></script>
   <script type="module" src="app.js?v=20260901-fastled-3"></script>
 </body>
 </html>

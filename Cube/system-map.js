@@ -1,4 +1,5 @@
 import {
+  CUBE_ANIMATION_STATES,
   CUBE_LED_MATRIX_SIZE,
   createCubeLedFrameGenerator
 } from "./cube-led-animation.js?v=20260901-fastled-3";
@@ -11,6 +12,14 @@ const systemMaps = [...document.querySelectorAll("[data-system-map]")];
 const CUBE_LED_CELL_SIZE = 10;
 const CUBE_LED_SIZE = 5;
 const CUBE_LED_SURFACE_SIZE = CUBE_LED_MATRIX_SIZE * CUBE_LED_CELL_SIZE;
+const CUBE_PHOTO_ANIMATION_STATE = "listening";
+const CUBE_PHOTO_STATE_REFRESH_MS = 10000;
+
+const MATRIX_STATE_CYCLE = Object.freeze([
+  Object.freeze({ state: "idle", duration: 3000 }),
+  Object.freeze({ state: "listening", duration: 3000 }),
+  Object.freeze({ state: "speaking", duration: 3000 })
+]);
 
 // These are the current homepage card calibrations, normalized to its stage.
 const CUBE_LED_CARD_CORNERS = Object.freeze({
@@ -88,8 +97,7 @@ const createPerspectiveTransform = (points, sourceWidth, sourceHeight) => {
   ].join(",")})`;
 };
 
-const setupSystemMapCubeVisual = (visual) => {
-  const canvas = visual.querySelector("[data-system-map-cube-canvas]");
+const createCubeLedCanvasRenderer = (canvas, { brightnessScale = 10 } = {}) => {
   const context = canvas?.getContext("2d", { alpha: true });
   if (!canvas || !context) return null;
 
@@ -98,18 +106,10 @@ const setupSystemMapCubeVisual = (visual) => {
   context.imageSmoothingEnabled = false;
 
   const ledGap = Math.floor((CUBE_LED_CELL_SIZE - CUBE_LED_SIZE) / 2);
-  let measuredWidth = 0;
-  let measuredHeight = 0;
-  let measuredProfile = "";
-  let animationFrame = 0;
-  let isVisible = true;
-  let disposed = false;
-  let visibilityObserver = null;
-  let resizeObserver = null;
 
   const drawFrame = (pixelData, brightness) => {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.globalAlpha = Math.min(1, Math.max(.12, brightness / 10));
+    const intensity = Math.min(1, Math.max(.12, brightness / brightnessScale));
 
     for (let index = 0; index < pixelData.length / 4; index += 1) {
       const offset = index * 4;
@@ -118,7 +118,7 @@ const setupSystemMapCubeVisual = (visual) => {
       const blue = pixelData[offset + 2];
       if (red + green + blue === 0) continue;
 
-      context.fillStyle = `rgb(${red},${green},${blue})`;
+      context.fillStyle = `rgb(${Math.round(red * intensity)},${Math.round(green * intensity)},${Math.round(blue * intensity)})`;
       context.fillRect(
         (index % CUBE_LED_MATRIX_SIZE) * CUBE_LED_CELL_SIZE + ledGap,
         Math.floor(index / CUBE_LED_MATRIX_SIZE) * CUBE_LED_CELL_SIZE + ledGap,
@@ -126,14 +126,38 @@ const setupSystemMapCubeVisual = (visual) => {
         CUBE_LED_SIZE
       );
     }
-
-    context.globalAlpha = 1;
   };
+
+  return { drawFrame };
+};
+
+const setupSystemMapCubeVisual = (visual) => {
+  const canvas = visual.querySelector("[data-system-map-cube-canvas]");
+  const renderer = createCubeLedCanvasRenderer(canvas);
+  if (!canvas || !renderer) return null;
+
+  let measuredWidth = 0;
+  let measuredHeight = 0;
+  let measuredProfile = "";
+  let animationFrame = 0;
+  let lastPhotoStateRefresh = 0;
+  let isVisible = true;
+  let disposed = false;
+  let visibilityObserver = null;
+  let resizeObserver = null;
 
   const frameGenerator = createCubeLedFrameGenerator({
     reducedMotion: reducedMotion.matches,
-    onFrame: drawFrame
+    onFrame: renderer.drawFrame
   });
+
+  const keepPhotoAnimationState = (now = performance.now(), force = false) => {
+    if (!force && now - lastPhotoStateRefresh < CUBE_PHOTO_STATE_REFRESH_MS) return;
+    frameGenerator.setState(CUBE_PHOTO_ANIMATION_STATE, now);
+    lastPhotoStateRefresh = now;
+  };
+
+  keepPhotoAnimationState(performance.now(), true);
 
   const resize = (force = false) => {
     if (disposed) return;
@@ -175,6 +199,7 @@ const setupSystemMapCubeVisual = (visual) => {
   const animate = (now) => {
     animationFrame = 0;
     if (!shouldAnimate()) return;
+    keepPhotoAnimationState(now);
     frameGenerator.update(now);
     animationFrame = window.requestAnimationFrame(animate);
   };
@@ -191,6 +216,7 @@ const setupSystemMapCubeVisual = (visual) => {
 
   const handleReducedMotionChange = (event) => {
     frameGenerator.setReducedMotion(event.matches);
+    keepPhotoAnimationState(performance.now(), true);
     if (event.matches) stopAnimation();
     else startAnimation();
   };
@@ -242,6 +268,155 @@ const setupSystemMapCubeVisual = (visual) => {
 };
 
 document.querySelectorAll("[data-system-map-cube-visual]").forEach(setupSystemMapCubeVisual);
+
+const setupSystemMapMatrixDemo = (card) => {
+  const canvas = card.querySelector("[data-matrix-canvas]");
+  const stateLabels = [...card.querySelectorAll("[data-matrix-state-label]")];
+  const renderer = createCubeLedCanvasRenderer(canvas, { brightnessScale: 50 });
+  if (!canvas || !renderer || !stateLabels.length) return null;
+
+  const frameGenerator = createCubeLedFrameGenerator({
+    reducedMotion: reducedMotion.matches,
+    onFrame: renderer.drawFrame
+  });
+
+  let stateIndex = 0;
+  let animationFrame = 0;
+  let stateTimer = 0;
+  let isRunning = false;
+  let isVisible = !("IntersectionObserver" in window);
+  let disposed = false;
+  let visibilityObserver = null;
+
+  const currentCycleEntry = () => MATRIX_STATE_CYCLE[stateIndex];
+
+  const updateStateLabels = (state) => {
+    stateLabels.forEach((label) => {
+      const isActive = label.dataset.matrixStateLabel === state;
+      label.classList.toggle("is-active", isActive);
+      if (isActive) label.setAttribute("aria-current", "true");
+      else label.removeAttribute("aria-current");
+    });
+  };
+
+  const setActiveState = (nextIndex, now = performance.now()) => {
+    stateIndex = (nextIndex + MATRIX_STATE_CYCLE.length) % MATRIX_STATE_CYCLE.length;
+    const { state } = currentCycleEntry();
+    frameGenerator.setState(state, now);
+    updateStateLabels(state);
+  };
+
+  const shouldRun = () => (
+    !disposed &&
+    !reducedMotion.matches &&
+    isVisible &&
+    !document.hidden
+  );
+
+  const stopStateTimer = () => {
+    if (stateTimer) window.clearTimeout(stateTimer);
+    stateTimer = 0;
+  };
+
+  const scheduleNextState = () => {
+    stopStateTimer();
+    if (!isRunning || !shouldRun()) return;
+
+    stateTimer = window.setTimeout(() => {
+      stateTimer = 0;
+      if (!isRunning || !shouldRun()) return;
+      setActiveState(stateIndex + 1);
+      scheduleNextState();
+    }, currentCycleEntry().duration);
+  };
+
+  const animate = (now) => {
+    animationFrame = 0;
+    if (!isRunning || !shouldRun()) return;
+
+    if (currentCycleEntry().state === "speaking") {
+      const voiceLevel = .32 + Math.sin(now * .004) * .14 + Math.sin(now * .009) * .06;
+      frameGenerator.setVoiceLevel(voiceLevel, now);
+    }
+
+    frameGenerator.update(now);
+    animationFrame = window.requestAnimationFrame(animate);
+  };
+
+  const stopPlayback = () => {
+    isRunning = false;
+    if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    animationFrame = 0;
+    stopStateTimer();
+  };
+
+  const startPlayback = () => {
+    if (isRunning || !shouldRun()) return;
+    isRunning = true;
+    frameGenerator.setState(currentCycleEntry().state, performance.now());
+    animationFrame = window.requestAnimationFrame(animate);
+    scheduleNextState();
+  };
+
+  const syncPlayback = () => {
+    if (shouldRun()) startPlayback();
+    else stopPlayback();
+  };
+
+  const handleVisibilityChange = () => syncPlayback();
+
+  const handleReducedMotionChange = (event) => {
+    stopPlayback();
+    setActiveState(0);
+    frameGenerator.setReducedMotion(event.matches);
+    if (event.matches) {
+      renderer.drawFrame(
+        frameGenerator.pixelData,
+        CUBE_ANIMATION_STATES.idle.brightness
+      );
+    }
+    syncPlayback();
+  };
+
+  const dispose = () => {
+    if (disposed) return;
+    disposed = true;
+    stopPlayback();
+    visibilityObserver?.disconnect();
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+    reducedMotion.removeEventListener("change", handleReducedMotionChange);
+    window.removeEventListener("pagehide", handlePageHide);
+    frameGenerator.dispose();
+  };
+
+  const handlePageHide = (event) => {
+    if (!event.persisted) dispose();
+  };
+
+  if ("IntersectionObserver" in window) {
+    visibilityObserver = new IntersectionObserver((entries) => {
+      isVisible = entries.some((entry) => entry.isIntersecting);
+      syncPlayback();
+    }, { threshold: .01 });
+    visibilityObserver.observe(card);
+  }
+
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+  reducedMotion.addEventListener("change", handleReducedMotionChange);
+  window.addEventListener("pagehide", handlePageHide);
+  setActiveState(0);
+  if (reducedMotion.matches) {
+    renderer.drawFrame(
+      frameGenerator.pixelData,
+      CUBE_ANIMATION_STATES.idle.brightness
+    );
+  }
+  syncPlayback();
+
+  return { dispose };
+};
+
+document.querySelectorAll("[data-matrix-demo]").forEach(setupSystemMapMatrixDemo);
 
 const mapStageClasses = [
   "has-cube",

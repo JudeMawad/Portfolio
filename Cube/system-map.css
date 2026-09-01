@@ -169,8 +169,9 @@
 
 .cube-system-node__cube-visual {
   position: relative;
-  width: min(100%, 28rem);
+  width: min(113%, 31rem);
   aspect-ratio: 1;
+  right: 3%;
 }
 
 .cube-system-node__cube-mirror {
@@ -448,49 +449,44 @@
 .cube-system-feedback {
   padding: clamp(2rem, 3.5vw, 3.5rem);
   display: grid;
-  grid-template-columns: minmax(10rem, .44fr) minmax(0, 1.56fr);
+  grid-template-columns: minmax(11rem, .5fr) minmax(0, 1.5fr);
   align-items: center;
   gap: clamp(2.5rem, 5vw, 6rem);
   border: 1px solid var(--line-bright);
 }
 
 .cube-system-feedback__matrix {
+  --matrix-led-left: 6%;
+  --matrix-led-top: 6%;
+  --matrix-led-width: 256px;
+  --matrix-led-height: 256px;
   position: relative;
   z-index: 0;
-  width: min(100%, 16rem);
+  width: min(100%, 18rem);
   aspect-ratio: 1;
   justify-self: center;
   isolation: isolate;
 }
 
-.cube-system-feedback__matrix::before {
+.cube-system-feedback__led-canvas {
   position: absolute;
-  inset: -12%;
-  z-index: -1;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--accent) 18%, transparent),
-    color-mix(in srgb, var(--accent) 5%, transparent) 42%,
-    transparent 70%
-  );
-  filter: blur(.45rem);
-  content: "";
-}
-
-.cube-system-feedback__matrix img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter:
-    drop-shadow(0 0 .65rem color-mix(in srgb, var(--accent) 32%, transparent))
-    drop-shadow(0 0 2rem color-mix(in srgb, var(--accent) 12%, transparent));
+  z-index: 1;
+  left: var(--matrix-led-left);
+  top: var(--matrix-led-top);
+  width: var(--matrix-led-width);
+  height: var(--matrix-led-height);
+  display: block;
+  background: var(--bg);
+  image-rendering: pixelated;
+  pointer-events: none;
 }
 
 .cube-system-feedback__states li {
   display: inline-flex;
   align-items: center;
   gap: .5rem;
+  font-size: .66rem;
+  transition: color 220ms ease;
 }
 
 .cube-system-feedback__states li i {
@@ -498,6 +494,16 @@
   height: .28rem;
   flex: 0 0 auto;
   border: 1px solid var(--accent);
+  transition: background-color 220ms ease, box-shadow 220ms ease;
+}
+
+.cube-system-feedback__states li.is-active {
+  color: var(--fg);
+}
+
+.cube-system-feedback__states li.is-active i {
+  background: var(--accent);
+  box-shadow: 0 0 .5rem color-mix(in srgb, var(--accent) 46%, transparent);
 }
 
 .cube-sections-ready [data-cube-reveal] {
@@ -658,7 +664,7 @@
   }
 
   .cube-system-node__cube-visual {
-    width: min(100%, 21rem);
+    width: min(100%, 35rem);
   }
 
   .cube-system-node__content {
@@ -711,7 +717,9 @@
   }
 
   .cube-system-feedback__matrix {
-    width: min(100%, 12rem);
+    --matrix-led-width: 192px;
+    --matrix-led-height: 192px;
+    width: min(100%, 13.5rem);
     justify-self: center;
   }
 
