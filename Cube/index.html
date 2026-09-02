@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="../styles/base.css">
   <link rel="stylesheet" href="style.css?v=20260831-ignite-navbar-1">
   <link rel="stylesheet" href="cube-callouts.css?v=20260831-mobile-all-1">
-  <link rel="stylesheet" href="system-map.css?v=20260901-system-map-34">
+  <link rel="stylesheet" href="system-map.css?v=20260902-hardware-flow-1">
   <script>document.documentElement.classList.add("js");</script>
   <script type="importmap">
     {
@@ -215,6 +215,135 @@
       </div>
     </section>
 
+    <section class="cube-section cube-hardware" id="hardware" aria-labelledby="cube-hardware-title">
+      <div class="cube-shell">
+        <header class="cube-section__grid cube-hardware__header">
+          <div class="cube-hardware__rail" data-cube-reveal>
+            <p class="cube-hardware__chapter"><span>03 /</span> Hardware</p>
+          </div>
+
+          <div class="cube-hardware__intro">
+            <h2 class="cube-hardware__heading" id="cube-hardware-title" data-cube-reveal>WHAT'S INSIDE.</h2>
+            <p class="cube-hardware__lead" data-cube-reveal>These are the main components inside the Cube.</p>
+          </div>
+        </header>
+
+        <div class="cube-hardware__flow" data-hardware-flow>
+          <svg class="cube-hardware__flow-connectors" aria-hidden="true" focusable="false" data-hardware-connectors>
+            <g class="cube-hardware__flow-connectors-base">
+              <path data-hardware-spine-path="base" />
+              <path data-hardware-spine-path="base" />
+              <path data-hardware-spine-path="base" />
+              <path data-hardware-spine-path="base" />
+              <path data-hardware-branch-path="base" />
+              <path data-hardware-branch-path="base" />
+              <path data-hardware-branch-path="base" />
+              <path data-hardware-branch-path="base" />
+              <circle data-hardware-endpoint="base" />
+              <circle data-hardware-endpoint="base" />
+              <circle data-hardware-endpoint="base" />
+              <circle data-hardware-endpoint="base" />
+              <circle data-hardware-junction="base" />
+            </g>
+            <g class="cube-hardware__flow-connectors-active">
+              <path pathLength="1" data-hardware-spine-path="active" />
+              <path pathLength="1" data-hardware-spine-path="active" />
+              <path pathLength="1" data-hardware-spine-path="active" />
+              <path pathLength="1" data-hardware-spine-path="active" />
+              <path pathLength="1" data-hardware-branch-path="active" />
+              <path pathLength="1" data-hardware-branch-path="active" />
+              <path pathLength="1" data-hardware-branch-path="active" />
+              <path pathLength="1" data-hardware-branch-path="active" />
+              <circle data-hardware-endpoint="active" />
+              <circle data-hardware-endpoint="active" />
+              <circle data-hardware-endpoint="active" />
+              <circle data-hardware-endpoint="active" />
+              <circle data-hardware-junction="active" />
+            </g>
+          </svg>
+
+          <ol class="cube-hardware__list" data-hardware-sequence>
+          <li class="cube-hardware__item" data-cube-reveal data-hardware-item tabindex="0">
+            <span class="cube-hardware__marker" aria-hidden="true"></span>
+            <div class="cube-hardware__content">
+              <p class="cube-hardware__number">01</p>
+              <div class="cube-hardware__body">
+                <h3 class="cube-hardware__title">Raspberry Pi 5</h3>
+                <p class="cube-hardware__role">Main Compute</p>
+                <span class="cube-hardware__rule" aria-hidden="true"></span>
+                <p class="cube-hardware__spec">8 GB / ARM64 / Active Cooling</p>
+                <p class="cube-hardware__description">Runs wake-word detection, speech recognition, LED control and the local services.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="cube-hardware__item" data-cube-reveal data-hardware-item tabindex="0">
+            <span class="cube-hardware__marker" aria-hidden="true"></span>
+            <div class="cube-hardware__content">
+              <p class="cube-hardware__number">02</p>
+              <div class="cube-hardware__body">
+                <h3 class="cube-hardware__title">64 &times; 64 HUB75E</h3>
+                <p class="cube-hardware__role">Visual Output</p>
+                <span class="cube-hardware__rule" aria-hidden="true"></span>
+                <p class="cube-hardware__spec">4,096 RGB Pixels / 128 &times; 128 MM</p>
+                <p class="cube-hardware__description">The 64 × 64 panel forms the front of the Cube and shows its idle, listening and speaking states.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="cube-hardware__item" data-cube-reveal data-hardware-item tabindex="0">
+            <span class="cube-hardware__marker" aria-hidden="true"></span>
+            <div class="cube-hardware__content">
+              <p class="cube-hardware__number">03</p>
+              <div class="cube-hardware__body">
+                <h3 class="cube-hardware__title">ReSpeaker XVF3800</h3>
+                <p class="cube-hardware__role">Voice Input</p>
+                <span class="cube-hardware__rule" aria-hidden="true"></span>
+                <p class="cube-hardware__spec">Far-Field Microphone Array</p>
+                <p class="cube-hardware__description">Used for far-field voice input and wake-word detection.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="cube-hardware__item" data-cube-reveal data-hardware-item tabindex="0">
+            <span class="cube-hardware__marker" aria-hidden="true"></span>
+            <div class="cube-hardware__content">
+              <p class="cube-hardware__number">04</p>
+              <div class="cube-hardware__body">
+                <h3 class="cube-hardware__title">Visaton FR 7/4</h3>
+                <p class="cube-hardware__role">Audio Output</p>
+                <span class="cube-hardware__rule" aria-hidden="true"></span>
+                <p class="cube-hardware__spec">Full-Range / 4 &Omega;</p>
+                <p class="cube-hardware__description">Compact speaker selected to fit inside the enclosure without a separate external audio system.</p>
+              </div>
+            </div>
+          </li>
+          </ol>
+
+          <aside class="cube-hardware__support" aria-label="Power and thermal components" data-hardware-distribution>
+            <dl class="cube-hardware__support-list" data-hardware-support-list>
+              <div data-hardware-support-item>
+                <dt>HUSB238</dt>
+                <dd>USB-C PD Negotiation</dd>
+              </div>
+              <div data-hardware-support-item>
+                <dt>52PI</dt>
+                <dd>Pi Power Delivery</dd>
+              </div>
+              <div data-hardware-support-item>
+                <dt>Pololu</dt>
+                <dd>5 V / 9 A Regulation</dd>
+              </div>
+              <div data-hardware-support-item>
+                <dt>Noctua 40 MM</dt>
+                <dd>Active Airflow</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </section>
+
     <footer class="project-footer">
       <div class="cube-shell project-footer__inner">
         <a class="project-footer__next" href="../Ignite/" data-cursor="view">
@@ -230,7 +359,7 @@
     </footer>
   </main>
 
-  <script type="module" src="system-map.js?v=20260902-system-map-25"></script>
-  <script type="module" src="app.js?v=20260901-fastled-3"></script>
+  <script type="module" src="system-map.js?v=20260902-system-map-26"></script>
+  <script type="module" src="app.js?v=20260902-hardware-flow-1"></script>
 </body>
 </html>

@@ -362,9 +362,10 @@ document.querySelectorAll("[data-system-map-cube-visual]").forEach(setupSystemMa
 
 const setupSystemMapMatrixDemo = (card) => {
   const canvas = card.querySelector("[data-matrix-canvas]");
+  const matrixSurface = card.querySelector(".cube-system-feedback__matrix");
   const stateLabels = [...card.querySelectorAll("[data-matrix-state-label]")];
   const renderer = createCubeLedCanvasRenderer(canvas, { brightnessScale: 50 });
-  if (!canvas || !renderer || !stateLabels.length) return null;
+  if (!canvas || !matrixSurface || !renderer || !stateLabels.length) return null;
 
   const frameGenerator = createCubeLedFrameGenerator({
     reducedMotion: reducedMotion.matches,
@@ -378,6 +379,19 @@ const setupSystemMapMatrixDemo = (card) => {
   let isVisible = !("IntersectionObserver" in window);
   let disposed = false;
   let visibilityObserver = null;
+  let resizeObserver = null;
+
+  const syncCanvasSize = () => {
+    const availableSize = Math.floor(Math.min(matrixSurface.clientWidth, matrixSurface.clientHeight));
+    if (!availableSize) return;
+
+    const usableSize = Math.max(0, availableSize - 16);
+    const canvasSize = [256, 192, 128, 64].find((size) => size <= usableSize)
+      ?? Math.min(64, availableSize);
+    matrixSurface.style.setProperty("--matrix-led-size", `${canvasSize}px`);
+    matrixSurface.style.setProperty("--matrix-led-left", `${Math.floor((matrixSurface.clientWidth - canvasSize) / 2)}px`);
+    matrixSurface.style.setProperty("--matrix-led-top", `${Math.floor((matrixSurface.clientHeight - canvasSize) / 2)}px`);
+  };
 
   const currentCycleEntry = () => MATRIX_STATE_CYCLE[stateIndex];
 
@@ -474,8 +488,10 @@ const setupSystemMapMatrixDemo = (card) => {
     disposed = true;
     stopPlayback();
     visibilityObserver?.disconnect();
+    resizeObserver?.disconnect();
     document.removeEventListener("visibilitychange", handleVisibilityChange);
     reducedMotion.removeEventListener("change", handleReducedMotionChange);
+    window.removeEventListener("resize", syncCanvasSize);
     window.removeEventListener("pagehide", handlePageHide);
     frameGenerator.dispose();
   };
@@ -492,9 +508,17 @@ const setupSystemMapMatrixDemo = (card) => {
     visibilityObserver.observe(card);
   }
 
+  if ("ResizeObserver" in window) {
+    resizeObserver = new ResizeObserver(syncCanvasSize);
+    resizeObserver.observe(matrixSurface);
+  } else {
+    window.addEventListener("resize", syncCanvasSize, { passive: true });
+  }
+
   document.addEventListener("visibilitychange", handleVisibilityChange);
   reducedMotion.addEventListener("change", handleReducedMotionChange);
   window.addEventListener("pagehide", handlePageHide);
+  syncCanvasSize();
   setActiveState(0);
   if (reducedMotion.matches) {
     renderer.drawFrame(

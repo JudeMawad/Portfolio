@@ -86,6 +86,303 @@
   margin-top: 1.15rem;
 }
 
+.cube-hardware {
+  --cube-hardware-connector-ease: cubic-bezier(.37, 0, .63, 1);
+
+  padding-block: clamp(5.5rem, 7.5vw, 7.5rem);
+}
+
+.cube-hardware__header {
+  align-items: start;
+}
+
+.cube-hardware__rail {
+  padding-top: .35rem;
+}
+
+.cube-hardware__chapter {
+  margin: 0;
+  color: var(--muted-bright);
+  font-family: var(--mono);
+  font-size: .64rem;
+  font-weight: 500;
+  letter-spacing: .15em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.cube-hardware__chapter span {
+  color: var(--accent);
+}
+
+.cube-hardware__intro {
+  min-width: 0;
+}
+
+.cube-hardware__heading {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(3.35rem, 6.7vw, 6.5rem);
+  font-weight: 600;
+  letter-spacing: -.067em;
+  line-height: .88;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.cube-hardware__lead {
+  max-width: 39rem;
+  margin: clamp(1.75rem, 2.8vw, 2.75rem) 0 0;
+  color: var(--muted-bright);
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  letter-spacing: -.018em;
+  line-height: 1.58;
+  text-wrap: pretty;
+}
+
+.cube-hardware__flow {
+  position: relative;
+  isolation: isolate;
+  margin: clamp(4rem, 5.5vw, 5.5rem) 0 0;
+}
+
+.cube-hardware__list {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: clamp(4.5rem, 6.5vw, 6.5rem);
+  list-style: none;
+}
+
+.cube-hardware__item {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  outline: none;
+}
+
+.cube-hardware__content {
+  width: 100%;
+  max-width: 38rem;
+  min-width: 0;
+  padding-left: clamp(2rem, 3vw, 3rem);
+  grid-column: 7 / -1;
+  box-sizing: border-box;
+  transition: transform 420ms var(--cube-ease);
+}
+
+.cube-hardware__item:nth-child(even) .cube-hardware__content {
+  padding-right: clamp(2rem, 3vw, 3rem);
+  padding-left: 0;
+  grid-column: 1 / 7;
+}
+
+.cube-hardware__marker {
+  position: absolute;
+  z-index: 2;
+  top: .03rem;
+  left: 50%;
+  width: .4rem;
+  height: .4rem;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 50%;
+  background: var(--bg);
+  transform: translate(-50%, -5%);
+  transition: border-color 260ms ease, background-color 260ms ease, box-shadow 260ms ease;
+  pointer-events: none;
+}
+
+.cube-hardware__item.is-active .cube-hardware__marker,
+.cube-hardware__item:focus-visible .cube-hardware__marker {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.cube-hardware__item:focus-visible .cube-hardware__marker {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px color-mix(in srgb, var(--accent) 52%, transparent);
+}
+
+.cube-hardware__number {
+  margin: 0 0 1.05rem;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: .65rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  line-height: 1;
+  opacity: .62;
+  transition: color 260ms ease, opacity 260ms ease;
+}
+
+.cube-hardware__title {
+  margin: 0;
+  font-size: clamp(1.95rem, 3.25vw, 3.15rem);
+  font-weight: 580;
+  letter-spacing: -.053em;
+  line-height: .98;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.cube-hardware__role {
+  margin: .65rem 0 0;
+  color: var(--muted-bright);
+  font-family: var(--mono);
+  font-size: .66rem;
+  font-weight: 500;
+  letter-spacing: .15em;
+  line-height: 1.45;
+  text-transform: uppercase;
+  opacity: .68;
+  transition: color 260ms ease, opacity 260ms ease;
+}
+
+.cube-hardware__item.is-active .cube-hardware__number,
+.cube-hardware__item.is-active .cube-hardware__role {
+  opacity: 1;
+}
+
+.cube-hardware__item.is-active .cube-hardware__role {
+  color: var(--fg);
+}
+
+.cube-hardware__rule {
+  width: 100%;
+  height: 1px;
+  margin: clamp(1.15rem, 1.5vw, 1.5rem) 0;
+  display: block;
+  background: var(--line-bright);
+  transform-origin: left center;
+}
+
+.cube-hardware__spec {
+  margin: 0;
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: clamp(.64rem, .8vw, .72rem);
+  font-weight: 500;
+  letter-spacing: .12em;
+  line-height: 1.55;
+  text-transform: uppercase;
+}
+
+.cube-hardware__description {
+  max-width: 31rem;
+  margin: 1rem 0 0;
+  color: var(--muted-bright);
+  font-size: clamp(.96rem, 1.08vw, 1.08rem);
+  line-height: 1.66;
+  text-wrap: pretty;
+}
+
+.cube-hardware__support {
+  --cube-hardware-support-connector-height: clamp(6.25rem, 8.5vw, 8.5rem);
+  --cube-hardware-support-gap: clamp(.7rem, 1.4vw, 1.35rem);
+
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+  padding-top: var(--cube-hardware-support-connector-height);
+}
+
+.cube-hardware__flow-connectors {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.cube-hardware__flow-connectors path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.15;
+  vector-effect: non-scaling-stroke;
+}
+
+.cube-hardware__flow-connectors-base {
+  color: color-mix(in srgb, var(--fg) 18%, var(--line-bright));
+}
+
+.cube-hardware__flow-connectors-base circle {
+  fill: var(--bg);
+  stroke: currentColor;
+  stroke-width: 1.15;
+  vector-effect: non-scaling-stroke;
+}
+
+.cube-hardware__flow-connectors-active {
+  color: var(--accent);
+  opacity: .58;
+}
+
+.cube-hardware__flow-connectors-active path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 100ms var(--cube-hardware-connector-ease);
+}
+
+.cube-hardware__flow-connectors-active circle {
+  fill: currentColor;
+  opacity: 0;
+  transition: opacity 100ms var(--cube-hardware-connector-ease);
+}
+
+.cube-hardware__support-list {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: var(--cube-hardware-support-gap);
+  font-family: var(--mono);
+  text-transform: uppercase;
+}
+
+.cube-hardware__support-list > div {
+  min-width: 0;
+  height: clamp(6.5rem, 7.5vw, 7.5rem);
+  padding: clamp(1rem, 1.5vw, 1.4rem) clamp(.8rem, 1.35vw, 1.25rem);
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: .65rem;
+  box-sizing: border-box;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.cube-hardware__support-list dt {
+  margin: 0;
+  color: var(--fg);
+  font-size: clamp(.67rem, .72vw, .74rem);
+  font-weight: 500;
+  letter-spacing: .11em;
+  line-height: 1.4;
+}
+
+.cube-hardware__support-list dd {
+  margin: 0;
+  max-width: 18ch;
+  color: var(--muted);
+  font-size: .59rem;
+  letter-spacing: .1em;
+  line-height: 1.55;
+}
+
 .cube-system__heading {
   align-items: end;
 }
@@ -451,10 +748,9 @@
 }
 
 .cube-system-feedback__matrix {
-  --matrix-led-left: 6%;
-  --matrix-led-top: 6%;
-  --matrix-led-width: 256px;
-  --matrix-led-height: 256px;
+  --matrix-led-size: 192px;
+  --matrix-led-left: calc(50% - 96px);
+  --matrix-led-top: calc(50% - 96px);
   position: relative;
   z-index: 0;
   width: min(100%, 18rem);
@@ -468,8 +764,8 @@
   z-index: 1;
   left: var(--matrix-led-left);
   top: var(--matrix-led-top);
-  width: var(--matrix-led-width);
-  height: var(--matrix-led-height);
+  width: var(--matrix-led-size);
+  height: var(--matrix-led-size);
   display: block;
   background: var(--bg);
   image-rendering: pixelated;
@@ -510,6 +806,48 @@
 .cube-sections-ready [data-cube-reveal].is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+}
+
+.cube-sections-ready .cube-hardware__item[data-cube-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.cube-sections-ready .cube-hardware__item .cube-hardware__number {
+  opacity: 0;
+  transition: color 260ms ease, opacity 700ms ease;
+}
+
+.cube-sections-ready .cube-hardware__item .cube-hardware__body {
+  opacity: 0;
+  transform: translate3d(0, .625rem, 0);
+  transition: opacity 760ms ease 70ms, transform 820ms var(--cube-ease) 70ms;
+}
+
+.cube-sections-ready .cube-hardware__item .cube-hardware__rule {
+  transform: scaleX(0);
+  transition: transform 780ms var(--cube-ease) 180ms;
+}
+
+.cube-sections-ready .cube-hardware__item.is-visible .cube-hardware__number {
+  opacity: .62;
+}
+
+.cube-sections-ready .cube-hardware__item.is-visible .cube-hardware__body {
+  opacity: 1;
+}
+
+.cube-sections-ready .cube-hardware__item.is-visible.is-active .cube-hardware__number {
+  opacity: 1;
+}
+
+.cube-sections-ready .cube-hardware__item.is-visible .cube-hardware__body {
+  transform: translate3d(0, 0, 0);
+}
+
+.cube-sections-ready .cube-hardware__item.is-visible .cube-hardware__rule {
+  transform: scaleX(1);
 }
 
 .cube-system-map.is-animated [data-map-node] {
@@ -629,6 +967,57 @@
     border-left: 0;
   }
 
+  .cube-hardware__rail {
+    padding-top: 0;
+  }
+
+  .cube-hardware__list {
+    row-gap: clamp(3.5rem, 8vw, 4.75rem);
+  }
+
+  .cube-hardware__marker {
+    left: .3rem;
+  }
+
+  .cube-hardware__item {
+    grid-template-columns: 1fr;
+  }
+
+  .cube-hardware__content,
+  .cube-hardware__item:nth-child(even) .cube-hardware__content {
+    max-width: 38rem;
+    padding-right: 0;
+    padding-left: 2rem;
+    grid-column: 1;
+  }
+
+  .cube-hardware__support {
+    --cube-hardware-support-connector-height: clamp(4.25rem, 8vw, 5.5rem);
+    --cube-hardware-support-gap: .7rem;
+  }
+
+  .cube-hardware__support-list {
+    width: calc(100% - 2.25rem);
+    grid-template-columns: 1fr;
+    margin-right: 0;
+    margin-left: 2.25rem;
+    gap: var(--cube-hardware-support-gap);
+  }
+
+  .cube-hardware__support-list > div {
+    height: 5.75rem;
+    grid-template-columns: minmax(10rem, .7fr) minmax(0, 1.3fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    padding: 1.2rem clamp(1rem, 3vw, 1.5rem);
+    align-items: center;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .cube-hardware__support-list dd {
+    max-width: none;
+  }
+
   .cube-system-node--cube {
     grid-template-columns: minmax(12rem, .72fr) minmax(0, 1.28fr);
   }
@@ -641,6 +1030,18 @@
 @media (max-width: 700px) {
   .cube-section {
     padding-block: clamp(5rem, 13vw, 7rem);
+  }
+
+  .cube-hardware__heading {
+    font-size: clamp(3rem, 13.6vw, 5.35rem);
+  }
+
+  .cube-hardware__flow {
+    margin-top: clamp(3.5rem, 9vw, 4.25rem);
+  }
+
+  .cube-hardware__support {
+    --cube-hardware-support-connector-height: clamp(4rem, 10vw, 5rem);
   }
 
   .cube-system-map {
@@ -712,8 +1113,6 @@
   }
 
   .cube-system-feedback__matrix {
-    --matrix-led-width: 192px;
-    --matrix-led-height: 192px;
     width: min(100%, 13.5rem);
     justify-self: center;
   }
@@ -749,6 +1148,30 @@
 
   .cube-introduction__lead {
     font-size: 1.12rem;
+  }
+
+  .cube-hardware__heading {
+    font-size: clamp(2.75rem, 14vw, 3.7rem);
+  }
+
+  .cube-hardware__title {
+    font-size: clamp(1.8rem, 9vw, 2.35rem);
+  }
+
+  .cube-hardware__content,
+  .cube-hardware__item:nth-child(even) .cube-hardware__content {
+    padding-left: 1.75rem;
+  }
+
+  .cube-hardware__support-list {
+    grid-template-columns: 1fr;
+  }
+
+  .cube-hardware__support-list > div,
+  .cube-hardware__support-list > div:nth-child(even) {
+    grid-template-columns: minmax(7.25rem, .8fr) minmax(0, 1.2fr);
+    gap: 1rem;
+    padding: 1.05rem .9rem;
   }
 
   .cube-system-map {
@@ -792,5 +1215,44 @@
   .cube-system-map.is-animated .cube-system-map__mobile-line {
     transform: scaleY(1) !important;
     transition: none !important;
+  }
+
+  .cube-hardware__number,
+  .cube-hardware__body,
+  .cube-hardware__rule,
+  .cube-hardware__content {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .cube-hardware__marker {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .cube-hardware__flow-connectors-active {
+    opacity: 0 !important;
+  }
+
+  .cube-hardware__flow-connectors-active path,
+  .cube-hardware__flow-connectors-active circle {
+    transition: none !important;
+  }
+}
+
+@media (min-width: 901px) and (hover: hover) and (pointer: fine) {
+  .cube-hardware__item:nth-child(odd):is(:hover, :focus-visible) .cube-hardware__content {
+    transform: translateX(.3rem);
+  }
+
+  .cube-hardware__item:nth-child(even):is(:hover, :focus-visible) .cube-hardware__content {
+    transform: translateX(-.3rem);
+  }
+
+  .cube-hardware__item:is(:hover, :focus-visible) .cube-hardware__number,
+  .cube-hardware__item:is(:hover, :focus-visible) .cube-hardware__role {
+    color: var(--accent);
+    opacity: 1;
   }
 }
