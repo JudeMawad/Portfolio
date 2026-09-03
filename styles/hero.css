@@ -508,7 +508,7 @@
   align-items: center;
   color: var(--hero-fg);
   font-family: "Arial Narrow", "Helvetica Neue", "Nimbus Sans Narrow", Arial, sans-serif;
-  font-size: clamp(4.2rem, 10.9vw, 9.8rem);
+  font-size: clamp(3.2rem, 9.9vw, 8.8rem);
   font-stretch:normal;
   font-weight: 600;
   letter-spacing: -.025em;
@@ -518,7 +518,8 @@
 }
 
 .hero-statement__line--top {
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: .2em;
 }
 
 .hero-statement__outline {
@@ -527,8 +528,7 @@
 }
 
 .hero-statement__line--bottom {
-  justify-content: space-between;
-  gap: clamp(.6rem, 1.6vw, 1.6rem);
+  line-height: .9;
 }
 
 .hero-statement__period { color: var(--hero-accent); }

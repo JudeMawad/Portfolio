@@ -378,7 +378,8 @@
   margin: 0;
   max-width: 18ch;
   color: var(--muted);
-  font-size: .59rem;
+  font-size: .70rem;
+  font-family: var(--sans);
   letter-spacing: .1em;
   line-height: 1.55;
 }
