@@ -832,7 +832,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     gap: .25rem .18em;
-    font-size: clamp(3.35rem, 18.25vw, 6.2rem);
+    font-size: clamp(3.35rem, 16vw, 6.2rem);
   }
 
   .hero-statement__line--bottom > span:last-child { margin-left: .035em; }
@@ -894,7 +894,7 @@
   }
   .hero-kicker p { max-width: 12rem; }
   .hero-statement__line { font-size: clamp(3.2rem, 19.25vw, 5rem); }
-  .hero-statement__line--bottom { font-size: clamp(3.1rem, 18.25vw, 4.8rem); }
+  .hero-statement__line--bottom { font-size: clamp(3.1rem, 16vw, 4.8rem); }
   .hero-footer__actions { gap: .4rem; }
   .hero-link { font-size: .6rem; }
   .site-menu__nav strong { font-size: clamp(2rem, 6.5vh, 3.5rem); }
