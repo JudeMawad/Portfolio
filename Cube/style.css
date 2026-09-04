@@ -233,6 +233,10 @@ html {
   white-space: nowrap;
 }
 
+.cube-hero__title-word {
+  --portfolio-display-stroke: color-mix(in srgb, var(--fg) 78%, transparent);
+}
+
 .cube-hero__descriptor {
   max-width: 34rem;
   margin: 0;

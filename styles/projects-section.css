@@ -533,9 +533,9 @@
 .projects-card-arrow {
   position: absolute;
   right: clamp(1.2rem, 2.5vw, 2.7rem);
-  bottom: clamp(1.1rem, 2vw, 2.2rem);
-  color: var(--accent, #ff5a1f);
-  font-size: clamp(1.1rem, 2vw, 2rem);
+  bottom: clamp(1rem, 1.7vw, 1.7rem);
+  color: var(--muted-bright, #b8b8b2);
+  font-size: clamp(0.7rem, 0.76vw, 0.82rem);
   opacity: 0;
   transform: translate(-0.7rem, 0.7rem);
   transition: opacity 450ms ease 140ms, transform 650ms cubic-bezier(0.2, 0.75, 0.25, 1) 140ms;

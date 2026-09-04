@@ -1,0 +1,19 @@
+.portfolio-display-word {
+  font-family: "Arial Narrow", "Helvetica Neue", "Nimbus Sans Narrow", Arial, sans-serif;
+  font-stretch: normal;
+  font-weight: 600;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+}
+
+.portfolio-display-word--outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--portfolio-display-stroke, #bdbdbb);
+  paint-order: stroke fill;
+}
+
+@supports not (-webkit-text-stroke: 1px black) {
+  .portfolio-display-word--outline {
+    color: var(--portfolio-display-stroke, #bdbdbb);
+  }
+}

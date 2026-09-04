@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#060504">
+  <meta name="description" content="Home Server — a personal self-hosting project running media, cloud storage, music, dashboards, and automation on Ubuntu and Docker.">
+  <meta property="og:title" content="Home Server — Self-Hosted Infrastructure | Jude Mawad">
+  <meta property="og:description" content="A personal Ubuntu and Docker home server built for media, storage, remote access, and automation.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://judemawad.com/images/SERVER_Bg.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Home Server — Self-Hosted Infrastructure | Jude Mawad">
+  <meta name="twitter:description" content="A personal Ubuntu and Docker home server built for media, storage, remote access, and automation.">
+  <meta name="twitter:image" content="https://judemawad.com/images/SERVER_Bg.png">
+  <title>Home Server — Self-Hosted Infrastructure | Jude Mawad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="preload" href="../images/SERVER_Bg.png" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="style.css?v=20260904-microcopy-2">
+  <link rel="stylesheet" href="../styles/display-type.css?v=20260904-display-word-1">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body class="server-page">
+  <a class="skip-link" href="#main-content">Skip to project</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="site-grid" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <header class="project-header" data-project-header>
+    <div class="project-header__inner">
+      <a class="project-header__identity" href="../#home" aria-label="Jude Mawad portfolio home">
+        <span>~/Portfolio$</span><strong>Jude Mawad</strong>
+      </a>
+      <nav class="project-header__nav" aria-label="Home Server project navigation">
+        <a href="#services">Services</a><a href="#media-flow">Media flow</a><a href="#access">Remote access</a><a href="#build">Build notes</a>
+      </nav>
+      <a class="project-header__back" href="../#projects"><span aria-hidden="true">&#8592;</span><span>Projects</span></a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="server-hero" id="overview" aria-labelledby="server-title">
+      <div class="server-hero__ambient" aria-hidden="true"></div>
+      <div class="server-shell server-hero__inner">
+        <div class="server-hero__copy">
+          <p class="server-eyebrow hero-enter" style="--enter-delay:80ms"><span>[003]</span><strong>Project / Home Server</strong></p>
+          <div class="server-hero__title-mask">
+            <h1 class="server-hero__title hero-enter" id="server-title" style="--enter-delay:140ms"><span>HOME</span><span class="server-hero__title-word portfolio-display-word portfolio-display-word--outline">SERVER</span></h1>
+          </div>
+          <p class="server-hero__lead hero-enter" style="--enter-delay:240ms">A Mini PC I turned into my own place for media, files, music, and small automations.</p>
+          <p class="server-hero__secondary hero-enter" style="--enter-delay:320ms">It runs Ubuntu and Docker, stays online at home, and is reachable remotely through Tailscale and SSH.</p>
+        </div>
+
+        <figure class="server-hero__visual hero-enter" style="--enter-delay:210ms" data-hero-visual>
+          <div class="server-hero__artwork">
+            <img src="../images/SERVER_Bg.png" alt="Abstract orange and black artwork used for the Home Server project" width="1354" height="1354" fetchpriority="high" decoding="async">
+            <div class="server-terminal" aria-label="Home server system summary">
+              <div class="server-terminal__bar"><span></span><span></span><span></span><b>jude@home-server:~</b></div>
+              <div class="server-terminal__body">
+                <p><span class="terminal-prompt">$</span> docker ps</p>
+                <p class="terminal-status"><i aria-hidden="true"></i><strong>stable</strong> / currently running</p>
+                <dl>
+                  <div><dt>OS</dt><dd>Ubuntu 24.04.2 LTS</dd></div>
+                  <div><dt>CPU</dt><dd>Intel(R) N150 CPU</dd></div>
+                  <div><dt>MEMORY</dt><dd>16 GB DDR4 RAM</dd></div>
+                  <div><dt>ARCH</dt><dd>x86-64 Mini PC</dd></div>
+                  <div><dt>RUNTIME</dt><dd>Docker</dd></div>
+                  <div><dt>ACCESS</dt><dd>Tailscale + SSH</dd></div>
+                  <div><dt>STORAGE</dt><dd>Internal SSD + external HDD</dd></div>
+                  <div><dt>FIRMWARE AGE</dt><dd><span data-firmware-age>1y 7month 2w 3d</span></dd></div>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <figcaption><span>Server / 01</span><span>Self-hosted infrastructure</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-section why" id="why" aria-labelledby="why-title">
+      <div class="server-shell section-grid">
+        <div class="section-rail" data-reveal><p class="server-index">[002]</p><p class="server-eyebrow">Why I built it</p></div>
+        <div>
+          <h2 class="case-heading case-heading--display" id="why-title" data-reveal>I wanted my subscriptions to become a system I controlled.</h2>
+          <div class="case-copy case-copy--wide" data-reveal>
+            <p>I was paying for services such as iCloud, Spotify, Netflix, and Disney+, but I did not control where the files lived or how the services worked together.</p>
+            <p>I wanted to find out how much of that setup I could bring home and run myself. The goal was not to recreate every subscription exactly; it was to understand the system and take responsibility for it.</p>
+          </div>
+
+          <figure class="ownership-shift" data-diagram data-reveal aria-labelledby="ownership-caption">
+            <div class="ownership-shift__side ownership-shift__side--before">
+              <span>BEFORE</span>
+              <ul><li>Cloud storage</li><li>Music streaming</li><li>Film &amp; TV streaming</li></ul>
+            </div>
+            <div class="ownership-shift__transfer" aria-hidden="true"><i></i><b>&#8594;</b></div>
+            <div class="ownership-shift__side ownership-shift__side--after">
+              <span>NOW</span>
+              <strong>Files + music + media</strong>
+              <small>Hosted and managed by me</small>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section services" id="services" aria-labelledby="services-title">
+      <div class="server-shell">
+        <header class="section-heading-row">
+          <div class="section-rail" data-reveal><p class="server-index">[003]</p><p class="server-eyebrow">Docker stack</p></div>
+          <div>
+            <h2 class="case-heading" id="services-title" data-reveal>What runs on it</h2>
+            <div class="case-copy case-copy--wide" data-reveal>
+              <p>I use Docker to keep each service configured separately while still letting the stack share storage and communicate.</p>
+            </div>
+          </div>
+        </header>
+
+        <figure class="service-map" data-diagram data-reveal aria-labelledby="service-map-caption">
+          <div class="service-map__host">
+            <div class="service-map__host-meta"><span>HOST / UBUNTU 24.04.2 LTS</span><i>ONLINE</i></div>
+            <div class="service-map__docker">
+              <div class="service-map__docker-label"><span>DOCKER</span><small>11 services</small></div>
+              <div class="service-map__groups">
+                <section class="service-group service-group--media" aria-labelledby="media-group-title">
+                  <header><span>01</span><h3 id="media-group-title">Media pipeline</h3></header>
+                  <ul><li>Jellyfin</li><li>Overseerr</li><li>Sonarr</li><li>Radarr</li><li>Prowlarr</li><li>qBittorrent</li></ul>
+                </section>
+                <section class="service-group" aria-labelledby="music-group-title">
+                  <header><span>02</span><h3 id="music-group-title">Music</h3></header>
+                  <ul><li>Navidrome</li><li>Lidarr</li></ul>
+                </section>
+                <section class="service-group" aria-labelledby="utility-group-title">
+                  <header><span>03</span><h3 id="utility-group-title">Files &amp; control</h3></header>
+                  <ul><li>Nextcloud</li><li>Homarr</li><li>Watchtower</li></ul>
+                </section>
+              </div>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="media-flow" id="media-flow" aria-labelledby="media-flow-title">
+      <div class="server-shell">
+        <header class="section-heading-row">
+          <div class="section-rail" data-reveal><p class="server-index">[004]</p><p class="server-eyebrow">Automation</p></div>
+          <div>
+            <h2 class="case-heading" id="media-flow-title" data-reveal>From a request to the library</h2>
+            <div class="case-copy case-copy--wide" data-reveal>
+              <p>The media side only became useful once the services could hand work to each other. I can start with a request; the rest of the path is handled by the stack.</p>
+            </div>
+          </div>
+        </header>
+
+        <figure class="pipeline" data-media-pipeline data-reveal aria-labelledby="pipeline-caption">
+          <ol class="pipeline__steps">
+            <li><button class="pipeline-node is-active" type="button" data-flow-step="request" aria-pressed="true"><span>01 / INPUT</span><strong>Request</strong><small>Choose something to add</small></button></li>
+            <li><i class="pipeline-connector" aria-hidden="true"><b></b></i><button class="pipeline-node" type="button" data-flow-step="overseerr" aria-pressed="false"><span>02 / REQUESTS</span><strong>Overseerr</strong><small>Routes the request</small></button></li>
+            <li><i class="pipeline-connector" aria-hidden="true"><b></b></i><button class="pipeline-node pipeline-node--split" type="button" data-flow-step="arr" aria-pressed="false"><span>03 / ORGANISE</span><strong>Sonarr <em>/</em> Radarr</strong><small>Series or film</small></button></li>
+            <li><i class="pipeline-connector" aria-hidden="true"><b></b></i><button class="pipeline-node" type="button" data-flow-step="prowlarr" aria-pressed="false"><span>04 / SEARCH</span><strong>Prowlarr</strong><small>Finds a source</small></button></li>
+            <li><i class="pipeline-connector" aria-hidden="true"><b></b></i><button class="pipeline-node" type="button" data-flow-step="qbittorrent" aria-pressed="false"><span>05 / TRANSFER</span><strong>qBittorrent</strong><small>Handles the download</small></button></li>
+            <li><i class="pipeline-connector" aria-hidden="true"><b></b></i><button class="pipeline-node" type="button" data-flow-step="library" aria-pressed="false"><span>06 / STORAGE</span><strong>Library</strong><small>Organised files</small></button></li>
+            <li><i class="pipeline-connector" aria-hidden="true"><b></b></i><button class="pipeline-node pipeline-node--output" type="button" data-flow-step="jellyfin" aria-pressed="false"><span>07 / WATCH</span><strong>Jellyfin</strong><small>Media becomes available</small></button></li>
+          </ol>
+
+          <div class="pipeline-console" aria-live="polite">
+            <p><span class="terminal-prompt">&gt;</span> <strong data-flow-title>Request</strong></p>
+            <p data-flow-detail>I choose a film or series I want to add. This is the only part of the workflow that needs a manual decision.</p>
+          </div>
+          <figcaption id="pipeline-caption">Select any stage to see what it contributes to the automated media workflow.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-section storage" id="storage" aria-labelledby="storage-title">
+      <div class="server-shell section-grid">
+        <div class="section-rail" data-reveal><p class="server-index">[005]</p><p class="server-eyebrow">Beyond media</p></div>
+        <div>
+          <h2 class="case-heading" id="storage-title" data-reveal>The server does more than stream films.</h2>
+
+          <div class="utility-grid" data-reveal>
+            <article><span>01 / FILES</span><h3>Nextcloud</h3><p>Replaces part of my cloud storage setup and gives me a place for files that I control.</p></article>
+            <article><span>02 / MUSIC</span><h3>Navidrome</h3><p>Streams my music library, with Lidarr supporting the music side of the stack.</p></article>
+            <article><span>03 / DASHBOARD</span><h3>Homarr</h3><p>Acts as the front door to the server so I can reach the different services from one dashboard.</p></article>
+            <article><span>04 / UPDATES</span><h3>Watchtower</h3><p>Helps keep the containers updated. It reduces repeated maintenance, but I still need to pay attention to the system.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section access" id="access" aria-labelledby="access-title">
+      <div class="server-shell">
+        <header class="section-heading-row">
+          <div class="section-rail" data-reveal><p class="server-index">[006]</p><p class="server-eyebrow">Remote access</p></div>
+          <div>
+            <h2 class="case-heading" id="access-title" data-reveal>Tailscale gets me home. SSH lets me work.</h2>
+            <div class="case-copy case-copy--wide" data-reveal>
+              <p>Tailscale gives my devices a private route back to the server when I am away from my home network. Once connected, I use SSH for administration and can reach the services I need.</p>
+              <p>Setting this up taught me the difference between a service simply running and it actually being reachable from the right network.</p>
+            </div>
+          </div>
+        </header>
+
+        <figure class="access-map" data-diagram data-reveal aria-labelledby="access-map-caption">
+          <div class="access-map__device"><span>REMOTE DEVICE</span><strong>Laptop / phone</strong><small>Authorised client</small></div>
+          <div class="access-map__route" aria-hidden="true"><i><b></b></i><span>Encrypted tailnet</span><i><b></b></i></div>
+          <div class="access-map__tailnet"><span>PRIVATE NETWORK</span><strong>Tailscale</strong><small>Remote route to home</small></div>
+          <div class="access-map__route" aria-hidden="true"><i><b></b></i><span>SSH / services</span><i><b></b></i></div>
+          <div class="access-map__server"><span>HOME</span><strong>Ubuntu server</strong><small>Docker stack</small></div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="build" id="build" aria-labelledby="build-title">
+      <div class="server-shell">
+        <header class="section-heading-row">
+          <div class="section-rail" data-reveal><p class="server-index">[007]</p><p class="server-eyebrow">Building it</p></div>
+          <div>
+            <h2 class="case-heading case-heading--display" id="build-title" data-reveal>I had never used Docker before this project.</h2>
+            <div class="case-copy case-copy--wide" data-reveal>
+              <p>Linux was also new to me. My process was to install one piece, find the gap in my understanding, read the documentation, and test again.</p>
+              <p>I built up the server in layers instead of trying to make the whole stack work at once.</p>
+            </div>
+          </div>
+        </header>
+
+        <ol class="build-log" data-reveal>
+          <li><span>01</span><div><small>BASE SYSTEM</small><h3>Get comfortable in Ubuntu</h3><p>Learn the filesystem, packages, users, services, and enough terminal commands to understand what the machine was doing.</p></div></li>
+          <li><span>02</span><div><small>CONTAINERS</small><h3>Learn Docker by running real services</h3><p>Work through images, containers, ports, volumes, environment values, and how configuration survives a restart.</p></div></li>
+          <li><span>03</span><div><small>NETWORK</small><h3>Reach it outside my home</h3><p>Set up Tailscale, connect my devices, and use SSH so I could manage the server remotely.</p></div></li>
+          <li><span>04</span><div><small>WORKFLOW</small><h3>Connect the services</h3><p>Make the request, search, download, library, and playback steps agree on where files and information should go.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="case-section problems" id="problems" aria-labelledby="problems-title">
+      <div class="server-shell">
+        <header class="section-heading-row">
+          <div class="section-rail" data-reveal><p class="server-index">[008]</p><p class="server-eyebrow">Problems</p></div>
+          <div>
+            <h2 class="case-heading" id="problems-title" data-reveal>Most failures were connections between layers.</h2>
+            <div class="case-copy case-copy--wide" data-reveal>
+              <p>A container could be running while the service still could not see a drive, reach another container, or write a file. Debugging meant checking each boundary instead of only looking at the application.</p>
+            </div>
+          </div>
+        </header>
+
+        <div class="problem-terminal" data-reveal>
+          <div class="problem-terminal__bar"><span></span><span></span><span></span><b>build-notes.log</b></div>
+          <ol>
+            <li><span>[PERMISSIONS]</span><strong>Linux ownership did not always match what a container expected.</strong><p>I learned to check users, groups, mounted paths, and whether the process could actually read and write there.</p></li>
+            <li><span>[DOCKER CONFIG]</span><strong>A small mismatch could stop a service from behaving correctly.</strong><p>Ports, volumes, names, and environment values all had to describe the same setup.</p></li>
+            <li><span>[REMOTE ACCESS]</span><strong>Working locally did not mean working through Tailscale.</strong><p>I had to trace the address, private-network route, and service before I could find where the connection stopped.</p></li>
+            <li><span>[STORAGE]</span><strong>A connected drive was not automatically useful to Docker.</strong><p>The host had to mount it correctly, then the relevant containers needed the correct path and permission.</p></li>
+            <li><span>[AUTOMATION]</span><strong>Every service worked alone before the full chain worked together.</strong><p>The difficult part was making requests, searches, downloads, library paths, and Jellyfin line up end to end.</p></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="learning" id="learning" aria-labelledby="learning-title">
+      <div class="learning__ambient" aria-hidden="true"></div>
+      <div class="server-shell section-grid">
+        <div class="section-rail" data-reveal><p class="server-index">[009]</p><p class="server-eyebrow">What I learned</p></div>
+        <div>
+          <h2 class="learning__title" id="learning-title" data-reveal>The server taught me how software meets the machine underneath it.</h2>
+          <p class="learning__lead" data-reveal>The biggest change is how I diagnose things. I now look past the interface and follow what is happening through the host, container, network, and filesystem.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="project-footer">
+      <div class="server-shell project-footer__inner">
+        <a class="project-footer__next" href="../#projects-syndexus-title" data-cursor="view"><span>Next project</span><strong>Syndexus</strong><i aria-hidden="true">&#8594;</i></a>
+        <div class="project-footer__meta"><a href="../#projects"><span aria-hidden="true">&#8592;</span> Back to projects</a><span>&copy; 2026 Jude Mawad</span></div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="app.js?v=20260904-1"></script>
+</body>
+</html>
