@@ -1195,6 +1195,16 @@
     grid-column: 2;
   }
 
+  .cube-physical-design__entry--internal-body .cube-physical-design__media,
+  .cube-physical-design__entry--outer-shell .cube-physical-design__media {
+    order: 1;
+  }
+
+  .cube-physical-design__entry--internal-body .cube-physical-design__copy,
+  .cube-physical-design__entry--outer-shell .cube-physical-design__copy {
+    order: 2;
+  }
+
   .cube-physical-design__media {
     position: static;
     display: grid;
