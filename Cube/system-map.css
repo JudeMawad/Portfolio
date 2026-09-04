@@ -384,6 +384,173 @@
   line-height: 1.55;
 }
 
+.cube-physical-design {
+  padding-block: clamp(5.5rem, 7.5vw, 7.5rem);
+}
+
+.cube-physical-design__header {
+  align-items: end;
+}
+
+.cube-physical-design__heading {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(3.35rem, 6.7vw, 6.5rem);
+  font-weight: 600;
+  letter-spacing: -.067em;
+  line-height: .88;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.cube-physical-design__log {
+  margin-top: clamp(4rem, 6vw, 6rem);
+  border-top: 1px solid var(--line);
+}
+
+.cube-physical-design__entry {
+  padding-block: clamp(2rem, 3.5vw, 3.5rem);
+  display: grid;
+  grid-template-columns: minmax(7rem, .28fr) minmax(14rem, .62fr) minmax(0, 1.1fr);
+  align-items: start;
+  gap: clamp(2rem, 4vw, 5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.cube-physical-design__status {
+  margin: .35rem 0 0;
+  color: var(--muted-bright);
+  font-family: var(--mono);
+  font-size: .64rem;
+  font-weight: 500;
+  letter-spacing: .15em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.cube-physical-design__status span {
+  color: var(--accent);
+}
+
+.cube-physical-design__copy {
+  min-width: 0;
+}
+
+.cube-physical-design__copy h3 {
+  margin: 0;
+  font-size: clamp(1.95rem, 3.25vw, 3.15rem);
+  font-weight: 580;
+  letter-spacing: -.053em;
+  line-height: .98;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.cube-physical-design__copy p {
+  max-width: 35rem;
+  margin: clamp(1.25rem, 2vw, 1.8rem) 0 0;
+  color: var(--muted-bright);
+  font-size: clamp(.98rem, 1.08vw, 1.08rem);
+  line-height: 1.66;
+  text-wrap: pretty;
+}
+
+.cube-physical-design__media {
+  --cube-physical-design-media-gap: clamp(2.75rem, 5vw, 4.5rem);
+
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  align-self: stretch;
+}
+
+.cube-physical-design__figure {
+  position: absolute;
+  inset-inline: 0;
+  min-width: 0;
+  min-height: 0;
+  height: calc((100% - var(--cube-physical-design-media-gap)) / 2);
+  margin: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.cube-physical-design__figure:first-child {
+  top: 0;
+}
+
+.cube-physical-design__figure:last-child {
+  bottom: 0;
+}
+
+.cube-physical-design__media--single {
+  position: static;
+  align-self: start;
+}
+
+.cube-physical-design__media--single .cube-physical-design__figure {
+  position: static;
+  height: auto;
+  display: block;
+}
+
+.cube-physical-design__media--single .cube-physical-design__image-frame {
+  width: min(100%, 35rem);
+  margin-inline: auto;
+  aspect-ratio: 1;
+}
+
+.cube-physical-design__image-frame {
+  position: relative;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.cube-physical-design__image-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+
+.cube-physical-design__figure figcaption {
+  margin-top: .8rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .62rem;
+  font-weight: 500;
+  letter-spacing: .11em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.cube-physical-design__figure figcaption::before {
+  width: .38rem;
+  aspect-ratio: 1;
+  flex: 0 0 auto;
+  background: var(--accent);
+  content: "";
+}
+
+.cube-physical-design__copy--wide {
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template-columns: minmax(14rem, .62fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 4vw, 5rem);
+}
+
+.cube-physical-design__copy--wide p {
+  margin-top: .15rem;
+}
+
 .cube-system__heading {
   align-items: end;
 }
@@ -1019,6 +1186,48 @@
     max-width: none;
   }
 
+  .cube-physical-design__entry {
+    grid-template-columns: minmax(7rem, .28fr) minmax(0, 1.72fr);
+  }
+
+  .cube-physical-design__copy,
+  .cube-physical-design__media {
+    grid-column: 2;
+  }
+
+  .cube-physical-design__media {
+    position: static;
+    display: grid;
+    align-self: auto;
+    gap: var(--cube-physical-design-media-gap);
+  }
+
+  .cube-physical-design__figure {
+    position: static;
+    height: auto;
+    display: block;
+  }
+
+  .cube-physical-design__media--single .cube-physical-design__image-frame {
+    width: 100%;
+  }
+
+  .cube-physical-design__image-frame img {
+    position: static;
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+
+  .cube-physical-design__copy--wide {
+    grid-column: 2;
+    display: block;
+  }
+
+  .cube-physical-design__copy--wide p {
+    margin-top: clamp(1.25rem, 2vw, 1.8rem);
+  }
+
   .cube-system-node--cube {
     grid-template-columns: minmax(12rem, .72fr) minmax(0, 1.28fr);
   }
@@ -1043,6 +1252,25 @@
 
   .cube-hardware__support {
     --cube-hardware-support-connector-height: clamp(4rem, 10vw, 5rem);
+  }
+
+  .cube-physical-design__heading {
+    font-size: clamp(3rem, 13.6vw, 5.35rem);
+  }
+
+  .cube-physical-design__log {
+    margin-top: clamp(3.5rem, 9vw, 4.25rem);
+  }
+
+  .cube-physical-design__entry {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .cube-physical-design__copy,
+  .cube-physical-design__media,
+  .cube-physical-design__copy--wide {
+    grid-column: 1;
   }
 
   .cube-system-map {
@@ -1156,6 +1384,14 @@
   }
 
   .cube-hardware__title {
+    font-size: clamp(1.8rem, 9vw, 2.35rem);
+  }
+
+  .cube-physical-design__heading {
+    font-size: clamp(2.75rem, 14vw, 3.7rem);
+  }
+
+  .cube-physical-design__copy h3 {
     font-size: clamp(1.8rem, 9vw, 2.35rem);
   }
 

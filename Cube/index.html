@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="../styles/base.css">
   <link rel="stylesheet" href="style.css?v=20260831-ignite-navbar-1">
   <link rel="stylesheet" href="cube-callouts.css?v=20260831-mobile-all-1">
-  <link rel="stylesheet" href="system-map.css?v=20260902-hardware-flow-1">
+  <link rel="stylesheet" href="system-map.css?v=20260904-physical-design-16">
   <script>document.documentElement.classList.add("js");</script>
   <script type="importmap">
     {
@@ -44,7 +44,7 @@
         <span>~/Portfolio$</span><strong>Jude Mawad</strong>
       </a>
       <nav class="project-header__nav" aria-label="The Cube project navigation">
-        <a href="#cube-hero">Overview</a><a href="#introduction">Introduction</a><a href="#system-map">System Map</a><a href="#hardware">Hardware</a>
+        <a href="#cube-hero">Overview</a><a href="#introduction">Introduction</a><a href="#system-map">System Map</a><a href="#hardware">Hardware</a><a href="#physical-design">Physical Design</a>
       </nav>
       <a class="project-header__back" href="../#projects">
         <span aria-hidden="true">&#8592;</span><span>Selected Projects</span>
@@ -334,6 +334,77 @@
               </div>
             </dl>
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="cube-section cube-physical-design" id="physical-design" aria-labelledby="cube-physical-design-title">
+      <div class="cube-shell">
+        <header class="cube-section__grid cube-physical-design__header">
+          <div class="cube-section__rail" data-cube-reveal>
+            <p class="cube-section__index">[004]</p>
+            <p class="cube-section__eyebrow">Physical Design</p>
+          </div>
+
+          <h2 class="cube-physical-design__heading" id="cube-physical-design-title" data-cube-reveal>Physical Design</h2>
+        </header>
+
+        <div class="cube-physical-design__log">
+          <article class="cube-physical-design__entry" data-cube-reveal>
+            <p class="cube-physical-design__status"><span>01 /</span> Complete</p>
+
+            <div class="cube-physical-design__copy">
+              <h3>Internal Body</h3>
+              <p>I designed the internal body specifically around FDM 3D printing. The print orientation was part of the design from the beginning, and I used chamfers, slopes, gradual transitions teardrop-shaped holesto avoid unsupported geometry and keep the main structure support-free.<br><br>
+              I also built cable routing into the printed body instead of letting wires sit underneath the boards. The channels keep the wiring in place and prevent cables from touching the underside of components such as the 52Pi board. Mounting points use heat-set inserts so the hardware can be removed and reassembled without wearing out the plastic. <br><br>
+              I mounted the Raspberry Pi stack vertically because it worked better for the airflow I wanted. Instead of the air hitting the boards from underneath, it can move upward between and alongside them. Cool air enters from the bottom, passes through the stack, and the fan near the top pulls the warm air out.<br><br>
+              Clearances were the part that took the most trial and error. Some dimensions that looked fine in Fusion 360 were too tight once printed, especially around boards, connectors, screws, and cable paths. I went through four prints before everything fit the way I wanted. Each version changed small things like tolerances, mounting positions and cable channels rather than completely redesigning the part.</p>
+            </div>
+
+            <div class="cube-physical-design__media">
+              <figure class="cube-physical-design__figure">
+                <div class="cube-physical-design__image-frame">
+                  <img src="../images/Cube Internal Body.png" alt="Fusion 360 render of the Cube's completed internal body with component mounting points, cable paths, and ventilation" width="2048" height="2048" loading="lazy" decoding="async">
+                </div>
+                <figcaption>Internal body / Fusion 360 / Complete</figcaption>
+              </figure>
+
+              <figure class="cube-physical-design__figure">
+                <div class="cube-physical-design__image-frame">
+                  <img src="../images/Cube Internal Body_Components.png" alt="Fusion 360 exploded render showing the hardware components fitted inside the Cube's internal body" width="2048" height="2048" loading="lazy" decoding="async">
+                </div>
+                <figcaption>Internal components / Fusion 360 / Complete</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="cube-physical-design__entry" data-cube-reveal>
+            <p class="cube-physical-design__status"><span>02 /</span> Complete</p>
+
+            <div class="cube-physical-design__copy">
+              <h3>Outer Shell</h3>
+              <p>Most of the work went into the proportions, wall thickness, openings, and the way the shell fits around the internal body. I also had to make sure the ports, speaker area, ventilation, and screw access still worked once everything was enclosed.<br><br>
+                 Just like the internal body, the shell was designed with 3D printing in mind, so tolerances and assembly clearances were part of the CAD from the beginning instead of being fixed afterwards.</p>
+            </div>
+
+            <div class="cube-physical-design__media cube-physical-design__media--single">
+              <figure class="cube-physical-design__figure">
+                <div class="cube-physical-design__image-frame">
+                  <img src="../images/Cube Shell.png" alt="Fusion 360 render of the completed Cube outer shell with display opening, speaker opening, and ventilation" width="2048" height="2048" loading="lazy" decoding="async">
+                </div>
+                <figcaption>Outer shell / Fusion 360 / Complete</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="cube-physical-design__entry cube-physical-design__entry--shell" data-cube-reveal>
+            <p class="cube-physical-design__status"><span>03 /</span> In progress</p>
+
+            <div class="cube-physical-design__copy cube-physical-design__copy--wide">
+              <h3>Acoustic Chamber</h3>
+              <p>The acoustic chamber is the next part I’m working on. I need to control the space behind the speaker, separate it from the rest of the enclosure, and test how the chamber size affects the sound before I lock the geometry.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
