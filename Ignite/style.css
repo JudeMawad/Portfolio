@@ -1,0 +1,207 @@
+:root {
+  --ignite-bg: #050505;
+  --ignite-surface: #0c0e0d;
+  --ignite-surface-raised: #101210;
+  --ignite-text: #f4f4ef;
+  --ignite-muted: #8b8d88;
+  --ignite-green: #aeff40;
+  --ignite-line: rgba(255, 255, 255, .12);
+  --ignite-pad: var(--pad);
+  --ignite-max: var(--max);
+  --ignite-header: var(--nav-height);
+  --bg: var(--ignite-bg);
+  --surface: var(--ignite-surface);
+  --surface-raised: var(--ignite-surface-raised);
+  --fg: var(--ignite-text);
+  --muted: var(--ignite-muted);
+  --line: var(--ignite-line);
+  --accent: var(--ignite-green);
+}
+
+html { color-scheme: dark; }
+main, main [id] { scroll-margin-top: calc(var(--ignite-header) + 1rem); }
+a { text-decoration: none; }
+.ignite-shell { width: min(100%, var(--ignite-max)); margin-inline: auto; padding-inline: var(--ignite-pad); }
+.scroll-progress { position: fixed; inset: 0 auto auto 0; z-index: 5000; width: 100%; height: 2px; pointer-events: none; transform: scaleX(0); transform-origin: 0 50%; background: var(--ignite-green); }
+
+/* Typography uses the shared project roles at every viewport. */
+.ignite-eyebrow, .ignite-index, figcaption, .food-lookup__input > span,
+.food-lookup__sources li > span, .food-lookup__result > span, .architecture-map span,
+.project-footer__next > span, .project-footer__meta {
+  font-family: var(--project-font-mono);
+  font-size: var(--project-text-label);
+  font-weight: var(--project-weight-medium);
+  line-height: var(--project-leading-tight);
+  letter-spacing: var(--project-tracking-label);
+  text-transform: uppercase;
+}
+.ignite-eyebrow, .ignite-index { margin: 0; }
+.ignite-eyebrow { color: var(--ignite-green); }
+.ignite-eyebrow span { margin-right: .85rem; color: var(--ignite-muted); }
+.ignite-eyebrow strong { font-weight: var(--project-weight-medium); }
+.ignite-index, figcaption { color: var(--ignite-muted); }
+.case-heading {
+  max-width: 20ch; margin: 0;
+  font-family: var(--project-font-body);
+  font-size: var(--project-text-section);
+  font-weight: var(--project-weight-semibold);
+  line-height: var(--project-leading-heading);
+  letter-spacing: var(--project-tracking-heading);
+  text-wrap: balance;
+}
+.detail-note h3, .food-lookup__sources strong, .health-data dt, .architecture-map strong {
+  font-family: var(--project-font-body);
+  font-size: var(--project-text-card-title);
+  font-weight: var(--project-weight-semibold);
+  line-height: var(--project-leading-heading);
+  letter-spacing: var(--project-tracking-heading);
+}
+.ignite-hero__secondary, .case-copy p, .detail-note p, .food-lookup p,
+.health-data dd, .analytics__areas dd, .architecture-map p, .technology-list dd, .test-coverage {
+  font-family: var(--project-font-body);
+  font-size: var(--project-text-body);
+  font-weight: var(--project-weight-regular);
+  line-height: var(--project-leading-body);
+  letter-spacing: var(--project-tracking-body);
+  color: var(--ignite-muted);
+}
+
+.ignite-hero { border-bottom: 1px solid var(--ignite-line); }
+.ignite-hero__inner {
+  min-height: min(850px, 100svh);
+  padding-top: calc(var(--ignite-header) + clamp(3rem, 6vw, 6rem));
+  padding-bottom: clamp(4rem, 7vw, 7rem);
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: center;
+}
+.ignite-hero__copy { min-width: 0; max-width: 42rem; }
+.ignite-hero__title-mask { margin-block: 1.5rem 2rem; }
+.ignite-hero__title {
+  margin: 0;
+  font-family: var(--project-font-display);
+  font-size: var(--project-text-hero);
+  font-weight: var(--project-weight-semibold);
+  line-height: var(--project-leading-display);
+  letter-spacing: var(--project-tracking-display);
+}
+.ignite-hero__lead {
+  max-width: 36rem; margin: 0;
+  font-family: var(--project-font-body);
+  font-size: var(--project-text-lead);
+  font-weight: var(--project-weight-medium);
+  line-height: var(--project-leading-tight);
+  letter-spacing: var(--project-tracking-lead);
+}
+.ignite-hero__secondary { max-width: 38rem; margin: 1.3rem 0 0; }
+.ignite-hero__visual { min-width: 0; width: 100%; margin: 0; }
+.ignite-hero__artwork > a { display: block; }
+.ignite-hero__artwork img { width: 100%; height: auto; }
+.ignite-hero__visual figcaption, .analytics__media figcaption { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
+.ignite-hero__visual figcaption a { color: var(--ignite-text); }
+.ignite-hero__visual figcaption a:hover { color: var(--ignite-green); }
+
+.case-section { padding-block: clamp(4rem, 7vw, 7rem); border-bottom: 1px solid var(--ignite-line); }
+.section-grid { display: grid; grid-template-columns: minmax(7rem, .28fr) minmax(0, 1.72fr); gap: clamp(2rem, 5.5vw, 7rem); align-items: start; }
+.section-grid > * { min-width: 0; }
+.section-rail { display: flex; flex-direction: column; gap: .85rem; }
+.case-copy { max-width: 48rem; margin-top: 2rem; }
+.case-copy p { margin: 0; }
+.case-copy p + p { margin-top: var(--space-4); }
+.case-copy code { overflow-wrap: anywhere; }
+.detail-notes { margin-top: 2.5rem; }
+.detail-note { padding-top: 1.25rem; border-top: 1px solid var(--ignite-line); margin-top: 2rem; }
+.detail-notes > .detail-note:first-child { margin-top: 0; }
+.detail-note h3 { max-width: 36rem; margin: 0; }
+.detail-note p { max-width: 48rem; margin: 1rem 0 0; }
+
+.food-lookup { margin: 2.5rem 0 0; }
+.food-lookup__input, .food-lookup__result { margin: 0; }
+.food-lookup__input > span, .food-lookup__result > span { display: block; margin-bottom: .6rem; color: var(--ignite-green); }
+.food-lookup__sources { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+.food-lookup__sources li { position: relative; min-width: 0; padding-block: 1.25rem; border-top: 1px solid var(--ignite-line); }
+.food-lookup__sources li:not(:last-child)::after { content: "→"; position: absolute; right: -1.5rem; top: 2.9rem; color: var(--ignite-green); }
+.food-lookup__sources span, .food-lookup__sources strong { display: block; }
+.food-lookup__sources span { color: var(--ignite-green); }
+.food-lookup__sources strong { margin-top: 1rem; }
+.food-lookup__sources p { margin: .85rem 0 0; }
+.food-lookup__result { padding-top: 1.25rem; border-top: 1px solid var(--ignite-line); }
+.food-lookup figcaption { margin-top: 1rem; }
+
+.health-data { margin: 2.5rem 0 0; }
+.health-data > div { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 2rem; padding-block: 1.5rem; border-top: 1px solid var(--ignite-line); }
+.health-data dt { margin: 0; }
+.health-data dd { margin: 0; }
+
+.analytics__layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(2rem, 4vw, 4rem); align-items: start; margin-top: 2rem; }
+.analytics__copy { min-width: 0; }
+.analytics__copy .case-copy { margin-top: 0; }
+.analytics__areas { margin: 1.5rem 0 0; }
+.analytics__areas > div { padding-block: .9rem; border-top: 1px solid var(--ignite-line); }
+.analytics__areas dt { color: var(--ignite-text); }
+.analytics__areas dd { margin: .3rem 0 0; }
+.analytics__media { min-width: 0; width: 100%; margin: 0; }
+.analytics__media img { width: 100%; height: auto; }
+.analytics__media figcaption { flex-wrap: wrap; }
+
+.architecture-map { margin: 2.5rem 0 0; }
+.architecture-map__layer { display: grid; grid-template-columns: 4rem minmax(0, .85fr) minmax(0, 1.15fr); align-items: baseline; gap: 1.25rem; padding-block: 1.25rem; border-block: 1px solid var(--ignite-line); }
+.architecture-map span { color: var(--ignite-green); }
+.architecture-map p { margin: 0; }
+.architecture-map__connector { position: relative; display: block; width: 1px; height: 1.75rem; margin-left: 2rem; background: var(--ignite-green); }
+.architecture-map__connector::after { position: absolute; bottom: 1px; left: -2px; width: 5px; height: 5px; border-right: 1px solid var(--ignite-green); border-bottom: 1px solid var(--ignite-green); transform: rotate(45deg); content: ""; }
+.architecture-map__branches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+.architecture-map__branches > div { min-width: 0; padding-block: 1.25rem; border-block: 1px solid var(--ignite-line); }
+.architecture-map__branches span, .architecture-map__branches strong, .architecture-map__branches small { display: block; }
+.architecture-map__branches strong { margin-top: .75rem; }
+.architecture-map__branches p { margin-top: .85rem; }
+.architecture-map__branches small { margin-top: 1rem; color: var(--ignite-muted); font-size: var(--project-text-small); line-height: var(--project-leading-body); }
+.architecture-map figcaption { margin-top: 1rem; }
+.technology-list { margin: 1.25rem 0 0; }
+.technology-list > div { padding-block: .85rem; display: grid; grid-template-columns: minmax(8rem, .45fr) minmax(0, 1.55fr); gap: 1.5rem; border-bottom: 1px solid var(--ignite-line); }
+.technology-list dt { color: var(--ignite-text); }
+.technology-list dd { margin: 0; }
+.language-list { list-style: none; margin: 1rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
+.test-coverage { padding-left: 1.25rem; margin: 1rem 0 0; }
+.test-coverage li + li { margin-top: .4rem; }
+
+.project-footer { padding-block: clamp(3rem, 5vw, 5rem) 1.5rem; }
+.project-footer__next { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--ignite-line); }
+.project-footer__next > span { grid-column: 1 / -1; color: var(--ignite-muted); }
+.project-footer__next strong {
+  font-family: var(--project-font-body);
+  font-size: var(--project-text-display);
+  font-weight: var(--project-weight-semibold);
+  line-height: var(--project-leading-display);
+  letter-spacing: var(--project-tracking-display);
+  text-transform: uppercase;
+}
+.project-footer__next i { align-self: center; font-size: var(--project-text-display-icon); font-style: normal; line-height: var(--project-leading-flat); color: var(--ignite-green); }
+.project-footer__next:hover strong { color: var(--ignite-green); }
+.project-footer__meta { padding-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; color: var(--ignite-muted); }
+.project-footer__meta a { color: var(--ignite-text); }
+
+@media (max-width: 900px) {
+  :root { --ignite-header: var(--nav-height-compact); }
+  .ignite-hero__inner { min-height: auto; grid-template-columns: 1fr; gap: 3rem; }
+  .ignite-hero__copy { max-width: 46rem; }
+  .ignite-hero__visual { max-width: 40rem; margin-inline: auto; }
+  .section-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+  .section-rail { flex-direction: row; gap: 1rem; }
+  .food-lookup__sources { grid-template-columns: 1fr; gap: 1.5rem; }
+  .food-lookup__sources li:not(:last-child)::after { content: "↓"; right: auto; left: .25rem; top: auto; bottom: -1.2rem; }
+  .health-data > div, .analytics__layout { grid-template-columns: 1fr; gap: 1rem; }
+  .analytics__media { max-width: 24rem; margin: 2rem auto 0; }
+  .architecture-map__branches { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+@media (max-width: 700px) {
+  .architecture-map__layer { grid-template-columns: 3rem minmax(0, 1fr); gap: .6rem 1rem; }
+  .architecture-map__layer p { grid-column: 2; }
+  .technology-list > div { grid-template-columns: 1fr; gap: .3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-header, .project-header::after, .project-header a, .project-header a::after, .skip-link { transition: none; }
+}

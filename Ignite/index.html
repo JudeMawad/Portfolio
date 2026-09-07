@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en" class="project-document">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="IGNITE is a native iOS app for tracking nutrition, workouts, activity, hydration, supplements, weight, and progress.">
+  <meta property="og:title" content="IGNITE — Native iOS Health &amp; Nutrition App">
+  <meta property="og:description" content="A native iOS tracker built with SwiftUI, Core Data, HealthKit, Supabase, and OpenFoodFacts.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://judemawad.com/images/IGNITE/campaign.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IGNITE — Native iOS Health &amp; Nutrition App">
+  <meta name="twitter:description" content="Track nutrition, workouts, activity, hydration, supplements, weight, and progress on iOS.">
+  <meta name="twitter:image" content="https://judemawad.com/images/IGNITE/campaign.png">
+  <title>IGNITE — iOS Fitness &amp; Nutrition App | Jude Mawad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="preload" href="../images/IGNITE/campaign.png" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="../shared/styles/tokens.css">
+  <link rel="stylesheet" href="../shared/styles/foundation.css">
+  <link rel="stylesheet" href="../shared/styles/project-navigation.css">
+  <link rel="stylesheet" href="style.css?v=20260906-editorial">
+  <link rel="stylesheet" href="../shared/styles/project-type.css">
+  <link rel="stylesheet" href="../shared/styles/project-reveal.css?v=20260906-hero">
+</head>
+<body class="project-page">
+  <a class="skip-link" href="#main-content">Skip to project</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="project-header" data-project-header>
+    <div class="project-header__inner">
+      <a class="project-header__identity" href="../#home" aria-label="Jude Mawad portfolio home">
+        <span>~/Portfolio$</span><strong>Jude Mawad</strong>
+      </a>
+      <nav class="project-header__nav" aria-label="IGNITE project navigation">
+        <a href="#product">Idea</a><a href="#local-first">Data</a><a href="#architecture">Structure</a>
+      </nav>
+      <a class="project-header__back" href="../#projects"><span aria-hidden="true">&#8592;</span><span>Projects</span></a>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="ignite-hero" id="overview" aria-labelledby="ignite-title">
+      <div class="ignite-shell ignite-hero__inner">
+        <div class="ignite-hero__copy">
+          <p class="ignite-eyebrow" data-reveal="hero" style="--reveal-delay:100ms">
+            <span>[002]</span> <strong>Project / IGNITE</strong>
+          </p>
+          <div class="ignite-hero__title-mask"><h1 id="ignite-title" class="ignite-hero__title" data-reveal="hero" style="--reveal-delay:180ms">IGNITE</h1></div>
+          <p class="ignite-hero__lead" data-reveal="hero" style="--reveal-delay:280ms">IGNITE is an iOS app I built to track food, workouts, activity, water, supplements, weight, and progress in one place.</p>
+          <p class="ignite-hero__secondary" data-reveal="hero" style="--reveal-delay:380ms">I built it in Swift and SwiftUI, using Core Data, HealthKit, Supabase, and OpenFoodFacts for the main data flows.</p>
+        </div>
+
+        <figure class="ignite-hero__visual" data-reveal="hero" style="--reveal-delay:620ms">
+          <div class="ignite-hero__artwork">
+            <a href="https://apps.apple.com/de/app/ignite-fitness-nutrition/id6755685081?l=en-GB" target="_blank" rel="noopener noreferrer" aria-label="View IGNITE: Fitness &amp; Nutrition on the App Store">
+              <img src="../images/IGNITE/campaign.png" alt="IGNITE product render showing dashboard and analytics screens on two iPhones" width="1090" height="1029" fetchpriority="high" decoding="async">
+            </a>
+          </div>
+          <figcaption><span>IGNITE / iOS</span><a href="https://apps.apple.com/de/app/ignite-fitness-nutrition/id6755685081?l=en-GB" target="_blank" rel="noopener noreferrer">App Store <span aria-hidden="true">&#8599;</span></a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-section" id="product" aria-labelledby="product-title">
+      <div class="ignite-shell section-grid">
+        <div class="section-rail" data-reveal><p class="ignite-index">[01]</p><p class="ignite-eyebrow">The idea</p></div>
+        <div>
+          <h2 id="product-title" class="case-heading" data-reveal>Why I built IGNITE</h2>
+          <div class="case-copy" data-reveal>
+            <p>The things I wanted to check every day were spread across nutrition apps, Apple Health, workout apps, and notes.</p>
+            <p>I built IGNITE to bring them into one daily view, with a shared history for tracking progress.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="local-first" aria-labelledby="local-first-title">
+      <div class="ignite-shell section-grid">
+        <div class="section-rail" data-reveal><p class="ignite-index">[02]</p><p class="ignite-eyebrow">On-device data</p></div>
+        <div>
+          <h2 id="local-first-title" class="case-heading" data-reveal>Local data and offline use</h2>
+          <div class="case-copy" data-reveal>
+            <p id="local-diagram-caption">I use Core Data to store foods, meals, water, supplements, weight, goals, and progress on the device. Existing logs and progress remain available without a network connection.</p>
+            <p>Food lookups, subscriptions, and other external services need the internet.</p>
+          </div>
+          <div class="detail-notes">
+            <div class="detail-note" data-reveal id="persistence">
+              <h3 id="persistence-title">Keeping data between launches</h3>
+              <p>As the data model changed, I added migrations so app updates could keep existing records.</p>
+            </div>
+            <div class="detail-note" data-reveal id="resilience">
+              <h3 id="async-title">Keeping the interface responsive</h3>
+              <p>I use Swift concurrency for network requests, HealthKit reads and writes, and StoreKit purchases. The interface can respond while that work runs and update when results are ready.</p>
+              <p>If a remote food service is unavailable, saved meals, tracking, and progress still work locally.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="food-pipeline" aria-labelledby="food-pipeline-title">
+      <div class="ignite-shell section-grid">
+        <div class="section-rail" data-reveal><p class="ignite-index">[03]</p><p class="ignite-eyebrow">Food search</p></div>
+        <div>
+          <h2 id="food-pipeline-title" class="case-heading" data-reveal>Finding and logging food</h2>
+          <div class="case-copy" data-reveal>
+            <p>Text searches and barcode scans use the same lookup, handled by <code>HybridFoodRepository</code>. IGNITE checks saved foods first and moves to remote sources when it needs a useful match.</p>
+          </div>
+          <figure class="food-lookup" data-reveal aria-labelledby="pipeline-caption">
+            <p class="food-lookup__input"><span>Input</span> Text search or barcode scan</p>
+            <ol class="food-lookup__sources">
+              <li><span>01 / FIRST</span><strong>Core Data</strong><p>Foods already saved on the device.</p></li>
+              <li><span>02 / NEXT</span><strong>Supabase</strong><p>IGNITE’s food database, if there is no useful local match.</p></li>
+              <li><span>03 / IF NEEDED</span><strong>OpenFoodFacts</strong><p>The public food database when another source is needed.</p></li>
+            </ol>
+            <p class="food-lookup__result"><span>Result</span> Clean up and deduplicate matches, then show results and save useful foods locally.</p>
+          </figure>
+          <div class="detail-note" data-reveal id="barcode">
+            <h3 id="barcode-title">Scan instead of typing</h3>
+            <p>I use AVFoundation to read barcodes with the iPhone camera. A detected code enters the same lookup; a matching food can then be logged and kept for later.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="healthkit" aria-labelledby="healthkit-title">
+      <div class="ignite-shell section-grid">
+        <div class="section-rail" data-reveal><p class="ignite-index">[04]</p><p class="ignite-eyebrow">Apple Health</p></div>
+        <div>
+          <h2 id="healthkit-title" class="case-heading" data-reveal>Apple Health integration</h2>
+          <div class="case-copy" data-reveal>
+            <p>I keep HealthKit permissions, queries, writes, observers, and background updates together in dedicated services.</p>
+          </div>
+          <dl class="health-data" data-reveal>
+            <div><dt>Read from Apple Health</dt><dd>Steps, active calories, weight, and workouts.</dd></div>
+            <div><dt>Write to Apple Health</dt><dd>Supported nutrition, hydration, weight, and workout data.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="analytics" aria-labelledby="analytics-title">
+      <div class="ignite-shell section-grid">
+        <div class="section-rail" data-reveal><p class="ignite-index">[05]</p><p class="ignite-eyebrow">Progress</p></div>
+        <div>
+          <h2 id="analytics-title" class="case-heading" data-reveal>Progress and goals</h2>
+          <div class="analytics__layout">
+            <div class="analytics__copy">
+              <div class="case-copy" data-reveal>
+                <p>I use Swift Charts to show nutrition, activity, water, and weight over different time ranges, making changes easier to see beyond a single day.</p>
+              </div>
+              <dl class="analytics__areas" data-reveal>
+                <div><dt>Nutrition</dt><dd>Calories, net calories, macros, and protein.</dd></div>
+                <div><dt>Activity</dt><dd>Steps and active energy.</dd></div>
+                <div><dt>Hydration</dt><dd>Water intake against the current goal.</dd></div>
+                <div><dt>Weight</dt><dd>Changes over time and progress toward a target.</dd></div>
+              </dl>
+              <div class="detail-note" data-reveal id="goals">
+                <h3 id="goals-title">Shared goals across screens</h3>
+                <p>During onboarding, I use profile information and a weight goal to estimate calorie and macro targets with the Mifflin–St Jeor equation. The app also sets goals for water, steps, active calories, and body weight.</p>
+                <p>The daily trackers and progress views use those same values.</p>
+              </div>
+            </div>
+            <figure class="analytics__media" data-reveal>
+              <img src="../images/IGNITE/3.png?v=20260830-phones" alt="IGNITE progress view showing weekly calories, protein, weight, and macro charts" width="907" height="1834" loading="lazy" decoding="async">
+              <figcaption><span>Swift Charts</span><span>Historical progress</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="architecture" aria-labelledby="architecture-title">
+      <div class="ignite-shell section-grid">
+        <div class="section-rail" data-reveal><p class="ignite-index">[06]</p><p class="ignite-eyebrow">Architecture</p></div>
+        <div>
+          <h2 id="architecture-title" class="case-heading" data-reveal>App structure</h2>
+          <div class="case-copy" data-reveal>
+            <p>I separate the interface, screen state, data access, and system integrations. The main dependencies are created in one place and passed to the parts of the app that need them.</p>
+          </div>
+          <figure class="architecture-map" data-reveal aria-labelledby="architecture-caption">
+            <div class="architecture-map__layer"><span>UI</span><strong>SwiftUI views</strong><p>Interface and navigation.</p></div>
+            <i class="architecture-map__connector" aria-hidden="true"></i>
+            <div class="architecture-map__layer"><span>State</span><strong>View models</strong><p>Screen state and UI logic.</p></div>
+            <i class="architecture-map__connector" aria-hidden="true"></i>
+            <div class="architecture-map__branches">
+              <div><span>Data access</span><strong>Repositories</strong><p>Core Data, food search, and caching.</p></div>
+              <div><span>System integrations</span><strong>Services</strong><p>HealthKit, networking, purchases, and system APIs.</p></div>
+            </div>
+          </figure>
+          <div class="detail-note" data-reveal id="technology">
+            <h3 id="technology-title">What I used to build it</h3>
+            <dl class="technology-list">
+              <div><dt>Language</dt><dd>Swift</dd></div>
+              <div><dt>UI</dt><dd>SwiftUI · UIKit</dd></div>
+              <div><dt>Storage</dt><dd>Core Data · UserDefaults</dd></div>
+              <div><dt>Apple frameworks</dt><dd>HealthKit · StoreKit 2 · AVFoundation · Swift Charts</dd></div>
+              <div><dt>Networking</dt><dd>URLSession · REST</dd></div>
+              <div><dt>Data</dt><dd>Supabase · OpenFoodFacts</dd></div>
+              <div><dt>Architecture</dt><dd>MVVM · Repositories · Services · Dependency Injection</dd></div>
+              <div><dt>Testing</dt><dd>XCTest</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="storekit" aria-labelledby="release-title">
+      <div class="ignite-shell section-grid">
+        <div class="section-rail" data-reveal><p class="ignite-index">[07]</p><p class="ignite-eyebrow">App details</p></div>
+        <div>
+          <h2 id="release-title" class="case-heading" data-reveal>Subscriptions, languages, and testing</h2>
+          <div class="detail-notes">
+            <div class="detail-note" data-reveal>
+              <h3 id="storekit-title">Subscriptions with StoreKit 2</h3>
+              <p>I use StoreKit 2 to load products, verify purchases, restore purchases, and listen for transaction updates. A shared entitlement state tells the relevant views which premium features are available.</p>
+            </div>
+            <div class="detail-note" data-reveal id="localization">
+              <h3 id="localization-title">Supporting four languages</h3>
+              <ul class="language-list" aria-label="Supported interface languages"><li>English</li><li>Deutsch</li><li>Español</li><li>Français</li></ul>
+              <p>I manage language selection and locale handling in one place. I also test longer translations in labels and navigation.</p>
+            </div>
+            <div class="detail-note" data-reveal id="testing">
+              <h3 id="testing-title">Testing with XCTest</h3>
+              <p>I use in-memory Core Data stores and test services so tests can run without real user data or live APIs. They cover:</p>
+              <ul class="test-coverage">
+                <li>Core Data repositories and view models.</li>
+                <li>Food-search fallbacks, caching, pagination, and duplicate handling.</li>
+                <li>Network failures and translations.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="reflection" aria-labelledby="reflection-title">
+      <div class="ignite-shell section-grid">
+        <div class="section-rail" data-reveal><p class="ignite-index">[08]</p><p class="ignite-eyebrow">Reflection</p></div>
+        <div>
+          <h2 id="reflection-title" class="case-heading" data-reveal>What I learned</h2>
+          <div class="case-copy" data-reveal>
+            <p>As IGNITE grew, the harder part was getting local data, HealthKit, remote food sources, and subscriptions to work together. I had to decide where data belonged and what should happen when a source was unavailable.</p>
+            <p>That pushed me to separate storage, networking, and Apple framework integrations from the SwiftUI views. If I built it again, I would define those responsibilities earlier.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="project-footer">
+      <div class="ignite-shell project-footer__inner">
+        <a class="project-footer__next" data-reveal href="../Server/"><span>Next project</span><strong>Home Server</strong><i aria-hidden="true">&#8594;</i></a>
+        <div class="project-footer__meta"><a href="../#projects"><span aria-hidden="true">&#8592;</span> Back to projects</a><span>&copy; 2026 Jude Mawad</span></div>
+      </div>
+    </footer>
+  </main>
+
+  <script type="module" src="app.js?v=20260907-architecture"></script>
+</body>
+</html>

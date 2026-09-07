@@ -1,0 +1,52 @@
+/* Shared document/navigation defaults. Project type roles live in project-type.css. */
+:root {
+  --sans: "Instrument Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --serif: "Instrument Serif", "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+  --mono: "DM Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-sans: var(--sans);
+  --font-mono: var(--mono);
+
+  --bg: #080808;
+  --surface: #0d0d0c;
+  --surface-raised: #11110f;
+  --fg: #f2f2f0;
+  --muted: #8f8f8b;
+  --muted-bright: #b8b8b2;
+  --line: #20201e;
+  --line-bright: #353531;
+  --accent: #e02010;
+
+  --text-body: 1rem;
+  --text-intro: clamp(1rem, 1.25vw, 1.18rem);
+  --text-lead: clamp(1rem, 1.35vw, 1.35rem);
+  --text-label: clamp(.72rem, .8vw, .82rem);
+  --leading-body: 1.5;
+  --leading-copy: 1.65;
+
+  --page-gutter: clamp(1rem, 4vw, 4rem);
+  --page-width: 1440px;
+  --pad: var(--page-gutter);
+  --max: var(--page-width);
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --section-space: clamp(6rem, 9vw, 9rem);
+  --section-space-display: clamp(8rem, 13vw, 13rem);
+
+  --nav-height: 4.75rem;
+  --nav-height-compact: 4.25rem;
+  --nav-text: clamp(.78rem, .72vw, .88rem);
+  --nav-identity: .82rem;
+  --nav-index: .68rem;
+  --nav-identity-compact: .76rem;
+  --nav-back-compact: .68rem;
+  --nav-index-compact: .58rem;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --nav-ease: var(--ease-out);
+  --header-h: var(--nav-height);
+}
+
+@media (max-width: 700px) {
+  :root {
+    --header-h: var(--nav-height-compact);
+  }
+}

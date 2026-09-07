@@ -1,0 +1,105 @@
+.scroll-progress {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 5000;
+  width: 100%;
+  height: 3px;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: var(--fg);
+}
+
+.site-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, transparent calc(25% - 1px), rgba(255, 255, 255, 0.025) 25%, transparent calc(25% + 1px)),
+    linear-gradient(to right, transparent calc(50% - 1px), rgba(255, 255, 255, 0.025) 50%, transparent calc(50% + 1px)),
+    linear-gradient(to right, transparent calc(75% - 1px), rgba(255, 255, 255, 0.025) 75%, transparent calc(75% + 1px));
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 6000;
+  pointer-events: none;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--fg);
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(242, 242, 240, 0.45);
+  color: var(--fg);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  transition: width 180ms ease, height 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.cursor-ring.is-active {
+  width: 64px;
+  height: 64px;
+  border-color: var(--fg);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .has-custom-cursor body,
+  .has-custom-cursor a,
+  .has-custom-cursor button {
+    cursor: none;
+  }
+
+  .has-custom-cursor .cursor-dot,
+  .has-custom-cursor .cursor-ring {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 760px) {
+
+  .site-grid {
+    display: none;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}

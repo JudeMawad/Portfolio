@@ -1,0 +1,97 @@
+/* One typography scale for every project detail page.
+   Project CSS assigns these roles; font sizes and breakpoints belong here. */
+:root {
+  --project-font-body: var(--sans);
+  --project-font-mono: var(--mono);
+  --project-font-display: "Arial Narrow", "Helvetica Neue", "Nimbus Sans Narrow", Arial, sans-serif;
+
+  /* Viewport sizing gives every project the same rendered title size. */
+  --project-text-hero: clamp(3rem, 8.25vw, 7.5rem);
+  --project-text-display: clamp(3.25rem, 8vw, 8.5rem);
+  --project-text-section: clamp(2.5rem, 4.5vw, 4.9rem);
+  --project-text-section-display: var(--project-text-section);
+  --project-text-subheading: clamp(1.8rem, 3vw, 3rem);
+  --project-text-card-title: clamp(1.125rem, 1.5vw, 1.5rem);
+  --project-text-lead: clamp(1.125rem, 1.45vw, 1.4rem);
+  --project-text-body: clamp(1rem, 1.1vw, 1.125rem);
+  --project-text-small: clamp(.85rem, .95vw, .95rem);
+  --project-text-label: clamp(.65rem, .76vw, .78rem);
+  --project-text-technical: clamp(.65rem, .85vw, .85rem);
+  --project-text-technical-small: clamp(.6rem, .72vw, .72rem);
+  --project-text-annotation: clamp(.5rem, .58vw, .6rem);
+  --project-text-icon: clamp(1.25rem, 2vw, 1.5rem);
+  --project-text-display-icon: clamp(3rem, 7vw, 7rem);
+
+  --project-weight-regular: 400;
+  --project-weight-medium: 500;
+  --project-weight-semibold: 600;
+  --project-weight-bold: 700;
+  --project-leading-body: 1.65;
+  --project-leading-tight: 1.4;
+  --project-leading-heading: 1.05;
+  --project-leading-display: .85;
+  --project-leading-flat: 1;
+  --project-tracking-body: normal;
+  --project-tracking-lead: -.02em;
+  --project-tracking-heading: -.045em;
+  --project-tracking-display: -.055em;
+  --project-tracking-label: .12em;
+  --project-tracking-technical: .06em;
+}
+
+html.project-document { font-size: 100%; }
+
+body.project-page {
+  font-family: var(--project-font-body);
+  font-size: var(--project-text-body);
+  font-weight: var(--project-weight-regular);
+  line-height: var(--project-leading-body);
+  letter-spacing: var(--project-tracking-body);
+}
+
+.project-page :where(button, input, textarea, select) { font: inherit; }
+.project-page :where(strong, b) { font-weight: var(--project-weight-semibold); }
+.project-page :where(code, pre) { font-family: var(--project-font-mono); }
+
+/* Project navigation uses the same families and weights as project content. */
+.project-page .project-header,
+.project-page .project-header__nav a,
+.project-page .project-header__back {
+  font-family: var(--project-font-body);
+  font-weight: var(--project-weight-medium);
+  line-height: var(--project-leading-tight);
+  letter-spacing: var(--project-tracking-body);
+}
+.project-page .project-header__identity span { font-family: var(--project-font-mono); }
+.project-page .project-header__identity strong { font-weight: var(--project-weight-semibold); }
+
+/* Outline artwork keeps its stroke and color while using its heading's type. */
+.project-page .portfolio-display-word {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+@media (max-width: 900px) {
+  :root {
+    /* All project heroes switch to a single-column composition here. */
+    --project-text-hero: clamp(3rem, 18vw, 9.2rem);
+    --project-text-section: clamp(2.5rem, 7vw, 4.6rem);
+    --project-text-subheading: clamp(1.8rem, 6vw, 3rem);
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --project-text-display: clamp(3rem, 15vw, 5rem);
+    --project-text-section: clamp(2.15rem, 10.5vw, 3.35rem);
+  }
+}
+
+@media (max-width: 430px) {
+  :root {
+    --project-text-section: clamp(2rem, 10.5vw, 2.8rem);
+  }
+}

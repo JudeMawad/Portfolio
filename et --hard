@@ -1,0 +1,150 @@
+[1mdiff --git a/README.md b/README.md[m
+[1mindex d5d9ad4..2d4e151 100644[m
+[1m--- a/README.md[m
+[1m+++ b/README.md[m
+[36m@@ -1,138 +1,23 @@[m
+[31m-# Jude Mawad — Portfolio[m
+[32m+[m[32m# Jude Mawad Portfolio[m
+ [m
+[31m-A responsive portfolio of software, hardware, and infrastructure projects, built[m
+[31m-with HTML, CSS, JavaScript, and Three.js.[m
+[32m+[m[32mMy personal portfolio showcasing software, hardware, and infrastructure projects.[m
+ [m
+[31m-**[Visit judemawad.com](https://judemawad.com)**[m
+[32m+[m[32m**[judemawad.com](https://judemawad.com)**[m
+ [m
+[31m-![Desktop view of Jude Mawad's portfolio, with project links and portrait](docs/images/portfolio.png)[m
+[32m+[m[32m![Portfolio preview](docs/images/portfolio.png)[m
+ [m
+[31m-## Project highlights[m
+[32m+[m[32m## Projects[m
+ [m
+[31m-- **[The Cube](https://judemawad.com/Cube/):** a physical computing case study with an interactive 3D model, LED simulations, and system diagrams.[m
+[31m-- **[Ignite](https://judemawad.com/Ignite/):** an iOS fitness and nutrition app, covering its product design and architecture.[m
+[31m-- **[Home Server](https://judemawad.com/Server/):** a Linux and Docker setup, with an interactive walkthrough of its services.[m
+[32m+[m[32m- **The Cube**: Voice-controlled physical computing system built around a Raspberry Pi 5.[m
+[32m+[m[32m- **IGNITE**:  Native iOS fitness and nutrition application.[m
+[32m+[m[32m- **Home Server**: Self-hosted Linux server and automation setup.[m
+ [m
+[31m-## Architecture[m
+[32m+[m[32m## Built with[m
+ [m
+[31m-The homepage is assembled from a document template and six HTML fragments by a[m
+[31m-small Node script. Its generated `index.html` is committed so the repository can[m
+[31m-be served directly. Project case studies are independent HTML pages with shared[m
+[31m-style tokens and document behavior; their diagrams and interactions stay local[m
+[31m-to each project. There is no application framework or backend.[m
+[32m+[m[32mHTML · CSS · JavaScript · Three.js[m
+ [m
+[31m-Vite is the development server. The published site uses the repository's static[m
+[31m-files, including `CNAME`, rather than a Vite production build. Three.js is installed[m
+[31m-for development and loaded through a versioned CDN import map on the static Cube[m
+[31m-page. Google Fonts supplies the typography.[m
+[32m+[m[32m## Development[m
+ [m
+[31m-`vite.config.mjs` limits dependency scanning to the four public HTML documents;[m
+[31m-the homepage template and fragments are generator inputs.[m
+[31m-[m
+[31m-## Run locally[m
+[31m-[m
+[31m-Use **Node.js 24** and its bundled npm (`.nvmrc` also specifies Node 24), then run:[m
+[31m-[m
+[31m-```sh[m
+[31m-npm ci[m
+[32m+[m[32m```bash[m
+[32m+[m[32mnpm install[m
+ npm run dev[m
+[31m-```[m
+[31m-[m
+[31m-Open the local URL printed by Vite. `npm run dev` regenerates the homepage before[m
+[31m-starting; regenerate again after editing a fragment during an active session.[m
+[31m-[m
+[31m-## Pages and sources[m
+[31m-[m
+[31m-| Area | Source |[m
+[31m-| --- | --- |[m
+[31m-| Homepage (`/`) | `home/index.template.html` and six `home/sections/*.html` fragments |[m
+[31m-| Homepage output | Generated, committed `index.html` |[m
+[31m-| Homepage behavior and styles | `home/app.js`, `home/scripts/`, and `home/styles/` |[m
+[31m-| Shared styles and typography | `shared/styles/`; see [the styling guide](shared/styles/README.md) |[m
+[31m-| Cube (`/Cube/`) | `Cube/index.html`, `Cube/app.js`, `Cube/scripts/`, and `Cube/styles/` |[m
+[31m-| Ignite (`/Ignite/`) | `Ignite/` |[m
+[31m-| Home Server (`/Server/`) | `Server/` |[m
+[31m-| Shared project headers and scroll restoration | `shared/scripts/project-page.js` |[m
+[31m-| Shared project reveals | `shared/scripts/project-reveal.js` and `shared/styles/project-reveal.css` |[m
+[31m-| Shared cursor and 2D Cube visuals | `shared/scripts/cursor.js`, `cube-photo-canvas.js`, and `cube-led-frames.js` |[m
+[31m-| Images and Cube model | `images/` |[m
+[31m-| Resume download | `Resume.pdf` |[m
+[31m-| Custom domain | `CNAME` |[m
+[31m-[m
+[31m-The homepage includes all project cards, including Syndexus and Clockwise, which[m
+[31m-have no local detail pages. Contact information is part of the homepage.[m
+[31m-[m
+[31m-## Edit the homepage[m
+[31m-[m
+[31m-Edit `home/index.template.html` for metadata, resource links, and section order.[m
+[31m-Edit `home/sections/*.html` for content. Fragment URLs resolve relative to the[m
+[31m-generated root homepage, not the `home/sections/` directory. The six[m
+[31m-`<!-- include:sections/NAME.html -->` markers remain relative to the template.[m
+[31m-Do not edit `index.html` directly.[m
+[31m-[m
+[31m-```sh[m
+[31m-npm run build:html[m
+[31m-npm run check:html[m
+[31m-```[m
+[31m-[m
+[31m-The generator validates the six includes (hero, projects, about, stack, journey,[m
+[31m-contact). The check fails when the committed homepage differs from its sources.[m
+[31m-Vite serves the generated file, so regenerate it after changing a fragment.[m
+[31m-Project detail pages are edited directly in their own directories.[m
+[31m-[m
+[31m-Each page's `app.js` initializes its features explicitly. Homepage navigation,[m
+[31m-terminal status, clock/hero presentation, projects, stack, journey, and page[m
+[31m-effects each own their behavior. Cube's entrypoint starts its header, hardware[m
+[31m-flow, system map, and cursor before dynamically loading `model-viewer.js`.[m
+[31m-The viewer owns Three.js and delegates material setup to `model-materials.js`;[m
+[31m-the model URL stays relative to `Cube/app.js`.[m
+[31m-[m
+[31m-The photo overlay and LED frame generator are shared with the homepage and have[m
+[31m-no Three.js dependency. The Three.js LED adapter and callouts stay inside Cube.[m
+[31m-Cube's `setCubeAnimationState`, `setCubeVoiceLevel`, and `cubeLedAnimation` window[m
+[31m-APIs accept requests while loading; `?cubeLedDebug=1` enables the diagnostic view.[m
+[31m-Features return cleanup methods; page entrypoints dispose them on a non-cached[m
+[31m-`pagehide`, preserving browser back/forward cache restoration.[m
+[31m-[m
+[31m-## Verify changes[m
+[31m-[m
+[31m-```sh[m
+[31m-npm run check[m
+[31m-```[m
+[31m-[m
+[31m-| Command | What it checks |[m
+[31m-| --- | --- |[m
+[31m-| `npm run lint` | JavaScript correctness, with browser and Node environments |[m
+[31m-| `npm run check:html` | Committed homepage matches its template and fragments |[m
+[31m-| `npm run check` | Linting and the homepage generation check |[m
+[31m-[m
+[31m-GitHub Actions runs these two checks on pull requests and pushes to `main`.[m
+[31m-Verify appearance, interactions, and links in the browser.[m
+[31m-[m
+[31m-Check all four pages at 1440px, 900px, 390px, and 320px, plus either side of the[m
+[31m-1050px and 900px navigation breakpoints. Exercise keyboard navigation, the mobile[m
+[31m-menu, homepage project scrolling and stack cards, project reveals, the Cube's[m
+[31m-model and diagrams, and Server flow buttons. Check reduced motion, local resource[m
+[31m-requests, links, and the browser console.[m
+[31m-[m
+[31m-Before deleting an asset or style, check HTML (including social-preview metadata),[m
+[31m-CSS, module imports, runtime-created markup/classes, and model dependencies.[m
+[31m-Preserve shared consumers: the homepage's Cube card and Cube system map both use[m
+[31m-the photo/LED overlay modules. Cache and build directories are ignored; they are[m
+[31m-not source files.[m
+[31m-[m
+[31m-## Making changes[m
+[31m-[m
+[31m-Keep content and feature code with its page, reusable presentation in[m
+[31m-`shared/styles/`, and reusable browser behavior in `shared/scripts/`. Preserve public URLs and[m
+[31m-the generated-homepage workflow. Include the relevant verification results with[m
+[31m-changes; keep formatting-only edits separate from behavior changes.[m
+[31m-[m
+[31m-When updating Three.js, update both Cube import-map URLs to the exact version[m
+[31m-resolved 

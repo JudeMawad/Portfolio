@@ -1,0 +1,99 @@
+#home,
+#projects,
+#about,
+#stack,
+#journey,
+#contact {
+  scroll-margin-top: var(--header-h);
+}
+
+.about-section::after,
+.stack-section::after,
+.projects-section::after,
+.journey-section::after,
+.contact-section::after {
+  --section-guide-color: color-mix(in srgb, var(--line, #20201e) 72%, transparent);
+  --section-guide-half: .5px;
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    transparent calc(25% - var(--section-guide-half)),
+    var(--section-guide-color) calc(25% - var(--section-guide-half)) calc(25% + var(--section-guide-half)),
+    transparent calc(25% + var(--section-guide-half)) calc(50% - var(--section-guide-half)),
+    var(--section-guide-color) calc(50% - var(--section-guide-half)) calc(50% + var(--section-guide-half)),
+    transparent calc(50% + var(--section-guide-half)) calc(75% - var(--section-guide-half)),
+    var(--section-guide-color) calc(75% - var(--section-guide-half)) calc(75% + var(--section-guide-half)),
+    transparent calc(75% + var(--section-guide-half)));
+}
+
+@media (min-width: 1600px) {
+  .about-section::after,
+  .stack-section::after,
+  .projects-section::after,
+  .journey-section::after,
+  .contact-section::after {
+    --section-guide-color: color-mix(in srgb, var(--line, #20201e) 88%, transparent);
+    --section-guide-half: 1px;
+  }
+}
+
+.section-heading {
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 6.4rem);
+  font-weight: 800;
+  letter-spacing: -0.065em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 2.8rem, 0);
+  filter: blur(7px);
+  transition:
+    opacity 760ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    transform 920ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    filter 760ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="left"] {
+  transform: translate3d(-4rem, 0, 0);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+}
+
+@media (max-width: 760px) {
+
+  .section-heading {
+    font-size: clamp(2.7rem, 13vw, 4.6rem);
+  }
+
+  .about-section::after,
+  .stack-section::after,
+  .projects-section::after,
+  .journey-section::after,
+  .contact-section::after {
+    background: linear-gradient(90deg,
+      transparent calc(50% - var(--section-guide-half)),
+      var(--section-guide-color) calc(50% - var(--section-guide-half)) calc(50% + var(--section-guide-half)),
+      transparent calc(50% + var(--section-guide-half)));
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}

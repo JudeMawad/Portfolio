@@ -1,0 +1,38 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio is a responsive web portfolio that displays projects, skills, and background information.",
+  "scripts": {
+    "predev": "npm run build:html",
+    "dev": "vite",
+    "build:html": "node build.mjs",
+    "check:html": "node build.mjs --check",
+    "lint": "eslint .",
+    "check": "npm run lint && npm run check:html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoudMawad/Portfolio.git"
+  },
+  "keywords": [],
+  "author": "Jude Mawad",
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "node": "24.x"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/JoudMawad/Portfolio/issues"
+  },
+  "homepage": "https://judemawad.com",
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.10.0",
+    "globals": "17.12.0",
+    "vite": "^8.2.2"
+  },
+  "dependencies": {
+    "three": "^0.185.1"
+  }
+}

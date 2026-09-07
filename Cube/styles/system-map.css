@@ -1,0 +1,584 @@
+.cube-system__heading {
+  align-items: end;
+}
+
+.cube-system-map {
+  /* Connector spacing controls: increasing these values moves the linked nodes farther apart. */
+  --cube-system-branch-length: clamp(14rem, 18vw, 20rem);
+  --cube-system-feedback-length: clamp(12rem, 16vw, 18rem);
+  --cube-system-mobile-connector-length: 10rem;
+  --cube-system-connector-ease: cubic-bezier(.37, 0, .63, 1);
+  /* Eighteen complete columns keep the grid flush with both horizontal edges. */
+  --cube-system-grid-column-width: 5.555556%;
+
+  position: relative;
+  margin: clamp(4rem, 7vw, 7rem) 0 0;
+  padding: clamp(2rem, 4vw, 4rem);
+  overflow: hidden;
+  isolation: isolate;
+  border-block: 1px solid var(--line);
+  border-inline: 1px solid var(--line);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .018) 1px, transparent 1px);
+  background-position: left top;
+  background-size: var(--cube-system-grid-column-width) 4rem;
+}
+
+.cube-system-map::before,
+.cube-system-map::after {
+  position: absolute;
+  z-index: 0;
+  width: .45rem;
+  height: .45rem;
+  border-color: var(--muted);
+  border-style: solid;
+  opacity: .65;
+  content: "";
+  pointer-events: none;
+}
+
+.cube-system-map::before {
+  inset: 1rem auto auto 1rem;
+  border-width: 1px 0 0 1px;
+}
+
+.cube-system-map::after {
+  inset: auto 1rem 1rem auto;
+  border-width: 0 1px 1px 0;
+}
+
+.cube-system-node,
+.cube-system-feedback {
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+}
+
+.cube-system-node--cube {
+  width: min(100%, 64rem);
+  min-height: clamp(24rem, 34vw, 31rem);
+  margin-inline: auto;
+  padding: clamp(2rem, 4vw, 4rem);
+  display: grid;
+  grid-template-columns: minmax(14rem, .82fr) minmax(0, 1.18fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5.5rem);
+  border: 1px solid var(--line-bright);
+  transition: border-color 420ms ease;
+}
+
+.cube-system-map.has-cube .cube-system-node--cube {
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--line-bright));
+}
+
+.cube-system-node__render {
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+}
+
+.cube-system-node__cube-visual {
+  position: relative;
+  width: min(100%, 31rem);
+  aspect-ratio: 1;
+  right: 3%;
+}
+
+.cube-system-node__cube-mirror {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(-1);
+  transform-origin: center;
+}
+
+.cube-system-node__cube-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cube-system-node__cube-led-canvas {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.cube-system-node__render > span {
+  margin-top: .75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-family: var(--project-font-mono);
+  font-size: var(--project-text-label);
+  font-weight: var(--project-weight-medium);
+  line-height: var(--project-leading-tight);
+  letter-spacing: var(--project-tracking-label);
+}
+
+.cube-system-node__content {
+  min-width: 0;
+}
+
+.cube-system-node__meta {
+  margin-bottom: clamp(1.6rem, 3vw, 2.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-family: var(--project-font-mono);
+  font-size: var(--project-text-label);
+  font-weight: var(--project-weight-medium);
+  line-height: var(--project-leading-tight);
+  letter-spacing: var(--project-tracking-label);
+}
+
+.cube-system-node__meta span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+}
+
+.cube-system-node__meta span:first-child > i {
+  width: .35rem;
+  height: .35rem;
+  flex: 0 0 auto;
+  background: var(--accent);
+}
+
+.cube-system-node h3,
+.cube-system-feedback h3 {
+  margin: 0;
+  text-wrap: balance;
+  font-family: var(--project-font-body);
+  font-size: var(--project-text-subheading);
+  font-weight: var(--project-weight-semibold);
+  line-height: var(--project-leading-heading);
+  letter-spacing: var(--project-tracking-heading);
+}
+
+.cube-system-node--cube h3 {
+  font-family: var(--project-font-body);
+  font-size: var(--project-text-section-display);
+  font-weight: var(--project-weight-semibold);
+  line-height: var(--project-leading-heading);
+  letter-spacing: var(--project-tracking-heading);
+}
+
+.cube-system-node p,
+.cube-system-feedback p {
+  max-width: 38rem;
+  margin: 1.5rem 0 0;
+  color: var(--muted-bright);
+  text-wrap: pretty;
+  font-family: var(--project-font-body);
+  font-size: var(--project-text-body);
+  font-weight: var(--project-weight-regular);
+  line-height: var(--project-leading-body);
+  letter-spacing: var(--project-tracking-body);
+}
+
+.cube-system-node__capabilities,
+.cube-system-feedback__states {
+  padding: 1rem 0 0;
+  margin: clamp(1.75rem, 3vw, 2.5rem) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem 1.25rem;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.cube-system-node__capabilities li,
+.cube-system-feedback__states li {
+  color: var(--muted);
+  text-transform: uppercase;
+  font-family: var(--project-font-mono);
+  font-size: var(--project-text-technical);
+  font-weight: var(--project-weight-medium);
+  line-height: var(--project-leading-tight);
+  letter-spacing: var(--project-tracking-technical);
+}
+
+.cube-system-node__capabilities li::before {
+  padding-right: .55rem;
+  color: var(--accent);
+  content: "+";
+}
+
+.cube-system-map__branch,
+.cube-system-map__feedback-connection {
+  position: relative;
+  z-index: 1;
+}
+
+.cube-system-map__branch {
+  height: var(--cube-system-branch-length);
+}
+
+.cube-system-map__feedback-connection {
+  height: var(--cube-system-feedback-length);
+}
+
+.cube-system-map__branch svg,
+.cube-system-map__feedback-connection svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.cube-system-map__line {
+  fill: none;
+  stroke: color-mix(in srgb, var(--fg) 18%, var(--line-bright));
+  stroke-width: 1.15;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  vector-effect: non-scaling-stroke;
+}
+
+.cube-system-map__systems {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.cube-system-node--system {
+  min-width: 0;
+  padding: clamp(2rem, 3.5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line-bright);
+}
+
+.cube-system-node--server {
+  border-left: 0;
+}
+
+.cube-system-node--system h3 {
+  max-width: 19ch;
+  font-family: var(--project-font-body);
+  font-size: var(--project-text-subheading);
+  font-weight: var(--project-weight-semibold);
+  line-height: var(--project-leading-heading);
+  letter-spacing: var(--project-tracking-heading);
+}
+
+.cube-system-node--system .cube-system-node__capabilities {
+  margin-top: auto;
+}
+
+.cube-system-map__mobile-line {
+  display: none;
+}
+
+.cube-system-feedback {
+  padding: clamp(2rem, 3.5vw, 3.5rem);
+  display: grid;
+  grid-template-columns: minmax(11rem, .5fr) minmax(0, 1.5fr);
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 6rem);
+  border: 1px solid var(--line-bright);
+}
+
+.cube-system-feedback__matrix {
+  --matrix-led-size: 192px;
+  --matrix-led-left: calc(50% - 96px);
+  --matrix-led-top: calc(50% - 96px);
+  position: relative;
+  z-index: 0;
+  width: min(100%, 18rem);
+  aspect-ratio: 1;
+  justify-self: center;
+  isolation: isolate;
+}
+
+.cube-system-feedback__led-canvas {
+  position: absolute;
+  z-index: 1;
+  left: var(--matrix-led-left);
+  top: var(--matrix-led-top);
+  width: var(--matrix-led-size);
+  height: var(--matrix-led-size);
+  display: block;
+  background: var(--bg);
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.cube-system-feedback__states li {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  transition: color 220ms ease;
+  font-family: var(--project-font-mono);
+  font-size: var(--project-text-technical);
+  font-weight: var(--project-weight-medium);
+  line-height: var(--project-leading-tight);
+  letter-spacing: var(--project-tracking-technical);
+}
+
+.cube-system-feedback__states li i {
+  width: .28rem;
+  height: .28rem;
+  flex: 0 0 auto;
+  border: 1px solid var(--accent);
+  transition: background-color 220ms ease, box-shadow 220ms ease;
+}
+
+.cube-system-feedback__states li.is-active {
+  color: var(--fg);
+}
+
+.cube-system-feedback__states li.is-active i {
+  background: var(--accent);
+  box-shadow: 0 0 .5rem color-mix(in srgb, var(--accent) 46%, transparent);
+}
+
+.cube-system-map.is-animated [data-map-node] {
+  opacity: 0;
+  transform: translate3d(0, .8rem, 0);
+}
+
+.cube-system-map.is-animated .cube-system-node__capabilities,
+.cube-system-map.is-animated .cube-system-feedback__states {
+  opacity: 0;
+  transform: translate3d(0, .45rem, 0);
+}
+
+.cube-system-map.is-animated .cube-system-map__line {
+  /* Leave enough normalized dash length for the connector's maximum
+     ultrawide vertical stretch, so adjoining path segments stay attached. */
+  stroke-dasharray: 4;
+  stroke-dashoffset: 4;
+}
+
+.cube-system-map.has-cube [data-map-node="cube"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 430ms ease, transform 560ms var(--cube-ease);
+}
+
+.cube-system-map.has-trunk .cube-system-map__line--trunk {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1100ms var(--cube-system-connector-ease);
+}
+
+.cube-system-map.has-branches .cube-system-map__line--branch-left,
+.cube-system-map.has-branches .cube-system-map__line--branch-right {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1900ms var(--cube-system-connector-ease);
+}
+
+.cube-system-map.has-branches .cube-system-map__line--branch-right {
+  transition-delay: 70ms;
+}
+
+.cube-system-map.has-pc [data-map-node="pc"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 420ms ease, transform 540ms var(--cube-ease);
+}
+
+.cube-system-map.has-server [data-map-node="server"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 420ms ease, transform 540ms var(--cube-ease);
+}
+
+.cube-system-map.has-capabilities .cube-system-node__capabilities {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 360ms ease, transform 460ms var(--cube-ease);
+}
+
+.cube-system-map.has-feedback-line .cube-system-map__line--feedback-left,
+.cube-system-map.has-feedback-line .cube-system-map__line--feedback-right {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1900ms var(--cube-system-connector-ease);
+}
+
+.cube-system-map.has-feedback [data-map-node="feedback"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 430ms ease, transform 560ms var(--cube-ease);
+}
+
+.cube-system-map.has-feedback .cube-system-feedback__states {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 360ms ease 120ms, transform 460ms var(--cube-ease) 120ms;
+}
+
+@media (max-width: 1120px) {
+  .cube-system-map {
+    --cube-system-grid-column-width: 8.333333%;
+
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .cube-system-node--cube {
+    min-height: 23rem;
+    padding: clamp(1.75rem, 3vw, 2.75rem);
+    gap: clamp(1.75rem, 3.5vw, 3.5rem);
+  }
+
+  .cube-system-node--system,
+  .cube-system-feedback {
+    padding: clamp(1.65rem, 2.8vw, 2.5rem);
+  }
+}
+
+@media (max-width: 900px) {
+
+  .cube-system-node--cube {
+    grid-template-columns: minmax(12rem, .72fr) minmax(0, 1.28fr);
+  }
+
+  .cube-system-node--system {
+    padding: 1.75rem;
+  }
+}
+
+@media (max-width: 700px) {
+
+  .cube-system-map {
+    --cube-system-grid-column-width: 10%;
+
+    margin-top: clamp(3rem, 10vw, 4.5rem);
+    padding: 1.25rem;
+    background-size: var(--cube-system-grid-column-width) 3rem;
+  }
+
+  .cube-system-node--cube {
+    min-height: 0;
+    padding: 1.5rem 1.25rem 2rem;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .cube-system-node__cube-visual {
+    width: min(100%, 35rem);
+  }
+
+  .cube-system-node__content {
+    width: 100%;
+  }
+
+  .cube-system-map__branch,
+  .cube-system-map__feedback-connection {
+    height: var(--cube-system-mobile-connector-length);
+  }
+
+  .cube-system-map__branch svg,
+  .cube-system-map__feedback-connection svg {
+    display: none;
+  }
+
+  .cube-system-map__mobile-line {
+    position: absolute;
+    inset: 0 auto 0 50%;
+    width: 1px;
+    display: block;
+    background: var(--line-bright);
+    transform-origin: top;
+  }
+
+  .cube-system-map__systems {
+    grid-template-columns: 1fr;
+  }
+
+  .cube-system-node--system {
+    padding: 1.5rem 1.25rem 2rem;
+  }
+
+  .cube-system-node--server {
+    border-left: 1px solid var(--line-bright);
+  }
+
+  .cube-system-map__systems > .cube-system-map__mobile-line {
+    position: relative;
+    inset: auto;
+    width: 1px;
+    height: var(--cube-system-mobile-connector-length);
+    justify-self: center;
+  }
+
+  .cube-system-feedback {
+    padding: 1.75rem 1.25rem 2rem;
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .cube-system-feedback__matrix {
+    width: min(100%, 13.5rem);
+    justify-self: center;
+  }
+
+  .cube-system-map.is-animated .cube-system-map__mobile-line {
+    transform: scaleY(0);
+  }
+
+  .cube-system-map.has-trunk .cube-system-map__mobile-line--pc {
+    transform: scaleY(1);
+    transition: transform 1600ms var(--cube-system-connector-ease);
+  }
+
+  .cube-system-map.has-server-line .cube-system-map__mobile-line--server {
+    transform: scaleY(1);
+    transition: transform 1600ms var(--cube-system-connector-ease);
+  }
+
+  .cube-system-map.has-feedback-line .cube-system-map__mobile-line--feedback {
+    transform: scaleY(1);
+    transition: transform 1600ms var(--cube-system-connector-ease);
+  }
+}
+
+@media (max-width: 430px) {
+
+  .cube-system-map {
+    --cube-system-grid-column-width: 14.285714%;
+
+    margin-inline: calc(var(--pad) * -.45);
+    padding-inline: 1rem;
+  }
+
+  .cube-system-node--cube,
+  .cube-system-node--system,
+  .cube-system-feedback {
+    padding-inline: .75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cube-system-map.is-animated [data-map-node],
+  .cube-system-map.is-animated .cube-system-node__capabilities,
+  .cube-system-map.is-animated .cube-system-feedback__states {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .cube-system-map.is-animated .cube-system-map__line {
+    stroke-dashoffset: 0 !important;
+    transition: none !important;
+  }
+
+  .cube-system-map.is-animated .cube-system-map__mobile-line {
+    transform: scaleY(1) !important;
+    transition: none !important;
+  }
+}
