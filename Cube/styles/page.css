@@ -152,6 +152,51 @@ html {
   letter-spacing: var(--project-tracking-body);
 }
 
+.cube-hero__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.cube-hero__status {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  min-height: 44px;
+  color: var(--muted-bright);
+  font-family: var(--project-font-mono);
+  font-size: var(--project-text-small);
+  line-height: var(--project-leading-tight);
+}
+
+.cube-hero__status::before {
+  content: "";
+  width: .375rem;
+  height: .375rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.cube-hero__source {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 44px;
+  color: color-mix(in srgb, var(--accent) 80%, var(--fg));
+  font-size: var(--project-text-small);
+  line-height: var(--project-leading-tight);
+}
+
+.cube-hero__source:hover,
+.cube-hero__source:focus-visible {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
 .cube-hero__visual {
   position: relative;
   z-index: 1;
