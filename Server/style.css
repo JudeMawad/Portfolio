@@ -26,8 +26,8 @@ a { text-decoration: none; }
 
 /* Type roles come from the shared project scale. */
 .server-eyebrow, .server-index, .server-specs dt, .service-group header span,
-.pipeline-node > span, .pipeline figcaption, .utility-grid article > span,
-.access-map span, .access-map small, .build-log > li > span, .build-log small, .problem-notes li > span {
+.utility-grid article > span,
+.build-log > li > span, .build-log small, .problem-notes li > span {
   font-family: var(--project-font-mono);
   font-size: var(--project-text-label);
   font-weight: var(--project-weight-medium);
@@ -49,14 +49,14 @@ a { text-decoration: none; }
   letter-spacing: var(--project-tracking-heading);
   text-wrap: balance;
 }
-.service-group h3, .pipeline-node strong, .utility-grid h3, .access-map strong, .build-log h3, .problem-notes strong {
+.service-group h3, .utility-grid h3, .build-log h3, .problem-notes strong {
   font-family: var(--project-font-body);
   font-size: var(--project-text-card-title);
   font-weight: var(--project-weight-semibold);
   line-height: var(--project-leading-heading);
   letter-spacing: var(--project-tracking-heading);
 }
-.server-hero__secondary, .case-copy p, .utility-grid p, .build-log p, .problem-notes p, .learning__lead, .pipeline-detail p {
+.server-hero__secondary, .case-copy p, .utility-grid p, .build-log p, .problem-notes p, .learning__lead {
   font-family: var(--project-font-body);
   font-size: var(--project-text-body);
   font-weight: var(--project-weight-regular);
@@ -119,39 +119,11 @@ a { text-decoration: none; }
 .service-group ul { margin: 1.5rem 0 0; padding: 0; list-style: none; }
 .service-group li { padding-block: .45rem; }
 
-.pipeline { margin: clamp(2.5rem, 4vw, 4rem) 0 0; }
-.pipeline__track { overflow-x: auto; padding: .5rem .4rem 1rem; margin-inline: -.4rem; }
-.pipeline__steps { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 1rem; list-style: none; min-width: 72rem; }
-.pipeline__steps li { position: relative; min-width: 0; }
-.pipeline-node { width: 100%; min-height: 11rem; padding: 1rem .5rem; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: .75rem; border: 0; border-top: 2px solid var(--server-line); background: transparent; text-align: left; cursor: pointer; transition: border-color 180ms ease, background-color 180ms ease; }
-.pipeline-node > span, .pipeline-node small { color: var(--server-muted); }
-.pipeline-node strong em { color: var(--server-orange); font-style: normal; }
-.pipeline-node small { font-size: var(--project-text-small); line-height: var(--project-leading-body); }
-.pipeline-node:hover { background: var(--server-surface); }
-.pipeline-node.is-active { border-color: var(--server-orange); }
-.pipeline-node.is-active > span { color: var(--server-orange); }
-.pipeline-connector { position: absolute; right: calc(100% + .2rem); top: 50%; width: .6rem; height: 1px; background: var(--server-muted); }
-.pipeline-connector::after { position: absolute; right: 0; top: -2px; width: 5px; height: 5px; border-top: 1px solid var(--server-muted); border-right: 1px solid var(--server-muted); transform: rotate(45deg); content: ""; }
-.pipeline-detail { margin-top: 1rem; padding-block: 1.5rem; border-top: 1px solid var(--server-line); }
-.pipeline-detail p { max-width: 48rem; margin: 0; }
-.pipeline-detail p + p { margin-top: .5rem; min-height: 3.3em; }
-.pipeline-detail strong { color: var(--server-text); }
-.pipeline figcaption { color: var(--server-muted); }
-
 .utility-grid { margin-top: 2.5rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 3rem; }
 .utility-grid article { padding-top: 1.25rem; border-top: 1px solid var(--server-line); }
 .utility-grid article > span { color: var(--server-orange); }
 .utility-grid h3 { margin: .75rem 0 0; }
 .utility-grid p { margin: 1rem 0 0; }
-
-.access-map { margin: clamp(2.5rem, 4vw, 4rem) 0 0; display: grid; grid-template-columns: 1fr .8fr 1fr .8fr 1fr; align-items: center; }
-.access-map__device, .access-map__tailnet, .access-map__server { min-width: 0; padding-block: 1.5rem; border-block: 1px solid var(--server-line); }
-.access-map span, .access-map strong, .access-map small { display: block; }
-.access-map span, .access-map small { color: var(--server-muted); }
-.access-map strong { margin-block: .75rem; }
-.access-map__tailnet > span { color: var(--server-orange); }
-.access-map__route { position: relative; padding: 1rem; text-align: center; }
-.access-map__route i { display: block; height: 1px; margin-block: .8rem; background: var(--server-line); }
 
 .build-log { list-style: none; margin: clamp(2.5rem, 4vw, 4rem) 0 0; padding: 0; }
 .build-log li { padding-block: 1.75rem; border-top: 1px solid var(--server-line); display: grid; grid-template-columns: minmax(7rem, .28fr) minmax(0, 1.72fr); gap: clamp(2rem, 5.5vw, 7rem); }
@@ -172,30 +144,12 @@ a { text-decoration: none; }
   .server-hero__copy, .server-specs { max-width: 44rem; width: 100%; }
   .section-grid, .section-heading-row { grid-template-columns: 1fr; gap: 1.75rem; }
   .section-rail { flex-direction: row; gap: 1rem; }
-  .access-map { grid-template-columns: 1fr .65fr 1fr .65fr 1fr; }
-  .access-map__route { padding-inline: .5rem; }
 }
 
 @media (max-width: 700px) {
   .service-map__groups, .utility-grid { grid-template-columns: 1fr; gap: 2rem; }
   .service-group ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1rem; }
-  .pipeline__steps { min-width: 0; grid-template-columns: 1fr; gap: 0; }
-  .pipeline-node { min-height: 0; padding: 1rem .75rem; display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); column-gap: 1rem; row-gap: .35rem; border-top: 1px solid var(--server-line); border-left: 2px solid transparent; }
-  .pipeline-node > span { grid-row: span 2; }
-  .pipeline-node small { grid-column: 2; }
-  .pipeline-node.is-active { border-top-color: var(--server-line); border-left-color: var(--server-orange); }
-  .pipeline-connector { display: none; }
-  .pipeline-detail p + p { min-height: 0; }
-  .access-map { grid-template-columns: 1fr; }
-  .access-map__route { padding: .75rem 0 .75rem 2rem; text-align: left; }
-  .access-map__route::before { position: absolute; content: ""; left: .75rem; inset-block: .25rem; width: 1px; background: var(--server-line); }
-  .access-map__route i { display: none; }
-  .access-map__device, .access-map__tailnet, .access-map__server { padding-block: 1.25rem; }
   .build-log li { grid-template-columns: 2rem minmax(0, 1fr); gap: 1rem; }
   .problem-notes li { grid-template-columns: 1fr; gap: .85rem; }
   .problem-notes p { grid-column: 1; margin: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pipeline-node { transition: none; }
 }

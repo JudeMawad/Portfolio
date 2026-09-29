@@ -23,7 +23,8 @@
   <link rel="stylesheet" href="../shared/styles/project-navigation.css">
   <link rel="stylesheet" href="styles/page.css">
   <link rel="stylesheet" href="styles/callouts.css">
-  <link rel="stylesheet" href="styles/sections.css">
+  <link rel="stylesheet" href="styles/sections.css?v=20260929-feature-disclosures">
+  <link rel="stylesheet" href="styles/display-apps.css?v=20260929-short-screen">
   <link rel="stylesheet" href="styles/hardware.css">
   <link rel="stylesheet" href="styles/physical-design.css">
   <link rel="stylesheet" href="styles/disclosures.css">
@@ -52,7 +53,7 @@
         <span>~/Portfolio$</span><strong>Jude Mawad</strong>
       </a>
       <nav class="project-header__nav" aria-label="The Cube project navigation">
-        <a href="#cube-hero">Overview</a><a href="#introduction">Introduction</a><a href="#hardware">Hardware</a><a href="#physical-design">Physical Design</a>
+        <a href="#cube-hero">Overview</a><a href="#introduction">What Cube can do</a><a href="#display-apps">Display apps</a><a href="#physical-design">Physical Design</a><a href="#hardware">Hardware</a>
       </nav>
       <a class="project-header__back" href="../#projects">
         <span aria-hidden="true">&#8592;</span><span>Projects</span>
@@ -108,27 +109,253 @@
       <div class="cube-shell cube-section__grid">
         <div class="cube-section__rail" data-cube-reveal>
           <p class="cube-section__index">[002]</p>
-          <p class="cube-section__eyebrow">Introduction</p>
+          <p class="cube-section__eyebrow">What Cube can do</p>
         </div>
 
         <div class="cube-introduction__content">
-          <h2 class="cube-section__heading" id="cube-introduction-title" data-cube-reveal>Cube</h2>
+          <h2 class="cube-section__heading" id="cube-introduction-title" data-cube-reveal>What Cube can do</h2>
 
-          <p class="cube-introduction__lead" data-cube-reveal>
-            Cube is a 128 mm desktop device I am building around a Raspberry Pi 5, a 64&times;64 RGB matrix, local voice processing and a custom enclosure.
-          </p>
+          <ol class="cube-introduction__features" role="list">
+            <li class="cube-introduction__card">
+              <details class="cube-introduction__details cube-disclosure" data-disclosure>
+                <summary>
+                  <span class="cube-introduction__number" aria-hidden="true">01</span>
+                  <h3>Movies through my server</h3>
+                </summary>
+                <div class="cube-disclosure__content">
+                  <div class="cube-introduction__copy">
+                    <p>I can ask Cube to download a movie through my home server, clarify which title I mean, and check its progress later. It announces when the download starts and when it’s ready. I can also cancel a tracked request after confirmation.</p>
+                    <a class="cube-introduction__link" href="../Server/#media-flow">Explore my server’s movie automation <span aria-hidden="true">→</span></a>
+                  </div>
+                </div>
+              </details>
+            </li>
+            <li class="cube-introduction__card">
+              <details class="cube-introduction__details cube-disclosure" data-disclosure>
+                <summary>
+                  <span class="cube-introduction__number" aria-hidden="true">02</span>
+                  <h3>Music on either speaker</h3>
+                </summary>
+                <div class="cube-disclosure__content">
+                  <div class="cube-introduction__copy">
+                    <p>I can play tracks, artists, and playlists through Cube’s built-in speaker or a connected Bluetooth speaker, and switch between them by voice. My phone controls the same Spotify session. Music and assistant speech have separate volumes, and music gets quieter while I talk to Cube.</p>
+                  </div>
+                </div>
+              </details>
+            </li>
+            <li class="cube-introduction__card">
+              <details class="cube-introduction__details cube-disclosure" data-disclosure>
+                <summary>
+                  <span class="cube-introduction__number" aria-hidden="true">03</span>
+                  <h3>Local AI with tools</h3>
+                </summary>
+                <div class="cube-disclosure__content">
+                  <div class="cube-introduction__copy">
+                    <p>For conversations and more flexible requests, Cube connects to an LLM running on my PC. Alongside answering questions, it can request actions for movies, lighting, plug status, and Cube’s controls. The backend checks and executes those requests. The PC also provides speech recognition and synthesis.</p>
+                  </div>
+                </div>
+              </details>
+            </li>
+            <li class="cube-introduction__card">
+              <details class="cube-introduction__details cube-disclosure" data-disclosure>
+                <summary>
+                  <span class="cube-introduction__number" aria-hidden="true">04</span>
+                  <h3>An animated display</h3>
+                </summary>
+                <div class="cube-disclosure__content">
+                  <div class="cube-introduction__copy">
+                    <p>Between interactions, the 64×64 display cycles through a falling-block clock, animated weather, pixel animations, and Spotify artwork with playback progress. It also shows when Cube is listening, thinking, or speaking.</p>
+                  </div>
+                </div>
+              </details>
+            </li>
+            <li class="cube-introduction__card">
+              <details class="cube-introduction__details cube-disclosure" data-disclosure>
+                <summary>
+                  <span class="cube-introduction__number" aria-hidden="true">05</span>
+                  <h3>Lights and plugs</h3>
+                </summary>
+                <div class="cube-disclosure__content">
+                  <div class="cube-introduction__copy">
+                    <p>I connected Cube to my Govee lights and Tuya devices so I can control them without opening their apps. I can switch individual devices or groups, adjust supported light brightness and colours, and check whether a plug is on.</p>
+                  </div>
+                </div>
+              </details>
+            </li>
+            <li class="cube-introduction__card">
+              <details class="cube-introduction__details cube-disclosure" data-disclosure>
+                <summary>
+                  <span class="cube-introduction__number" aria-hidden="true">06</span>
+                  <h3>Follow-ups and interruptions</h3>
+                </summary>
+                <div class="cube-disclosure__content">
+                  <div class="cube-introduction__copy">
+                    <p>When Cube asks for clarification, I can answer without repeating “Hey Cube” during the follow-up window. I can also interrupt a spoken reply with another wake. Movie requests support corrections such as “the newer one” or “no, I meant…”.</p>
+                  </div>
+                </div>
+              </details>
+            </li>
+          </ol>
 
-          <div class="cube-introduction__columns">
-            <div data-cube-reveal>
-              <p>The idea is to use it as a physical voice interface for my computer and home server. It can listen for a wake word, transcribe speech locally, and pass requests to the local AI running on my PC.</p>
-              <p>From there, the AI can interact with my computer through the terminal, for example executing commands, searching for files or prints, and controlling local tools.</p>
-              <p>Requests that do not need my PC can be handled through my home server instead. The Cube can trigger existing automations to download movies or music, manage services, or send files back to me.</p>
+          <p class="cube-introduction__note">My PC doesn’t have to stay on. Supported music, lighting, plug, and device commands work without the AI node, using speech fallbacks on the server and Pi. The backend still needs to be running.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cube-section cube-display-apps" id="display-apps" aria-labelledby="cube-display-apps-title" data-display-apps>
+      <div class="cube-shell cube-section__grid cube-display-apps__scene">
+        <div class="cube-section__rail">
+          <p class="cube-section__index">[003]</p>
+          <p class="cube-section__eyebrow">Display apps</p>
+        </div>
+        <div class="cube-display-apps__content">
+          <header>
+            <h2 class="cube-section__heading" id="cube-display-apps-title">Display apps</h2>
+            <p class="cube-display-apps__intro">Rendered previews from Cube’s display apps, using sample data.</p>
+          </header>
+          <div class="cube-display-apps__layout">
+            <figure class="cube-display-apps__viewer" aria-label="Cube display preview" data-display-viewer>
+              <div class="cube-display-apps__media">
+                <img class="cube-display-apps__photo" src="../images/THE_CUBE_OFF.png" width="1080" height="1080" alt="Cube with its LED display and speaker" loading="lazy" decoding="async">
+                <canvas class="cube-display-apps__screen" width="640" height="640" aria-hidden="true"></canvas>
+              </div>
+            </figure>
+            <ol class="cube-display-apps__entries" role="list">
+              <li class="cube-display-apps__entry" data-display-entry data-video-src="media/display-apps/clock/preview.mp4" data-poster-src="media/display-apps/clock/poster-512.png">
+                <article class="cube-display-apps__card">
+                  <div class="cube-display-apps__card-heading">
+                    <h3>Clock</h3>
+                    <svg class="cube-display-apps__glyph" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 0h1.5v1.5h-1.5zM6 0h1.5v1.5h-1.5zM8 0h1.5v1.5h-1.5zM10 0h1.5v1.5h-1.5zM2 2h1.5v1.5h-1.5zM12 2h1.5v1.5h-1.5zM0 4h1.5v1.5h-1.5zM6 4h1.5v1.5h-1.5zM14 4h1.5v1.5h-1.5zM0 6h1.5v1.5h-1.5zM6 6h1.5v1.5h-1.5zM14 6h1.5v1.5h-1.5zM0 8h1.5v1.5h-1.5zM6 8h1.5v1.5h-1.5zM8 8h1.5v1.5h-1.5zM10 8h1.5v1.5h-1.5zM14 8h1.5v1.5h-1.5zM0 10h1.5v1.5h-1.5zM14 10h1.5v1.5h-1.5zM2 12h1.5v1.5h-1.5zM12 12h1.5v1.5h-1.5zM4 14h1.5v1.5h-1.5zM6 14h1.5v1.5h-1.5zM8 14h1.5v1.5h-1.5zM10 14h1.5v1.5h-1.5z"/></svg>
+                  </div>
+                  <p>I went with a Tetris-style clock instead of plain digits. Falling blocks build the time, with the date sitting underneath.</p>
+                </article>
+              </li>
+              <li class="cube-display-apps__entry" data-display-entry data-video-src="media/display-apps/weather/preview.mp4" data-poster-src="media/display-apps/weather/poster-512.png">
+                <article class="cube-display-apps__card">
+                  <div class="cube-display-apps__card-heading">
+                    <h3>Weather</h3>
+                    <svg class="cube-display-apps__glyph" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 0h1.5v1.5h-1.5zM8 0h1.5v1.5h-1.5zM4 2h1.5v1.5h-1.5zM10 2h1.5v1.5h-1.5zM2 4h1.5v1.5h-1.5zM4 4h1.5v1.5h-1.5zM12 4h1.5v1.5h-1.5zM0 6h1.5v1.5h-1.5zM14 6h1.5v1.5h-1.5zM0 8h1.5v1.5h-1.5zM2 8h1.5v1.5h-1.5zM4 8h1.5v1.5h-1.5zM6 8h1.5v1.5h-1.5zM8 8h1.5v1.5h-1.5zM10 8h1.5v1.5h-1.5zM12 8h1.5v1.5h-1.5zM14 8h1.5v1.5h-1.5zM4 12h1.5v1.5h-1.5zM8 12h1.5v1.5h-1.5zM2 14h1.5v1.5h-1.5zM6 14h1.5v1.5h-1.5z"/></svg>
+                  </div>
+                  <p>I kept the weather screen simple: the current temperature, chance of rain, and a small animated scene that changes with the conditions.</p>
+                </article>
+              </li>
+              <li class="cube-display-apps__entry" data-display-entry data-video-src="media/display-apps/animation/pac-man.mp4" data-poster-src="media/display-apps/animation/pac-man-poster-512.png">
+                <article class="cube-display-apps__card">
+                  <div class="cube-display-apps__card-heading">
+                    <h3>Animation</h3>
+                    <svg class="cube-display-apps__glyph" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 0h1.5v1.5h-1.5zM6 0h1.5v1.5h-1.5zM8 0h1.5v1.5h-1.5zM2 2h1.5v1.5h-1.5zM4 2h1.5v1.5h-1.5zM6 2h1.5v1.5h-1.5zM8 2h1.5v1.5h-1.5zM10 2h1.5v1.5h-1.5zM0 4h1.5v1.5h-1.5zM2 4h1.5v1.5h-1.5zM4 4h1.5v1.5h-1.5zM6 4h1.5v1.5h-1.5zM8 4h1.5v1.5h-1.5zM0 6h1.5v1.5h-1.5zM2 6h1.5v1.5h-1.5zM4 6h1.5v1.5h-1.5zM6 6h1.5v1.5h-1.5zM14 6h1.5v1.5h-1.5zM0 8h1.5v1.5h-1.5zM2 8h1.5v1.5h-1.5zM4 8h1.5v1.5h-1.5zM6 8h1.5v1.5h-1.5zM8 8h1.5v1.5h-1.5zM2 10h1.5v1.5h-1.5zM4 10h1.5v1.5h-1.5zM6 10h1.5v1.5h-1.5zM8 10h1.5v1.5h-1.5zM10 10h1.5v1.5h-1.5zM4 12h1.5v1.5h-1.5zM6 12h1.5v1.5h-1.5zM8 12h1.5v1.5h-1.5z"/></svg>
+                  </div>
+                  <p>I added this mostly for fun. I can convert GIFs for the 64×64 panel and have them rotate between the other screens.</p>
+                </article>
+              </li>
+              <li class="cube-display-apps__entry" data-display-entry data-video-src="media/display-apps/music/hotel-california.mp4" data-poster-src="media/display-apps/music/hotel-california-poster-512.png">
+                <article class="cube-display-apps__card">
+                  <div class="cube-display-apps__card-heading">
+                    <h3>Music / Spotify</h3>
+                    <svg class="cube-display-apps__glyph" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 0h1.5v1.5h-1.5zM8 0h1.5v1.5h-1.5zM10 0h1.5v1.5h-1.5zM12 0h1.5v1.5h-1.5zM6 2h1.5v1.5h-1.5zM12 2h1.5v1.5h-1.5zM6 4h1.5v1.5h-1.5zM12 4h1.5v1.5h-1.5zM6 6h1.5v1.5h-1.5zM12 6h1.5v1.5h-1.5zM2 8h1.5v1.5h-1.5zM4 8h1.5v1.5h-1.5zM6 8h1.5v1.5h-1.5zM12 8h1.5v1.5h-1.5zM0 10h1.5v1.5h-1.5zM2 10h1.5v1.5h-1.5zM4 10h1.5v1.5h-1.5zM6 10h1.5v1.5h-1.5zM10 10h1.5v1.5h-1.5zM12 10h1.5v1.5h-1.5zM0 12h1.5v1.5h-1.5zM2 12h1.5v1.5h-1.5zM4 12h1.5v1.5h-1.5zM8 12h1.5v1.5h-1.5zM10 12h1.5v1.5h-1.5zM12 12h1.5v1.5h-1.5zM2 14h1.5v1.5h-1.5zM10 14h1.5v1.5h-1.5z"/></svg>
+                  </div>
+                  <p>I connected Cube to Spotify so I can control music by voice or from my phone. The display shows the album cover and track progress.</p>
+                </article>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cube-section cube-physical-design" id="physical-design" aria-labelledby="cube-physical-design-title">
+      <div class="cube-shell">
+        <header class="cube-section__grid cube-physical-design__header">
+          <div class="cube-section__rail" data-cube-reveal>
+            <p class="cube-section__index">[004]</p>
+            <p class="cube-section__eyebrow">Physical Design</p>
+          </div>
+
+          <div class="cube-physical-design__intro-wrap">
+            <h2 class="cube-physical-design__heading" id="cube-physical-design-title" data-cube-reveal>Physical Design</h2>
+            <p class="cube-physical-design__intro">Explore the structure, component layout and enclosure of the Cube.</p>
+          </div>
+        </header>
+
+        <div class="cube-design-gallery" data-design-gallery>
+          <figure class="cube-design-gallery__figure">
+            <div class="cube-design-gallery__viewer" id="cube-design-viewer">
+              <img class="cube-design-gallery__image" src="../images/Cube Internal Body_Components.png" alt="Fusion 360 exploded assembly render showing components inside the Cube's internal body" width="2048" height="2048" loading="lazy" decoding="async" data-design-image>
             </div>
 
-            <div data-cube-reveal>
-              <p>Before designing the enclosure, I started by testing the individual parts: the HUB75E matrix and animations, wake-word detection, Whisper for speech recognition, and local language models.</p>
-              <p>The current stage is focused on the internal body: fitting the electronics inside the 128 mm cube, designing mounts, routing cables, managing cooling and testing printed prototypes before moving on to the final enclosure.</p>
+            <div class="cube-design-gallery__thumbnails" role="group" aria-label="Physical design views" data-design-thumbnails hidden>
+              <button class="cube-design-gallery__thumbnail" type="button" aria-pressed="true" aria-controls="cube-design-viewer" data-design-alt="Fusion 360 exploded assembly render showing components inside the Cube's internal body">
+                <img src="../images/Cube Internal Body_Components.png" alt="" width="2048" height="2048" loading="lazy" decoding="async">
+                <span>Assembly</span>
+              </button>
+              <button class="cube-design-gallery__thumbnail" type="button" aria-pressed="false" aria-controls="cube-design-viewer" data-design-alt="Fusion 360 render of the Cube's internal body without components, showing mounts, cable paths and ventilation">
+                <img src="../images/Cube Internal Body.png" alt="" width="2048" height="2048" loading="lazy" decoding="async">
+                <span>Body</span>
+              </button>
+              <button class="cube-design-gallery__thumbnail" type="button" aria-pressed="false" aria-controls="cube-design-viewer" data-design-alt="Fusion 360 render of the Cube's outer shell with display and speaker openings and ventilation">
+                <img src="../images/Cube Shell.png" alt="" width="2048" height="2048" loading="lazy" decoding="async">
+                <span>Shell</span>
+              </button>
+              <button class="cube-design-gallery__thumbnail" type="button" aria-pressed="false" aria-controls="cube-design-viewer" data-design-alt="CAD render of the Cube's acoustic chamber with a circular speaker opening and mounting holes">
+                <img src="../images/Accoustic Chamber.png" alt="" width="2048" height="2048" loading="lazy" decoding="async">
+                <span>Chamber</span>
+              </button>
             </div>
+
+          </figure>
+
+          <section class="cube-design-gallery__details" aria-label="Physical design details">
+            <div class="cube-design-gallery__preview">
+              <h3>Internal Body</h3>
+              <p>I designed the internal body specifically around FDM 3D printing. The print orientation was part of the design from the beginning, and I used chamfers, slopes, gradual transitions and teardrop-shaped holes to avoid unsupported geometry and keep the main structure support-free.</p>
+              <details class="cube-design-gallery__read-more cube-disclosure" data-disclosure>
+              <summary>
+                <span class="cube-design-gallery__more-label">Read more…</span>
+                <span class="cube-design-gallery__less-label">Read less</span>
+                <span class="visually-hidden"> design details</span>
+              </summary>
+              <div class="cube-disclosure__content">
+                <div class="cube-design-gallery__notes">
+                  <p>I also built cable routing into the printed body instead of letting wires sit underneath the boards. The channels keep the wiring in place and prevent cables from touching the underside of components such as the 52Pi board. Mounting points use heat-set inserts so the hardware can be removed and reassembled without wearing out the plastic. <br><br>
+                  I mounted the Raspberry Pi stack vertically because it worked better for the airflow I wanted. Instead of the air hitting the boards from underneath, it can move upward between and alongside them. Cool air enters from the bottom, passes through the stack, and the fan near the top pulls the warm air out.<br><br>
+                  Clearances were the part that took the most trial and error. Some dimensions that looked fine in Fusion 360 were too tight once printed, especially around boards, connectors, screws, and cable paths. I went through four prints before everything fit the way I wanted. Each version changed small things like tolerances, mounting positions and cable channels rather than completely redesigning the part.</p>
+                  <h3>Outer Shell</h3>
+                  <p>Most of the work went into the proportions, wall thickness, openings, and the way the shell fits around the internal body. I also had to make sure the ports, speaker area, ventilation, and screw access still worked once everything was enclosed.<br><br>
+                     Just like the internal body, the shell was designed with 3D printing in mind, so tolerances and assembly clearances were part of the CAD from the beginning instead of being fixed afterwards.</p>
+                  <h3>Acoustic chamber</h3>
+                  <p>I designed and printed a separate chamber to give the speaker its own sealed space inside Cube. To prevent air leaking between the printed plastic parts, I also printed a flexible TPU gasket to seal the joint.</p>
+                  <p>One unexpected challenge was mounting the speaker itself. Its frame had very little surface area at the top and bottom to rest against the chamber, so getting it to sit flat and form a proper seal was more difficult than I expected.</p>
+                </div>
+              </div>
+              </details>
+            </div>
+          </section>
+        </div>
+
+        <div class="cube-cad-files" role="region" aria-labelledby="cube-cad-files-title">
+          <h3 id="cube-cad-files-title">CAD files</h3>
+          <div class="cube-cad-files__list">
+            <a class="cube-cad-files__download" href="../images/Cube%20Internal%20Body.step" download="cube-internal-body.step">
+              <span class="cube-cad-files__copy">
+                <strong><span class="visually-hidden">Download </span>Internal body</strong>
+                <span class="cube-cad-files__meta">STEP &middot; 658 kB</span>
+              </span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" /></svg>
+            </a>
+            <a class="cube-cad-files__download" href="../images/Cube%20Outer%20Body.step" download="cube-outer-shell.step">
+              <span class="cube-cad-files__copy">
+                <strong><span class="visually-hidden">Download </span>Outer shell</strong>
+                <span class="cube-cad-files__meta">STEP &middot; 2.6 MB</span>
+              </span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" /></svg>
+            </a>
+            <a class="cube-cad-files__download" href="../images/Cube%20Accoustic%20Chamber.step" download="cube-acoustic-chamber.step">
+              <span class="cube-cad-files__copy">
+                <strong><span class="visually-hidden">Download </span>Acoustic chamber</strong>
+                <span class="cube-cad-files__meta">STEP &middot; 199 kB</span>
+              </span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" /></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -138,7 +365,7 @@
       <div class="cube-shell">
         <header class="cube-section__grid cube-hardware__header">
           <div class="cube-hardware__rail" data-cube-reveal>
-            <p class="cube-hardware__chapter"><span>03 /</span> Hardware</p>
+            <p class="cube-hardware__chapter"><span>05 /</span> Hardware</p>
           </div>
 
           <div class="cube-hardware__intro">
@@ -184,168 +411,6 @@
       </div>
     </section>
 
-    <section class="cube-section cube-physical-design" id="physical-design" aria-labelledby="cube-physical-design-title">
-      <div class="cube-shell">
-        <header class="cube-section__grid cube-physical-design__header">
-          <div class="cube-section__rail" data-cube-reveal>
-            <p class="cube-section__index">[004]</p>
-            <p class="cube-section__eyebrow">Physical Design</p>
-          </div>
-
-          <div class="cube-physical-design__intro-wrap">
-            <h2 class="cube-physical-design__heading" id="cube-physical-design-title" data-cube-reveal>Physical Design</h2>
-            <p class="cube-physical-design__intro">Explore the structure, component layout and enclosure of the Cube.</p>
-          </div>
-        </header>
-
-        <div class="cube-physical-design__log">
-          <article class="cube-physical-design__entry cube-physical-design__entry--internal-body" data-cube-reveal>
-            <p class="cube-physical-design__status"><span>01 /</span> Complete</p>
-
-            <div class="cube-physical-design__copy">
-              <h3>Internal Body</h3>
-              <p>I designed the internal body specifically around FDM 3D printing. The print orientation was part of the design from the beginning, and I used chamfers, slopes, gradual transitions teardrop-shaped holesto avoid unsupported geometry and keep the main structure support-free.<br><br>
-              I also built cable routing into the printed body instead of letting wires sit underneath the boards. The channels keep the wiring in place and prevent cables from touching the underside of components such as the 52Pi board. Mounting points use heat-set inserts so the hardware can be removed and reassembled without wearing out the plastic. <br><br>
-              I mounted the Raspberry Pi stack vertically because it worked better for the airflow I wanted. Instead of the air hitting the boards from underneath, it can move upward between and alongside them. Cool air enters from the bottom, passes through the stack, and the fan near the top pulls the warm air out.<br><br>
-              Clearances were the part that took the most trial and error. Some dimensions that looked fine in Fusion 360 were too tight once printed, especially around boards, connectors, screws, and cable paths. I went through four prints before everything fit the way I wanted. Each version changed small things like tolerances, mounting positions and cable channels rather than completely redesigning the part.</p>
-            </div>
-
-            <div class="cube-physical-design__media">
-              <figure class="cube-physical-design__figure">
-                <div class="cube-physical-design__image-frame">
-                  <img src="../images/Cube Internal Body.png" alt="Fusion 360 render of the Cube's completed internal body with component mounting points, cable paths, and ventilation" width="2048" height="2048" loading="lazy" decoding="async">
-                </div>
-                <figcaption>Internal body / Fusion 360 / Complete</figcaption>
-              </figure>
-
-              <figure class="cube-physical-design__figure">
-                <div class="cube-physical-design__image-frame">
-                  <img src="../images/Cube Internal Body_Components.png" alt="Fusion 360 exploded render showing the hardware components fitted inside the Cube's internal body" width="2048" height="2048" loading="lazy" decoding="async">
-                </div>
-                <figcaption>Internal components / Fusion 360 / Complete</figcaption>
-              </figure>
-            </div>
-          </article>
-
-          <article class="cube-physical-design__entry cube-physical-design__entry--outer-shell" data-cube-reveal>
-            <p class="cube-physical-design__status"><span>02 /</span> Complete</p>
-
-            <div class="cube-physical-design__copy">
-              <h3>Outer Shell</h3>
-              <p>Most of the work went into the proportions, wall thickness, openings, and the way the shell fits around the internal body. I also had to make sure the ports, speaker area, ventilation, and screw access still worked once everything was enclosed.<br><br>
-                 Just like the internal body, the shell was designed with 3D printing in mind, so tolerances and assembly clearances were part of the CAD from the beginning instead of being fixed afterwards.</p>
-            </div>
-
-            <div class="cube-physical-design__media cube-physical-design__media--single">
-              <figure class="cube-physical-design__figure">
-                <div class="cube-physical-design__image-frame">
-                  <img src="../images/Cube Shell.png" alt="Fusion 360 render of the completed Cube outer shell with display opening, speaker opening, and ventilation" width="2048" height="2048" loading="lazy" decoding="async">
-                </div>
-                <figcaption>Outer shell / Fusion 360 / Complete</figcaption>
-              </figure>
-            </div>
-          </article>
-
-          <article class="cube-physical-design__entry cube-physical-design__entry--chamber" data-cube-reveal>
-            <p class="cube-physical-design__status"><span>03 /</span> Done</p>
-
-            <div class="cube-physical-design__copy">
-              <h3>Acoustic chamber</h3>
-              <p>I designed and printed a separate chamber to give the speaker its own sealed space inside Cube. To prevent air leaking between the printed plastic parts, I also printed a flexible TPU gasket to seal the joint.</p>
-              <p>One unexpected challenge was mounting the speaker itself. Its frame had very little surface area at the top and bottom to rest against the chamber, so getting it to sit flat and form a proper seal was more difficult than I expected.</p>
-            </div>
-
-            <div class="cube-physical-design__media cube-physical-design__media--single">
-              <figure class="cube-physical-design__figure">
-                <div class="cube-physical-design__image-frame">
-                  <img src="../images/Accoustic Chamber.png" alt="CAD render of the Cube's acoustic chamber with a circular speaker opening and mounting holes" width="2048" height="2048" loading="lazy" decoding="async">
-                </div>
-                <figcaption>Acoustic chamber / Done</figcaption>
-              </figure>
-            </div>
-          </article>
-        </div>
-
-        <div class="cube-design-gallery" data-design-gallery>
-          <figure class="cube-design-gallery__figure">
-            <div class="cube-design-gallery__viewer" id="cube-design-viewer">
-              <img class="cube-design-gallery__image" src="../images/Cube Internal Body_Components.png" alt="Fusion 360 exploded assembly render showing components inside the Cube's internal body" width="2048" height="2048" loading="lazy" decoding="async" data-design-image>
-            </div>
-
-            <div class="cube-design-gallery__thumbnails" role="group" aria-label="Physical design views" data-design-thumbnails hidden>
-              <button class="cube-design-gallery__thumbnail" type="button" aria-pressed="true" aria-controls="cube-design-viewer cube-design-caption" data-design-title="Assembly" data-design-description="The internal body with its mounted components and hardware layout." data-design-alt="Fusion 360 exploded assembly render showing components inside the Cube's internal body">
-                <img src="../images/Cube Internal Body_Components.png" alt="" width="2048" height="2048" loading="lazy" decoding="async">
-                <span>Assembly</span>
-              </button>
-              <button class="cube-design-gallery__thumbnail" type="button" aria-pressed="false" aria-controls="cube-design-viewer cube-design-caption" data-design-title="Body" data-design-description="A support-free printed structure with mounting points, cable paths and ventilation." data-design-alt="Fusion 360 render of the Cube's internal body without components, showing mounts, cable paths and ventilation">
-                <img src="../images/Cube Internal Body.png" alt="" width="2048" height="2048" loading="lazy" decoding="async">
-                <span>Body</span>
-              </button>
-              <button class="cube-design-gallery__thumbnail" type="button" aria-pressed="false" aria-controls="cube-design-viewer cube-design-caption" data-design-title="Shell" data-design-description="The outer enclosure fits around the body while keeping ports, airflow and screws accessible." data-design-alt="Fusion 360 render of the Cube's outer shell with display and speaker openings and ventilation">
-                <img src="../images/Cube Shell.png" alt="" width="2048" height="2048" loading="lazy" decoding="async">
-                <span>Shell</span>
-              </button>
-              <button class="cube-design-gallery__thumbnail" type="button" aria-pressed="false" aria-controls="cube-design-viewer cube-design-caption" data-design-title="Chamber" data-design-description="Done: a separate printed chamber gives the speaker a sealed space, with a flexible TPU gasket sealing the joint." data-design-alt="CAD render of the Cube's acoustic chamber with a circular speaker opening and mounting holes">
-                <img src="../images/Accoustic Chamber.png" alt="" width="2048" height="2048" loading="lazy" decoding="async">
-                <span>Chamber</span>
-              </button>
-            </div>
-
-            <figcaption class="cube-design-gallery__caption" id="cube-design-caption" aria-live="polite" aria-atomic="true">
-              <h3 data-design-caption-title>Assembly</h3>
-              <p data-design-caption-description>The internal body with its mounted components and hardware layout.</p>
-            </figcaption>
-          </figure>
-
-          <details class="cube-design-gallery__details cube-disclosure" data-disclosure>
-            <summary>Design details</summary>
-            <div class="cube-disclosure__content">
-              <div class="cube-design-gallery__notes">
-                <h3>Internal Body</h3>
-                <p>I designed the internal body specifically around FDM 3D printing. The print orientation was part of the design from the beginning, and I used chamfers, slopes, gradual transitions teardrop-shaped holesto avoid unsupported geometry and keep the main structure support-free.<br><br>
-                I also built cable routing into the printed body instead of letting wires sit underneath the boards. The channels keep the wiring in place and prevent cables from touching the underside of components such as the 52Pi board. Mounting points use heat-set inserts so the hardware can be removed and reassembled without wearing out the plastic. <br><br>
-                I mounted the Raspberry Pi stack vertically because it worked better for the airflow I wanted. Instead of the air hitting the boards from underneath, it can move upward between and alongside them. Cool air enters from the bottom, passes through the stack, and the fan near the top pulls the warm air out.<br><br>
-                Clearances were the part that took the most trial and error. Some dimensions that looked fine in Fusion 360 were too tight once printed, especially around boards, connectors, screws, and cable paths. I went through four prints before everything fit the way I wanted. Each version changed small things like tolerances, mounting positions and cable channels rather than completely redesigning the part.</p>
-                <h3>Outer Shell</h3>
-                <p>Most of the work went into the proportions, wall thickness, openings, and the way the shell fits around the internal body. I also had to make sure the ports, speaker area, ventilation, and screw access still worked once everything was enclosed.<br><br>
-                   Just like the internal body, the shell was designed with 3D printing in mind, so tolerances and assembly clearances were part of the CAD from the beginning instead of being fixed afterwards.</p>
-                <h3>Acoustic chamber</h3>
-                <p>I designed and printed a separate chamber to give the speaker its own sealed space inside Cube. To prevent air leaking between the printed plastic parts, I also printed a flexible TPU gasket to seal the joint.</p>
-                <p>One unexpected challenge was mounting the speaker itself. Its frame had very little surface area at the top and bottom to rest against the chamber, so getting it to sit flat and form a proper seal was more difficult than I expected.</p>
-              </div>
-            </div>
-          </details>
-        </div>
-
-        <div class="cube-cad-files" role="region" aria-labelledby="cube-cad-files-title">
-          <h3 id="cube-cad-files-title">CAD files</h3>
-          <div class="cube-cad-files__list">
-            <a class="cube-cad-files__download" href="../images/Cube%20Internal%20Body.step" download="cube-internal-body.step">
-              <span class="cube-cad-files__copy">
-                <strong><span class="visually-hidden">Download </span>Internal body</strong>
-                <span class="cube-cad-files__meta">STEP &middot; 658 kB</span>
-              </span>
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" /></svg>
-            </a>
-            <a class="cube-cad-files__download" href="../images/Cube%20Outer%20Body.step" download="cube-outer-shell.step">
-              <span class="cube-cad-files__copy">
-                <strong><span class="visually-hidden">Download </span>Outer shell</strong>
-                <span class="cube-cad-files__meta">STEP &middot; 2.6 MB</span>
-              </span>
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" /></svg>
-            </a>
-            <a class="cube-cad-files__download" href="../images/Cube%20Accoustic%20Chamber.step" download="cube-acoustic-chamber.step">
-              <span class="cube-cad-files__copy">
-                <strong><span class="visually-hidden">Download </span>Acoustic chamber</strong>
-                <span class="cube-cad-files__meta">STEP &middot; 199 kB &middot; Done</span>
-              </span>
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" /></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <footer class="project-footer">
       <div class="cube-shell project-footer__inner">
         <a class="project-footer__next" href="../Ignite/" data-cursor="view">
@@ -361,6 +426,6 @@
     </footer>
   </main>
 
-  <script type="module" src="app.js?v=20260929-mobile-design"></script>
+  <script type="module" src="app.js?v=20260929-feature-disclosures"></script>
 </body>
 </html>

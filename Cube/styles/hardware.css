@@ -1,4 +1,5 @@
 .cube-hardware__header {
+  grid-column: 1 / -1;
   align-items: start;
 }
 
@@ -50,6 +51,7 @@
 }
 
 .cube-hardware__list {
+  grid-column: -2 / -1;
   margin: clamp(1.75rem, 3vw, 2.75rem) 0 0;
   padding: 0;
   display: grid;

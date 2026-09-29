@@ -5,8 +5,6 @@ export function setupDesignGallery() {
   const image = gallery.querySelector("[data-design-image]");
   const thumbnails = gallery.querySelector("[data-design-thumbnails]");
   const buttons = [...thumbnails.querySelectorAll("button")];
-  const title = gallery.querySelector("[data-design-caption-title]");
-  const description = gallery.querySelector("[data-design-caption-description]");
   const listeners = new AbortController();
 
   buttons.forEach((button) => {
@@ -14,8 +12,6 @@ export function setupDesignGallery() {
       const preview = button.querySelector("img");
       image.src = preview.src;
       image.alt = button.dataset.designAlt;
-      title.textContent = button.dataset.designTitle;
-      description.textContent = button.dataset.designDescription;
       buttons.forEach((item) => {
         item.setAttribute("aria-pressed", String(item === button));
       });

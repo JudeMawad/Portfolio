@@ -1,0 +1,50 @@
+{
+  "apps": {
+    "clock": {
+      "native_video_matches_all_source_rgb_frames": true,
+      "poster_matches_selected_source_frame": true,
+      "poster_upscale_is_exact_nearest_neighbor": true,
+      "mp4_all_frames_decode": true,
+      "frame_count": 180,
+      "source_rgb_sha256": "e6c774665ff55ac040544536916d214b747939fbde7bc28c238d385c91ed7059"
+    },
+    "weather": {
+      "native_video_matches_all_source_rgb_frames": true,
+      "poster_matches_selected_source_frame": true,
+      "poster_upscale_is_exact_nearest_neighbor": true,
+      "mp4_all_frames_decode": true,
+      "frame_count": 162,
+      "source_rgb_sha256": "83fe4683ffbd8cc102d1777624ecbba292535a655b47001680a2f545a03d5957"
+    },
+    "animation": {
+      "source_gif_frames_decode": true,
+      "source_gif_copy_matches": true,
+      "source_gif_frame_count": 75,
+      "source_timing_preserved": true,
+      "native_video_matches_all_adapted_rgb_frames": true,
+      "poster_matches_selected_source_frame": true,
+      "poster_upscale_is_exact_nearest_neighbor": true,
+      "mp4_all_frames_decode": true,
+      "maximum_mp4_black_noise": 4,
+      "frame_count": 101,
+      "duration_seconds": 4.04,
+      "fps": 25,
+      "source_rgb_sha256": "83b6b6e81a43482a9b935fbce32ec82eea521af6108524888ba7b2855579df27"
+    },
+    "music": {
+      "source_artwork_copy_matches": true,
+      "artwork_full_frame_preserved": true,
+      "playback_pixels_outside_artwork_preserved": true,
+      "native_video_matches_all_composited_rgb_frames": true,
+      "poster_matches_selected_source_frame": true,
+      "poster_upscale_is_exact_nearest_neighbor": true,
+      "mp4_all_frames_decode": true,
+      "maximum_mp4_black_noise": 0,
+      "frame_count": 300,
+      "duration_seconds": 10,
+      "fps": 30,
+      "source_rgb_sha256": "fbf0914084da7562ccc594e5431c5ea96e946ee0b617d496ce0ebc0b38ccd62a"
+    }
+  },
+  "manifest_media_paths_exist": true
+}

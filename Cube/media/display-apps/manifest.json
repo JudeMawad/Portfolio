@@ -1,0 +1,376 @@
+{
+  "schema_version": 1,
+  "title": "Cube display app portfolio resources",
+  "capture_method": "Clock and Weather: production app Render methods through DisplayRuntime with deterministic fixtures. Music preserves the exported playback indicators with user-supplied album artwork. Animation adapts the user-supplied PAC_MAN.gif to the 64x64 grid.",
+  "timing": "Clock, Weather and Music retain 30 fps real-time sampling. Animation preserves every supplied GIF delay exactly at 25 fps; no sped-up motion or interpolation.",
+  "native_video_format": "Lossless VP9 RGB (profile 1) WebM; decoded frames verified against captured or adapted 64x64 source frames.",
+  "compatibility_video_format": "H.264 yuv420p MP4, nearest-neighbor 8x upscale before lossy encoding; minor codec/color differences possible.",
+  "loop_note": "Loop is a website playback recommendation; containers do not enforce looping.",
+  "snapshot_note": "Original exported apps identify their source snapshot below. Animation and Music artwork were replaced in the portfolio with user-supplied media.",
+  "source_sha256": {
+    "LICENSE": "a9c64c90e5a536fc58d369d39f2821c5c7c38eacf89a60b8c656d87fdc00d6b7",
+    "THIRD_PARTY_NOTICES.md": "391be304fd76b9e1a6900059c979b4402a782d5946cf8ac12f8a2c8bf484f527",
+    "client/app/display/music.py": "63c1e280211927415f0dd8baf5b0a05d2d0375705aa7fc863cfdff8f15c62913",
+    "client/app/display/weather.py": "a555c591daf83ddb319f7d325d50e14d81fd6a3796f0ff73901bd9c59a96a43d",
+    "client/assets/README.md": "082b3971da0e51baef3c75abb6cb693e1a34f425ba60a5603828f68f97f7e78e",
+    "client/native/cube-display/animation-asset.cc": "f7c4c623ef3a051ff4139685dcda9b3e99a9e9e9b7e6123173416169fd0d62fc",
+    "client/native/cube-display/animation-asset.h": "d20eda11add5458d7eb9deea85058aeb57330013417f706954accf8cead6f09a",
+    "client/native/cube-display/apps/animation.cc": "510e3e72ee6cef88f0475d4ffd91efb2f43d3543d512fc6898c40af76fe6335b",
+    "client/native/cube-display/apps/animation.h": "8ad568185ffe5cd241c2cc17f3e14ef780ce969d4601a2bdba8bd0e20c5d94fe",
+    "client/native/cube-display/apps/music.cc": "1c26450d5de12de126e35efdaf58a1366bf6b3b820d4410240fffdca818f5a8c",
+    "client/native/cube-display/apps/music.h": "05fda6ae19b1bc983c5e5e32c8f9408b40565e02c0bd167b242a06b74a4b53da",
+    "client/native/cube-display/apps/tetris-clock-geometry.h": "1bf61b7a8848ccf501103ae06006b361410f92edb26f41c94ac3b04a18d75f54",
+    "client/native/cube-display/apps/tetris-clock.cc": "161d993bb69f3d8f6f2511157d8e8df307a47992550c33e773cffe866a2fdc81",
+    "client/native/cube-display/apps/tetris-clock.h": "8fe832273a86519b80713983e9027e1eed98a8572df22de7bcc38a9841e79c7a",
+    "client/native/cube-display/apps/weather.cc": "f2910309b1b5acf693e5991fa9539ba8f90f75cdcabf35fd5bc2c1d2dcdb10a1",
+    "client/native/cube-display/apps/weather.h": "d78ed1df5e12e0a9316d22e23e58b2d34501fc922c71efa8fa817409f902d5a4",
+    "client/native/cube-display/content-mask.cc": "a712923bfe86538ffca366e36ee3e4652b30af6b22e535655ce5f2392954ddd6",
+    "client/native/cube-display/content-mask.h": "10a759b1a1f7ffe81585b5863f0aa15d3281e8c36b3eaef428956eda59538cd2",
+    "client/native/cube-display/content-renderer.cc": "1293a7d887d62890bc9cf9a367886a8f815b8771bf545e56c96a07f4a0cc9642",
+    "client/native/cube-display/content-renderer.h": "9e65afef4b4bbb893daabea3a7c882ad2e1c83cc0874c396759ca8105292662e",
+    "client/native/cube-display/cube-display.cc": "7fb20dd2eefae8178c09ed298d70644309b8d7cfc0eb566c63e54349a7a6a4a9",
+    "client/native/cube-display/display-compositor.h": "99b149677ecb64af13dd1f7f1767ed36134fe3adafee833299dbc59f292ac297",
+    "client/native/cube-display/display-frame.h": "f24e529607b94110ffd3b81cac43585911450ecf1868225ce5851504e0c5b23d",
+    "client/native/cube-display/display-runtime.h": "3a87cd6ca15837a4a975c29aeb275957d1e01d9aa716e6cfac9a90e72da91fc5",
+    "client/native/cube-display/dissolve-transition.cc": "708e312b5045ecfe37e25a91f5d06991b7e673ac24f4230b5b87360718452b93",
+    "client/native/cube-display/dissolve-transition.h": "710f3e19f1b6b89c1fb0bddfbea653eac1576ecda087089a97c34ae00d41facd",
+    "client/native/cube-display/music-state.h": "0ee70706821a6facf9d4026df7898493266177101769465da798ce501ef215b2",
+    "client/native/cube-display/pixel-font.h": "32598532adf8d7e52067bc43f9a1f3b303f9d2f17ed42db0e379a05f99b54b40",
+    "client/native/cube-display/weather-state.h": "e891797978cb99df1d7bc4d2d1f8c23f2d8015d024fbbb6b4c407ab466c3d03e",
+    "server/features/music/display.py": "56acebc84d2712a5d20addbda3c787d7fe3de8ce754d2d576a0afa8323d2bb7f",
+    "tools/convert_cube_animation.py": "b3b225626f094e635325bba1ec8a6d5d6edfd9bb319373c906627be7bf095d27",
+    "tools/export_portfolio_display.cc": "afc1f79fa0c4d788e28b1f385f08504ece6b0821e968575295778a3883f32aba",
+    "tools/export_portfolio_display.py": "6789de0f0e956405d1f8213ce4fc27716824afc6ecba3209d260839f92e62f56",
+    "tools/generate_cube_animation_samples.py": "d20a406cf2fded77b70bf11241f13338e913682eaca793523c7d81663a034713",
+    "animation/PAC_MAN.gif": "f60527454a32a9fa8ebdd0cd6326ab8bab62f710c39ad8d158b303a96ac850d5",
+    "music/hotel-california.jpg": "23e83d2b1f2f31870e4e10ba51fb9e1e56bd307531144c30006cbf5ed39500a9"
+  },
+  "apps": [
+    {
+      "id": "clock",
+      "title": "Clock",
+      "frame_count": 180,
+      "poster_frame": 105,
+      "description": "A falling-block clock assembles the time above the date.",
+      "fixture": {
+        "time": "12:34",
+        "date": "2026-09-26",
+        "date_caption": "SAT 26 SEP"
+      },
+      "loop_behavior": "Restarts initial assembly after a hold; not a seamless loop. The live clock only rebuilds changed digits.",
+      "source_files": [
+        "client/native/cube-display/apps/tetris-clock.cc",
+        "client/native/cube-display/apps/tetris-clock.h",
+        "client/native/cube-display/apps/tetris-clock-geometry.h",
+        "client/native/cube-display/pixel-font.h"
+      ],
+      "provenance": "Original Cube renderer geometry and glyphs; repository MIT license.",
+      "preview": "clock/preview.webm",
+      "preview_mp4": "clock/preview.mp4",
+      "poster": "clock/poster.png",
+      "poster_upscaled": "clock/poster-512.png",
+      "native_resolution": {
+        "width": 64,
+        "height": 64
+      },
+      "mp4_resolution": {
+        "width": 512,
+        "height": 512
+      },
+      "duration_seconds": 6.0,
+      "fps": 30,
+      "animated": true,
+      "loop": true,
+      "seamless_loop": false,
+      "poster_time_seconds": 3.5,
+      "attribution": "Cube contributors; retain included MIT license."
+    },
+    {
+      "id": "weather",
+      "title": "Weather",
+      "frame_count": 162,
+      "poster_frame": 39,
+      "description": "Animated weather with temperature and precipitation probability.",
+      "fixture": {
+        "temperature_c": 18,
+        "precipitation_probability_percent": 60,
+        "condition": "Rain",
+        "is_day": true,
+        "location": null
+      },
+      "loop_behavior": "Three complete 1.8-second rain cycles; seamless loop.",
+      "source_files": [
+        "client/native/cube-display/apps/weather.cc",
+        "client/native/cube-display/apps/weather.h",
+        "client/native/cube-display/weather-state.h",
+        "client/native/cube-display/pixel-font.h",
+        "client/app/display/weather.py"
+      ],
+      "provenance": "Original Cube renderer artwork and glyphs; synthetic weather, no provider data or location.",
+      "preview": "weather/preview.webm",
+      "preview_mp4": "weather/preview.mp4",
+      "poster": "weather/poster.png",
+      "poster_upscaled": "weather/poster-512.png",
+      "native_resolution": {
+        "width": 64,
+        "height": 64
+      },
+      "mp4_resolution": {
+        "width": 512,
+        "height": 512
+      },
+      "duration_seconds": 5.4,
+      "fps": 30,
+      "animated": true,
+      "loop": true,
+      "seamless_loop": true,
+      "poster_time_seconds": 1.3,
+      "attribution": "Cube contributors; retain included MIT license."
+    },
+    {
+      "id": "animation",
+      "title": "Animation",
+      "frame_count": 101,
+      "poster_frame": 38,
+      "description": "Playful pixel animations bring the display to life between interactions.",
+      "fixture": {
+        "asset": "animation/PAC_MAN.gif",
+        "source_frame_count": 75,
+        "source_dimensions": {
+          "width": 480,
+          "height": 480
+        },
+        "source_durations_ms": [
+          440,
+          80,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          80,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          80,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          80,
+          40,
+          280,
+          280
+        ]
+      },
+      "loop_behavior": "Repeats the supplied GIF at its original 4.04-second timing, including its blank opening frame.",
+      "source_files": [
+        "animation/PAC_MAN.gif"
+      ],
+      "provenance": "User-supplied PAC_MAN.gif, copied unchanged. Derived videos and posters preserve the full frame and timing, with nearest-neighbor adaptation to 64x64. Not generated by the Cube renderer.",
+      "preview": "animation/pac-man.webm",
+      "preview_mp4": "animation/pac-man.mp4",
+      "poster": "animation/pac-man-poster.png",
+      "poster_upscaled": "animation/pac-man-poster-512.png",
+      "native_resolution": {
+        "width": 64,
+        "height": 64
+      },
+      "mp4_resolution": {
+        "width": 512,
+        "height": 512
+      },
+      "duration_seconds": 4.04,
+      "fps": 25,
+      "animated": true,
+      "loop": true,
+      "seamless_loop": false,
+      "poster_time_seconds": 1.52,
+      "attribution": "User-supplied animation; the Cube contributors MIT license does not establish licensing for this GIF."
+    },
+    {
+      "id": "music",
+      "title": "Music / Spotify",
+      "frame_count": 300,
+      "poster_frame": 60,
+      "description": "Album artwork, playback state and track progress for Spotify playback.",
+      "fixture": {
+        "artwork": "music/hotel-california-artwork.png",
+        "track_duration_ms": 180000,
+        "initial_progress_ms": 45000,
+        "pause_at_seconds": 4,
+        "resume_at_seconds": 6,
+        "real_track": false,
+        "artwork_source": "music/hotel-california.jpg",
+        "artwork_viewport": {
+          "x": 3,
+          "y": 0,
+          "width": 58,
+          "height": 58
+        }
+      },
+      "loop_behavior": "Plays 4 seconds, pauses 2, resumes 4. Progress resets on replay; not seamless. No audio.",
+      "source_files": [
+        "client/native/cube-display/apps/music.cc",
+        "client/native/cube-display/apps/music.h",
+        "client/native/cube-display/music-state.h",
+        "server/features/music/display.py",
+        "client/app/display/music.py",
+        "music/hotel-california.jpg"
+      ],
+      "provenance": "User-supplied Hotel California album cover, resized in full to the existing 58x58 artwork viewport. Native playback and progress pixels, 30 fps timing, and the silent ten-second demonstration remain unchanged.",
+      "preview": "music/hotel-california.webm",
+      "preview_mp4": "music/hotel-california.mp4",
+      "poster": "music/hotel-california-poster.png",
+      "poster_upscaled": "music/hotel-california-poster-512.png",
+      "native_resolution": {
+        "width": 64,
+        "height": 64
+      },
+      "mp4_resolution": {
+        "width": 512,
+        "height": 512
+      },
+      "duration_seconds": 10.0,
+      "fps": 30,
+      "animated": true,
+      "loop": true,
+      "seamless_loop": false,
+      "poster_time_seconds": 2.0,
+      "attribution": "Playback graphics originate from Cube contributors. The user-supplied album artwork is separate from the included Cube MIT license."
+    }
+  ],
+  "files": {
+    "clock/poster-512.png": {
+      "bytes": 2444,
+      "sha256": "36f5502026ce5348d3653faf1e40217a96b1303d7f99cf3806abec87f2ab5c82"
+    },
+    "clock/poster.png": {
+      "bytes": 671,
+      "sha256": "cd95fbba60b3cdf63d4ef71ca38083c3b8ba9740114265602987d05b656df3ab"
+    },
+    "clock/preview.mp4": {
+      "bytes": 20851,
+      "sha256": "7e7a024d543637cce29693fbeb42236addb1823b617fb33d7701e5b3a9c1a0e4"
+    },
+    "clock/preview.webm": {
+      "bytes": 35205,
+      "sha256": "2645940868384fffb307bf189ebd6715fcbc407932691052c07c8915a26a07f3"
+    },
+    "weather/poster-512.png": {
+      "bytes": 2122,
+      "sha256": "a149b7b381a2b5a6431578840eeebf8809756ea97207b248528710656aa07295"
+    },
+    "weather/poster.png": {
+      "bytes": 461,
+      "sha256": "4263af0094e34c15dbbf26036dc0667973827f208ff0e85d1a2f797f7095a2e0"
+    },
+    "weather/preview.mp4": {
+      "bytes": 11601,
+      "sha256": "f7e6590bfc193bbf53ac0495aeea47efdfdb1f85f8dfbecad9c8c9ea2ab11ea9"
+    },
+    "weather/preview.webm": {
+      "bytes": 13894,
+      "sha256": "585729537075357908be42692ddc8a58cf2dfe543d505451b1dc5242e2837ef2"
+    },
+    "animation/PAC_MAN.gif": {
+      "bytes": 262391,
+      "sha256": "f60527454a32a9fa8ebdd0cd6326ab8bab62f710c39ad8d158b303a96ac850d5"
+    },
+    "animation/pac-man.mp4": {
+      "bytes": 35704,
+      "sha256": "6760290c0ec708ecfac224142746b855304d7b2b798e561eb6a0de7d7f84f76a"
+    },
+    "animation/pac-man.webm": {
+      "bytes": 62663,
+      "sha256": "d3d13e84e8269d752613b580d60eb47f557b9257d6a00726ee6365c451a1a23e"
+    },
+    "animation/pac-man-poster.png": {
+      "bytes": 956,
+      "sha256": "8913f44dfc1b54e1c0a3d6cbd053ac041320a4dc43756860eeeed0d4f0fd5178"
+    },
+    "animation/pac-man-poster-512.png": {
+      "bytes": 2451,
+      "sha256": "56b402e9688b8dd8750e748623a2338d28d5d91fa1cdc82f3c223b6f07a20c57"
+    },
+    "music/hotel-california.jpg": {
+      "bytes": 50376,
+      "sha256": "23e83d2b1f2f31870e4e10ba51fb9e1e56bd307531144c30006cbf5ed39500a9"
+    },
+    "music/hotel-california-artwork.png": {
+      "bytes": 7129,
+      "sha256": "a37b57f8c59dbd6133a0c79d07b63dfeb1ac3df446f878b8accb5d8a3927ce7e"
+    },
+    "music/hotel-california.mp4": {
+      "bytes": 30456,
+      "sha256": "009f98b3802586ee8b151fdb50f2d312f9b1aa01be47cc30bd74fdd03c46667d"
+    },
+    "music/hotel-california.webm": {
+      "bytes": 30979,
+      "sha256": "5741207b7c5ad4beb36e1abc23b79bc618238ba99b76cf7e78eb3aa114d67f6e"
+    },
+    "music/hotel-california-poster.png": {
+      "bytes": 7353,
+      "sha256": "8861fb74225c0f866fd9c2ee08a36b5bd40176d69240e88e37b62720a7960781"
+    },
+    "music/hotel-california-poster-512.png": {
+      "bytes": 14284,
+      "sha256": "62df5e1a53eedcf03bc746ca7c7a65b1726a75b41d05c452b52995cdd1b8ab82"
+    }
+  }
+}

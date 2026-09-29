@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="../shared/styles/tokens.css">
   <link rel="stylesheet" href="../shared/styles/foundation.css">
   <link rel="stylesheet" href="../shared/styles/project-navigation.css">
-  <link rel="stylesheet" href="style.css?v=20260906-editorial">
+  <link rel="stylesheet" href="style.css?v=20260929-text">
   <link rel="stylesheet" href="../shared/styles/project-type.css">
   <link rel="stylesheet" href="../shared/styles/project-reveal.css?v=20260906-hero">
 </head>
@@ -108,16 +108,9 @@
           <h2 id="food-pipeline-title" class="case-heading" data-reveal>Finding and logging food</h2>
           <div class="case-copy" data-reveal>
             <p>Text searches and barcode scans use the same lookup, handled by <code>HybridFoodRepository</code>. IGNITE checks saved foods first and moves to remote sources when it needs a useful match.</p>
+            <p>The lookup starts with foods saved in Core Data, then checks IGNITE’s Supabase database if there is no useful local match. OpenFoodFacts provides another source when needed.</p>
+            <p>Matches are cleaned up and deduplicated before they appear in the results. Useful foods are saved locally for later.</p>
           </div>
-          <figure class="food-lookup" data-reveal aria-labelledby="pipeline-caption">
-            <p class="food-lookup__input"><span>Input</span> Text search or barcode scan</p>
-            <ol class="food-lookup__sources">
-              <li><span>01 / FIRST</span><strong>Core Data</strong><p>Foods already saved on the device.</p></li>
-              <li><span>02 / NEXT</span><strong>Supabase</strong><p>IGNITE’s food database, if there is no useful local match.</p></li>
-              <li><span>03 / IF NEEDED</span><strong>OpenFoodFacts</strong><p>The public food database when another source is needed.</p></li>
-            </ol>
-            <p class="food-lookup__result"><span>Result</span> Clean up and deduplicate matches, then show results and save useful foods locally.</p>
-          </figure>
           <div class="detail-note" data-reveal id="barcode">
             <h3 id="barcode-title">Scan instead of typing</h3>
             <p>I use AVFoundation to read barcodes with the iPhone camera. A detected code enters the same lookup; a matching food can then be logged and kept for later.</p>
@@ -180,17 +173,9 @@
           <h2 id="architecture-title" class="case-heading" data-reveal>App structure</h2>
           <div class="case-copy" data-reveal>
             <p>I separate the interface, screen state, data access, and system integrations. The main dependencies are created in one place and passed to the parts of the app that need them.</p>
+            <p>SwiftUI views handle the interface and navigation. They use view models to manage screen state and UI logic.</p>
+            <p>View models use repositories for Core Data, food search, and caching, and services for HealthKit, networking, purchases, and other system APIs.</p>
           </div>
-          <figure class="architecture-map" data-reveal aria-labelledby="architecture-caption">
-            <div class="architecture-map__layer"><span>UI</span><strong>SwiftUI views</strong><p>Interface and navigation.</p></div>
-            <i class="architecture-map__connector" aria-hidden="true"></i>
-            <div class="architecture-map__layer"><span>State</span><strong>View models</strong><p>Screen state and UI logic.</p></div>
-            <i class="architecture-map__connector" aria-hidden="true"></i>
-            <div class="architecture-map__branches">
-              <div><span>Data access</span><strong>Repositories</strong><p>Core Data, food search, and caching.</p></div>
-              <div><span>System integrations</span><strong>Services</strong><p>HealthKit, networking, purchases, and system APIs.</p></div>
-            </div>
-          </figure>
           <div class="detail-note" data-reveal id="technology">
             <h3 id="technology-title">What I used to build it</h3>
             <dl class="technology-list">

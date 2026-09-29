@@ -86,7 +86,7 @@ const createPerspectiveProjector = (points) => {
   };
 };
 
-const createProjectedCubeLedCanvasRenderer = (canvas, { brightnessScale = 10 } = {}) => {
+export const createProjectedCubeLedCanvasRenderer = (canvas, { brightnessScale = 10 } = {}) => {
   const context = canvas?.getContext("2d", { alpha: true });
   if (!canvas || !context) return null;
 
@@ -165,6 +165,14 @@ const createProjectedCubeLedCanvasRenderer = (canvas, { brightnessScale = 10 } =
   return { drawFrame, resize };
 };
 
+export const getCubePhotoCorners = (profile) => {
+  const geometry = CUBE_LED_CARD_GEOMETRY[profile];
+  return CUBE_LED_CARD_CORNERS[profile].map((point) => ({
+    x: (point.x * geometry.stageWidth - geometry.renderLeft) / geometry.renderWidth,
+    y: (point.y * geometry.stageHeight - geometry.renderTop) / geometry.renderHeight
+  }));
+};
+
 export const setupCubePhotoCanvas = (visual, canvas) => {
   if (!visual || !canvas) return null;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -173,13 +181,7 @@ export const setupCubePhotoCanvas = (visual, canvas) => {
   if (!canvas || !renderer) return null;
 
   const corners = Object.fromEntries(
-    ["desktop", "mobile"].map((profile) => {
-      const geometry = CUBE_LED_CARD_GEOMETRY[profile];
-      return [profile, CUBE_LED_CARD_CORNERS[profile].map((point) => ({
-        x: (point.x * geometry.stageWidth - geometry.renderLeft) / geometry.renderWidth,
-        y: (point.y * geometry.stageHeight - geometry.renderTop) / geometry.renderHeight
-      }))];
-    })
+    ["desktop", "mobile"].map((profile) => [profile, getCubePhotoCorners(profile)])
   );
 
   let measuredWidth = 0;

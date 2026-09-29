@@ -3,3 +3,4 @@
 *.glb binary
 *.pdf binary
 *.step binary
+Cube/media/display-apps/** -text

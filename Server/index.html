@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="../shared/styles/tokens.css">
   <link rel="stylesheet" href="../shared/styles/foundation.css">
   <link rel="stylesheet" href="../shared/styles/project-navigation.css">
-  <link rel="stylesheet" href="style.css?v=20260906-editorial">
+  <link rel="stylesheet" href="style.css?v=20260929-text">
   <link rel="stylesheet" href="../shared/styles/display-type.css?v=20260904-display-word-1">
   <link rel="stylesheet" href="../shared/styles/project-type.css">
   <link rel="stylesheet" href="../shared/styles/project-reveal.css?v=20260906-hero">
@@ -118,29 +118,12 @@
           <div>
             <h2 class="case-heading" data-reveal id="media-flow-title">From a request to the library</h2>
             <div class="case-copy case-copy--wide" data-reveal>
-              <p>I choose a film or series. The services then handle the search, download, and library update so it becomes available in Jellyfin.</p>
+              <p>I choose a film or series in Overseerr, which sends the request to Sonarr for series or Radarr for films. Those services track the request and use Prowlarr to find a suitable source.</p>
+              <p>qBittorrent handles the download. The completed files then reach the organised library path shared by the automation services and Jellyfin.</p>
+              <p>Jellyfin picks up the library update and makes the media available to watch on my devices.</p>
             </div>
           </div>
         </header>
-
-        <figure class="pipeline" data-reveal data-media-pipeline aria-labelledby="pipeline-caption">
-          <div class="pipeline__track">
-          <ol class="pipeline__steps">
-            <li><button class="pipeline-node is-active" type="button" data-flow-step="request" aria-controls="pipeline-detail" aria-pressed="true"><span>01 / INPUT</span><strong>Request</strong><small>Choose something to add</small></button></li>
-            <li><i class="pipeline-connector" aria-hidden="true"></i><button class="pipeline-node" type="button" data-flow-step="overseerr" aria-controls="pipeline-detail" aria-pressed="false"><span>02 / REQUESTS</span><strong>Overseerr</strong><small>Routes the request</small></button></li>
-            <li><i class="pipeline-connector" aria-hidden="true"></i><button class="pipeline-node pipeline-node--split" type="button" data-flow-step="arr" aria-controls="pipeline-detail" aria-pressed="false"><span>03 / ORGANISE</span><strong>Sonarr <em>/</em> Radarr</strong><small>Series or film</small></button></li>
-            <li><i class="pipeline-connector" aria-hidden="true"></i><button class="pipeline-node" type="button" data-flow-step="prowlarr" aria-controls="pipeline-detail" aria-pressed="false"><span>04 / SEARCH</span><strong>Prowlarr</strong><small>Finds a source</small></button></li>
-            <li><i class="pipeline-connector" aria-hidden="true"></i><button class="pipeline-node" type="button" data-flow-step="qbittorrent" aria-controls="pipeline-detail" aria-pressed="false"><span>05 / TRANSFER</span><strong>qBittorrent</strong><small>Handles the download</small></button></li>
-            <li><i class="pipeline-connector" aria-hidden="true"></i><button class="pipeline-node" type="button" data-flow-step="library" aria-controls="pipeline-detail" aria-pressed="false"><span>06 / STORAGE</span><strong>Library</strong><small>Organised files</small></button></li>
-            <li><i class="pipeline-connector" aria-hidden="true"></i><button class="pipeline-node pipeline-node--output" type="button" data-flow-step="jellyfin" aria-controls="pipeline-detail" aria-pressed="false"><span>07 / WATCH</span><strong>Jellyfin</strong><small>Media becomes available</small></button></li>
-          </ol>
-          </div>
-
-          <div class="pipeline-detail" id="pipeline-detail" aria-live="polite" aria-atomic="true">
-            <p><strong data-flow-title>Request</strong></p>
-            <p data-flow-detail>I choose the film or series I want to add.</p>
-          </div>
-        </figure>
       </div>
     </section>
 
@@ -167,18 +150,11 @@
           <div>
             <h2 class="case-heading" data-reveal id="access-title">Access away from home</h2>
             <div class="case-copy case-copy--wide" data-reveal>
-              <p>Tailscale gives my devices a private route back to the server when I am away from my home network. Once connected, I use SSH for administration and can reach the services I need.</p>
+              <p>Tailscale connects my authorised laptop and phone to the Ubuntu server over an encrypted private network when I am away from home.</p>
+              <p>Once connected, I use SSH to administer the server and access the services running in Docker.</p>
             </div>
           </div>
         </header>
-
-        <figure class="access-map" data-reveal aria-label="My devices connect to the home server through Tailscale">
-          <div class="access-map__device"><span>REMOTE DEVICE</span><strong>Laptop / phone</strong><small>Authorised client</small></div>
-          <div class="access-map__route" aria-hidden="true"><i></i><span>Encrypted tailnet</span><i></i></div>
-          <div class="access-map__tailnet"><span>PRIVATE NETWORK</span><strong>Tailscale</strong><small>Remote route to home</small></div>
-          <div class="access-map__route" aria-hidden="true"><i></i><span>SSH / services</span><i></i></div>
-          <div class="access-map__server"><span>HOME</span><strong>Ubuntu server</strong><small>Docker stack</small></div>
-        </figure>
       </div>
     </section>
 
@@ -238,6 +214,6 @@
     </section>
   </main>
 
-  <script type="module" src="app.js?v=20260907-architecture"></script>
+  <script type="module" src="app.js?v=20260929-text"></script>
 </body>
 </html>

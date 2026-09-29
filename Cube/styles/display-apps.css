@@ -1,0 +1,202 @@
+.cube-display-apps__content {
+  --display-card-height: clamp(16rem, 32svh, 23rem);
+  min-width: 0;
+}
+
+.cube-display-apps__intro,
+.cube-display-apps__entry p {
+  color: var(--muted-bright);
+  font-family: var(--project-font-body);
+  font-size: var(--project-text-body);
+  line-height: var(--project-leading-body);
+  text-wrap: pretty;
+}
+
+.cube-display-apps__intro { margin: 1.25rem 0 0; max-width: 38rem; }
+
+.cube-display-apps__layout {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin-top: clamp(2rem, 4vw, 4rem);
+}
+
+.cube-display-apps__viewer {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  margin: 0;
+}
+
+.cube-display-apps__media {
+  position: relative;
+  width: min(100%, 36rem);
+  margin-inline: auto;
+  aspect-ratio: 1;
+}
+
+.cube-display-apps__photo,
+.cube-display-apps__screen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cube-display-apps__photo { transform: scaleX(-1); }
+
+.cube-display-apps__screen {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.is-photo-ready .cube-display-apps__screen { opacity: 1; }
+
+.cube-display-apps__entries {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  grid-column: 1;
+  grid-row: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cube-display-apps__entry { flex: none; margin: 0; container-type: inline-size; }
+
+/* Quiet enclosure-like panels with a small matrix glyph for each display app. */
+.cube-display-apps__card {
+  position: relative;
+  min-height: var(--display-card-height);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: .875rem;
+  overflow: hidden;
+  color: var(--fg);
+  border: 1px solid var(--line-bright);
+  border-radius: .875rem;
+  background: var(--surface-raised);
+  transform-origin: 50% 0;
+}
+
+.cube-display-apps__card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted);
+}
+
+.cube-display-apps__glyph {
+  flex: none;
+  width: clamp(1.75rem, 3vw, 2.5rem);
+  height: auto;
+  fill: currentColor;
+}
+
+.cube-display-apps__entry h3 {
+  min-width: 0;
+  margin: 0;
+  color: var(--fg);
+  font-family: var(--project-font-body);
+  font-size: clamp(1.8rem, 8.5cqi, 2.75rem);
+  font-weight: var(--project-weight-semibold);
+  line-height: var(--project-leading-heading);
+  letter-spacing: var(--project-tracking-heading);
+}
+
+.cube-display-apps__entry[aria-current="true"] h3,
+.cube-display-apps__entry[aria-current="true"] .cube-display-apps__glyph { color: var(--accent); }
+
+.cube-display-apps__entry p {
+  max-width: 30rem;
+  margin: 0;
+  color: var(--muted-bright);
+}
+
+/* Short or zoomed screens keep every preview visible alongside flowing copy. */
+.is-display-ready:not(.is-display-stacked) .cube-display-apps__viewer {
+  position: sticky;
+  top: var(--cube-header);
+  z-index: 1;
+  background: var(--bg);
+}
+
+.is-display-ready:not(.is-display-stacked) .cube-display-apps__media {
+  max-width: min(var(--display-card-height), calc(100svh - var(--cube-header) - 3rem));
+}
+
+/* One pinned scene keeps the heading, Cube and stack on the same boundaries. */
+.cube-display-apps.is-display-stacked {
+  height: var(--display-section-height);
+}
+
+.is-display-stacked .cube-display-apps__scene {
+  position: sticky;
+  top: var(--display-scene-top);
+  height: var(--display-scene-height);
+  align-items: stretch;
+}
+
+.is-display-stacked .cube-display-apps__content {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.is-display-stacked .cube-display-apps__layout {
+  flex: 1;
+  min-height: 0;
+  align-items: center;
+}
+
+.is-display-stacked .cube-display-apps__media { max-width: var(--display-media-size); }
+
+.is-display-stacked .cube-display-apps__entries {
+  height: 100%;
+  /* Allow the stack edges; incoming cards enter from below. */
+  clip-path: inset(-3rem -4rem 0);
+}
+
+.is-display-stacked .cube-display-apps__entry {
+  position: absolute;
+  inset: 0 0 auto;
+  transform: translate3d(0, var(--display-entry-offset, 0px), 0);
+  will-change: transform;
+}
+
+.is-display-stacked .cube-display-apps__card {
+  transform: translate3d(0, var(--display-stack-shift, 0px), 0) scale(var(--display-stack-scale, 1));
+  filter: brightness(var(--display-stack-brightness, 1));
+  will-change: transform;
+}
+
+@media (max-width: 900px) {
+  .cube-display-apps__layout { display: block; }
+  .cube-display-apps__content { --display-card-height: clamp(12rem, 26svh, 16rem); }
+
+  .cube-display-apps__viewer {
+    padding-block: .75rem;
+  }
+
+  .cube-display-apps__media { width: min(100%, 20rem); }
+  .is-display-ready:not(.is-display-stacked) .cube-display-apps__media {
+    width: min(100%, 12rem, 30svh);
+  }
+  .is-display-stacked .cube-display-apps__scene { grid-template-rows: auto minmax(0, 1fr); }
+  .is-display-stacked .cube-display-apps__layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .is-display-stacked .cube-display-apps__viewer { flex: none; padding: 0; }
+  .is-display-stacked .cube-display-apps__entries { flex: 1; width: 100%; min-height: 0; }
+}

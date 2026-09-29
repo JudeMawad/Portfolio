@@ -2,10 +2,11 @@ import { setupProjectPage } from "../shared/scripts/project-page.js";
 import { setupCursor } from "../shared/scripts/cursor.js";
 import { setupSectionReveals } from "./scripts/section-reveals.js";
 import { setupDesignGallery } from "./scripts/design-gallery.js";
-import { setupDisclosures } from "./scripts/disclosures.js";
+import { setupDisclosures } from "./scripts/disclosures.js?v=20260929-feature-disclosures";
+import { setupDisplayApps } from "./scripts/display-apps.js?v=20260929-clean-pixels";
 
 const lifetime = new AbortController();
-const features = [setupProjectPage(), setupSectionReveals(), setupDesignGallery(), setupDisclosures(), setupCursor()];
+const features = [setupProjectPage(), setupSectionReveals(), setupDesignGallery(), setupDisclosures(), setupDisplayApps(), setupCursor()];
 const modelUrl = new URL("../images/THE_CUBE.glb", import.meta.url).href;
 
 // These controls are available before Three.js or the model finishes loading.
