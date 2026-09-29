@@ -127,6 +127,9 @@
 
 .cube-introduction__card h3 {
   min-width: 0;
+  min-block-size: 2lh;
+  display: flex;
+  align-items: center;
   margin: 0;
   color: var(--fg);
   font-size: var(--project-text-card-title);
