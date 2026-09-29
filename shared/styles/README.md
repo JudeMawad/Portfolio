@@ -24,7 +24,7 @@ Project compositions and content remain in their existing stylesheets and HTML.
 | Homepage section utilities and reveals | `home/styles/base.css` |
 | Homepage/Cube grid, progress, cursor, motion defaults | `shared/styles/effects.css` |
 | Cube section layout and spacing | `Cube/styles/sections.css` |
-| Cube hardware, physical design, system map | Corresponding files in `Cube/styles/` |
+| Cube hardware and physical design | Corresponding files in `Cube/styles/` |
 | Cube hero and callouts | `Cube/styles/page.css` and `callouts.css` |
 | Ignite and Server compositions | Each page's `style.css` |
 
@@ -66,7 +66,7 @@ are no CSS import chains. Preserve these orders, including typography overrides:
 - Home: shared tokens, foundation, effects; home base, navigation, hero; shared
   display type; home about, stack, projects, journey, contact.
 - Cube: shared tokens, foundation, effects, project navigation; Cube page,
-  callouts, sections, hardware, physical design, system map; shared display type,
+  callouts, sections, hardware, physical design; shared display type,
   project type.
 - Ignite: shared tokens, foundation, project navigation; Ignite style; shared
   project type, project reveal.
@@ -77,7 +77,7 @@ Responsive and reduced-motion rules live with their feature. Common Cube section
 spacing, including hardware and physical-design base padding, stays in `sections.css`
 so its mobile overrides retain their precedence. Ignite and Server reveals use
 `shared/scripts/project-reveal.js`; homepage reveals use
-`home/scripts/page-effects.js`, and Cube uses `Cube/scripts/system-map.js`.
+`home/scripts/page-effects.js`, and Cube uses `Cube/scripts/section-reveals.js`.
 
 Ignite and Server define their existing project palette at the top of their
 stylesheets and map it to shared `--bg`, `--fg`, `--accent`, etc. Their existing

@@ -1,0 +1,56 @@
+.cube-disclosure {
+  border: 1px solid var(--line);
+}
+
+.cube-disclosure > summary {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .875rem clamp(.875rem, 2vw, 1.5rem);
+  font-size: var(--project-text-body);
+  font-weight: var(--project-weight-medium);
+  line-height: var(--project-leading-tight);
+  list-style: none;
+  cursor: pointer;
+}
+
+.cube-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.cube-disclosure > summary::before {
+  content: "";
+  width: 0;
+  height: 0;
+  flex: 0 0 auto;
+  border-block: .25rem solid transparent;
+  border-left: .375rem solid var(--accent);
+  transition: transform 220ms var(--cube-ease);
+}
+
+.cube-disclosure[open]:not([data-disclosure-state="closed"]) > summary::before {
+  transform: rotate(90deg);
+}
+
+.cube-disclosure > summary:hover {
+  background: var(--surface);
+}
+
+.cube-disclosure > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.cube-disclosure__content {
+  display: flow-root;
+}
+
+.cube-disclosure__content.is-animating {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cube-disclosure > summary::before {
+    transition: none;
+  }
+}

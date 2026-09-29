@@ -155,86 +155,222 @@
   content: "";
 }
 
-.cube-physical-design__copy--wide {
-  grid-column: 2 / -1;
-  display: grid;
-  grid-template-columns: minmax(14rem, .62fr) minmax(0, 1.1fr);
-  gap: clamp(2rem, 4vw, 5rem);
+.cube-physical-design__intro-wrap {
+  display: contents;
 }
 
-.cube-physical-design__copy--wide p {
-  margin-top: .15rem;
+.cube-physical-design__intro {
+  display: none;
+  max-width: 39rem;
+  margin: 1.25rem 0 0;
+  color: var(--muted-bright);
+  font-size: var(--project-text-body);
+  line-height: var(--project-leading-body);
+}
+
+.cube-design-gallery {
+  display: none;
+  max-width: 54rem;
+  margin: clamp(1.75rem, 3vw, 2.75rem) auto 0;
+}
+
+.cube-design-gallery__figure {
+  margin: 0;
+}
+
+.cube-design-gallery__viewer {
+  height: clamp(14rem, 65vw, 26rem);
+  padding: clamp(.75rem, 2vw, 1.5rem);
+  display: grid;
+  place-items: center;
+}
+
+.cube-design-gallery__image {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.cube-design-gallery__thumbnails {
+  margin-top: .75rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .75rem;
+}
+
+.cube-design-gallery__thumbnail {
+  min-width: 0;
+  padding: .625rem .75rem;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  align-items: center;
+  gap: .625rem;
+  border: 0;
+  border-radius: .875rem;
+  background: var(--surface-raised);
+  color: var(--muted-bright);
+  text-align: left;
+  cursor: pointer;
+}
+
+.cube-design-gallery__thumbnail img {
+  width: 3rem;
+  height: 3rem;
+  padding: .2rem;
+  object-fit: contain;
+}
+
+.cube-design-gallery__thumbnail:hover {
+  color: var(--fg);
+}
+
+.cube-design-gallery__thumbnail[aria-pressed="true"] {
+  color: var(--accent);
+  font-weight: var(--project-weight-semibold);
+}
+
+.cube-design-gallery__thumbnail:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.cube-design-gallery__caption {
+  margin-top: 1rem;
+}
+
+.cube-design-gallery__caption h3,
+.cube-design-gallery__notes h3 {
+  margin: 0;
+  font-size: var(--project-text-card-title);
+  font-weight: var(--project-weight-semibold);
+  line-height: var(--project-leading-tight);
+  letter-spacing: var(--project-tracking-lead);
+}
+
+.cube-design-gallery__caption p,
+.cube-design-gallery__notes p {
+  margin: .5rem 0 0;
+  color: var(--muted-bright);
+  font-size: var(--project-text-body);
+  line-height: var(--project-leading-body);
+}
+
+.cube-design-gallery__details {
+  margin-top: 1rem;
+}
+
+.cube-design-gallery__notes {
+  padding: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.cube-design-gallery__notes p + h3 {
+  margin-top: 1.5rem;
+}
+
+.cube-design-gallery [hidden] {
+  display: none;
+}
+
+.cube-cad-files {
+  margin: clamp(2rem, 4vw, 3rem) auto 0;
+}
+
+.cube-cad-files h3 {
+  margin: 0 0 1rem;
+  font-size: var(--project-text-card-title);
+  font-weight: var(--project-weight-semibold);
+  line-height: var(--project-leading-tight);
+  letter-spacing: var(--project-tracking-lead);
+}
+
+.cube-cad-files__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(.75rem, 1.5vw, 1.25rem);
+}
+
+.cube-cad-files__download {
+  min-width: 0;
+  min-height: 44px;
+  padding: clamp(.875rem, 2vw, 1.25rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1.25rem;
+  align-items: center;
+  gap: .75rem;
+  border-radius: .875rem;
+  background: var(--surface-raised);
+  color: var(--fg);
+  font-size: var(--project-text-body);
+  line-height: var(--project-leading-tight);
+}
+
+.cube-cad-files__copy {
+  min-width: 0;
+  display: grid;
+  gap: .3rem;
+}
+
+.cube-cad-files__meta {
+  color: var(--muted-bright);
+  font-size: var(--project-text-small);
+}
+
+.cube-cad-files__download svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cube-cad-files__download:hover {
+  color: var(--accent);
+}
+
+.cube-cad-files__download:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (min-width: 701px) {
+  .cube-cad-files__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 900px) {
-
-  .cube-physical-design__entry {
-    grid-template-columns: minmax(7rem, .28fr) minmax(0, 1.72fr);
+  .cube-cad-files {
+    max-width: 54rem;
   }
 
-  .cube-physical-design__copy,
-  .cube-physical-design__media {
-    grid-column: 2;
+  .cube-physical-design__header {
+    align-items: start;
   }
 
-  .cube-physical-design__entry--internal-body .cube-physical-design__media,
-  .cube-physical-design__entry--outer-shell .cube-physical-design__media {
-    order: 1;
-  }
-
-  .cube-physical-design__entry--internal-body .cube-physical-design__copy,
-  .cube-physical-design__entry--outer-shell .cube-physical-design__copy {
-    order: 2;
-  }
-
-  .cube-physical-design__media {
-    position: static;
-    display: grid;
-    align-self: auto;
-    gap: var(--cube-physical-design-media-gap);
-  }
-
-  .cube-physical-design__figure {
-    position: static;
-    height: auto;
+  .cube-physical-design__intro-wrap,
+  .cube-physical-design__intro,
+  .cube-design-gallery {
     display: block;
   }
 
-  .cube-physical-design__media--single .cube-physical-design__image-frame {
-    width: 100%;
-  }
-
-  .cube-physical-design__image-frame img {
-    position: static;
-    width: 100%;
-    max-width: none;
-    height: auto;
-  }
-
-  .cube-physical-design__copy--wide {
-    grid-column: 2;
-    display: block;
-  }
-
-  .cube-physical-design__copy--wide p {
-    margin-top: clamp(1.25rem, 2vw, 1.8rem);
+  .cube-physical-design__log {
+    display: none;
   }
 }
 
-@media (max-width: 700px) {
-
-  .cube-physical-design__log {
-    margin-top: clamp(3.5rem, 9vw, 4.25rem);
+@media (max-width: 430px) {
+  .cube-design-gallery__thumbnail {
+    padding: .5rem;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: .5rem;
   }
 
-  .cube-physical-design__entry {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
-  }
-
-  .cube-physical-design__copy,
-  .cube-physical-design__media,
-  .cube-physical-design__copy--wide {
-    grid-column: 1;
+  .cube-design-gallery__thumbnail img {
+    width: 2.25rem;
+    height: 2.25rem;
   }
 }

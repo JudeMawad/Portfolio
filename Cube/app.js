@@ -1,10 +1,11 @@
 import { setupProjectPage } from "../shared/scripts/project-page.js";
 import { setupCursor } from "../shared/scripts/cursor.js";
-import { setupHardwareFlow } from "./scripts/hardware-flow.js";
-import { setupSystemMap } from "./scripts/system-map.js";
+import { setupSectionReveals } from "./scripts/section-reveals.js";
+import { setupDesignGallery } from "./scripts/design-gallery.js";
+import { setupDisclosures } from "./scripts/disclosures.js";
 
 const lifetime = new AbortController();
-const features = [setupProjectPage(), setupHardwareFlow(), setupSystemMap(), setupCursor()];
+const features = [setupProjectPage(), setupSectionReveals(), setupDesignGallery(), setupDisclosures(), setupCursor()];
 const modelUrl = new URL("../images/THE_CUBE.glb", import.meta.url).href;
 
 // These controls are available before Three.js or the model finishes loading.
@@ -66,7 +67,7 @@ window.addEventListener("pagehide", (event) => {
   if (window.cubeLedAnimation === cubeLedApi) delete window.cubeLedAnimation;
 });
 
-// Ordinary page content and 2D diagrams are ready even if the viewer cannot load.
+// Ordinary page content is ready even if the viewer cannot load.
 const loadViewer = () => import("./scripts/model-viewer.js")
   .then(({ setupModelViewer }) => {
     if (!lifetime.signal.aborted) return setupModelViewer({ modelUrl, controls, signal: lifetime.signal });

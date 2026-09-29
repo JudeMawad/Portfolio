@@ -3,7 +3,7 @@ import {
   createCubeLedFrameGenerator
 } from "./cube-led-frames.js";
 
-// Shared PNG overlay for the portfolio card and the Cube System Map.
+// PNG overlay for the portfolio card.
 const CUBE_LED_CELL_SIZE = 10;
 const CUBE_LED_SIZE = 5;
 const CUBE_LED_SURFACE_SIZE = CUBE_LED_MATRIX_SIZE * CUBE_LED_CELL_SIZE;
