@@ -199,5 +199,7 @@
     margin-top: 1.5rem;
   }
   .is-display-stacked .cube-display-apps__viewer { flex: none; padding: 0; }
+  /* Enlarge the photo and LED overlay together without moving the stack. */
+  .is-display-stacked .cube-display-apps__media { transform: scale(1.2); }
   .is-display-stacked .cube-display-apps__entries { flex: 1; width: 100%; min-height: 0; }
 }
