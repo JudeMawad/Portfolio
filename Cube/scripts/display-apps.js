@@ -64,10 +64,12 @@ export function setupDisplayApps() {
     const paddingBottom = parseFloat(sectionStyle.paddingBottom) || 0;
     mobile = window.innerWidth <= 900;
     stickyTop = header + (mobile ? 16 : 24);
-    const sceneHeight = window.innerHeight - stickyTop - 24;
     section.style.setProperty("--display-scene-top", `${stickyTop}px`);
-    section.style.setProperty("--display-scene-height", `${sceneHeight}px`);
     section.classList.add("is-display-stacked");
+    // CSS uses the small viewport: mobile browser bars must not resize the scene
+    // or change its scroll distances while the user is moving through the stack.
+    const sceneHeight = scene.clientHeight;
+    const viewportHeight = sceneHeight + stickyTop + 24;
     cardHeights = cards.map((card) => card.offsetHeight);
     const cardHeight = Math.max(...cardHeights);
     const layoutHeight = layout.clientHeight;
@@ -78,9 +80,9 @@ export function setupDisplayApps() {
     section.style.setProperty("--display-media-size", `${Math.max(132, mediaSize)}px`);
     if (stacked) {
       cardOffset = Math.max(36, (list.clientHeight - cardHeight) / 2);
-      const step = cardHeight + window.innerHeight * (mobile ? .18 : .24);
+      const step = cardHeight + viewportHeight * (mobile ? .18 : .24);
       positions = entries.map((_, index) => index * step);
-      const runway = positions.at(-1) + Math.max(80, window.innerHeight * .12);
+      const runway = positions.at(-1) + Math.max(80, viewportHeight * .12);
       section.style.setProperty("--display-section-height", `${sectionPadding + sceneHeight + runway + paddingBottom}px`);
     }
     queueSync();
@@ -221,7 +223,7 @@ export function setupDisplayApps() {
       videos.forEach((video) => { video.removeAttribute("src"); video.load(); });
       sources.remove();
       section.classList.remove("is-display-ready", "is-display-stacked");
-      ["--display-scene-top", "--display-scene-height", "--display-media-size", "--display-section-height"].forEach((name) => section.style.removeProperty(name));
+      ["--display-scene-top", "--display-media-size", "--display-section-height"].forEach((name) => section.style.removeProperty(name));
       cards.forEach((card) => {
         ["--display-stack-scale", "--display-stack-shift", "--display-stack-brightness"].forEach((name) => card.style.removeProperty(name));
       });

@@ -141,7 +141,8 @@
 .is-display-stacked .cube-display-apps__scene {
   position: sticky;
   top: var(--display-scene-top);
-  height: var(--display-scene-height);
+  /* Keep the scene steady while mobile browser controls hide and reappear. */
+  height: max(0px, calc(100svh - var(--display-scene-top) - 24px));
   align-items: stretch;
 }
 
