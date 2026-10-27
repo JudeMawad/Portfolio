@@ -55,11 +55,25 @@ export function setupProjects() {
         panel.style.setProperty('--projects-card-delta', delta.toFixed(4));
       });
 
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const centerDistance = Math.abs(rect.left + rect.width / 2 - window.innerWidth / 2);
-        card.classList.toggle('is-active', centerDistance < Math.min(window.innerWidth * 0.3, rect.width * 0.52));
-      });
+      if (cards.length) {
+        const centers = cards.map((card) => {
+          const rect = card.getBoundingClientRect();
+          return rect.left + rect.width / 2;
+        });
+        const viewportCenter = window.innerWidth / 2;
+        // Edge cards may never reach the screen center. Let the focus move
+        // toward their reachable positions at the start and end of the rail.
+        const startFocus = Math.min(viewportCenter, centers[0] - x);
+        const endFocus = Math.max(viewportCenter, centers.at(-1) - x - distance);
+        const focus = startFocus + (endFocus - startFocus) * progress;
+        let activeIndex = 0;
+        centers.forEach((center, index) => {
+          if (Math.abs(center - focus) < Math.abs(centers[activeIndex] - focus)) {
+            activeIndex = index;
+          }
+        });
+        cards.forEach((card, index) => card.classList.toggle('is-active', index === activeIndex));
+      }
 
       if (intro) {
         const introExit = clamp(progress * 4.2, 0, 0.82);

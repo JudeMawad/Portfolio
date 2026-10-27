@@ -64,7 +64,7 @@ Keep ordinary `<link>` elements in the template or full project document. There
 are no CSS import chains. Preserve these orders, including typography overrides:
 
 - Home: shared tokens, foundation, effects; home base, navigation, hero; shared
-  display type; home about, stack, projects, journey, contact.
+  display type; home about, projects, contact.
 - Cube: shared tokens, foundation, effects, project navigation; Cube page,
   callouts, sections, hardware, physical design; shared display type,
   project type.
@@ -87,7 +87,7 @@ variable cycles.
 
 ## Navigation variants
 
-- `.site-header` and `.site-menu` retain the homepage terminal identity, contact
+- `.site-header` and `.site-menu` retain the homepage name, contact
   link, and mobile overlay. The menu appears at 1050px and below.
 - `.project-header` retains project section links and the return link. Section
   links hide at 900px and below, matching existing behavior.
@@ -114,7 +114,7 @@ diagram descriptions use small text.
 
 Edit `home/index.template.html` for document metadata, stylesheets, and scripts.
 Edit `home/sections/*.html` for section content. The template controls the current section
-order: hero, projects, about, stack, journey, contact.
+order: hero, projects, about, contact.
 
 Run `npm run build:html` to regenerate `index.html`, then `npm run check:html` to
 verify it matches its sources. The generator checks for missing, duplicated, or

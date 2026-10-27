@@ -1,16 +1,12 @@
 #home,
 #projects,
 #about,
-#stack,
-#journey,
 #contact {
   scroll-margin-top: var(--header-h);
 }
 
 .about-section::after,
-.stack-section::after,
 .projects-section::after,
-.journey-section::after,
 .contact-section::after {
   --section-guide-color: color-mix(in srgb, var(--line, #20201e) 72%, transparent);
   --section-guide-half: .5px;
@@ -31,9 +27,7 @@
 
 @media (min-width: 1600px) {
   .about-section::after,
-  .stack-section::after,
   .projects-section::after,
-  .journey-section::after,
   .contact-section::after {
     --section-guide-color: color-mix(in srgb, var(--line, #20201e) 88%, transparent);
     --section-guide-half: 1px;
@@ -77,9 +71,7 @@
   }
 
   .about-section::after,
-  .stack-section::after,
   .projects-section::after,
-  .journey-section::after,
   .contact-section::after {
     background: linear-gradient(90deg,
       transparent calc(50% - var(--section-guide-half)),

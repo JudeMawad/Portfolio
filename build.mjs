@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const sectionNames = ['hero', 'projects', 'about', 'stack', 'journey', 'contact'];
+const sectionNames = ['hero', 'projects', 'about', 'contact'];
 const includePattern = /^<!-- include:sections\/([a-z]+)\.html -->\r?\n/gm;
 
 // The template owns document metadata, stylesheet order, and scripts. Section
@@ -14,7 +14,7 @@ async function renderHomepage() {
   const markers = template.match(/<!--\s*include:[\s\S]*?-->/g) ?? [];
 
   if (markers.length !== includes.length || includes.length !== sectionNames.length) {
-    throw new Error('The homepage template must contain exactly six valid section include lines.');
+    throw new Error(`The homepage template must contain exactly ${sectionNames.length} valid section include lines.`);
   }
 
   for (const name of sectionNames) {
@@ -63,7 +63,7 @@ async function main() {
     if (existing !== document) {
       throw new Error(`${outputLabel} is out of date. Run npm run build:html to regenerate the homepage.`);
     }
-    console.log(`${outputLabel} matches the homepage template and all six section fragments.`);
+    console.log(`${outputLabel} matches the homepage template and all ${sectionNames.length} section fragments.`);
     return;
   }
 
@@ -73,7 +73,7 @@ async function main() {
   }
 
   await writeFile(outputPath, document);
-  console.log(`Built ${outputLabel} from home/index.template.html and six section fragments.`);
+  console.log(`Built ${outputLabel} from home/index.template.html and ${sectionNames.length} section fragments.`);
 }
 
 main().catch((error) => {

@@ -76,6 +76,4 @@ const loadViewer = () => import("./scripts/model-viewer.js")
   .catch(() => {
     if (lifetime.signal.aborted) return;
     document.querySelector("[data-cube-visual]")?.classList.add("is-model-error");
-    const status = document.querySelector("[data-model-status]");
-    if (status) status.textContent = "Product Render / Static";
   });

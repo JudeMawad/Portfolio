@@ -6,14 +6,12 @@ export async function setupModelViewer({ modelUrl, controls, signal }) {
   const visual = document.querySelector("[data-cube-visual]");
   const stage = document.querySelector("[data-cube-stage]");
   const canvas = document.querySelector("[data-cube-canvas]");
-  const modelStatus = document.querySelector("[data-model-status]");
   if (!canvas || !visual || !stage) return;
 
   let renderer;
 
   const showStaticFallback = () => {
     visual.classList.add("is-model-error");
-    if (modelStatus) modelStatus.textContent = "Product Render / Static";
   };
 
   let THREE;
@@ -269,7 +267,6 @@ export async function setupModelViewer({ modelUrl, controls, signal }) {
         });
         resize();
         visual.classList.add("is-model-ready");
-        if (modelStatus) modelStatus.textContent = "Product Render / Live";
 
         if (motionQuery.matches) {
           presentation.quaternion.copy(userRotationTarget);
@@ -290,11 +287,7 @@ export async function setupModelViewer({ modelUrl, controls, signal }) {
         showStaticFallback();
       }
     },
-    (event) => {
-      if (isDisposed || !modelStatus || !event.lengthComputable || !event.total) return;
-      const percent = Math.min(99, Math.round((event.loaded / event.total) * 100));
-      modelStatus.textContent = `Product Render / Loading ${percent}%`;
-    },
+    undefined,
     () => {
       if (!isDisposed) showStaticFallback();
     }

@@ -62,8 +62,6 @@ body.project-page {
   line-height: var(--project-leading-tight);
   letter-spacing: var(--project-tracking-body);
 }
-.project-page .project-header__identity span { font-family: var(--project-font-mono); }
-.project-page .project-header__identity strong { font-weight: var(--project-weight-semibold); }
 
 /* Outline artwork keeps its stroke and color while using its heading's type. */
 .project-page .portfolio-display-word {
