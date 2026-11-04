@@ -4,14 +4,17 @@ const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('#main-nav');
 if (menuButton && navigation) {
   menuButton.hidden = false;
-  const closeMenu = () => {
-    menuButton.setAttribute('aria-expanded', 'false');
-    navigation.classList.remove('is-open');
+  const mobileMenu = matchMedia('(max-width: 760px)');
+  const setMenuOpen = isOpen => {
+    menuButton.setAttribute('aria-expanded', String(isOpen));
+    navigation.classList.toggle('is-open', isOpen);
+    navigation.inert = mobileMenu.matches && !isOpen;
   };
+  const closeMenu = () => setMenuOpen(false);
+  closeMenu();
   menuButton.addEventListener('click', () => {
     const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
-    menuButton.setAttribute('aria-expanded', String(!isOpen));
-    navigation.classList.toggle('is-open', !isOpen);
+    setMenuOpen(!isOpen);
   });
   navigation.addEventListener('click', event => {
     if (event.target.closest('a')) closeMenu();
@@ -22,7 +25,7 @@ if (menuButton && navigation) {
       menuButton.focus();
     }
   });
-  matchMedia('(min-width: 761px)').addEventListener('change', closeMenu);
+  mobileMenu.addEventListener('change', closeMenu);
 }
 
 // Keep deep-linked price groups visible before moving focus to them.
