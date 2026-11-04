@@ -6,6 +6,7 @@ Standalone salon website concept at <https://judemawad.com/mrs-goodcut/>. GitHub
 
 - Edit `index.html` for German content, prices, opening hours and external links; `styles.css` for presentation; `app.js` for the menu, gallery and scroll animations.
 - Keep local asset URLs and salon home/legal links under `/mrs-goodcut/`. Font URLs in CSS and image `srcset` URLs also need this prefix.
+- Retro typography uses locally hosted Barlow Condensed 700 for homepage headings and Oleo Script 400 for the wordmark. Keep Manrope for body text, navigation, controls, prices, captions and legal-page reading text; do not add remote font requests. Font provenance and licenses are recorded in `ASSET-SOURCES.md` and `assets/fonts/`.
 - Legal pages live at `/mrs-goodcut/impressum/` and `/mrs-goodcut/datenschutz/`. Their hosting information describes this portfolio copy on GitHub Pages, separately from the private Sites preview.
 - Keep the page-level `noindex, nofollow` metadata. This is a public portfolio concept, not a migration of the salon's official domain. Do not copy the original preview's root `robots.txt` or Cloudflare `_headers` into the portfolio.
 - Keep the existing Meetergo booking destination and the confirmed deposit threshold of €150. Prices and salon information were checked against the original website on 4 November 2026; review with the salon before any official launch.
@@ -13,4 +14,4 @@ Standalone salon website concept at <https://judemawad.com/mrs-goodcut/>. GitHub
 
 The source was imported from the Mrs.Goodcut private preview, revision `fdf5fc4eb6c177936353e1d554a46fd85458caed`, with paths, social preview URLs and hosting information adapted for this domain. The original salon site at <https://mrsgoodcut.com/> remains separate.
 
-Photos and salon content retain their respective owners' rights. Manrope font license and credits are in `assets/fonts/`.
+Photos and salon content retain their respective owners' rights. Font license copies are in `assets/fonts/`; credits and source URLs are in `ASSET-SOURCES.md`.

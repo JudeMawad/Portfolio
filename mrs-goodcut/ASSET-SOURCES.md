@@ -33,6 +33,20 @@ Downloaded from Google Fonts; Latin subsets include German umlauts and the euro 
 - Google Fonts family CSS: https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@400..800&display=swap
 - License sources: https://raw.githubusercontent.com/google/fonts/main/ofl/fraunces/OFL.txt and https://raw.githubusercontent.com/google/fonts/main/ofl/manrope/OFL.txt
 
+### Retro restyle fonts
+
+Retrieved 4 November 2026 from Google Fonts. These are locally hosted, unmodified Latin WOFF2 subsets. FontTools verified weights 700 and 400 respectively, and actual character-map coverage for Ä, Ö, Ü, ä, ö, ü, ß and €. Manrope remains the reading and interface font; Fraunces is retained from the original preview but is not used by the retro restyle.
+
+| Font | Local file | Original WOFF2 source | License |
+| --- | --- | --- | --- |
+| Barlow Condensed, normal 700 | `assets/fonts/barlow-condensed-700-latin.woff2` | https://fonts.gstatic.com/s/barlowcondensed/v13/HTxwL3I-JCGChYJ8VI-L6OO_au7B46r2z3bWuQ.woff2 | `assets/fonts/BarlowCondensed-LICENSE.txt` |
+| Oleo Script, normal 400 | `assets/fonts/oleo-script-400-latin.woff2` | https://fonts.gstatic.com/s/oleoscript/v15/rax5HieDvtMOe0iICsUccChdu08.woff2 | `assets/fonts/OleoScript-LICENSE.txt` |
+
+- Google Fonts family CSS: https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Oleo+Script&display=swap
+- Barlow Condensed license source: https://raw.githubusercontent.com/google/fonts/main/ofl/barlowcondensed/OFL.txt
+- Oleo Script license source: https://raw.githubusercontent.com/google/fonts/main/ofl/oleoscript/OFL.txt
+- Both families use the SIL Open Font License 1.1. Barlow credits The Barlow Project Authors; Oleo Script credits Soytutype and retains its reserved font name.
+
 ## Price transcription
 
 Visually cross-checked against the source image on 4 November 2026. Labels below preserve the source's meaning; the two '+ föhnen/glätten' entries show the total price with styling, not an additional surcharge.
