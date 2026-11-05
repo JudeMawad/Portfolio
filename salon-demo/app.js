@@ -43,6 +43,33 @@ document.addEventListener('click', event => {
 window.addEventListener('hashchange', () => revealPriceGroup(location.hash));
 revealPriceGroup(location.hash);
 
+// Demo actions stay on this page and never contact a real salon or service.
+const demoDialog = document.querySelector('.demo-dialog');
+if (demoDialog && typeof demoDialog.showModal === 'function') {
+  const message = demoDialog.querySelector('#demo-dialog-message');
+  const messages = {
+    booking: 'Hier würde die Online-Terminbuchung öffnen. Studio Locke ist ein fiktiver Salon. Es wird kein Termin angelegt.',
+    phone: 'Die Telefonnummer ist ein Platzhalter. In dieser Demo wird kein Anruf gestartet.',
+    email: 'Die E-Mail-Adresse ist ein Platzhalter. In dieser Demo wird keine Nachricht verschickt.',
+    map: 'Die Adresse ist frei erfunden. In einer echten Salonwebsite öffnet dieser Link die Anfahrt zum Standort.',
+    social: 'Hier würde das Social-Media-Profil des Salons öffnen. Für diesen fiktiven Salon gibt es kein verknüpftes Profil.'
+  };
+  let demoReturnFocus;
+  document.querySelectorAll('[data-demo-action]').forEach(link => {
+    link.setAttribute('aria-haspopup', 'dialog');
+    link.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      demoReturnFocus = link;
+      message.textContent = messages[link.dataset.demoAction];
+      demoDialog.showModal();
+      demoDialog.querySelector('.demo-close').focus();
+    });
+  });
+  demoDialog.querySelector('.demo-close').addEventListener('click', () => demoDialog.close());
+  demoDialog.addEventListener('close', () => demoReturnFocus?.focus({ preventScroll: true }));
+}
+
 const galleryLinks = [...document.querySelectorAll('[data-gallery]')];
 const dialog = document.querySelector('.lightbox');
 if (dialog && typeof dialog.showModal === 'function' && galleryLinks.length) {
@@ -56,7 +83,7 @@ if (dialog && typeof dialog.showModal === 'function' && galleryLinks.length) {
     const originalImage = source.querySelector('img');
     photo.src = source.href;
     photo.alt = originalImage.alt;
-    caption.textContent = `Look ${selected + 1} von ${galleryLinks.length} · Mrs.Goodcut`;
+    caption.textContent = `Look ${selected + 1} von ${galleryLinks.length} · Studio Locke`;
   }
   galleryLinks.forEach((link, index) => {
     link.setAttribute('aria-haspopup', 'dialog');

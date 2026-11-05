@@ -1,19 +1,19 @@
 @font-face {
   font-family: Manrope;
-  src: url('/mrs-goodcut/assets/fonts/manrope-latin.woff2') format('woff2');
+  src: url('/salon-demo/assets/fonts/manrope-latin.woff2') format('woff2');
   font-weight: 400 800;
   font-display: swap;
 }
 @font-face {
   font-family: Anton;
-  src: url('/mrs-goodcut/assets/fonts/anton-400-latin.woff2') format('woff2');
+  src: url('/salon-demo/assets/fonts/anton-400-latin.woff2') format('woff2');
   font-style: normal;
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: Yellowtail;
-  src: url('/mrs-goodcut/assets/fonts/yellowtail-400-latin.woff2') format('woff2');
+  src: url('/salon-demo/assets/fonts/yellowtail-400-latin.woff2') format('woff2');
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -33,8 +33,8 @@
   --sans: Manrope, Arial, sans-serif;
   --display: Anton, 'Arial Narrow', Impact, sans-serif;
   --script: Yellowtail, 'Brush Script MT', cursive;
-  --paper-texture: url('/mrs-goodcut/assets/paper-grain.svg');
-  --ink-texture: url('/mrs-goodcut/assets/ink-grain.svg');
+  --paper-texture: url('/salon-demo/assets/paper-grain.svg');
+  --ink-texture: url('/salon-demo/assets/ink-grain.svg');
 }
 
 /* Foundations */
@@ -288,6 +288,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* Work gallery */
 .section-topline { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-bottom: 42px; }
 .section-topline > .text-link { flex-shrink: 0; }
+.gallery-demo-note { margin-top: 12px; font-size: .875rem; }
 .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 26px; }
 .gallery-item { min-width: 0; cursor: zoom-in; }
 .gallery-image { overflow: hidden; border-radius: 0; outline: 1px solid var(--line); background: var(--paper); }
@@ -317,6 +318,8 @@ summary::-webkit-details-marker { display: none; }
 .booking-card { padding: 32px; border: 1px solid var(--navy); outline: 1px solid var(--navy); outline-offset: -7px; background: var(--cream) var(--paper-texture); box-shadow: 5px 5px 0 var(--navy); text-align: left; }
 .booking-card h3 { font-size: 2rem; line-height: 1.25; }
 .booking-card > p { margin-top: 20px; font-size: 1rem; line-height: 1.75; }
+.booking-card > .demo-notice { font-size: .875rem; }
+#demo-hinweis { scroll-margin-top: 110px; }
 .booking-card > .button { display: flex; margin-top: 24px; }
 .booking-phone { display: inline-block; margin-top: 18px; font-size: 1.25rem; font-weight: 650; line-height: 1.8; }
 .booking-service-note a { color: var(--navy); font-weight: 700; }
@@ -348,6 +351,13 @@ summary::-webkit-details-marker { display: none; }
 .footer-bottom nav { display: flex; flex-wrap: wrap; gap: 18px 26px; }
 .site-footer a:focus-visible { outline-color: var(--cream); }
 .mobile-booking { display: none; }
+
+/* Local demo notices work without collecting or submitting information. */
+.demo-dialog { width: min(540px, calc(100% - 40px)); max-height: calc(100dvh - 40px); padding: 32px; border: 2px solid var(--navy); background: var(--cream) var(--paper-texture); color: var(--ink); }
+.demo-dialog::backdrop { background: #26344ae8; }
+.demo-dialog h2 { font-size: 2rem; }
+.demo-dialog > p:not(.eyebrow) { margin-top: 20px; }
+.demo-dialog .button { margin-top: 28px; max-width: 100%; }
 
 /* Native image dialog */
 .lightbox { width: min(1050px, 94vw); max-width: 94vw; height: min(870px, 93dvh); max-height: 93dvh; padding: 18px 25px 12px; border: 1px solid var(--line); background: var(--cream); color: var(--ink); }
