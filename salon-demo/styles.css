@@ -147,8 +147,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .arrival-note a,
 .site-footer a,
 .legal-content a:not(.button),
-.service-row h3,
-.gallery figcaption {
+.service-row h3 {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: .22em;
@@ -156,8 +155,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 :is(.text-link, .booking-phone, .booking-service-note a, .contact-direct > a,
   .social-links a, .arrival-note a, .site-footer a, .legal-content a:not(.button)):is(:hover, :focus-visible),
-.service-row:is(:hover, :focus-visible) h3,
-.gallery-item:is(:hover, :focus-visible) figcaption {
+.service-row:is(:hover, :focus-visible) h3 {
   text-decoration-thickness: 3px;
 }
 .skip-link {
@@ -279,21 +277,34 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   align-items: center;
   gap: 80px;
 }
-.team-figure { min-width: 0; }
-.team-figure > img { width: 100%; aspect-ratio: 1.3; object-fit: cover; object-position: 50% 48%; border-radius: 0; outline: 1px solid var(--ochre); }
 .salon-copy h2 { margin-bottom: 26px; }
 .salon-copy > p { max-width: 34rem; margin-top: 16px; color: var(--cream); font-size: 1.0625rem; line-height: 1.8; }
 .salon-section a:focus-visible { outline-color: var(--cream); }
 
-/* Work gallery */
+/* Static image spaces show where a customer's own photographs belong. */
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-width: 0;
+  aspect-ratio: 4 / 5;
+  padding: 28px 20px;
+  border: 1px dashed var(--line);
+  background: var(--paper) var(--paper-texture);
+  color: var(--ink);
+  text-align: center;
+}
+.photo-placeholder svg { flex-shrink: 0; width: 44px; height: 44px; fill: none; stroke: currentColor; stroke-width: 1.5; opacity: .7; }
+.photo-placeholder span { max-width: 18ch; font-size: .9375rem; font-weight: 600; line-height: 1.6; }
+.team-placeholder { aspect-ratio: 1.3; border-color: var(--ochre); background: rgba(240, 234, 221, .04); color: var(--cream); }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 26px; }
+.gallery-grid figcaption { margin-top: 12px; font-size: .875rem; font-weight: 600; line-height: 1.6; }
+
+/* Shared section headings */
 .section-topline { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-bottom: 42px; }
 .section-topline > .text-link { flex-shrink: 0; }
-.gallery-demo-note { margin-top: 12px; font-size: .875rem; }
-.gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 26px; }
-.gallery-item { min-width: 0; cursor: zoom-in; }
-.gallery-image { overflow: hidden; border-radius: 0; outline: 1px solid var(--line); background: var(--paper); }
-.gallery-image img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
-.gallery figcaption { margin-top: 12px; color: var(--muted); font-size: .875rem; font-weight: 600; line-height: 1.6; }
 
 /* Prices and appointments */
 .prices-section { background: var(--paper) var(--paper-texture); }
@@ -359,18 +370,6 @@ summary::-webkit-details-marker { display: none; }
 .demo-dialog > p:not(.eyebrow) { margin-top: 20px; }
 .demo-dialog .button { margin-top: 28px; max-width: 100%; }
 
-/* Native image dialog */
-.lightbox { width: min(1050px, 94vw); max-width: 94vw; height: min(870px, 93dvh); max-height: 93dvh; padding: 18px 25px 12px; border: 1px solid var(--line); background: var(--cream); color: var(--ink); }
-.lightbox::backdrop { background: #26344ae8; backdrop-filter: blur(7px); }
-.lightbox-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-.lightbox-toolbar p { font-size: .875rem; }
-.lightbox button { min-width: 44px; min-height: 44px; padding: 8px; border: 0; background: none; color: var(--ink); }
-.lightbox-close { display: flex; align-items: center; gap: 10px; font-size: .875rem; }
-.lightbox-close span { font-size: 26px; }
-.lightbox-stage { height: calc(100% - 110px); display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 10px; align-items: center; }
-.lightbox-stage img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
-.lightbox-prev, .lightbox-next { font-size: 27px; }
-.lightbox-help { margin-top: 16px; font-size: .875rem; text-align: center; }
 
 /* Legal pages */
 .page-shell { width: min(840px, calc(100% - 48px)); margin-inline: auto; }
@@ -405,7 +404,7 @@ summary::-webkit-details-marker { display: none; }
   .hero-photo-wrap { height: 450px; }
   .price-layout { grid-template-columns: minmax(0, 1fr); }
   .salon-grid { grid-template-columns: minmax(0, 1fr); gap: 38px; }
-  .team-figure { width: 100%; max-width: 580px; margin-inline: auto; }
+  .team-placeholder { width: 100%; max-width: 580px; margin-inline: auto; }
   .salon-copy > p { max-width: 44rem; }
   .contact-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; }
   .contact-direct { grid-column: 1 / -1; padding-top: 28px; border-top: 1px solid var(--line); }
@@ -450,12 +449,12 @@ summary::-webkit-details-marker { display: none; }
   .section-heading > .text-link { margin-top: 18px; }
   .salon-section { padding-block: 60px; }
   .salon-grid { gap: 32px; }
-  .team-figure { max-width: none; }
+  .team-placeholder { max-width: none; }
+  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 16px; }
+  .photo-placeholder { padding: 24px 16px; }
   .section-topline { display: block; margin-bottom: 30px; }
   .section-topline > .text-link { margin-top: 20px; }
   .section-side-note { max-width: none; margin-top: 20px; }
-  .gallery { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 25px 16px; }
-  .gallery-image img { aspect-ratio: 3/4; }
   .price-group > summary { padding-block: 21px; font-size: 1.25rem; }
   .price-list > div { gap: 16px; }
   .booking-card { padding: 26px 22px; }
@@ -472,11 +471,6 @@ summary::-webkit-details-marker { display: none; }
   .mobile-booking > a { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 16px 12px; font-size: .9375rem; font-weight: 650; line-height: 1.5; }
   .mobile-booking > a:last-child { background: var(--ochre); color: var(--ink); font-family: var(--display); font-size: 1.125rem; font-weight: 400; line-height: 1.25; letter-spacing: .04em; text-transform: uppercase; }
   .mobile-booking > a:focus-visible { outline-color: var(--ink); outline-offset: -6px; }
-  .lightbox { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; padding: 12px 10px; border: 0; }
-  .lightbox-toolbar { padding-inline: 6px; gap: 12px; }
-  .lightbox-stage { height: calc(100% - 125px); grid-template-columns: 34px minmax(0, 1fr) 34px; gap: 2px; }
-  .lightbox-stage button { min-width: 34px; padding-inline: 0; }
-  .lightbox-help { font-size: .75rem; }
   .legal-content { padding-block: 42px 60px; }
   .legal-page .header-inner { display: flex; flex-wrap: wrap; gap: 18px; padding-block: 18px; }
   .legal-page .site-footer { padding-bottom: 32px; }
@@ -485,8 +479,7 @@ summary::-webkit-details-marker { display: none; }
   .brand { font-size: 1.375rem; }
   .menu-toggle:not([hidden]) { gap: 8px; padding-left: 8px; }
   .hero-photo-wrap { height: 370px; }
-  .gallery { grid-template-columns: minmax(0, 1fr); }
-  .gallery-image img { aspect-ratio: 4/5; }
+  .gallery-grid { grid-template-columns: minmax(0, 1fr); }
   .price-list > div { gap: 12px; }
   .legal-page .site-header .button { margin-left: 0; }
 }
@@ -500,7 +493,7 @@ summary::-webkit-details-marker { display: none; }
   body:not(.legal-page) :is(h1, h2, h3) { background: none; -webkit-text-fill-color: currentColor; }
 }
 @media print {
-  .site-header, .mobile-booking, .lightbox { display: none; }
+  .site-header, .mobile-booking { display: none; }
   body, .salon-section, .site-footer { background: white; color: black; }
   .prices-section, .booking-card { background: white; }
   .hero-photo-wrap, .booking-card { box-shadow: none; }

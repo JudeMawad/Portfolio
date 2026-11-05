@@ -70,50 +70,6 @@ if (demoDialog && typeof demoDialog.showModal === 'function') {
   demoDialog.addEventListener('close', () => demoReturnFocus?.focus({ preventScroll: true }));
 }
 
-const galleryLinks = [...document.querySelectorAll('[data-gallery]')];
-const dialog = document.querySelector('.lightbox');
-if (dialog && typeof dialog.showModal === 'function' && galleryLinks.length) {
-  const photo = dialog.querySelector('#lightbox-image');
-  const caption = dialog.querySelector('#gallery-caption');
-  let selected = 0;
-  let returnFocus;
-  function showImage(index) {
-    selected = (index + galleryLinks.length) % galleryLinks.length;
-    const source = galleryLinks[selected];
-    const originalImage = source.querySelector('img');
-    photo.src = source.href;
-    photo.alt = originalImage.alt;
-    caption.textContent = `Look ${selected + 1} von ${galleryLinks.length} · Studio Locke`;
-  }
-  galleryLinks.forEach((link, index) => {
-    link.setAttribute('aria-haspopup', 'dialog');
-    link.addEventListener('click', event => {
-      // Preserve native open-in-new-tab and modifier-click behavior.
-      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-      event.preventDefault();
-      returnFocus = link;
-      showImage(index);
-      dialog.showModal();
-      dialog.querySelector('.lightbox-close').focus();
-    });
-  });
-  dialog.querySelector('.lightbox-close').addEventListener('click', () => dialog.close());
-  dialog.querySelector('.lightbox-prev').addEventListener('click', () => showImage(selected - 1));
-  dialog.querySelector('.lightbox-next').addEventListener('click', () => showImage(selected + 1));
-  dialog.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-      event.preventDefault();
-      showImage(selected + (event.key === 'ArrowRight' ? 1 : -1));
-    }
-  });
-  dialog.addEventListener('click', event => {
-    if (event.target !== dialog) return;
-    const bounds = dialog.getBoundingClientRect();
-    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
-  });
-  dialog.addEventListener('close', () => returnFocus?.focus({ preventScroll: true }));
-}
-
 document.querySelectorAll('[data-year]').forEach(element => {
   element.textContent = new Intl.DateTimeFormat('de-DE', { year: 'numeric', timeZone: 'Europe/Berlin' }).format(new Date());
 });

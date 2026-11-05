@@ -1,6 +1,8 @@
 # Demo asset sources
 
-All salon, team and hairstyle photographs were created with built-in image generation on 5 November 2026 for this fictional website demo. They do not depict the previous salon or its clients. Prompts are recorded in IMAGE-PROMPTS.md. Images are optimized locally to WebP with Sharp and carry no source-photo metadata. The site labels these as AI-generated examples.
+The only photograph is an AI-generated fictional retro salon interior, created with the built-in image tool on 5 November 2026. It does not depict a real salon. The prompt is recorded in IMAGE-PROMPTS.md.
+
+Responsive assets: `assets/hero-retro-960.webp` (960 × 1280) and `assets/hero-retro-1080.webp` (1080 × 1440). Both are WebP derivatives of the same shop photograph; the larger version is also the social preview. They are optimized locally with Sharp. The team and six hairstyle spaces use labeled HTML/CSS placeholders with original inline SVG icons, not additional photographs.
 
 ## Fonts
 
