@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "name": "ODDHAUS: Heart-Eye hero",
+  "assetRevision": "d33f56ca1cbf1213",
+  "modelUrl": "/oddhaus/models/heart-eye-hero.glb",
+  "posterUrl": "/oddhaus/models/heart-eye-hero-poster.webp",
+  "posterViewHeight": 1.2,
+  "posterDimensions": {
+    "width": 1000,
+    "height": 1000
+  },
+  "coordinateSystem": {
+    "unit": "meter",
+    "up": "+Y",
+    "front": "+Z",
+    "pivot": "visual center"
+  },
+  "rootNode": "HeroRoot",
+  "motionNode": "HeroMotionRoot",
+  "requiredAnimationClips": [
+    "HeroScroll"
+  ],
+  "animation": {
+    "clipName": "HeroScroll",
+    "durationSeconds": 4,
+    "posterTimeSeconds": 0
+  },
+  "neutralBounds": {
+    "min": [
+      -0.02054531049922616,
+      -0.04325900988220946,
+      -0.01244464609771967
+    ],
+    "max": [
+      0.01844778646380337,
+      0.041185625070805545,
+      0.01244464609771967
+    ],
+    "center": [
+      -0.0010487620177113948,
+      -0.001036692405701957,
+      0
+    ],
+    "height": 0.084444634953015
+  },
+  "verifiedProductDimensions": false,
+  "sourceSha256": "23d37b656fceeb954b1f0bb38bce8a923d75505aa9cd959baace1a8826cf093e",
+  "measured": {
+    "bytes": 2339612,
+    "triangles": 74852,
+    "materials": 7,
+    "meshes": 9,
+    "primitives": 9
+  },
+  "posterNote": "Exact opening browser render of Heart-Eye HeroScroll at time zero. Transparent square capture, normalized view height 1.2, center Y zero. The storefront applies the same responsive framing to this poster and the live scene. Re-render through /asset-studio after changing the asset or renderer.",
+  "posterRevision": "f7c45f9245e65fb6"
+}

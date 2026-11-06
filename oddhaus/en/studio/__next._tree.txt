@@ -1,0 +1,6 @@
+:HL["/oddhaus/_next/static/css/e35eb211cc8c0266.css","style"]
+:HL["/oddhaus/_next/static/css/31c8a8ff0eefff64.css","style"]
+3:[["children",{"s":"__PAGE__","h":160}]]
+2:[["children",{"s":"studio","h":96,"c":"$Q3"}]]
+1:[["children",{"s":{"n":"locale","t":"d","k":"en","s":["_not-found","_global-error"]},"h":96,"c":"$Q2"}]]
+0:{"b":"ab3tuQ0HHtA7VQ_GEBowj","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

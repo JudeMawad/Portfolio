@@ -1,0 +1,68 @@
+{
+  "version": 4,
+  "description": "Full-resolution hero loops with static dithering for smoother sky gradients: dark-sky desktop and existing final mobile composition.",
+  "sourceQuality": "Full-resolution renders with static dithering: 1920x1080 desktop and 1080x1620 mobile.",
+  "audio": false,
+  "embeddedBackground": true,
+  "files": {
+    "desktop": {
+      "video": "/oddhaus/videos/hero/heart-eye-desktop.mp4?v=4aca0605bc3e",
+      "poster": "/oddhaus/videos/hero/heart-eye-desktop.webp?v=72d69a1d3a8f",
+      "bytes": 3204385,
+      "posterBytes": 1221196,
+      "tracks": [
+        {
+          "durationSeconds": 12,
+          "handler": "vide",
+          "codec": "avc1",
+          "width": 1920,
+          "height": 1080,
+          "frames": 360,
+          "fps": 30
+        }
+      ],
+      "fastStart": true,
+      "sourceSha256": "4aca0605bc3ee5cb9134206c242df508fb4402b5fb191e6e3136b8d4a28141d0",
+      "publishedSha256": "4aca0605bc3ee5cb9134206c242df508fb4402b5fb191e6e3136b8d4a28141d0",
+      "sourceFile": "output/hero-video-dithered/hero-desktop.mp4",
+      "posterSource": "output/hero-video-dithered/hero-desktop-poster.webp",
+      "minimumTopMargin": 0.30769771337509155,
+      "minimumBottomMargin": 0.07719283550977707,
+      "webm": "/oddhaus/videos/hero/heart-eye-desktop.webm?v=9dcf25c3b086",
+      "webmBytes": 1267757,
+      "webmCodec": "vp9",
+      "webmSha256": "9dcf25c3b08641719796cece76d4ac6ae58c03bf3ca82bbcccc16e36013c0c57",
+      "posterSha256": "72d69a1d3a8fc78431b1914593f592007a7af8499669e943dce672c8d860018f"
+    },
+    "mobile": {
+      "video": "/oddhaus/videos/hero/heart-eye-mobile.mp4?v=6fca3150631d",
+      "poster": "/oddhaus/videos/hero/heart-eye-mobile.webp?v=ea7d715f5238",
+      "bytes": 4000437,
+      "posterBytes": 1042584,
+      "tracks": [
+        {
+          "durationSeconds": 12,
+          "handler": "vide",
+          "codec": "avc1",
+          "width": 1080,
+          "height": 1620,
+          "frames": 360,
+          "fps": 30
+        }
+      ],
+      "fastStart": true,
+      "sourceSha256": "6fca3150631d89630ac84a837a44f29e68a7020337917636d3eadb75c9061637",
+      "publishedSha256": "6fca3150631d89630ac84a837a44f29e68a7020337917636d3eadb75c9061637",
+      "sourceFile": "output/hero-video-dithered/hero-mobile.mp4",
+      "posterSource": "output/hero-video-dithered/hero-mobile-poster.webp",
+      "minimumTopMargin": 0.2872568964958191,
+      "minimumBottomMargin": 0.11698312312364578,
+      "webm": "/oddhaus/videos/hero/heart-eye-mobile.webm?v=3c0fc743b6a2",
+      "webmBytes": 1607459,
+      "webmCodec": "vp9",
+      "webmSha256": "3c0fc743b6a27bd236cb37be965e02009bf7c59893136c9ba3079888cba8eb1d",
+      "posterSha256": "ea7d715f523892e33ebcd80487677344f1c00d0de30d47f29129c177786b86ea"
+    }
+  },
+  "assetRevision": "static-dither-1bac3a69a6a7"
+}
