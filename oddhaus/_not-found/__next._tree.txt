@@ -1,4 +1,4 @@
-:HL["/oddhaus/_next/static/css/4ba37ff73ee0c5db.css","style"]
+:HL["/oddhaus/_next/static/css/60931126082ed147.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"n9tHoGBCVS4j1svWi8dKi","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"WBycZRRnNy-JN_UEis7PJ","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
