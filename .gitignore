@@ -1,5 +1,6 @@
 node_modules/
 dist/
+!oddhaus/_next/static/chunks/next/dist/
 .vite/
 .cache/
 *.log
