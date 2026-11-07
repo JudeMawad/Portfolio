@@ -1,6 +1,6 @@
 {
-  "version": 4,
-  "description": "Full-resolution hero loops with static dithering for smoother sky gradients: dark-sky desktop and existing final mobile composition.",
+  "version": 5,
+  "description": "Full-resolution desktop and mobile hero loops with matching dark-blue skies and static dithering for smoother gradients.",
   "sourceQuality": "Full-resolution renders with static dithering: 1920x1080 desktop and 1080x1620 mobile.",
   "audio": false,
   "embeddedBackground": true,
@@ -35,10 +35,10 @@
       "posterSha256": "72d69a1d3a8fc78431b1914593f592007a7af8499669e943dce672c8d860018f"
     },
     "mobile": {
-      "video": "/oddhaus/videos/hero/heart-eye-mobile.mp4?v=6fca3150631d",
-      "poster": "/oddhaus/videos/hero/heart-eye-mobile.webp?v=ea7d715f5238",
-      "bytes": 4000437,
-      "posterBytes": 1042584,
+      "video": "/oddhaus/videos/hero/heart-eye-mobile.mp4?v=10a93e7efdad",
+      "poster": "/oddhaus/videos/hero/heart-eye-mobile.webp?v=d0dd5a923e81",
+      "bytes": 3931810,
+      "posterBytes": 1050206,
       "tracks": [
         {
           "durationSeconds": 12,
@@ -51,18 +51,18 @@
         }
       ],
       "fastStart": true,
-      "sourceSha256": "6fca3150631d89630ac84a837a44f29e68a7020337917636d3eadb75c9061637",
-      "publishedSha256": "6fca3150631d89630ac84a837a44f29e68a7020337917636d3eadb75c9061637",
-      "sourceFile": "output/hero-video-dithered/hero-mobile.mp4",
-      "posterSource": "output/hero-video-dithered/hero-mobile-poster.webp",
+      "sourceSha256": "10a93e7efdad846846a1ee36179da7ec5eb3340e890b8603b45d54921231cd05",
+      "publishedSha256": "10a93e7efdad846846a1ee36179da7ec5eb3340e890b8603b45d54921231cd05",
+      "sourceFile": "output/hero-video-mobile-dark-dithered/hero-mobile.mp4",
+      "posterSource": "output/hero-video-mobile-dark-dithered/hero-mobile-poster.webp",
       "minimumTopMargin": 0.2872568964958191,
       "minimumBottomMargin": 0.11698312312364578,
-      "webm": "/oddhaus/videos/hero/heart-eye-mobile.webm?v=3c0fc743b6a2",
-      "webmBytes": 1607459,
+      "webm": "/oddhaus/videos/hero/heart-eye-mobile.webm?v=b47af1d72e90",
+      "webmBytes": 1632845,
       "webmCodec": "vp9",
-      "webmSha256": "3c0fc743b6a27bd236cb37be965e02009bf7c59893136c9ba3079888cba8eb1d",
-      "posterSha256": "ea7d715f523892e33ebcd80487677344f1c00d0de30d47f29129c177786b86ea"
+      "webmSha256": "b47af1d72e9013ecc71a45672e51c3c2308311da5be01d6a1edf78c1c3c60c2c",
+      "posterSha256": "d0dd5a923e815f5d4eb942551c749ceafe8437fe05582fafbe73c4fdd5ea50f7"
     }
   },
-  "assetRevision": "static-dither-1bac3a69a6a7"
+  "assetRevision": "dark-sky-static-dither-6db8f6b35fbe"
 }
