@@ -1,4 +1,4 @@
 :HL["/oddhaus/_next/static/css/e35eb211cc8c0266.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"ab3tuQ0HHtA7VQ_GEBowj","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"1G9DWPl9NuMiHh9Pl4fJy","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
