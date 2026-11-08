@@ -1,6 +1,6 @@
 :HL["/oddhaus/_next/static/css/45a1f01cac1665b1.css","style"]
-:HL["/oddhaus/_next/static/css/b729e1daf065d3cf.css","style"]
+:HL["/oddhaus/_next/static/css/088be5288b418e93.css","style"]
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"info","t":"d","k":"imprint","s":["cart","products","shop","studio"]},"h":96,"c":"$Q3"}]]
 1:[["children",{"s":{"n":"locale","t":"d","k":"de","s":["_not-found","_global-error"]},"h":96,"c":"$Q2"}]]
-0:{"b":"cNYoD1v1i8K8HILEjvw3s","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"MIf1PjYsMyQPfqEGCyu73","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
