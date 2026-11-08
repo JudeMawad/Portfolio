@@ -1,8 +1,8 @@
-:HL["/oddhaus/_next/static/css/45a1f01cac1665b1.css","style"]
+:HL["/oddhaus/_next/static/css/90395106d1d2c20d.css","style"]
 :HL["/oddhaus/_next/static/css/088be5288b418e93.css","style"]
 :HL["/oddhaus/_next/static/css/5fbe936e85938a63.css","style"]
 4:[["children",{"s":"__PAGE__","h":160}]]
 3:[["children",{"s":{"n":"handle","t":"d","k":"stair-01","s":[]},"h":96,"c":"$Q4"}]]
 2:[["children",{"s":"products","h":96,"c":"$Q3"}]]
 1:[["children",{"s":{"n":"locale","t":"d","k":"en","s":["_not-found","_global-error"]},"h":96,"c":"$Q2"}]]
-0:{"b":"MIf1PjYsMyQPfqEGCyu73","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"dU5vHH484a2Xa-Vcj15V6","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
